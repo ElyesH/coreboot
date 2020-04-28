@@ -23,9 +23,9 @@ bootblock-generic-ccopts += $(ppc64_flags)
 
 $(objcbfs)/bootblock.debug: $$(bootblock-objs)
 	@printf "    LINK       $(subst $(obj)/,,$(@))\n"
-	$(LD_bootblock) $(LDFLAGS_bootblock) -o $@ -L$(obj) \
-		-T $(call src-to-obj,bootblock,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(bootblock-objs)) \
-		$(LIBGCC_FILE_NAME_bootblock) --end-group $(COMPILER_RT_bootblock)
+	$(CC_bootblock) $(LDFLAGS_bootblock) -o $@ -L$(obj) \
+		-T $(call src-to-obj,bootblock,$(CONFIG_MEMLAYOUT_LD_FILE)) -Wl,--whole-archive,--start-group $(filter-out %.ld,$(bootblock-objs)) \
+		$(LIBGCC_FILE_NAME_bootblock) -Wl,--end-group $(COMPILER_RT_bootblock)
 
 endif
 
@@ -50,7 +50,7 @@ romstage-$(CONFIG_COLLECT_TIMESTAMPS) += timestamp.c
 
 $(objcbfs)/romstage.debug: $$(romstage-objs)
 	@printf "    LINK       $(subst $(obj)/,,$(@))\n"
-	$(LD_romstage) $(LDFLAGS_romstage) -o $@ -L$(obj) -T $(call src-to-obj,romstage,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(romstage-objs)) --end-group $(COMPILER_RT_romstage)
+	$(CC_romstage) $(LDFLAGS_romstage) -o $@ -L$(obj) -T $(call src-to-obj,romstage,$(CONFIG_MEMLAYOUT_LD_FILE)) -Wl,--whole-archive,--start-group $(filter-out %.ld,$(romstage-objs)) -Wl,--end-group $(COMPILER_RT_romstage)
 
 romstage-c-ccopts += $(ppc64_flags)
 romstage-S-ccopts += $(ppc64_asm_flags)
@@ -83,7 +83,7 @@ ramstage-srcs += src/mainboard/$(MAINBOARDDIR)/mainboard.c
 
 $(objcbfs)/ramstage.debug: $$(ramstage-objs)
 	@printf "    CC         $(subst $(obj)/,,$(@))\n"
-	$(LD_ramstage) $(LDFLAGS_ramstage) -o $@ -L$(obj) -T $(call src-to-obj,ramstage,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(ramstage-objs)) --end-group $(COMPILER_RT_ramstage)
+	$(CC_ramstage) $(LDFLAGS_ramstage) -o $@ -L$(obj) -T $(call src-to-obj,ramstage,$(CONFIG_MEMLAYOUT_LD_FILE)) -Wl,--whole-archive,--start-group $(filter-out %.ld,$(ramstage-objs)) -Wl,--end-group $(COMPILER_RT_ramstage)
 
 ramstage-c-ccopts += $(ppc64_flags)
 ramstage-S-ccopts += $(ppc64_asm_flags)

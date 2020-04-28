@@ -63,7 +63,7 @@ $(1)-S-ccopts += -I.
 
 $$(objcbfs)/$(1).debug: $$$$($(1)-libs) $$$$($(1)-objs)
 	@printf "    LINK       $$(subst $$(obj)/,,$$(@))\n"
-	$$(LD_$(1)) $$(LDFLAGS_$(1)) -o $$@ -L$$(obj) $$(COMPILER_RT_FLAGS_$(1)) --whole-archive --start-group $$(filter-out %.ld,$$($(1)-objs)) $$($(1)-libs) --no-whole-archive $$(COMPILER_RT_$(1)) --end-group -T $(call src-to-obj,$(1),$(CONFIG_MEMLAYOUT_LD_FILE)) --oformat $(2)
+	$$(CC_$(1)) $$(LDFLAGS_$(1)) -o $$@ -L$$(obj) $$(COMPILER_RT_FLAGS_$(1)) -Wl,--whole-archive,--start-group $$(filter-out %.ld,$$($(1)-objs)) $$($(1)-libs) -Wl,--no-whole-archive $$(COMPILER_RT_$(1)) -Wl,--end-group -T $(call src-to-obj,$(1),$(CONFIG_MEMLAYOUT_LD_FILE)) -Wl,--oformat=$(2)
 endef
 
 ###############################################################################
@@ -226,11 +226,11 @@ postcar-y += postcar.c
 postcar-$(CONFIG_COLLECT_TIMESTAMPS_TSC) += timestamp.c
 postcar-$(CONFIG_HAVE_CF9_RESET) += cf9_reset.c
 
-LDFLAGS_postcar += -Map $(objcbfs)/postcar.map
+LDFLAGS_postcar += -Wl,-Map,$(objcbfs)/postcar.map
 
 $(objcbfs)/postcar.debug: $$(postcar-objs)
 	@printf "    LINK       $(subst $(obj)/,,$(@))\n"
-	$(LD_postcar) $(LDFLAGS_postcar) -o $@ -L$(obj) $(COMPILER_RT_FLAGS_postcar) --whole-archive --start-group $(filter-out %.ld,$^) --no-whole-archive $(COMPILER_RT_postcar) --end-group -T $(call src-to-obj,postcar,$(CONFIG_MEMLAYOUT_LD_FILE))
+	$(CC_postcar) $(LDFLAGS_postcar) -o $@ -L$(obj) $(COMPILER_RT_FLAGS_postcar) -Wl,--whole-archive,--start-group $(filter-out %.ld,$^) -Wl,--no-whole-archive $(COMPILER_RT_postcar) -Wl,--end-group -T $(call src-to-obj,postcar,$(CONFIG_MEMLAYOUT_LD_FILE))
 
 $(objcbfs)/postcar.elf: $(objcbfs)/postcar.debug.rmod
 	cp $< $@
@@ -288,11 +288,11 @@ rmodules_x86_64-y += memset.c
 
 ifeq ($(CONFIG_ARCH_RAMSTAGE_X86_32),y)
 target-objcopy=-O elf32-i386 -B i386
-LD_MACHINE =-m elf_i386
+LD_MACHINE =-Wl,-m,elf_i386
 endif
 ifeq ($(CONFIG_ARCH_RAMSTAGE_X86_64),y)
 target-objcopy=-O elf64-x86-64 -B i386:x86-64
-LD_MACHINE =-m elf_x86_64
+LD_MACHINE =-Wl,-m,elf_x86_64
 endif
 
 # Make sure generated code does not use XMMx and MMx registers
@@ -317,11 +317,11 @@ $(objcbfs)/ramstage.elf: $(objcbfs)/ramstage.debug.rmod
 
 $(objcbfs)/ramstage.debug: $(objgenerated)/ramstage.o $(call src-to-obj,ramstage,$(CONFIG_MEMLAYOUT_LD_FILE))
 	@printf "    CC         $(subst $(obj)/,,$(@))\n"
-	$(LD_ramstage) $(LDFLAGS_ramstage) -o $@ -L$(obj) $< -T $(call src-to-obj,ramstage,$(CONFIG_MEMLAYOUT_LD_FILE))
+	$(CC_ramstage) $(LDFLAGS_ramstage) -o $@ -L$(obj) $< -T $(call src-to-obj,ramstage,$(CONFIG_MEMLAYOUT_LD_FILE))
 
 $(objgenerated)/ramstage.o: $$(ramstage-objs) $(COMPILER_RT_ramstage) $$(ramstage-libs)
 	@printf "    CC         $(subst $(obj)/,,$(@))\n"
-	$(LD_ramstage) $(LD_MACHINE) -r -o $@ $(COMPILER_RT_FLAGS_ramstage) --whole-archive --start-group $(filter-out %.ld,$(ramstage-objs)) $(ramstage-libs) --no-whole-archive $(COMPILER_RT_ramstage) --end-group
+	$(CC_ramstage) $(LD_MACHINE) -nostdlib -r -o $@ $(COMPILER_RT_FLAGS_ramstage) -Wl,--whole-archive,--start-group $(filter-out %.ld,$(ramstage-objs)) $(ramstage-libs) -Wl,--no-whole-archive $(COMPILER_RT_ramstage) -Wl,--end-group
 
 endif # CONFIG_ARCH_RAMSTAGE_X86_32 / CONFIG_ARCH_RAMSTAGE_X86_64
 

@@ -78,15 +78,15 @@ bootblock-y = bootblock.S
 
 $(objcbfs)/bootblock.debug: $$(bootblock-objs)
 	@printf "    LINK       $(subst $(obj)/,,$(@))\n"
-	$(LD_bootblock) $(LDFLAGS_bootblock) -o $@ -L$(obj) \
-		-T $(call src-to-obj,bootblock,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(bootblock-objs)) \
-		$(LIBGCC_FILE_NAME_bootblock) --end-group $(COMPILER_RT_bootblock)
+	$(CC_bootblock) $(LDFLAGS_bootblock) -o $@ -L$(obj) \
+		-T $(call src-to-obj,bootblock,$(CONFIG_MEMLAYOUT_LD_FILE)) -Wl,--whole-archive,--start-group $(filter-out %.ld,$(bootblock-objs)) \
+		$(LIBGCC_FILE_NAME_bootblock) -Wl,--end-group $(COMPILER_RT_bootblock)
 
 bootblock-c-ccopts += $(riscv_flags)
 bootblock-S-ccopts += $(riscv_asm_flags)
 
 ifeq ($(CONFIG_ARCH_RISCV_RV32),y)
-LDFLAGS_bootblock += -m elf32lriscv
+LDFLAGS_bootblock += -Wl,-m,elf32lriscv
 endif #CONFIG_ARCH_RISCV_RV32
 
 endif #CONFIG_ARCH_BOOTBLOCK_RISCV
@@ -102,13 +102,13 @@ romstage-y += romstage.S
 
 $(objcbfs)/romstage.debug: $$(romstage-objs)
 	@printf "    LINK       $(subst $(obj)/,,$(@))\n"
-	$(LD_romstage) $(LDFLAGS_romstage) -o $@ -L$(obj) -T $(call src-to-obj,romstage,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(romstage-objs)) --end-group $(COMPILER_RT_romstage)
+	$(CC_romstage) $(LDFLAGS_romstage) -o $@ -L$(obj) -T $(call src-to-obj,romstage,$(CONFIG_MEMLAYOUT_LD_FILE)) -Wl,--whole-archive,--start-group $(filter-out %.ld,$(romstage-objs)) -Wl,--end-group $(COMPILER_RT_romstage)
 
 romstage-c-ccopts += $(riscv_flags)
 romstage-S-ccopts += $(riscv_asm_flags)
 
 ifeq ($(CONFIG_ARCH_RISCV_RV32),y)
-LDFLAGS_romstage += -m elf32lriscv
+LDFLAGS_romstage += -Wl,-m,elf32lriscv
 endif #CONFIG_ARCH_RISCV_RV32
 
 endif #CONFIG_ARCH_ROMSTAGE_RISCV
@@ -132,13 +132,13 @@ ramstage-srcs += src/mainboard/$(MAINBOARDDIR)/mainboard.c
 
 $(objcbfs)/ramstage.debug: $$(ramstage-objs)
 	@printf "    CC         $(subst $(obj)/,,$(@))\n"
-	$(LD_ramstage) $(LDFLAGS_ramstage) -o $@ -L$(obj) -T $(call src-to-obj,ramstage,$(CONFIG_MEMLAYOUT_LD_FILE)) --whole-archive --start-group $(filter-out %.ld,$(ramstage-objs)) --end-group $(COMPILER_RT_ramstage)
+	$(CC_ramstage) $(LDFLAGS_ramstage) -o $@ -L$(obj) -T $(call src-to-obj,ramstage,$(CONFIG_MEMLAYOUT_LD_FILE)) -Wl,--whole-archive,--start-group $(filter-out %.ld,$(ramstage-objs)) -Wl,--end-group $(COMPILER_RT_ramstage)
 
 ramstage-c-ccopts += $(riscv_flags)
 ramstage-S-ccopts += $(riscv_asm_flags)
 
 ifeq ($(CONFIG_ARCH_RISCV_RV32),y)
-LDFLAGS_ramstage += -m elf32lriscv
+LDFLAGS_ramstage += -Wl,-m,elf32lriscv
 endif #CONFIG_ARCH_RISCV_RV32
 
 endif #CONFIG_ARCH_RAMSTAGE_RISCV

@@ -141,7 +141,7 @@ ADAFLAGS_$(1) = --RTS=$$(obj)/libgnat-$(2)/ $$(ADAFLAGS_common) $$(GCC_ADAFLAGS_
 CPPFLAGS_$(1) = $$(CPPFLAGS_common) $$(CPPFLAGS_$(2)) -D__ARCH_$(2)__
 COMPILER_RT_$(1) := $$(COMPILER_RT_$(2))
 COMPILER_RT_FLAGS_$(1) := $$(COMPILER_RT_FLAGS_$(2))
-LDFLAGS_$(1) = $$(LDFLAGS_common) $$(LDFLAGS_$(2))
+LDFLAGS_$(1) = $$(CFLAGS_$(1)) $$(LDFLAGS_common) $$(LDFLAGS_$(2))
 endef
 
 # define_class: Allows defining any program as dynamic class and compiler tool

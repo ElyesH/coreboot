@@ -18,7 +18,7 @@ smm-generic-ccopts += -D__SMM__
 smm-c-deps+=$$(OPTION_TABLE_H)
 
 $(obj)/smm/smm.o: $$(smm-objs) $(COMPILER_RT_smm)
-	$(LD_smm) -nostdlib -r -o $@ $(COMPILER_RT_FLAGS_smm) --whole-archive --start-group $(filter-out %.ld, $(smm-objs)) --no-whole-archive $(COMPILER_RT_smm) --end-group
+	$(CC_smm) $(CFLAGS_smm) -r -o $@ $(COMPILER_RT_FLAGS_smm) -Wl,--whole-archive,--start-group $(filter-out %.ld, $(smm-objs)) -Wl,--no-whole-archive $(COMPILER_RT_smm) -Wl,--end-group
 
 # change to the target path because objcopy will use the path name in its
 # ELF symbol names.
@@ -47,7 +47,7 @@ ramstage-srcs += $(obj)/cpu/x86/smm/smmstub.manual
 # SMM Stub Module. The stub is used as a trampoline for relocation and normal
 # SMM handling.
 $(obj)/smmstub/smmstub.o: $$(smmstub-objs) $(COMPILER_RT_smmstub)
-	$(LD_smmstub) -nostdlib -r -o $@ $(COMPILER_RT_FLAGS_smmstub) --whole-archive --start-group $(smmstub-objs) --no-whole-archive $(COMPILER_RT_smmstub) --end-group
+	$(CC_smmstub) $(CFLAGS_smmstub) -nostdlib -r -o $@ $(COMPILER_RT_FLAGS_smmstub) -Wl,--whole-archive,--start-group $(smmstub-objs) -Wl,--no-whole-archive $(COMPILER_RT_smmstub) -Wl,--end-group
 
 # Link the SMM stub module with a 0-byte heap.
 ifeq ($(CONFIG_ARCH_RAMSTAGE_X86_32),y)

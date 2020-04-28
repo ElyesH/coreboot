@@ -387,7 +387,7 @@ arch_config_x86() {
 	TCLIST="i386 x86_64"
 	TWIDTH="32"
 	TABI="elf"
-	CC_RT_EXTRA_GCC="--wrap __divdi3 --wrap __udivdi3 --wrap __moddi3 --wrap __umoddi3"
+	CC_RT_EXTRA_GCC="-Wl,--wrap=__divdi3,--wrap=__udivdi3,--wrap=__moddi3,--wrap=__umoddi3"
 }
 
 arch_config_ppc64() {
