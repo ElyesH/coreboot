@@ -73,7 +73,7 @@ static int gtt_setup(u8 *mmiobase)
 
 static int intel_gma_init_lvds(struct northbridge_intel_i945_config *conf,
 			  unsigned int pphysbase, unsigned int piobase,
-			  u8 *mmiobase, unsigned int pgfx)
+			  u8 *mmiobase, uintptr_t pgfx)
 {
 	struct edid edid;
 	struct edid_mode *mode;
@@ -95,7 +95,7 @@ static int intel_gma_init_lvds(struct northbridge_intel_i945_config *conf,
 
 	printk(BIOS_SPEW,
 	       "i915lightup: graphics %p mmio %p addrport %04x physbase %08x\n",
-	       (void *)pgfx, mmiobase, piobase, pphysbase);
+	       (void *)(uintptr_t)pgfx, mmiobase, piobase, pphysbase);
 
 	intel_gmbus_read_edid(mmiobase + GMBUS0, GMBUS_PORT_PANEL, 0x50,
 			edid_data, sizeof(edid_data));
@@ -356,8 +356,8 @@ static int intel_gma_init_lvds(struct northbridge_intel_i945_config *conf,
 
 	if (CONFIG(LINEAR_FRAMEBUFFER)) {
 		printk(BIOS_SPEW, "memset %p to 0x00 for %d bytes\n",
-			(void *)pgfx, hactive * vactive * 4);
-		memset((void *)pgfx, 0x00, hactive * vactive * 4);
+			(void *)(uintptr_t)pgfx, hactive * vactive * 4);
+		memset((void *)(uintptr_t)pgfx, 0x00, hactive * vactive * 4);
 
 		fb_new_framebuffer_info_from_edid(&edid, pgfx);
 	} else {
@@ -373,7 +373,7 @@ static int intel_gma_init_lvds(struct northbridge_intel_i945_config *conf,
 
 static int intel_gma_init_vga(struct northbridge_intel_i945_config *conf,
 			  unsigned int pphysbase, unsigned int piobase,
-			  u8 *mmiobase, unsigned int pgfx)
+			  u8 *mmiobase, uintptr_t pgfx)
 {
 	int i;
 	u32 hactive, vactive;
@@ -381,7 +381,7 @@ static int intel_gma_init_vga(struct northbridge_intel_i945_config *conf,
 	u32 uma_size;
 
 	printk(BIOS_SPEW, "mmiobase %x addrport %x physbase %x\n",
-		(u32)mmiobase, piobase, pphysbase);
+		(u32)(uintptr_t)mmiobase, piobase, pphysbase);
 
 	gtt_setup(mmiobase);
 

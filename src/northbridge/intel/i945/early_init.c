@@ -150,6 +150,8 @@ static void i945_setup_bars(void)
 
 	/* vram size from CMOS option */
 	gfxsize = get_uint_option("gfx_uma_size", 2);	/* 2 for 8MB */
+	if (gfxsize > 6)
+		gfxsize = 2;
 	/* make sure no invalid setting is used */
 	if (gfxsize > 6)
 		gfxsize = 2;
@@ -816,7 +818,7 @@ void i945_late_initialization(int s3resume)
 
 	i945_setup_dmi_rcrb();
 
-	if (CONFIG(NORTHBRIDGE_INTEL_SUBTYPE_I945GM))
+//	if (CONFIG(NORTHBRIDGE_INTEL_SUBTYPE_I945GM))
 		i945_setup_pci_express_x16();
 
 	i945_setup_root_complex_topology();

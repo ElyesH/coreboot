@@ -1,0 +1,3 @@
+boot_option=Fallback
+nmi=Enable
+boot_devices=''
