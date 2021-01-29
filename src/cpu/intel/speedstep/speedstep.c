@@ -16,23 +16,31 @@
 static void speedstep_get_limits(sst_params_t *const params)
 {
 	msr_t msr;
+	struct cpuinfo_x86 c;
 
-	const uint16_t cpu_id = (cpuid_eax(1) >> 4) & 0xffff;
+	get_fms(&c, cpuid_eax(1));
 	const uint32_t state_mask =
 		/* Penryn supports non integer (i.e. half) ratios. */
-		((cpu_id == 0x1067) ? SPEEDSTEP_RATIO_NONINT : 0)
+		((c.x86 == 6 && c.x86_model == 0x17) ?
+			SPEEDSTEP_RATIO_NONINT : 0)
 		| SPEEDSTEP_RATIO_VALUE_MASK | SPEEDSTEP_VID_MASK;
+
+	const bool msr_extended_config_supported = c.x86 != 0xf;
+	const bool msr_platform_info_supported = c.x86 != 0xf;
 
 	/* Initialize params to zero. */
 	memset(params, '\0', sizeof(*params));
 
+	if (msr_extended_config_supported) {
 	/* Read Super-LFM parameters. */
-	if (((rdmsr(MSR_EXTENDED_CONFIG).lo >> 27) & 3) == 3) {/*supported and
-								 enabled bits */
-		msr = rdmsr(MSR_FSB_CLOCK_VCC);
-		params->slfm = SPEEDSTEP_STATE_FROM_MSR(msr.lo, state_mask);
-		params->slfm.dynfsb	= 1;
-		params->slfm.is_slfm	= 1;
+		/* If (supported and enabled bits) */
+		if (((rdmsr(MSR_EXTENDED_CONFIG).lo >> 27) & 3) == 3) {
+			msr = rdmsr(MSR_FSB_CLOCK_VCC);
+			params->slfm =
+				SPEEDSTEP_STATE_FROM_MSR(msr.lo, state_mask);
+			params->slfm.dynfsb	= 1;
+			params->slfm.is_slfm	= 1;
+		}
 	}
 
 	/* Read normal minimum parameters. */
@@ -45,7 +53,7 @@ static void speedstep_get_limits(sst_params_t *const params)
 	   when using turbo mode. */
 	msr = rdmsr(IA32_PLATFORM_ID);
 	params->max = SPEEDSTEP_STATE_FROM_MSR(msr.lo, state_mask);
-	if (cpu_id == 0x006e) {
+	if ((c.x86 == 6 && c.x86_model == 0xe) || c.x86 == 0xf) {
 		/* Looks like Yonah CPUs don't have the frequency ratio in
 		   IA32_PLATFORM_ID. Use IA32_PERF_STATUS instead, the reading
 		   should be reliable as those CPUs don't have turbo mode. */
@@ -54,41 +62,38 @@ static void speedstep_get_limits(sst_params_t *const params)
 						>> SPEEDSTEP_RATIO_SHIFT;
 	}
 
-	/* Read turbo parameters. */
-	msr = rdmsr(MSR_FSB_CLOCK_VCC);
-	if ((msr.hi & (1 << (63 - 32))) &&
-		/* supported and */
-			!(rdmsr(IA32_MISC_ENABLE).hi & (1 << (38 - 32)))) {
-			/* not disabled */
-		params->turbo = SPEEDSTEP_STATE_FROM_MSR(msr.hi, state_mask);
-		params->turbo.is_turbo = 1;
+	if (msr_platform_info_supported) {
+		/* Read turbo parameters. */
+		msr = rdmsr(MSR_FSB_CLOCK_VCC);
+		if ((msr.hi & (1 << (63 - 32))) &&
+		    /* supported and */
+		    !(rdmsr(IA32_MISC_ENABLE).hi & (1 << (38 - 32)))) {
+		    /* not disabled */
+			params->turbo =
+				SPEEDSTEP_STATE_FROM_MSR(msr.hi, state_mask);
+			params->turbo.is_turbo = 1;
+		}
 	}
 
 	/* Set power limits by processor type. */
 	/* Defined values match the normal voltage versions only. But
 	   they are only a hint for OSPM, so this should not hurt much. */
-	switch (cpu_id) {
-	case 0x006e:
+	if (c.x86 == 6 && c.x86_model == 0xe) {
 		/* Yonah */
 		params->min.power	= SPEEDSTEP_MIN_POWER_YONAH;
 		params->max.power	= SPEEDSTEP_MAX_POWER_YONAH;
-		break;
-	case 0x1067:
+	} else if (c.x86 == 6 && c.x86_model == 0x17) {
 		/* Penryn */
 		params->slfm.power	= SPEEDSTEP_SLFM_POWER_PENRYN;
 		params->min.power	= SPEEDSTEP_MIN_POWER_PENRYN;
 		params->max.power	= SPEEDSTEP_MAX_POWER_PENRYN;
 		params->turbo.power	= SPEEDSTEP_MAX_POWER_PENRYN;
-		break;
-	case 0x006f:
-		/* Merom */
-	default:
+	} else {
 		/* Use Merom values by default (as before). */
 		params->slfm.power	= SPEEDSTEP_SLFM_POWER_MEROM;
 		params->min.power	= SPEEDSTEP_MIN_POWER_MEROM;
 		params->max.power	= SPEEDSTEP_MAX_POWER_MEROM;
 		params->turbo.power	= SPEEDSTEP_MAX_POWER_MEROM;
-		break;
 	}
 }
 

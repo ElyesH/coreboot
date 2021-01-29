@@ -1,0 +1,6 @@
+Category: desktop
+Board URL: http://www.nec-computers.com/support2/pib.asp?platform=spec_veracruz&mode=default&source=1409
+ROM package: PLCC
+ROM protocol: FWH
+ROM socketed: y
+Flashrom support: y

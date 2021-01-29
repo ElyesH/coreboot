@@ -1,0 +1,2 @@
+config BOARD_NEC_945G_M4
+	bool "945G-M4"
