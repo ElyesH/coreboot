@@ -1,9 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
+
 #include <console/console.h>
 #include <fsp/util.h>
 #include <memory_info.h>
 #include <soc/meminit.h>
-#include <stddef.h> /* required for FspmUpd.h */
+#include <stddef.h>
 #include <fsp/soc_binding.h>
 #include <string.h>
 

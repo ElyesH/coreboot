@@ -2,7 +2,6 @@
 
 #include <assert.h>
 #include <amdblocks/ioapic.h>
-#include <device/pci.h>
 #include <soc/iomap.h>
 #include <soc/pci_devs.h>
 #include <soc/platform_descriptors.h>

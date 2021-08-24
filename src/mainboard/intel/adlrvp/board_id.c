@@ -3,8 +3,8 @@
 #include <boardid.h>
 #include <ec/acpi/ec.h>
 #include <ec/google/chromeec/ec.h>
-#include <stdint.h>
 #include <types.h>
+
 #include "board_id.h"
 
 static uint32_t get_board_id_via_ext_ec(void)

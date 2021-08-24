@@ -3,9 +3,9 @@
 #include <device/mmio.h>
 #include <console/console.h>
 #include <delay.h>
-#include <stdint.h>
 #include <string.h>
 #include <types.h>
+
 #include "raminit.h"
 #include "x4x.h"
 
