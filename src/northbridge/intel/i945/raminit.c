@@ -293,6 +293,8 @@ static void gather_common_timing(struct sys_info *sysinfo, struct timings *saved
 	int i, j;
 	u8 raw_spd[SPD_SIZE_MAX_DDR2];
 	u8 dimm_mask = 0;
+	bool channel0_populated = false;
+	bool channel1_populated = false;
 
 	memset(saved_timings, 0, sizeof(*saved_timings));
 	saved_timings->max_tRR = UINT32_MAX;
@@ -314,10 +316,8 @@ static void gather_common_timing(struct sys_info *sysinfo, struct timings *saved
 
 	printk(BIOS_DEBUG, "This mainboard supports ");
 	if (sdram_capabilities_dual_channel()) {
-		sysinfo->dual_channel = true;
 		printk(BIOS_DEBUG, "Dual Channel Operation.\n");
 	} else {
-		sysinfo->dual_channel = false;
 		printk(BIOS_DEBUG, "only Single Channel Operation.\n");
 	}
 
@@ -462,6 +462,12 @@ static void gather_common_timing(struct sys_info *sysinfo, struct timings *saved
 	if (!(dimm_mask & ((1 << DIMM_SOCKETS) - 1)))
 		/* FIXME: Possibly does not boot in this case */
 		printk(BIOS_INFO, "Channel 0 has no memory populated.\n");
+
+	if (dimm_mask & ((1 << DIMM_SOCKETS) - 1))
+		channel0_populated = true;
+	if (dimm_mask >> DIMM_SOCKETS & ((1 << DIMM_SOCKETS) - 1))
+		channel1_populated = true;
+	sysinfo->dual_channel = channel0_populated & channel1_populated;
 }
 
 static void choose_tclk(struct sys_info *sysinfo, struct timings *saved_timings)
@@ -904,20 +910,18 @@ static void sdram_rcomp_buffer_strength_and_slew(struct sys_info *sysinfo)
 {
 	const u8 *strength_multiplier;
 	int idx;
-	bool dual_channel;
+	bool dual_channel = sysinfo->dual_channel;
 
 	/* Set Strength Multipliers */
 
 	/* Dual Channel needs different tables. */
-	if (sdram_capabilities_dual_channel()) {
+	if (dual_channel) {
 		printk(BIOS_DEBUG, "Programming Dual Channel RCOMP\n");
 		strength_multiplier = dual_channel_strength_multiplier;
-		dual_channel = true;
 		idx = 5 * sysinfo->dimm[0] + sysinfo->dimm[2];
 	} else {
 		printk(BIOS_DEBUG, "Programming Single Channel RCOMP\n");
 		strength_multiplier = single_channel_strength_multiplier;
-		dual_channel = false;
 		idx = 5 * sysinfo->dimm[0] + sysinfo->dimm[1];
 	}
 
