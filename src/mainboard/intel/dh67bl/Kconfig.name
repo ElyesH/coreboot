@@ -1,0 +1,4 @@
+## SPDX-License-Identifier: GPL-2.0-or-later
+
+config BOARD_INTEL_DH67BL
+	bool "DH67BL"

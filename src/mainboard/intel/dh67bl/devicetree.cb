@@ -1,0 +1,110 @@
+## SPDX-License-Identifier: GPL-2.0-or-later
+
+chip northbridge/intel/sandybridge
+	register "gfx" = "GMA_STATIC_DISPLAYS(0)"
+	register "gpu_cpu_backlight" = "0x00000000"
+	register "gpu_dp_b_hotplug" = "4"
+	register "gpu_dp_c_hotplug" = "0"
+	register "gpu_dp_d_hotplug" = "4"
+	register "gpu_panel_port_select" = "0"
+	register "gpu_panel_power_backlight_off_delay" = "0"
+	register "gpu_panel_power_backlight_on_delay" = "0"
+	register "gpu_panel_power_cycle_delay" = "4"
+	register "gpu_panel_power_down_delay" = "0"
+	register "gpu_panel_power_up_delay" = "0"
+	register "gpu_pch_backlight" = "0x00000000"
+	register "spd_addresses" = "{0x50, 0x51, 0x52, 0x53}"
+	device domain 0x0 on
+		chip southbridge/intel/bd82x6x
+			register "docking_supported" = "0"
+			register "gen1_dec" = "0x00fc0241"
+			register "gen2_dec" = "0x00fc0291"
+			register "gen3_dec" = "0x00fc0251"
+			register "gen4_dec" = "0x00fc02a1"
+			register "pcie_hotplug_map" = "{ 0, 0, 0, 0, 0, 0, 0, 0 }"
+			register "pcie_port_coalesce" = "1"
+			register "sata_interface_speed_support" = "0x3"
+			register "sata_port_map" = "0x3f"
+			register "spi_lvscc" = "0x2005"
+			register "spi_uvscc" = "0x2005"
+			register "usb_port_config" = "{
+				{1, 0xf53, 0},
+				{1, 0xf53, 0},
+				{1, 0xf53, 1},
+				{1, 0xf53, 1},
+				{1, 0xf53, 2},
+				{1, 0xf53, 2},
+				{1, 0xf53, 3},
+				{1, 0xf53, 3},
+				{1, 0xf57, 4},
+				{1, 0xf57, 4},
+				{1, 0xf5b, 5},
+				{1, 0xf5b, 5},
+				{1, 0xf5b, 6},
+				{1, 0xf5b, 6},
+			}"
+			device ref mei1 on
+				subsystemid 0x8086 0x2002
+			end
+			device ref mei2 off
+			end
+			device ref me_ide_r off
+			end
+			device ref me_kt off
+			end
+			device ref gbe on
+				subsystemid 0x8086 0x2002
+			end
+			device ref ehci2 on
+				subsystemid 0x8086 0x2002
+			end
+			device ref hda on
+				subsystemid 0x8086 0x2002
+			end
+			device ref pcie_rp1 on
+				subsystemid 0x8086 0x2002
+			end
+			device ref pcie_rp2 off
+			end
+			device ref pcie_rp3 off
+			end
+			device ref pcie_rp4 on
+				subsystemid 0x8086 0x2002
+			end
+			device ref pcie_rp5 off
+			end
+			device ref pcie_rp6 off
+			end
+			device ref pcie_rp7 off
+			end
+			device ref pcie_rp8 off
+			end
+			device ref ehci1 on
+				subsystemid 0x8086 0x2002
+			end
+			device ref pci_bridge off
+			end
+			device ref lpc on
+				subsystemid 0x8086 0x2002
+			end
+			device ref sata1 on
+				subsystemid 0x8086 0x2002
+			end
+			device ref smbus on
+				subsystemid 0x8086 0x2002
+			end
+			device ref sata2 off
+			end
+			device ref thermal off
+			end
+		end
+		device ref host_bridge on
+			subsystemid 0x8086 0x2002
+		end
+		device ref peg10 off
+		end
+		device ref igd on
+			subsystemid 0x8086 0x2002
+		end
+	end
+end

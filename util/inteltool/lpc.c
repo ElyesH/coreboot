@@ -87,6 +87,7 @@ int print_lpc(struct pci_dev *sb, struct pci_access *pacc)
 	printf("\n========== LPC/eSPI =========\n\n");
 
 	switch (sb->device_id) {
+	case PCI_DEVICE_ID_INTEL_H67:
 	case PCI_DEVICE_ID_INTEL_H110:
 	case PCI_DEVICE_ID_INTEL_H170:
 	case PCI_DEVICE_ID_INTEL_Z170:
