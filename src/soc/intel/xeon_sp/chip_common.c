@@ -21,7 +21,7 @@
  * @param from The device pointer to start search from.
  *
  * @return Pointer to the device struct. When there are multiple device
- * instances, the caller should continue search upon a non-NULL match.
+ * instances, the caller should continue search upon a non-nullptr match.
  */
 struct device *dev_find_all_devices_on_socket(uint8_t socket, u16 vendor, u16 device,
 	struct device *from)
@@ -35,7 +35,7 @@ struct device *dev_find_all_devices_on_socket(uint8_t socket, u16 vendor, u16 de
  */
 struct device *dev_find_device_on_socket(uint8_t socket, u16 vendor, u16 device)
 {
-	return dev_find_all_devices_on_socket(socket, vendor, device, NULL);
+	return dev_find_all_devices_on_socket(socket, vendor, device, nullptr);
 }
 
 static int filter_device_on_stack(struct device *dev, uint8_t socket, uint8_t stack,
@@ -77,7 +77,7 @@ static int filter_device_on_stack(struct device *dev, uint8_t socket, uint8_t st
  * @param from The device pointer to start search from.
  *
  * @return Pointer to the device struct. When there are multiple device
- * instances, the caller should continue search upon a non-NULL match.
+ * instances, the caller should continue search upon a non-nullptr match.
  */
 struct device *dev_find_all_devices_on_stack(uint8_t socket, uint8_t stack,
 	u16 vendor, u16 device, struct device *from)
@@ -106,7 +106,7 @@ struct device *dev_find_all_devices_on_stack(uint8_t socket, uint8_t stack,
  * @param from The device pointer to start search from.
  *
  * @return Pointer to the device struct. When there are multiple device
- * instances, the caller should continue search upon a non-NULL match.
+ * instances, the caller should continue search upon a non-nullptr match.
  */
 struct device *dev_find_all_devices_on_domain(struct device *domain, u16 vendor,
 	u16 device, struct device *from)

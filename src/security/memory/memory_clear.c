@@ -74,7 +74,7 @@ static void clear_memory(void *unused)
 			BM_MEM_RAM);
 
 	/* Add reserved entries */
-	void *baseptr = NULL;
+	void *baseptr = nullptr;
 	size_t size = 0;
 
 	/* Only skip CBMEM, stage program, stack and heap are included there. */
@@ -134,4 +134,4 @@ static void clear_memory(void *unused)
 }
 
 /* After DEV_INIT as MTRRs needs to be configured on x86 */
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, clear_memory, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, clear_memory, nullptr);

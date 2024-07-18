@@ -20,7 +20,7 @@ static const char *tbt_dma_acpi_name(const struct device *dev)
 	case SA_DEVFN_TCSS_DMA1:
 		return "TDM1";
 	default:
-		return NULL;
+		return nullptr;
 	}
 }
 

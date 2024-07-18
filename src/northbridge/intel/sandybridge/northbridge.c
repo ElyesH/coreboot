@@ -42,14 +42,14 @@ static const char *northbridge_acpi_name(const struct device *dev)
 		return "PCI0";
 
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pci.devfn) {
 	case PCI_DEVFN(0, 0):
 		return "MCHC";
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 struct device_operations sandybridge_pci_domain_ops = {

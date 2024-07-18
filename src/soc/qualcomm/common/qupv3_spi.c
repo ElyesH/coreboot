@@ -94,11 +94,11 @@ int qup_spi_xfer(const struct spi_slave *slave, const void *dout,
 	if (!bytes_out) {
 		size = bytes_in;
 		m_cmd = SPI_RX_ONLY;
-		dout = NULL;
+		dout = nullptr;
 	} else if (!bytes_in) {
 		size = bytes_out;
 		m_cmd = SPI_TX_ONLY;
-		din = NULL;
+		din = nullptr;
 	} else {
 		size = MIN(bytes_in, bytes_out);
 		m_cmd = SPI_FULL_DUPLEX;

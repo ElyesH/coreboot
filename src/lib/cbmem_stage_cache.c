@@ -12,7 +12,7 @@ void stage_cache_add(int stage_id, const struct prog *stage)
 	void *c;
 
 	meta = cbmem_add(CBMEM_ID_STAGEx_META + stage_id, sizeof(*meta));
-	if (meta == NULL) {
+	if (meta == nullptr) {
 		printk(BIOS_ERR, "Can't add %x metadata to cbmem\n",
 				CBMEM_ID_STAGEx_META + stage_id);
 		return;
@@ -29,7 +29,7 @@ void stage_cache_add(int stage_id, const struct prog *stage)
 	}
 
 	c = cbmem_add(CBMEM_ID_STAGEx_CACHE + stage_id, p_size);
-	if (c == NULL) {
+	if (c == nullptr) {
 		printk(BIOS_ERR, "Can't add stage_cache %x to cbmem\n",
 				CBMEM_ID_STAGEx_CACHE + stage_id);
 		return;
@@ -43,7 +43,7 @@ void stage_cache_add_raw(int stage_id, const void *base, const size_t size)
 	void *c;
 
 	c = cbmem_add(CBMEM_ID_STAGEx_RAW + stage_id, size);
-	if (c == NULL) {
+	if (c == nullptr) {
 		printk(BIOS_DEBUG, "Error: Can't add %x raw data to cbmem\n",
 				CBMEM_ID_STAGEx_RAW + stage_id);
 		return;
@@ -57,7 +57,7 @@ void stage_cache_get_raw(int stage_id, void **base, size_t *size)
 	const struct cbmem_entry *e;
 
 	e = cbmem_entry_find(CBMEM_ID_STAGEx_RAW + stage_id);
-	if (e == NULL) {
+	if (e == nullptr) {
 		printk(BIOS_ERR, "Can't find raw %x data in cbmem\n",
 				CBMEM_ID_STAGEx_RAW + stage_id);
 		return;
@@ -75,10 +75,10 @@ void stage_cache_load_stage(int stage_id, struct prog *stage)
 	size_t size;
 	void *load_addr;
 
-	prog_set_entry(stage, NULL, NULL);
+	prog_set_entry(stage, nullptr, nullptr);
 
 	meta = cbmem_find(CBMEM_ID_STAGEx_META + stage_id);
-	if (meta == NULL) {
+	if (meta == nullptr) {
 		printk(BIOS_ERR, "Can't find %x metadata in cbmem\n",
 				CBMEM_ID_STAGEx_META + stage_id);
 		return;
@@ -86,7 +86,7 @@ void stage_cache_load_stage(int stage_id, struct prog *stage)
 
 	e = cbmem_entry_find(CBMEM_ID_STAGEx_CACHE + stage_id);
 
-	if (e == NULL) {
+	if (e == nullptr) {
 		printk(BIOS_ERR, "Can't find stage_cache %x in cbmem\n",
 				CBMEM_ID_STAGEx_CACHE + stage_id);
 		return;

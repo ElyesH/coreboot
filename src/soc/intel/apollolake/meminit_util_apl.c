@@ -34,7 +34,7 @@ void save_lpddr4_dimm_info_part_num(const char *dram_part_num)
 				smbios_memory_info_guid,
 				&hob_size);
 
-	if (memory_info_hob == NULL || hob_size == 0) {
+	if (memory_info_hob == nullptr || hob_size == 0) {
 		printk(BIOS_ERR, "SMBIOS memory info HOB is missing\n");
 		return;
 	}
@@ -44,7 +44,7 @@ void save_lpddr4_dimm_info_part_num(const char *dram_part_num)
 	 * table 17
 	 */
 	mem_info = cbmem_add(CBMEM_ID_MEMINFO, sizeof(*mem_info));
-	if (mem_info == NULL) {
+	if (mem_info == nullptr) {
 		printk(BIOS_ERR, "CBMEM entry for DIMM info missing\n");
 		return;
 	}
@@ -77,7 +77,7 @@ void save_lpddr4_dimm_info_part_num(const char *dram_part_num)
 				src_dimm->DimmId,
 				dram_part_num,
 				strlen(dram_part_num),
-				NULL, /* SPD not available */
+				nullptr, /* SPD not available */
 				memory_info_hob->DataWidth,
 				0,
 				0,
@@ -94,7 +94,7 @@ void save_lpddr4_dimm_info_part_num(const char *dram_part_num)
 
 void save_lpddr4_dimm_info(const struct lpddr4_cfg *lp4cfg, size_t mem_sku)
 {
-	const char *part_num = NULL;
+	const char *part_num = nullptr;
 
 	if (mem_sku >= lp4cfg->num_skus) {
 		printk(BIOS_ERR, "Too few LPDDR4 SKUs: 0x%zx/0x%zx\n",

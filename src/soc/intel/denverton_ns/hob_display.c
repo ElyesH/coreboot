@@ -37,7 +37,7 @@ static const struct guid_name_map  guid_names[] = {
 const char *soc_get_hob_type_name(
 	const struct hob_header *hob)
 {
-	return NULL;
+	return nullptr;
 }
 
 const char *soc_get_guid_name(const uint8_t *guid)
@@ -49,7 +49,7 @@ const char *soc_get_guid_name(const uint8_t *guid)
 		if (fsp_guid_compare(guid, guid_names[index].guid))
 			return guid_names[index].name;
 
-	return NULL;
+	return nullptr;
 }
 
 void soc_display_hob(const struct hob_header *hob)

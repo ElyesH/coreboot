@@ -14,7 +14,7 @@ void *acpi_get_gnvs(void);
 void *acpi_get_device_nvs(void);
 int acpi_reset_gnvs_for_wake(struct global_nvs **gnvs);
 #else
-static inline void *acpi_get_gnvs(void) { return NULL; }
+static inline void *acpi_get_gnvs(void) { return nullptr; }
 static inline int acpi_reset_gnvs_for_wake(struct global_nvs **gnvs) { return -1; }
 #endif
 

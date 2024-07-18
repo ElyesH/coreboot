@@ -146,5 +146,5 @@ void *get_smi_source_handler(int source)
 		if (smi_sources[i].type == source)
 			return smi_sources[i].handler;
 
-	return NULL;
+	return nullptr;
 }

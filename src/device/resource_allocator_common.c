@@ -49,8 +49,8 @@ const struct device *largest_resource(struct bus *bus,
 	struct pick_largest_state state;
 
 	state.last = *result_res;
-	state.result_dev = NULL;
-	state.result = NULL;
+	state.result_dev = nullptr;
+	state.result = nullptr;
 	state.seen_last = 0;
 
 	search_bus_resources(bus, type_mask, type, pick_largest_resource,

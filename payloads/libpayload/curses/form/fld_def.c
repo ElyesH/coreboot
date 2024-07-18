@@ -79,7 +79,7 @@ _nc_Default_Field = &default_field;
 |                    Use the type-dependent argument list to construct
 |                    it.
 |
-|   Return Values :  Pointer to argument structure. Maybe NULL.
+|   Return Values :  Pointer to argument structure. Maybe nullptr.
 |                    In case of an error in *err an error counter is increased.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(TypeArgument *)
@@ -127,7 +127,7 @@ _nc_Make_Argument(const FIELDTYPE *typ, va_list *ap, int *err)
 |   Description   :  Create a copy of an argument structure for the specified
 |                    type.
 |
-|   Return Values :  Pointer to argument structure. Maybe NULL.
+|   Return Values :  Pointer to argument structure. Maybe nullptr.
 |                    In case of an error in *err an error counter is increased.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(TypeArgument *)
@@ -270,7 +270,7 @@ _nc_Free_Type(FIELD *field)
 |                    E_BAD_ARGUMENT - invalid argument
 |                    E_SYSTEM_ERROR - system error
 |
-|   Return Values :  Pointer to the new field or NULL if failure.
+|   Return Values :  Pointer to the new field or nullptr if failure.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(FIELD *)
 new_field(int rows, int cols, int frow, int fcol, int nrow, int nbuf)

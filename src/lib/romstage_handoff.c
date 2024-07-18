@@ -31,7 +31,7 @@ static struct romstage_handoff *romstage_handoff_find_or_add(void)
 
 	handoff = cbmem_add(CBMEM_ID_ROMSTAGE_INFO, sizeof(*handoff));
 
-	if (handoff != NULL)
+	if (handoff != nullptr)
 		memset(handoff, 0, sizeof(*handoff));
 	else
 		printk(BIOS_DEBUG, "Romstage handoff structure not added!\n");
@@ -45,7 +45,7 @@ int romstage_handoff_init(int is_s3_resume)
 
 	handoff = romstage_handoff_find_or_add();
 
-	if (handoff == NULL)
+	if (handoff == nullptr)
 		return -1;
 
 	handoff->s3_resume = is_s3_resume;
@@ -64,7 +64,7 @@ int romstage_handoff_is_resume(void)
 	/* Only try evaluate handoff once for s3 resume state. */
 	once = 1;
 	handoff = cbmem_find(CBMEM_ID_ROMSTAGE_INFO);
-	if (handoff == NULL)
+	if (handoff == nullptr)
 		return 0;
 
 	s3_resume = handoff->s3_resume;

@@ -94,7 +94,7 @@ static void imdr_init(struct imdr *ir, void *upper_limit)
 	uintptr_t limit = (uintptr_t)upper_limit;
 	/* Upper limit is aligned down to 4KiB */
 	ir->limit = ALIGN_DOWN(limit, LIMIT_ALIGN);
-	ir->r = NULL;
+	ir->r = nullptr;
 }
 
 static int imdr_create_empty(struct imdr *imdr, size_t root_size,
@@ -218,10 +218,10 @@ static const struct imd_entry *imdr_entry_find(const struct imdr *imdr,
 
 	r = imdr_root(imdr);
 
-	if (r == NULL)
-		return NULL;
+	if (r == nullptr)
+		return nullptr;
 
-	e = NULL;
+	e = nullptr;
 	/* Skip first entry covering the root. */
 	for (i = 1; i < r->num_entries; i++) {
 		if (id != r->entries[i].id)
@@ -240,7 +240,7 @@ static int imdr_limit_size(struct imdr *imdr, size_t max_size)
 	size_t root_size;
 
 	r = imdr_root(imdr);
-	if (r == NULL)
+	if (r == nullptr)
 		return -1;
 
 	root_size = imdr->limit - (uintptr_t)r;
@@ -276,14 +276,14 @@ static struct imd_entry *imd_entry_add_to_root(struct imd_root *r, uint32_t id,
 	size_t used_size;
 
 	if (r->num_entries == r->max_entries)
-		return NULL;
+		return nullptr;
 
 	/* Determine total size taken up by entry. */
 	used_size = ALIGN_UP(size, r->entry_align);
 
 	/* See if size overflows imd total size. */
 	if (used_size > imd_root_data_left(r))
-		return NULL;
+		return nullptr;
 
 	/*
 	 * Determine if offset field overflows. All offsets should be lower
@@ -293,7 +293,7 @@ static struct imd_entry *imd_entry_add_to_root(struct imd_root *r, uint32_t id,
 	e_offset = last_entry->start_offset;
 	e_offset -= (ssize_t)used_size;
 	if (e_offset >= last_entry->start_offset)
-		return NULL;
+		return nullptr;
 
 	entry = root_last_entry(r) + 1;
 	r->num_entries++;
@@ -310,11 +310,11 @@ static const struct imd_entry *imdr_entry_add(const struct imdr *imdr,
 
 	r = imdr_root(imdr);
 
-	if (r == NULL)
-		return NULL;
+	if (r == nullptr)
+		return nullptr;
 
 	if (root_is_locked(r))
-		return NULL;
+		return nullptr;
 
 	return imd_entry_add_to_root(r, id, size);
 }
@@ -325,7 +325,7 @@ static bool imdr_has_entry(const struct imdr *imdr, const struct imd_entry *e)
 	size_t idx;
 
 	r = imdr_root(imdr);
-	if (r == NULL)
+	if (r == nullptr)
 		return false;
 
 	/* Determine if the entry is within this root structure. */
@@ -345,14 +345,14 @@ static const struct imdr *imd_entry_to_imdr(const struct imd *imd,
 	if (imdr_has_entry(&imd->sm, entry))
 		return &imd->sm;
 
-	return NULL;
+	return nullptr;
 }
 
 /* Initialize imd handle. */
 void imd_handle_init(struct imd *imd, void *upper_limit)
 {
 	imdr_init(&imd->lg, upper_limit);
-	imdr_init(&imd->sm, NULL);
+	imdr_init(&imd->sm, nullptr);
 }
 
 void imd_handle_init_partial_recovery(struct imd *imd)
@@ -373,7 +373,7 @@ void imd_handle_init_partial_recovery(struct imd *imd)
 
 	e = imdr_entry_find(imdr, SMALL_REGION_ID);
 
-	if (e == NULL)
+	if (e == nullptr)
 		return;
 
 	imd->sm.limit = (uintptr_t)imdr_entry_at(imdr, e);
@@ -409,7 +409,7 @@ int imd_create_tiered_empty(struct imd *imd,
 	/* Add a new entry to the large region to cover the root and entries. */
 	e = imdr_entry_add(imdr, SMALL_REGION_ID, sm_region_size);
 
-	if (e == NULL)
+	if (e == nullptr)
 		goto fail;
 
 	imd->sm.limit = (uintptr_t)imdr_entry_at(imdr, e);
@@ -438,7 +438,7 @@ int imd_recover(struct imd *imd)
 	/* Determine if small region is present. */
 	e = imdr_entry_find(imdr, SMALL_REGION_ID);
 
-	if (e == NULL)
+	if (e == nullptr)
 		return 0;
 
 	small_upper_limit = (uintptr_t)imdr_entry_at(imdr, e);
@@ -465,13 +465,13 @@ int imd_lockdown(struct imd *imd)
 	struct imd_root *r;
 
 	r = imdr_root(&imd->lg);
-	if (r == NULL)
+	if (r == nullptr)
 		return -1;
 
 	r->flags |= IMD_FLAG_LOCKED;
 
 	r = imdr_root(&imd->sm);
-	if (r != NULL)
+	if (r != nullptr)
 		r->flags |= IMD_FLAG_LOCKED;
 
 	return 0;
@@ -489,7 +489,7 @@ int imd_region_used(struct imd *imd, void **base, size_t *size)
 
 	r = imdr_root(&imd->lg);
 
-	if (r == NULL)
+	if (r == nullptr)
 		return -1;
 
 	/* Use last entry to obtain lowest address. */
@@ -511,7 +511,7 @@ const struct imd_entry *imd_entry_add(const struct imd *imd, uint32_t id,
 {
 	struct imd_root *r;
 	const struct imdr *imdr;
-	const struct imd_entry *e = NULL;
+	const struct imd_entry *e = nullptr;
 
 	/*
 	 * Determine if requested size is less than 1/4 of small data
@@ -521,13 +521,13 @@ const struct imd_entry *imd_entry_add(const struct imd *imd, uint32_t id,
 	r = imdr_root(imdr);
 
 	/* No small region. Use the large region. */
-	if (r == NULL)
+	if (r == nullptr)
 		return imdr_entry_add(&imd->lg, id, size);
 	else if (size <= r->entry_align || size <= imd_root_data_left(r) / 4)
 		e = imdr_entry_add(imdr, id, size);
 
 	/* Fall back on large region allocation. */
-	if (e == NULL)
+	if (e == nullptr)
 		e = imdr_entry_add(&imd->lg, id, size);
 
 	return e;
@@ -541,7 +541,7 @@ const struct imd_entry *imd_entry_find(const struct imd *imd, uint32_t id)
 	 * the small region first. */
 	e = imdr_entry_find(&imd->sm, id);
 
-	if (e == NULL)
+	if (e == nullptr)
 		e = imdr_entry_find(&imd->lg, id);
 
 	return e;
@@ -554,7 +554,7 @@ const struct imd_entry *imd_entry_find_or_add(const struct imd *imd,
 
 	e = imd_entry_find(imd, id);
 
-	if (e != NULL)
+	if (e != nullptr)
 		return e;
 
 	return imd_entry_add(imd, id, size);
@@ -571,8 +571,8 @@ void *imd_entry_at(const struct imd *imd, const struct imd_entry *entry)
 
 	imdr = imd_entry_to_imdr(imd, entry);
 
-	if (imdr == NULL)
-		return NULL;
+	if (imdr == nullptr)
+		return nullptr;
 
 	return imdr_entry_at(imdr, entry);
 }
@@ -589,7 +589,7 @@ int imd_entry_remove(const struct imd *imd, const struct imd_entry *entry)
 
 	imdr = imd_entry_to_imdr(imd, entry);
 
-	if (imdr == NULL)
+	if (imdr == nullptr)
 		return -1;
 
 	r = imdr_root(imdr);
@@ -616,13 +616,13 @@ static void imdr_print_entries(const struct imdr *imdr, const char *indent,
 	size_t i;
 	size_t j;
 
-	if (imdr == NULL)
+	if (imdr == nullptr)
 		return;
 
 	r = imdr_root(imdr);
 
 	for (i = 0; i < r->num_entries; i++) {
-		const char *name = NULL;
+		const char *name = nullptr;
 		const struct imd_entry *e = &r->entries[i];
 
 		for (j = 0; j < size; j++) {
@@ -634,7 +634,7 @@ static void imdr_print_entries(const struct imdr *imdr, const char *indent,
 
 		printk(BIOS_DEBUG, "%s", indent);
 
-		if (name == NULL)
+		if (name == nullptr)
 			printk(BIOS_DEBUG, "%08x   ", e->id);
 		else
 			printk(BIOS_DEBUG, "%s", name);
@@ -647,11 +647,11 @@ static void imdr_print_entries(const struct imdr *imdr, const char *indent,
 int imd_print_entries(const struct imd *imd, const struct imd_lookup *lookup,
 			size_t size)
 {
-	if (imdr_root(&imd->lg) == NULL)
+	if (imdr_root(&imd->lg) == nullptr)
 		return -1;
 
 	imdr_print_entries(&imd->lg, "", lookup, size);
-	if (imdr_root(&imd->sm) != NULL) {
+	if (imdr_root(&imd->sm) != nullptr) {
 		printk(BIOS_DEBUG, "IMD small region:\n");
 		imdr_print_entries(&imd->sm, "  ", lookup, size);
 	}
@@ -661,7 +661,7 @@ int imd_print_entries(const struct imd *imd, const struct imd_lookup *lookup,
 
 int imd_cursor_init(const struct imd *imd, struct imd_cursor *cursor)
 {
-	if (imd == NULL || cursor == NULL)
+	if (imd == nullptr || cursor == nullptr)
 		return -1;
 
 	memset(cursor, 0, sizeof(*cursor));
@@ -678,12 +678,12 @@ const struct imd_entry *imd_cursor_next(struct imd_cursor *cursor)
 	const struct imd_entry *e;
 
 	if (cursor->current_imdr >= ARRAY_SIZE(cursor->imdr))
-		return NULL;
+		return nullptr;
 
 	r = imdr_root(cursor->imdr[cursor->current_imdr]);
 
-	if (r == NULL)
-		return NULL;
+	if (r == nullptr)
+		return nullptr;
 
 	if (cursor->current_entry >= r->num_entries) {
 		/* Try next imdr. */

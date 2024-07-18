@@ -42,7 +42,7 @@ struct panel_description *get_panel_description(uint32_t panel_id)
 	uint32_t id = panel_id & 0xF;
 
 	if (id >= ARRAY_SIZE(panels))
-		return NULL;
+		return nullptr;
 
 	return &panels[id];
 }

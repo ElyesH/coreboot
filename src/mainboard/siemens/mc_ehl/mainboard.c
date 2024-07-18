@@ -170,4 +170,4 @@ struct chip_operations mainboard_ops = {
 	.final = mainboard_final
 };
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENUMERATE, BS_ON_ENTRY, wait_for_legacy_dev, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENUMERATE, BS_ON_ENTRY, wait_for_legacy_dev, nullptr);

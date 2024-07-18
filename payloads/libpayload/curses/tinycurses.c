@@ -233,18 +233,18 @@ int delwin(WINDOW *win)
 WINDOW *derwin(WINDOW *orig, int num_lines, int num_columns, int begy, int begx)
 {
 #if 0
-	WINDOW *win = NULL;
+	WINDOW *win = nullptr;
 	int i;
 	int flags = _SUBWIN;
 
 	/* Make sure window fits inside the original one. */
 	if (begy < 0 || begx < 0 || orig == 0 || num_lines < 0
 	    || num_columns < 0)
-		return NULL;
+		return nullptr;
 
 	if (begy + num_lines > orig->_maxy + 1
 	    || begx + num_columns > orig->_maxx + 1)
-		return NULL;
+		return nullptr;
 
 	if (num_lines == 0)
 		num_lines = orig->_maxy + 1 - begy;
@@ -258,7 +258,7 @@ WINDOW *derwin(WINDOW *orig, int num_lines, int num_columns, int begy, int begx)
 	// FIXME
 	if ((win = _nc_makenew(num_lines, num_columns, orig->_begy + begy,
 	                        orig->_begx + begx, flags)) == 0)
-	     return NULL;
+	     return nullptr;
 
 	win->_pary = begy;
 	win->_parx = begx;
@@ -272,7 +272,7 @@ WINDOW *derwin(WINDOW *orig, int num_lines, int num_columns, int begy, int begx)
 
 	return win;
 #else
-	return NULL;
+	return nullptr;
 #endif
 }
 int doupdate(void) { /* TODO */ return(0); }
@@ -337,7 +337,7 @@ WINDOW *initscr(void)
 	return stdscr;
 }
 // int intrflush (WINDOW *,bool) {}
-/* D */ bool isendwin(void) { return ((SP == NULL) ? FALSE : SP->_endwin); }
+/* D */ bool isendwin(void) { return ((SP == nullptr) ? FALSE : SP->_endwin); }
 // bool is_linetouched (WINDOW *,int) {}
 // bool is_wintouched (WINDOW *) {}
 // NCURSES_CONST char * keyname (int) {}
@@ -392,7 +392,7 @@ WINDOW *newwin(int num_lines, int num_columns, int begy, int begx)
 	// TODO: WINDOWLIST?
 
 	if (window_count >= MAX_WINDOWS)
-		return NULL;
+		return nullptr;
 
 	win = &window_list[window_count++];
 
@@ -469,8 +469,8 @@ int printw(const char *fmt, ...)
 /* D */ char *slk_label(int n)
 {
 	// TODO: Needed?
-	// if (SP == NULL || SP->_slk == NULL || n < 1 || n > SP->_slk->labcnt)
-	// 	return NULL;
+	// if (SP == nullptr || SP->_slk == nullptr || n < 1 || n > SP->_slk->labcnt)
+	// 	return nullptr;
 	return SP->_slk->ent[n - 1].ent_text;
 }
 // int slk_noutrefresh (void) {}

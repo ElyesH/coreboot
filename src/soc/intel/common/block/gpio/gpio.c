@@ -136,7 +136,7 @@ static const struct pad_community *gpio_get_community(gpio_t pad)
 	}
 	printk(BIOS_ERR, "%s pad %d not found\n", __func__, pad);
 	die("Invalid GPIO pad number\n");
-	return NULL;
+	return nullptr;
 }
 
 static void gpio_configure_owner(const struct pad_config *cfg,
@@ -312,7 +312,7 @@ static uint32_t gpio_pad_reset_config_override(const struct pad_community *comm,
 	const struct reset_mapping *rst_map = comm->reset_map;
 	int i;
 
-	if (rst_map == NULL || comm->num_reset_vals == 0)
+	if (rst_map == nullptr || comm->num_reset_vals == 0)
 		return config_value;/* Logical reset values equal chipset
 					values */
 	for (i = 0; i < comm->num_reset_vals; i++, rst_map++) {
@@ -339,7 +339,7 @@ static void gpio_configure_pad(const struct pad_config *cfg)
 	int i, pin, group;
 
 	if (!cfg) {
-		printk(BIOS_ERR, "%s: cfg value is NULL\n", __func__);
+		printk(BIOS_ERR, "%s: cfg value is nullptr\n", __func__);
 		return;
 	}
 
@@ -408,7 +408,7 @@ static const struct pad_config *gpio_get_config(const struct pad_config *c,
 {
 	size_t i;
 
-	if (override_cfg_table == NULL)
+	if (override_cfg_table == nullptr)
 		return c;
 
 	for (i = 0; i < num; i++) {
@@ -606,7 +606,7 @@ int gpio_lock_pads(const struct gpio_lock_config *pad_list, const size_t count)
 		return -1;
 	}
 
-	if ((pad_list == NULL) || (count == 0)) {
+	if ((pad_list == nullptr) || (count == 0)) {
 		printk(BIOS_ERR, "%s: Error: pad_list null or count = 0!\n", __func__);
 		return -1;
 	}
@@ -831,7 +831,7 @@ static int gpio_route_pmc_gpio_gpe(int pmc_gpe_num)
 	int i;
 
 	routes = soc_pmc_gpio_routes(&num_routes);
-	assert(routes != NULL);
+	assert(routes != nullptr);
 	for (i = 0; i < num_routes; i++, routes++) {
 		if (pmc_gpe_num == routes->pmc)
 			return routes->gpio;
@@ -962,7 +962,7 @@ static void *allocate_snapshot_space(void)
 		total += comm->last_pad - comm->first_pad + 1;
 
 	if (total == 0)
-		return NULL;
+		return nullptr;
 
 	return malloc(total * GPIO_NUM_PAD_CFG_REGS * sizeof(uint32_t));
 }
@@ -973,9 +973,9 @@ void gpio_snapshot(void)
 	const struct pad_community *comm;
 	uint16_t config_offset;
 
-	if (snapshot == NULL) {
+	if (snapshot == nullptr) {
 		snapshot = allocate_snapshot_space();
-		if (snapshot == NULL)
+		if (snapshot == nullptr)
 			return;
 	}
 
@@ -1000,7 +1000,7 @@ size_t gpio_verify_snapshot(void)
 	uint16_t config_offset;
 	size_t changes = 0;
 
-	if (snapshot == NULL)
+	if (snapshot == nullptr)
 		return 0;
 
 	comm = soc_gpio_get_community(&gpio_communities);
@@ -1029,8 +1029,8 @@ static void snapshot_cleanup(void *unused)
 	free(snapshot);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, snapshot_cleanup, NULL);
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, snapshot_cleanup, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, snapshot_cleanup, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, snapshot_cleanup, nullptr);
 
 bool gpio_get_vw_info(gpio_t pad, unsigned int *vw_index, unsigned int *vw_bit)
 {

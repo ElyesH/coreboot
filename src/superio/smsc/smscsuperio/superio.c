@@ -182,22 +182,22 @@ static struct device_operations ops = {
  * TODO: FDC, PP, SP1, SP2, and KBC should work, the rest probably not (yet).
  */
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, LD_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
-	{ NULL, LD_PP,  PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
-	{ NULL, LD_SP1, PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, LD_SP2, PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, LD_RTC, },
-	{ NULL, LD_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
+	{ nullptr, LD_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
+	{ nullptr, LD_PP,  PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
+	{ nullptr, LD_SP1, PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, LD_SP2, PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, LD_RTC, },
+	{ nullptr, LD_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
 		0x07ff, 0x07ff, },
-	{ NULL, LD_AUX, },
-	{ NULL, LD_XBUS, },
-	{ NULL, LD_HWM, PNP_IO0, 0x07f0, },
-	{ NULL, LD_GAME, },
-	{ NULL, LD_PME, },
-	{ NULL, LD_MPU401, },
-	{ NULL, LD_RT,  PNP_IO0, 0x0780, },
-	{ NULL, LD_ACPI, },
-	{ NULL, LD_SMB, },
+	{ nullptr, LD_AUX, },
+	{ nullptr, LD_XBUS, },
+	{ nullptr, LD_HWM, PNP_IO0, 0x07f0, },
+	{ nullptr, LD_GAME, },
+	{ nullptr, LD_PME, },
+	{ nullptr, LD_MPU401, },
+	{ nullptr, LD_RT,  PNP_IO0, 0x0780, },
+	{ nullptr, LD_ACPI, },
+	{ nullptr, LD_SMB, },
 };
 
 /**

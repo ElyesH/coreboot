@@ -324,7 +324,7 @@ static void *allocate_hsphy_buf(void)
 		if (!hsphy_buf || dma_buf_size < HSPHY_PAYLOAD_SIZE) {
 			printk(BIOS_ERR, "DMA protection enabled but DMA buffer does not"
 					 " exist or is too small\n");
-			return NULL;
+			return nullptr;
 		}
 
 		/* Rather impossible scenario, but check alignment anyways */
@@ -337,7 +337,7 @@ static void *allocate_hsphy_buf(void)
 
 		if (!hsphy_buf) {
 			printk(BIOS_ERR, "Failed to allocate memory for HSPHY blob\n");
-			return NULL;
+			return nullptr;
 		}
 	}
 

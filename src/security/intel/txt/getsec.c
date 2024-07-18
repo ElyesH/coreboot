@@ -82,7 +82,7 @@ void enable_getsec_or_reset(void)
 
 /**
  * Get information as returned by getsec[PARAMETER].
- * Arguments can be set to NULL if not needed.
+ * Arguments can be set to nullptr if not needed.
  *
  * Returns false on error, true on success.
  */
@@ -108,7 +108,7 @@ bool getsec_parameter(uint32_t *version_mask,
 			: "=a" (eax), "=b" (ebx), "=c" (ecx)
 			: "a" (IA32_GETSEC_PARAMETERS), "b" (i) :);
 		switch (eax & 0x1f) {
-		case 0: /* NULL - Exit marker */
+		case 0: /* nullptr - Exit marker */
 			return true;
 		case 1: /* Supported AC module versions */
 			if (version_mask)

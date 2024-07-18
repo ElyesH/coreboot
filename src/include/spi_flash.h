@@ -111,7 +111,7 @@ struct spi_flash {
 	u8 pp_cmd; /* Page program command. */
 	u8 wren_cmd; /* Write Enable command. */
 	const struct spi_flash_ops *ops;
-	/* If !NULL all protection callbacks exist. */
+	/* If !nullptr all protection callbacks exist. */
 	const struct spi_flash_protection_ops *prot_ops;
 	const struct spi_flash_part_id *part;
 };

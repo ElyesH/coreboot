@@ -155,7 +155,7 @@ static void acpi_save_wake_source(void *unused)
 	       gnvs->pm1i);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, acpi_save_wake_source, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, acpi_save_wake_source, nullptr);
 
 static void baytrail_enable_2x_refresh_rate(void)
 {

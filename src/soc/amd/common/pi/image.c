@@ -11,7 +11,7 @@ static bool validate_image(void *module_chain, const char module_signature[8])
 	uint64_t signature = *(uint64_t *)module_signature;
 	char *checking_str;
 
-	while ((mod_ptr != NULL) &&
+	while ((mod_ptr != nullptr) &&
 	  (MODULE_SIGNATURE == *(uint32_t *)&mod_ptr->ModuleHeaderSignature)) {
 		checking_str = (char *)&mod_ptr->ModuleIdentifier;
 		if (signature == *(uint64_t *)checking_str)
@@ -44,5 +44,5 @@ void *amd_find_image(const void *start_address, const void *end_address,
 		}
 		current_ptr += alignment;
 	}
-	return NULL;
+	return nullptr;
 }

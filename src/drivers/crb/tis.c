@@ -53,17 +53,17 @@ tis_sendrecv_fn crb_tis_probe(enum tpm_family *family)
 	if (CONFIG(HAVE_INTEL_PTT)) {
 		if (!ptt_active()) {
 			printk(BIOS_ERR, "%s: Intel PTT is not active.\n", __func__);
-			return NULL;
+			return nullptr;
 		}
 		printk(BIOS_DEBUG, "%s: Intel PTT is active.\n", __func__);
 	}
 
 	/* Wake TPM up (if necessary) */
 	if (crb_tpm_init())
-		return NULL;
+		return nullptr;
 
 	/* CRB interface exists only in TPM2 */
-	if (family != NULL)
+	if (family != nullptr)
 		*family = TPM_2;
 
 	crb_tpm_get_info(&info);
@@ -207,7 +207,7 @@ static struct device_operations __maybe_unused crb_ops = {
 
 static void enable_dev(struct device *dev)
 {
-	if (crb_tis_probe(NULL) == NULL) {
+	if (crb_tis_probe(nullptr) == nullptr) {
 		dev->enabled = 0;
 		return;
 	}

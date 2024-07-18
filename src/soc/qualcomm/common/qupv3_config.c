@@ -31,7 +31,7 @@ void qupv3_se_fw_load_and_init(unsigned int bus, unsigned int protocol,
 		die("*ERROR*  * INVALID PROTOCOL ***\n");
 
 	if (!fw_list[protocol]) {
-		fw_list[protocol] = cbfs_map(filename[protocol], NULL);
+		fw_list[protocol] = cbfs_map(filename[protocol], nullptr);
 		if (!fw_list[protocol])
 			die("*ERROR*  * cbfs_map failed ***\n");
 	}
@@ -193,7 +193,7 @@ void gpi_firmware_load(int addr)
 
 	/* Assign firmware header base */
 	if (!gsi_hdr) {
-		gsi_hdr = cbfs_map(filename, NULL);
+		gsi_hdr = cbfs_map(filename, nullptr);
 		if (!gsi_hdr)
 			die("*ERROR*  * cbfs_map() failed ***\n");
 	}

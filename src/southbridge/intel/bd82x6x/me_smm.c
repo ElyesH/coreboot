@@ -27,7 +27,7 @@ static int me8_mkhi_end_of_post(void)
 
 	/* Send request and wait for response */
 	printk(BIOS_NOTICE, "ME: %s\n", __func__);
-	if (mei_sendrecv(&mei, &mkhi, NULL, &eop_ack, sizeof(eop_ack)) < 0) {
+	if (mei_sendrecv(&mei, &mkhi, nullptr, &eop_ack, sizeof(eop_ack)) < 0) {
 		printk(BIOS_ERR, "ME: END OF POST message failed\n");
 		return -1;
 	}
@@ -51,7 +51,7 @@ static int me7_mkhi_end_of_post(void)
 	};
 
 	/* Send request and wait for response */
-	if (mei_sendrecv(&mei, &mkhi, NULL, NULL, 0) < 0) {
+	if (mei_sendrecv(&mei, &mkhi, nullptr, nullptr, 0) < 0) {
 		printk(BIOS_ERR, "ME: END OF POST message failed\n");
 		return -1;
 	}

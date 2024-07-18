@@ -38,7 +38,7 @@ static unsigned long mainboard_write_acpi_tables(
 
 	nhlt = nhlt_init();
 
-	if (nhlt == NULL)
+	if (nhlt == nullptr)
 		return start_addr;
 
 	variant_nhlt_init(nhlt);

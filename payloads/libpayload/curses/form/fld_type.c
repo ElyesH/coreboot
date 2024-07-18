@@ -85,7 +85,7 @@ set_field_type(FIELD *field, FIELDTYPE *type,...)
 |
 |   Description   :  Retrieve the associated fieldtype for this field.
 |
-|   Return Values :  Pointer to fieldtype of NULL if none is defined.
+|   Return Values :  Pointer to fieldtype of nullptr if none is defined.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(FIELDTYPE *)
 field_type(const FIELD *field)

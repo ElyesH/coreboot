@@ -152,7 +152,7 @@ dwc2_rh_disable_port(usbdev_t *const dev, const int port)
 }
 
 static const generic_hub_ops_t dwc2_rh_ops = {
-	.hub_status_changed	= NULL,
+	.hub_status_changed	= nullptr,
 	.port_status_changed	= dwc2_rh_port_status_changed,
 	.port_connected		= dwc2_rh_port_connected,
 	.port_in_reset		= dwc2_rh_port_in_reset,
@@ -160,7 +160,7 @@ static const generic_hub_ops_t dwc2_rh_ops = {
 	.port_speed		= dwc2_rh_port_speed,
 	.enable_port		= dwc2_rh_enable_port,
 	.disable_port		= dwc2_rh_disable_port,
-	.start_port_reset	= NULL,
+	.start_port_reset	= nullptr,
 	.reset_port		= dwc2_rh_reset_port,
 };
 

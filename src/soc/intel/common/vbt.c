@@ -10,13 +10,13 @@
 void *vbt_get(void)
 {
 	if (!CONFIG(RUN_FSP_GOP))
-		return NULL;
+		return nullptr;
 
 	/* Normal mode and S3 resume path PEIM GFX init is not needed.
-	 * Passing NULL as VBT will not make PEIM GFX to execute. */
+	 * Passing nullptr as VBT will not make PEIM GFX to execute. */
 	if (acpi_is_wakeup_s3())
-		return NULL;
+		return nullptr;
 	if (!display_init_required())
-		return NULL;
-	return locate_vbt(NULL);
+		return nullptr;
+	return locate_vbt(nullptr);
 }

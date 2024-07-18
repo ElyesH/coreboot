@@ -33,7 +33,7 @@ static efi_wrapper_entry_t load_reference_code(void)
 
 	if (rmodule_stage_load(&refcode)) {
 		printk(BIOS_DEBUG, "Error loading reference code.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* Cache loaded reference code. */
@@ -53,7 +53,7 @@ void baytrail_run_reference_code(void)
 
 	entry = load_reference_code();
 
-	if (entry == NULL)
+	if (entry == nullptr)
 		return;
 
 	wrp.tsc_ticks_per_microsecond = tsc_freq_mhz();

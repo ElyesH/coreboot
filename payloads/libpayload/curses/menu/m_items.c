@@ -82,7 +82,7 @@ set_menu_items(MENU * menu, ITEM ** items)
 |
 |   Description   :  Returns a pointer to the item pointer array of the menu
 |
-|   Return Values :  NULL on error
+|   Return Values :  nullptr on error
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(ITEM **)
 menu_items(const MENU * menu)
@@ -96,7 +96,7 @@ menu_items(const MENU * menu)
 |   Function      :  int item_count(const MENU *menu)
 |
 |   Description   :  Get the number of items connected to the menu. If the
-|                    menu pointer is NULL we return -1.
+|                    menu pointer is nullptr we return -1.
 |
 |   Return Values :  Number of items or -1 to indicate error.
 +--------------------------------------------------------------------------*/

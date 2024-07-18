@@ -21,7 +21,7 @@ struct device *add_cpu_device(struct bus *cpu_bus, unsigned int apic_id,
 	else
 		cpu = find_dev_path(cpu_bus, &cpu_path);
 	if (!cpu)
-		return NULL;
+		return nullptr;
 
 	cpu->enabled = enabled;
 	printk(BIOS_DEBUG, "CPU: %s %s\n",

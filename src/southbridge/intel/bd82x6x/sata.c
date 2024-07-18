@@ -93,7 +93,7 @@ static void sata_init(struct device *dev)
 
 	printk(BIOS_DEBUG, "SATA: Initializing...\n");
 
-	if (config == NULL) {
+	if (config == nullptr) {
 		printk(BIOS_ERR, "SATA: ERROR: Device not in devicetree.cb!\n");
 		return;
 	}

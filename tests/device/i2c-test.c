@@ -43,7 +43,7 @@ int platform_i2c_transfer(unsigned int bus, struct i2c_msg *segments, int count)
 	int i;
 	int reg;
 	struct i2c_msg *tmp = segments;
-	i2c_ex_devs_t *i2c_dev = NULL;
+	i2c_ex_devs_t *i2c_dev = nullptr;
 
 	check_expected(count);
 
@@ -61,7 +61,7 @@ int platform_i2c_transfer(unsigned int bus, struct i2c_msg *segments, int count)
 			break;
 		}
 
-	if (i2c_dev == NULL)
+	if (i2c_dev == nullptr)
 		return -1;
 
 	/* Write commands */
@@ -86,7 +86,7 @@ static void mock_expect_params_platform_i2c_transfer(void)
 	/* Flags should always be only within supported range */
 	expect_in_set_count(platform_i2c_transfer, segments->flags, expected_flags, -1);
 
-	expect_not_value_count(platform_i2c_transfer, segments->buf, NULL, -1);
+	expect_not_value_count(platform_i2c_transfer, segments->buf, nullptr, -1);
 
 	expect_in_range_count(platform_i2c_transfer, count, 1, INT_MAX, -1);
 }
@@ -156,5 +156,5 @@ int main(void)
 	const struct CMUnitTest tests[] = {cmocka_unit_test(i2c_read_field_test),
 					   cmocka_unit_test(i2c_write_field_test)};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

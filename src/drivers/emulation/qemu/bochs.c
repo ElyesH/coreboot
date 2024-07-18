@@ -74,7 +74,7 @@ static struct resource res_legacy = {
 	VBE_DISPI_IOPORT_INDEX,
 	VBE_DISPI_IOPORT_DATA - VBE_DISPI_IOPORT_INDEX,
 	VBE_DISPI_IOPORT_DATA,
-	NULL,
+	nullptr,
 	IORESOURCE_IO,
 	0,
 	1,

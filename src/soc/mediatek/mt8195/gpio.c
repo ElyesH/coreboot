@@ -26,7 +26,7 @@ void *gpio_find_reg_addr(gpio_t gpio)
 		reg_addr = (void *)IOCFG_TL_BASE;
 		break;
 	default:
-		reg_addr = NULL;
+		reg_addr = nullptr;
 		break;
 	}
 

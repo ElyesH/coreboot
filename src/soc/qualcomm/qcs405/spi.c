@@ -212,7 +212,7 @@ static struct qcs_spi_slave *to_qcs_spi(const struct spi_slave *slave)
 			return ds;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static void write_force_cs(const struct spi_slave *slave, int assert)
@@ -658,13 +658,13 @@ static int spi_ctrlr_xfer(const struct spi_slave *slave, const void *dout,
 	if (ret != SUCCESS)
 		return ret;
 
-	if (dout != NULL) {
+	if (dout != nullptr) {
 		ret = blsp_spi_write(ds, txp, (unsigned int)out_bytes);
 		if (ret != SUCCESS)
 			goto out;
 	}
 
-	if (din != NULL) {
+	if (din != nullptr) {
 		ret = blsp_spi_read(ds, rxp, in_bytes);
 		if (ret != SUCCESS)
 			goto out;
@@ -682,7 +682,7 @@ out:
 
 static int spi_ctrlr_setup(const struct spi_slave *slave)
 {
-	struct qcs_spi_slave *ds = NULL;
+	struct qcs_spi_slave *ds = nullptr;
 	int i;
 	unsigned int bus = slave->bus;
 	unsigned int cs = slave->cs;

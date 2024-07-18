@@ -241,7 +241,7 @@ static void set_single_gpio(const struct soc_amd_gpio *g)
 	if (!can_set_smi_flags)
 		return;
 
-	if (gev_tbl == NULL)
+	if (gev_tbl == nullptr)
 		soc_get_gpio_event_table(&gev_tbl, &gev_items);
 
 	gevent_num = get_gpio_gevent(g->gpio, gev_tbl, gev_items);
@@ -305,7 +305,7 @@ void gpio_configure_pads_with_override(const struct soc_amd_gpio *base_cfg,
 
 void gpio_configure_pads(const struct soc_amd_gpio *gpio_list_ptr, size_t size)
 {
-	gpio_configure_pads_with_override(gpio_list_ptr, size, NULL, 0);
+	gpio_configure_pads_with_override(gpio_list_ptr, size, nullptr, 0);
 }
 
 int gpio_interrupt_status(gpio_t gpio)

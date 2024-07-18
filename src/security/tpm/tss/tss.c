@@ -28,17 +28,17 @@ tpm_result_t tlcl_lib_init(void)
 	/* Set right away to make recursion impossible. */
 	init_done = true;
 
-	tlcl_tis_sendrecv = NULL;
+	tlcl_tis_sendrecv = nullptr;
 	if (CONFIG(CRB_TPM))
 		tlcl_tis_sendrecv = crb_tis_probe(&tlcl_tpm_family);
-	if (CONFIG(MEMORY_MAPPED_TPM) && tlcl_tis_sendrecv == NULL)
+	if (CONFIG(MEMORY_MAPPED_TPM) && tlcl_tis_sendrecv == nullptr)
 		tlcl_tis_sendrecv = pc80_tis_probe(&tlcl_tpm_family);
-	if (CONFIG(I2C_TPM) && tlcl_tis_sendrecv == NULL)
+	if (CONFIG(I2C_TPM) && tlcl_tis_sendrecv == nullptr)
 		tlcl_tis_sendrecv = i2c_tis_probe(&tlcl_tpm_family);
-	if (CONFIG(SPI_TPM) && tlcl_tis_sendrecv == NULL)
+	if (CONFIG(SPI_TPM) && tlcl_tis_sendrecv == nullptr)
 		tlcl_tis_sendrecv = spi_tis_probe(&tlcl_tpm_family);
 
-	if (tlcl_tis_sendrecv == NULL) {
+	if (tlcl_tis_sendrecv == nullptr) {
 		printk(BIOS_ERR, "%s: TIS probe failed\n", __func__);
 		tlcl_tpm_family = TPM_UNKNOWN;
 	} else if (tlcl_tpm_family != TPM_1 && tlcl_tpm_family != TPM_2) {

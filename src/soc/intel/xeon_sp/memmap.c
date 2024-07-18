@@ -66,7 +66,7 @@ union dpr_register txt_get_chipset_dpr(void)
 
 	dpr.raw = pci_read_config32(dev, VTD_LTDPR);
 
-	dev = NULL;
+	dev = nullptr;
 	/* Look for VTD devices on all sockets */
 	while ((dev = dev_find_device(PCI_VID_INTEL, MMAP_VTD_STACK_CFG_REG_DEVID, dev))) {
 		/* Compare the LTDPR register on all iio stacks */

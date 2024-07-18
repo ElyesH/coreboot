@@ -538,7 +538,7 @@ static void pcie_rtd3_acpi_fill_ssdt(const struct device *dev)
 		else
 			acpigen_write_name_integer("_S0W", ACPI_DEVICE_SLEEP_D3_HOT);
 
-		acpi_device_add_storage_d3_enable(NULL);
+		acpi_device_add_storage_d3_enable(nullptr);
 
 		acpigen_pop_len(); /* Device */
 

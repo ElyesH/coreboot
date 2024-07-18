@@ -229,12 +229,12 @@ void *bootmem_allocate_buffer(size_t size)
 
 	if (!bootmem_is_initialized()) {
 		printk(BIOS_ERR, "%s: lib uninitialized!\n", __func__);
-		return NULL;
+		return nullptr;
 	}
 
 	/* 4KiB alignment. */
 	size = ALIGN_UP(size, 4096);
-	region = NULL;
+	region = nullptr;
 	memranges_each_entry(r, &bootmem) {
 		if (range_entry_base(r) >= max_addr)
 			break;
@@ -255,8 +255,8 @@ void *bootmem_allocate_buffer(size_t size)
 		region = r;
 	}
 
-	if (region == NULL)
-		return NULL;
+	if (region == nullptr)
+		return nullptr;
 
 	/* region now points to the highest usable region for the given size. */
 	end = range_entry_end(region);

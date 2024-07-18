@@ -45,7 +45,7 @@ __weak void graphics_soc_panel_init(struct device *dev)
 __weak const struct i915_gpu_controller_info *
 intel_igd_get_controller_info(const struct device *device)
 {
-	return NULL;
+	return nullptr;
 }
 
 static uint32_t graphics_get_ddi_func_ctrl(unsigned long reg)

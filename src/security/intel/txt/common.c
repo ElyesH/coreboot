@@ -196,7 +196,7 @@ static int validate_acm(const void *ptr)
 		return ACM_E_SIZE_INCORRECT;
 	}
 
-	if (!getsec_parameter(NULL, NULL, &max_size_acm_area, NULL, NULL, NULL))
+	if (!getsec_parameter(nullptr, nullptr, &max_size_acm_area, nullptr, nullptr, nullptr))
 		return ACM_E_CANT_CALL_GETSEC;
 
 	/*
@@ -233,19 +233,19 @@ static int validate_acm(const void *ptr)
 
 /*
  * Prepare to run the BIOS ACM: mmap it from the CBFS and verify that it
- * can be launched. Returns pointer to ACM on success, NULL on failure.
+ * can be launched. Returns pointer to ACM on success, nullptr on failure.
  */
 static void *intel_txt_prepare_bios_acm(size_t *acm_len)
 {
-	void *acm_data = NULL;
+	void *acm_data = nullptr;
 
 	if (!acm_len)
-		return NULL;
+		return nullptr;
 
 	acm_data = cbfs_map(CONFIG_INTEL_TXT_CBFS_BIOS_ACM, acm_len);
 	if (!acm_data) {
 		printk(BIOS_ERR, "TEE-TXT: Couldn't locate BIOS ACM in CBFS.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/*
@@ -256,7 +256,7 @@ static void *intel_txt_prepare_bios_acm(size_t *acm_len)
 	if (!IS_ALIGNED((uintptr_t)acm_data, 4096)) {
 		printk(BIOS_ERR, "TEE-TXT: BIOS ACM isn't mapped at page boundary.\n");
 		cbfs_unmap(acm_data);
-		return NULL;
+		return nullptr;
 	}
 
 	/*
@@ -267,7 +267,7 @@ static void *intel_txt_prepare_bios_acm(size_t *acm_len)
 	if (!IS_ALIGNED(*acm_len, 64)) {
 		printk(BIOS_ERR, "TEE-TXT: BIOS ACM size isn't multiple of 64.\n");
 		cbfs_unmap(acm_data);
-		return NULL;
+		return nullptr;
 	}
 
 	/*
@@ -277,7 +277,7 @@ static void *intel_txt_prepare_bios_acm(size_t *acm_len)
 	if (!IS_ALIGNED((uintptr_t)acm_data, (1UL << log2_ceil(*acm_len)))) {
 		printk(BIOS_ERR, "TEE-TXT: BIOS ACM isn't aligned to its size.\n");
 		cbfs_unmap(acm_data);
-		return NULL;
+		return nullptr;
 	}
 
 	/*
@@ -288,7 +288,7 @@ static void *intel_txt_prepare_bios_acm(size_t *acm_len)
 	if (popcnt(ALIGN_UP(*acm_len, 4096)) > get_var_mtrr_count()) {
 		printk(BIOS_ERR, "TEE-TXT: Not enough MTRRs to cache this BIOS ACM's size.\n");
 		cbfs_unmap(acm_data);
-		return NULL;
+		return nullptr;
 	}
 
 	if (CONFIG(INTEL_TXT_LOGGING))
@@ -298,7 +298,7 @@ static void *intel_txt_prepare_bios_acm(size_t *acm_len)
 	if (ret < 0) {
 		printk(BIOS_ERR, "TEE-TXT: Validation of ACM failed with: %d\n", ret);
 		cbfs_unmap(acm_data);
-		return NULL;
+		return nullptr;
 	}
 
 	return acm_data;
@@ -489,7 +489,7 @@ bool intel_txt_prepare_txt_env(void)
 		failure = true;
 	}
 
-	if (!getsec_parameter(NULL, NULL, NULL, NULL, NULL, &txt_feature_flags))
+	if (!getsec_parameter(nullptr, nullptr, nullptr, nullptr, nullptr, &txt_feature_flags))
 		return true;
 
 	printk(BIOS_DEBUG, "TEE-TXT: Machine Check Register: ");

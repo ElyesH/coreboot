@@ -317,7 +317,7 @@ static struct get_bp_info_rsp *sync_cse_bp_info_to_cbmem(void)
 {
 	struct get_bp_info_rsp *cse_bp_info_in_cbmem = cbmem_find(CBMEM_ID_CSE_BP_INFO);
 
-	if (cse_bp_info_in_cbmem != NULL)
+	if (cse_bp_info_in_cbmem != nullptr)
 		return cse_bp_info_in_cbmem;
 
 	cse_bp_info_in_cbmem = cbmem_add(CBMEM_ID_CSE_BP_INFO,
@@ -325,7 +325,7 @@ static struct get_bp_info_rsp *sync_cse_bp_info_to_cbmem(void)
 
 	if (!cse_bp_info_in_cbmem) {
 		printk(BIOS_ERR, "Unable to store Boot Parition Info in cbmem\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* Copy the CSE Boot Partition Info command response to cbmem */
@@ -746,7 +746,7 @@ static enum cb_err get_cse_ver_from_cbfs(struct fw_version *cbfs_rw_version)
 	char *version_str, *cbfs_ptr;
 	size_t size;
 
-	if (cbfs_rw_version == NULL)
+	if (cbfs_rw_version == nullptr)
 		return CB_ERR;
 
 	cbfs_ptr = cbfs_map(CONFIG_SOC_INTEL_CSE_RW_VERSION_CBFS_NAME, &size);
@@ -879,7 +879,7 @@ static enum csme_failure_reason cse_trigger_fw_update(enum cse_update_status sta
 		struct region_device *target_rdev)
 {
 	enum csme_failure_reason rv;
-	void *cse_cbfs_rw = NULL;
+	void *cse_cbfs_rw = nullptr;
 	size_t size;
 
 	if (CONFIG(SOC_INTEL_CSE_LITE_COMPRESS_ME_RW)) {
@@ -1494,7 +1494,7 @@ static void store_ish_version(void)
 		return;
 
 	struct cse_specific_info *cse_info_in_cbmem = cbmem_find(CBMEM_ID_CSE_INFO);
-	if (cse_info_in_cbmem == NULL)
+	if (cse_info_in_cbmem == nullptr)
 		return;
 
 	struct cse_specific_info cse_info_in_cmos;
@@ -1562,4 +1562,4 @@ static void ramstage_cse_misc_ops(void *unused)
 		store_ish_version();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, ramstage_cse_misc_ops, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, ramstage_cse_misc_ops, nullptr);

@@ -64,7 +64,7 @@ bool fit_payload_arch(struct prog *payload, struct fit_config_node *config,
 		      struct region *fdt,
 		      struct region *initrd)
 {
-	void *arg = NULL;
+	void *arg = nullptr;
 
 	if (!config->fdt || !fdt) {
 		printk(BIOS_CRIT, "Providing a valid FDT is mandatory to "

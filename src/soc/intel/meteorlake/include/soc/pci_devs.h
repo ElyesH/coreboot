@@ -209,7 +209,7 @@
  * PCI_DEV_PMC is intentionally not defined in RAMSTAGE since PMC device gets
  * hidden from PCI bus after call to FSP-S. This leads to resource allocator
  * dropping it from the root bus as unused device. All references to PCI_DEV_PMC
- * would then return NULL and can go unnoticed if not handled properly. Since,
+ * would then return nullptr and can go unnoticed if not handled properly. Since,
  * this device does not have any special chip config associated with it, it is
  * okay to not provide the definition for it in ramstage.
  */

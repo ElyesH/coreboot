@@ -33,7 +33,7 @@ static void *get_spd_pointer(char *spd_file_content, int total_spds, int *dual)
 	printk(BIOS_DEBUG, "ram_id=%d, total_spds: %d\n", ram_id, total_spds);
 
 	if (ram_id >= total_spds)
-		return NULL;
+		return nullptr;
 
 	/* Single channel configs */
 	if (dual_channel_config & (1 << ram_id))

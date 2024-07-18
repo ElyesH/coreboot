@@ -74,7 +74,7 @@ static void wrap_interactive_printf(const char *fmt, ...)
 {
 	va_list args;
 	va_start(args, fmt);
-	vtxprintf(console_interactive_tx_byte, fmt, args, NULL);
+	vtxprintf(console_interactive_tx_byte, fmt, args, nullptr);
 	va_end(args);
 }
 
@@ -91,7 +91,7 @@ static void line_start(union log_state state)
 		__cbmemc_tx_byte(marker);
 		return;
 	}
-	console_stored_tx_byte(marker, NULL);
+	console_stored_tx_byte(marker, nullptr);
 
 	/* Interactive consoles get a `[DEBUG]  ` style readable prefix,
 	   and potentially an escape sequence for highlighting. */

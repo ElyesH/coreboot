@@ -200,7 +200,7 @@ static void ssdt_generate_physmap(struct acpi_dp *dp, uint8_t num_top_row_keys,
 			       "PS2K: invalid top-action-key-%u: %u(skipped)\n",
 			       i, key);
 		}
-		acpi_dp_add_integer(dp_array, NULL, SCANCODE(keymap));
+		acpi_dp_add_integer(dp_array, nullptr, SCANCODE(keymap));
 		printk(BIOS_INFO, " %X", SCANCODE(keymap));
 	}
 
@@ -236,7 +236,7 @@ static void ssdt_generate_keymap(struct acpi_dp *dp, uint8_t num_top_row_keys,
 			continue;
 		}
 		keymap = action_keymaps[key];
-		acpi_dp_add_integer(dp_array, NULL, keymap);
+		acpi_dp_add_integer(dp_array, nullptr, keymap);
 		total++;
 	}
 
@@ -244,12 +244,12 @@ static void ssdt_generate_keymap(struct acpi_dp *dp, uint8_t num_top_row_keys,
 	if (can_send_function_keys) {
 		for (i = 0; i < num_top_row_keys; i++) {
 			keymap = function_keymaps[i];
-			acpi_dp_add_integer(dp_array, NULL, keymap);
+			acpi_dp_add_integer(dp_array, nullptr, keymap);
 		}
 
 		/* Add the Fn-key */
 		if (CONFIG_ACPI_FNKEY_GEN_SCANCODE != 0) {
-			acpi_dp_add_integer(dp_array, NULL, KEYMAP(CONFIG_ACPI_FNKEY_GEN_SCANCODE,
+			acpi_dp_add_integer(dp_array, nullptr, KEYMAP(CONFIG_ACPI_FNKEY_GEN_SCANCODE,
 								   KEY_FN));
 			total++;
 		}
@@ -261,7 +261,7 @@ static void ssdt_generate_keymap(struct acpi_dp *dp, uint8_t num_top_row_keys,
 	if (has_numeric_keypad) {
 		for (i = 0; i < ARRAY_SIZE(numeric_keypad_keymaps); i++) {
 			keymap = numeric_keypad_keymaps[i];
-			acpi_dp_add_integer(dp_array, NULL, keymap);
+			acpi_dp_add_integer(dp_array, nullptr, keymap);
 		}
 
 		total += ARRAY_SIZE(numeric_keypad_keymaps);
@@ -269,13 +269,13 @@ static void ssdt_generate_keymap(struct acpi_dp *dp, uint8_t num_top_row_keys,
 
 	/* Provide keymap for screenlock only if it is present */
 	if (has_scrnlock_key) {
-		acpi_dp_add_integer(dp_array, NULL, KEYMAP(0x5d, KEY_SLEEP));
+		acpi_dp_add_integer(dp_array, nullptr, KEYMAP(0x5d, KEY_SLEEP));
 		total++;
 	}
 
 	/* Add the keymap for the assistant key if present */
 	if (has_assistant_key) {
-		acpi_dp_add_integer(dp_array, NULL, KEYMAP(0x5c, KEY_ASSISTANT));
+		acpi_dp_add_integer(dp_array, nullptr, KEYMAP(0x5c, KEY_ASSISTANT));
 		total++;
 	}
 
@@ -285,7 +285,7 @@ static void ssdt_generate_keymap(struct acpi_dp *dp, uint8_t num_top_row_keys,
 	if (has_alpha_num_punct_keys) {
 		for (i = 0; i < ARRAY_SIZE(rest_of_keymaps); i++) {
 			keymap = rest_of_keymaps[i];
-			acpi_dp_add_integer(dp_array, NULL, keymap);
+			acpi_dp_add_integer(dp_array, nullptr, keymap);
 		}
 	}
 

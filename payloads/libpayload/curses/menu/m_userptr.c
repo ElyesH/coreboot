@@ -64,7 +64,7 @@ set_menu_userptr(MENU * menu, void *userptr)
 |                    store application relevant information.
 |
 |   Return Values :  Value of the pointer. If no such pointer has been set,
-|                    NULL is returned
+|                    nullptr is returned
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(void *)
 menu_userptr(const MENU * menu)

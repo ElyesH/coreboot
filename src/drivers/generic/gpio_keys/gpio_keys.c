@@ -15,7 +15,7 @@ static struct acpi_dp *gpio_keys_add_child_node(
 	struct acpi_dp *dsd;
 
 	if (!key->dev_name || !key->linux_code)
-		return NULL;
+		return nullptr;
 
 	dsd = acpi_dp_new_table(config->key.dev_name);
 

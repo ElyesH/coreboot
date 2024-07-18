@@ -21,7 +21,7 @@ uint64_t storage_block_erase(struct storage_media *media, uint64_t start,
 	cmd.cmdarg = start;
 	cmd.flags = 0;
 
-	if (ctrlr->send_cmd(ctrlr, &cmd, NULL))
+	if (ctrlr->send_cmd(ctrlr, &cmd, nullptr))
 		return 0;
 
 	cmd.cmdidx = MMC_CMD_ERASE_GROUP_END;
@@ -29,7 +29,7 @@ uint64_t storage_block_erase(struct storage_media *media, uint64_t start,
 	cmd.resp_type = CARD_RSP_R1;
 	cmd.flags = 0;
 
-	if (ctrlr->send_cmd(ctrlr, &cmd, NULL))
+	if (ctrlr->send_cmd(ctrlr, &cmd, nullptr))
 		return 0;
 
 	cmd.cmdidx = MMC_CMD_ERASE;
@@ -37,7 +37,7 @@ uint64_t storage_block_erase(struct storage_media *media, uint64_t start,
 	cmd.resp_type = CARD_RSP_R1;
 	cmd.flags = 0;
 
-	if (ctrlr->send_cmd(ctrlr, &cmd, NULL))
+	if (ctrlr->send_cmd(ctrlr, &cmd, nullptr))
 		return 0;
 
 	size_t erase_blocks;

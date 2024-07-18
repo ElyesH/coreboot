@@ -61,6 +61,6 @@ void mainboard_memory_init_params(FSPM_UPD *mupd)
 	mainboard_config_iio(mupd);
 
 	/* do not configure GPIO controller inside FSP-M */
-	mupd->FspmConfig.GpioConfig.GpioTable = NULL;
+	mupd->FspmConfig.GpioConfig.GpioTable = nullptr;
 	mupd->FspmConfig.GpioConfig.NumberOfEntries = 0;
 }

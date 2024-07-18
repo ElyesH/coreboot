@@ -29,9 +29,9 @@ soc_get_fsp_smbios_memory_info_hob(void)
 	memory_info_hob = fsp_find_extension_hob_by_guid(
 				smbios_memory_info_guid,
 				&hob_size);
-	if (memory_info_hob == NULL || hob_size == 0) {
+	if (memory_info_hob == nullptr || hob_size == 0) {
 		printk(BIOS_ERR, "SMBIOS MEMORY_INFO_DATA_HOB not found\n");
-		return NULL;
+		return nullptr;
 	}
 
 	return memory_info_hob;

@@ -72,7 +72,7 @@ static tpm_result_t tspi_init_crtm(void)
 		/* Mapping measures the file. We know we can safely map here because
 		   bootblock-as-a-file is only used on x86, where we don't need cache to map. */
 		enum cbfs_type type = CBFS_TYPE_BOOTBLOCK;
-		void *mapping = cbfs_ro_type_map("bootblock", NULL, &type);
+		void *mapping = cbfs_ro_type_map("bootblock", nullptr, &type);
 		if (!mapping) {
 			printk(BIOS_INFO,
 			       "TSPI: Couldn't measure bootblock into CRTM!\n");
@@ -188,7 +188,7 @@ tpm_result_t tspi_measure_cache_to_pcr(void)
 	if (!tpm_log_available())
 		return TPM_SUCCESS;
 
-	if (tpm_log_init() == NULL) {
+	if (tpm_log_init() == nullptr) {
 		printk(BIOS_WARNING, "TPM LOG: log non-existent!\n");
 		return TPM_CB_FAIL;
 	}
@@ -220,7 +220,7 @@ static void recover_tpm_log(int is_recovery)
 		return;
 	}
 
-	if (ram_log == NULL) {
+	if (ram_log == nullptr) {
 		printk(BIOS_WARNING, "TPM LOG: CBMEM not available, something went wrong\n");
 		return;
 	}
@@ -230,4 +230,4 @@ static void recover_tpm_log(int is_recovery)
 CBMEM_CREATION_HOOK(recover_tpm_log);
 #endif
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, tpm_log_dump, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, tpm_log_dump, nullptr);

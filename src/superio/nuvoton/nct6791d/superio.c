@@ -27,7 +27,7 @@ static const char *nct6791d_acpi_hid(const struct device *dev)
 	if ((dev->path.type != DEVICE_PATH_PNP) ||
 		(dev->path.pnp.port == 0) ||
 		((dev->path.pnp.device & 0xff) > NCT6791D_DS))
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pnp.device & 0xff) {
 	case NCT6791D_SP1: /* fallthrough */
@@ -56,44 +56,44 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, NCT6791D_PP, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0,
+	{ nullptr, NCT6791D_PP, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0,
 		0x0ff8, },
-	{ NULL, NCT6791D_SP1, PNP_IO0 | PNP_IRQ0,
+	{ nullptr, NCT6791D_SP1, PNP_IO0 | PNP_IRQ0,
 		0x0ff8, },
-	{ NULL, NCT6791D_SP2, PNP_IO0 | PNP_IRQ0,
+	{ nullptr, NCT6791D_SP2, PNP_IO0 | PNP_IRQ0,
 		0x0ff8, },
-	{ NULL, NCT6791D_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
+	{ nullptr, NCT6791D_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
 		0x0fff, 0x0fff, },
-	{ NULL, NCT6791D_CIR, PNP_IO0 | PNP_IRQ0,
+	{ nullptr, NCT6791D_CIR, PNP_IO0 | PNP_IRQ0,
 		0x0ff8, },
-	{ NULL, NCT6791D_ACPI},
-	{ NULL, NCT6791D_HWM_FPLED, PNP_IO0 | PNP_IO1 | PNP_IRQ0,
+	{ nullptr, NCT6791D_ACPI},
+	{ nullptr, NCT6791D_HWM_FPLED, PNP_IO0 | PNP_IO1 | PNP_IRQ0,
 		0x0ffe, 0x0ffe, },
-	{ NULL, NCT6791D_BCLK_WDT2_WDTMEM},
-	{ NULL, NCT6791D_CIRWUP, PNP_IO0 | PNP_IRQ0,
+	{ nullptr, NCT6791D_BCLK_WDT2_WDTMEM},
+	{ nullptr, NCT6791D_CIRWUP, PNP_IO0 | PNP_IRQ0,
 		0x0ff8, },
-	{ NULL, NCT6791D_GPIO_PP_OD},
-	{ NULL, NCT6791D_PORT80},
-	{ NULL, NCT6791D_WDT1},
-	{ NULL, NCT6791D_WDTMEM},
-	{ NULL, NCT6791D_GPIOBASE, PNP_IO0,
+	{ nullptr, NCT6791D_GPIO_PP_OD},
+	{ nullptr, NCT6791D_PORT80},
+	{ nullptr, NCT6791D_WDT1},
+	{ nullptr, NCT6791D_WDTMEM},
+	{ nullptr, NCT6791D_GPIOBASE, PNP_IO0,
 		0x0ff8, },
-	{ NULL, NCT6791D_GPIO0},
-	{ NULL, NCT6791D_GPIO1},
-	{ NULL, NCT6791D_GPIO2},
-	{ NULL, NCT6791D_GPIO3},
-	{ NULL, NCT6791D_GPIO4},
-	{ NULL, NCT6791D_GPIO5},
-	{ NULL, NCT6791D_GPIO6},
-	{ NULL, NCT6791D_GPIO7},
-	{ NULL, NCT6791D_GPIO8},
-	{ NULL, NCT6791D_DS5},
-	{ NULL, NCT6791D_DS3},
-	{ NULL, NCT6791D_PCHDSW},
-	{ NULL, NCT6791D_DSWWOPT},
-	{ NULL, NCT6791D_DS3OPT},
-	{ NULL, NCT6791D_DSDSS},
-	{ NULL, NCT6791D_DSPU},
+	{ nullptr, NCT6791D_GPIO0},
+	{ nullptr, NCT6791D_GPIO1},
+	{ nullptr, NCT6791D_GPIO2},
+	{ nullptr, NCT6791D_GPIO3},
+	{ nullptr, NCT6791D_GPIO4},
+	{ nullptr, NCT6791D_GPIO5},
+	{ nullptr, NCT6791D_GPIO6},
+	{ nullptr, NCT6791D_GPIO7},
+	{ nullptr, NCT6791D_GPIO8},
+	{ nullptr, NCT6791D_DS5},
+	{ nullptr, NCT6791D_DS3},
+	{ nullptr, NCT6791D_PCHDSW},
+	{ nullptr, NCT6791D_DSWWOPT},
+	{ nullptr, NCT6791D_DS3OPT},
+	{ nullptr, NCT6791D_DSDSS},
+	{ nullptr, NCT6791D_DSPU},
 };
 
 static void enable_dev(struct device *dev)

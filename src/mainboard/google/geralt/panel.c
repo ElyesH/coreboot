@@ -18,7 +18,7 @@ struct panel_description __weak *get_panel_description(uint32_t panel_id)
 {
 	printk(BIOS_WARNING, "%s: %s: the panel configuration is not ready\n",
 	       __func__, mainboard_part_number);
-	return NULL;
+	return nullptr;
 }
 
 struct panel_description *get_active_panel(void)

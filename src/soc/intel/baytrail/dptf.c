@@ -30,4 +30,4 @@ static void dptf_init(void *unused)
 	reg_script_run(dptf_init_settings);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, dptf_init, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, dptf_init, nullptr);

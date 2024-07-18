@@ -86,7 +86,7 @@ int dw_i2c_soc_bus_to_devfn(unsigned int bus);
 /*
  * SoC implemented callback for getting I2C bus configuration.
  *
- * Returns NULL if i2c config is not found
+ * Returns nullptr if i2c config is not found
  */
 const struct dw_i2c_bus_config *dw_i2c_get_soc_cfg(unsigned int bus);
 

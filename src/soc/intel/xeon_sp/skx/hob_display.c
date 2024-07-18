@@ -29,7 +29,7 @@ const char *soc_get_guid_name(const uint8_t *guid)
 		if (fsp_guid_compare(guid, guid_names[index].guid))
 			return guid_names[index].name;
 
-	return NULL;
+	return nullptr;
 }
 
 void soc_display_hob(const struct hob_header *hob)

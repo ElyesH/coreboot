@@ -1572,7 +1572,7 @@ void dp_display_startup(struct device *dev)
 	printk(BIOS_INFO, "%s: entry: disp_ctrl: %p.\n",
 		 __func__, disp_ctrl);
 
-	if (disp_ctrl == NULL) {
+	if (disp_ctrl == nullptr) {
 		printk(BIOS_ERR, "No dc is assigned by dt.\n");
 		return;
 	}

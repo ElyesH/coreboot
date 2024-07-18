@@ -119,7 +119,7 @@ void fsp_notify(u32 phase)
 	FSP_INFO_HEADER *fsp_header_ptr;
 
 	fsp_header_ptr = fsp_get_fih();
-	if (fsp_header_ptr == NULL) {
+	if (fsp_header_ptr == nullptr) {
 		fsp_header_ptr = (void *)find_fsp(CONFIG_FSP_LOC);
 		if ((u32)fsp_header_ptr < 0xff) {
 			/* output something in case there is no serial */
@@ -180,7 +180,7 @@ void fsp_set_runtime(FSP_INFO_HEADER *fih, void *hob_list)
 
 	fspr = cbmem_add(CBMEM_ID_FSP_RUNTIME, sizeof(*fspr));
 
-	if (fspr == NULL)
+	if (fspr == nullptr)
 		die("Can't save FSP runtime information.\n");
 
 	fspr->fih = (uintptr_t)fih;
@@ -193,8 +193,8 @@ FSP_INFO_HEADER *fsp_get_fih(void)
 
 	fspr = cbmem_find(CBMEM_ID_FSP_RUNTIME);
 
-	if (fspr == NULL)
-		return NULL;
+	if (fspr == nullptr)
+		return nullptr;
 
 	return (void *)(uintptr_t)fspr->fih;
 }
@@ -205,8 +205,8 @@ void *fsp_get_hob_list(void)
 
 	fspr = cbmem_find(CBMEM_ID_FSP_RUNTIME);
 
-	if (fspr == NULL)
-		return NULL;
+	if (fspr == nullptr)
+		return nullptr;
 
 	return (void *)(uintptr_t)fspr->hob_list;
 }
@@ -217,7 +217,7 @@ void fsp_update_fih(FSP_INFO_HEADER *fih)
 
 	fspr = cbmem_find(CBMEM_ID_FSP_RUNTIME);
 
-	if (fspr == NULL)
+	if (fspr == nullptr)
 		die("Can't update FSP runtime information.\n");
 
 	fspr->fih = (uintptr_t)fih;

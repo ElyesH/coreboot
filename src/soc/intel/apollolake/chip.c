@@ -133,11 +133,11 @@ const char *soc_acpi_name(const struct device *dev)
 			}
 			break;
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pci.devfn) {
 	/* DSDT: acpi/northbridge.asl */
@@ -196,7 +196,7 @@ const char *soc_acpi_name(const struct device *dev)
 		return "RP01";
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static struct device_operations pci_domain_ops = {
@@ -244,7 +244,7 @@ static void pcie_update_device_tree(unsigned int devfn0, int num_funcs)
 	unsigned int inc = PCI_DEVFN(0, 1);
 
 	func0 = pcidev_path_on_root(devfn0);
-	if (func0 == NULL)
+	if (func0 == nullptr)
 		return;
 
 	/* No more functions if function 0 is disabled. */
@@ -260,7 +260,7 @@ static void pcie_update_device_tree(unsigned int devfn0, int num_funcs)
 	 */
 	for (i = 1; i < num_funcs; i++, devfn += inc) {
 		struct device *dev = pcidev_path_on_root(devfn);
-		if (dev == NULL)
+		if (dev == nullptr)
 			continue;
 
 		if (!dev->enabled)
@@ -777,7 +777,7 @@ static void soc_enable_untrusted_mode(void *unused)
 static void drop_privilege_all(void)
 {
 	/* Drop privilege level on all the CPUs */
-	if (mp_run_on_all_cpus(&soc_enable_untrusted_mode, NULL) != CB_SUCCESS)
+	if (mp_run_on_all_cpus(&soc_enable_untrusted_mode, nullptr) != CB_SUCCESS)
 		printk(BIOS_ERR, "failed to enable untrusted mode\n");
 }
 
@@ -920,4 +920,4 @@ void soc_load_logo(FSPS_UPD *supd)
 	supd->FspsConfig.LogoSize = (uint32_t)logo_size;
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, spi_flash_init_cb, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, spi_flash_init_cb, nullptr);

@@ -146,7 +146,7 @@ static void create_cbfs(const struct cbfs_test_file *files[], const size_t nfile
 	size_t file_size = 0;
 	memset(buffer, 0, buffer_size);
 	for (size_t i = 0; i < nfiles; ++i) {
-		if (files[i] == NULL) {
+		if (files[i] == nullptr) {
 			file_size = CBFS_ALIGNMENT;
 			assert_true(&data_ptr[file_size] < &buffer[buffer_size]);
 		} else {
@@ -282,7 +282,7 @@ static int teardown_cbfs_test(void **state)
 
 static void test_cbfs_boot_device_init(void **state)
 {
-	const struct cbfs_boot_device *cbd = NULL;
+	const struct cbfs_boot_device *cbd = nullptr;
 
 	/* No valid RO, should fail */
 	set_fmap_locate_area_results(0, 0, CB_ERR);
@@ -292,8 +292,8 @@ static void test_cbfs_boot_device_init(void **state)
 	lib_sysinfo.cbfs_rw_mcache_offset = 0;
 	lib_sysinfo.cbfs_ro_mcache_offset = 0;
 	lib_sysinfo.cbfs_ro_mcache_size = 0;
-	assert_int_equal(NULL, cbfs_get_boot_device(true));
-	assert_null(cbfs_ro_map("file", NULL));
+	assert_int_equal(nullptr, cbfs_get_boot_device(true));
+	assert_null(cbfs_ro_map("file", nullptr));
 
 	/* Valid RO */
 	set_fmap_locate_area_results(0x12345678, 0x90ABCDEF, CB_SUCCESS);
@@ -322,13 +322,13 @@ static void test_cbfs_boot_device_init(void **state)
 void test_cbfs_map(void **state)
 {
 	struct cbfs_test_state *s = *state;
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size_out = 0;
 	const struct cbfs_test_file *cbfs_files[] = {
-		&test_file_int_1, &test_file_2, NULL, &test_file_int_3,
-		&test_file_int_2, NULL,		NULL, &test_file_1,
+		&test_file_int_1, &test_file_2, nullptr, &test_file_int_3,
+		&test_file_int_2, nullptr,		nullptr, &test_file_1,
 	};
-	uint8_t *cbfs_buf = NULL;
+	uint8_t *cbfs_buf = nullptr;
 	size_t foffset = 0;
 
 	setup_cbfs_boot_device(s);
@@ -340,7 +340,7 @@ void test_cbfs_map(void **state)
 	expect_cbfs_lookup(TEST_DATA_INT_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_int_1.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	mapping = cbfs_map(TEST_DATA_INT_1_FILENAME, &size_out);
 	assert_non_null(mapping);
 	assert_int_equal(TEST_DATA_INT_1_SIZE, size_out);
@@ -380,7 +380,7 @@ void test_cbfs_map(void **state)
 	expect_cbfs_lookup(TEST_DATA_INT_2_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_int_2.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	mapping = cbfs_map(TEST_DATA_INT_2_FILENAME, &size_out);
 	assert_non_null(mapping);
 	assert_int_equal(TEST_DATA_INT_2_SIZE, size_out);
@@ -392,7 +392,7 @@ void test_cbfs_map(void **state)
 	expect_cbfs_lookup(TEST_DATA_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_1.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	mapping = cbfs_map(TEST_DATA_1_FILENAME, &size_out);
 	assert_non_null(mapping);
 	assert_int_equal(TEST_DATA_1_SIZE, size_out);
@@ -410,9 +410,9 @@ void test_cbfs_map(void **state)
 static void test_cbfs_invalid_compression_algo(void **state)
 {
 	struct cbfs_test_state *s = *state;
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size_out = 0;
-	uint8_t *cbfs_buf = NULL;
+	uint8_t *cbfs_buf = nullptr;
 	struct cbfs_test_file *f;
 	struct cbfs_file_attr_compression *comp;
 	const struct cbfs_test_file *cbfs_files[] = {
@@ -441,19 +441,19 @@ static void test_cbfs_io_error(void **state)
 	setup_cbfs_boot_device(s);
 
 	expect_cbfs_lookup(TEST_DATA_1_FILENAME, CB_CBFS_IO, 0, 0);
-	assert_null(cbfs_map(TEST_DATA_1_FILENAME, NULL));
+	assert_null(cbfs_map(TEST_DATA_1_FILENAME, nullptr));
 }
 
 static void test_cbfs_successful_fallback_to_ro(void **state)
 {
 	struct cbfs_test_state *s = *state;
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size_out = 0;
 	const struct cbfs_test_file *cbfs_files[] = {
 		&test_file_1,	  &test_file_2,	    &test_file_int_1,
 		&test_file_int_1, &test_file_int_2, &test_file_int_3,
 	};
-	uint8_t *cbfs_buf = NULL;
+	uint8_t *cbfs_buf = nullptr;
 	size_t foffset = 0;
 
 	if (!CONFIG(LP_ENABLE_CBFS_FALLBACK)) {
@@ -504,10 +504,10 @@ static void test_cbfs_load(void **state)
 	struct cbfs_test_state *s = *state;
 	size_t size_out = 0;
 	const struct cbfs_test_file *cbfs_files[] = {
-		&test_file_int_1, &test_file_2, NULL, &test_file_int_3,
-		&test_file_int_2, NULL,		NULL, &test_file_1,
+		&test_file_int_1, &test_file_2, nullptr, &test_file_int_3,
+		&test_file_int_2, nullptr,		nullptr, &test_file_1,
 	};
-	uint8_t *cbfs_buf = NULL;
+	uint8_t *cbfs_buf = nullptr;
 	uint8_t load_buf[1 * KiB];
 	size_t foffset = 0;
 
@@ -521,7 +521,7 @@ static void test_cbfs_load(void **state)
 	expect_cbfs_lookup(TEST_DATA_INT_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_int_1.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	size_out = cbfs_load(TEST_DATA_INT_1_FILENAME, load_buf, sizeof(load_buf));
 	assert_int_equal(TEST_DATA_INT_1_SIZE, size_out);
 	assert_memory_equal(test_data_int_1, load_buf, TEST_DATA_INT_1_SIZE);
@@ -532,7 +532,7 @@ static void test_cbfs_load(void **state)
 	expect_cbfs_lookup(TEST_DATA_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_1.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	size_out = cbfs_load(TEST_DATA_1_FILENAME, load_buf, TEST_DATA_1_SIZE / 2);
 	assert_int_equal(0, size_out);
 }
@@ -540,13 +540,13 @@ static void test_cbfs_load(void **state)
 static void test_cbfs_map_with_mcache(void **state)
 {
 	struct cbfs_test_state *s = *state;
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size_out = 0;
 	const struct cbfs_test_file *cbfs_files[] = {
-		&test_file_int_2, &test_file_1,	    NULL,
+		&test_file_int_2, &test_file_1,	    nullptr,
 		&test_file_int_3, &test_file_int_1, &test_file_2,
 	};
-	uint8_t *cbfs_buf = NULL;
+	uint8_t *cbfs_buf = nullptr;
 	size_t foffset = 0;
 
 	/* Will not be accessed, just needs to be valid. */
@@ -563,7 +563,7 @@ static void test_cbfs_map_with_mcache(void **state)
 	expect_cbfs_mcache_lookup(TEST_DATA_INT_1_FILENAME, CB_SUCCESS,
 				  (const union cbfs_mdata *)&cbfs_buf[foffset],
 				  foffset + be32toh(test_file_int_1.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	mapping = cbfs_map(TEST_DATA_INT_1_FILENAME, &size_out);
 	assert_non_null(mapping);
 	assert_int_equal(TEST_DATA_INT_1_SIZE, size_out);
@@ -574,13 +574,13 @@ static void test_cbfs_map_with_mcache(void **state)
 static void test_cbfs_boot_device_read_failure(void **state)
 {
 	struct cbfs_test_state *s = *state;
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size_out = 0;
 	const struct cbfs_test_file *cbfs_files[] = {
-		&test_file_int_3, &test_file_1,	    NULL,
+		&test_file_int_3, &test_file_1,	    nullptr,
 		&test_file_int_3, &test_file_int_1, &test_file_2,
 	};
-	uint8_t *cbfs_buf = NULL;
+	uint8_t *cbfs_buf = nullptr;
 	size_t foffset = 0;
 
 	setup_cbfs_boot_device(s);
@@ -592,7 +592,7 @@ static void test_cbfs_boot_device_read_failure(void **state)
 	expect_cbfs_lookup(TEST_DATA_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_1.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	force_single_boot_device_size_failure = true;
 	mapping = cbfs_map(TEST_DATA_1_FILENAME, &size_out);
 	assert_null(mapping);
@@ -602,13 +602,13 @@ static void test_cbfs_boot_device_read_failure(void **state)
 static void test_cbfs_unverified_area_map(void **state)
 {
 	struct cbfs_test_state *s = *state;
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size_out = 0;
 	const struct cbfs_test_file *cbfs_files[] = {
-		&test_file_int_1, &test_file_2, NULL, &test_file_int_3,
-		&test_file_int_2, NULL,		NULL, &test_file_1,
+		&test_file_int_1, &test_file_2, nullptr, &test_file_int_3,
+		&test_file_int_2, nullptr,		nullptr, &test_file_1,
 	};
-	uint8_t *cbfs_buf = NULL;
+	uint8_t *cbfs_buf = nullptr;
 	size_t foffset = 0;
 
 	cbfs_buf = s->cbfs_rw_buf;
@@ -620,7 +620,7 @@ static void test_cbfs_unverified_area_map(void **state)
 	expect_cbfs_lookup(TEST_DATA_INT_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_int_1.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	mapping = cbfs_unverified_area_map("TEST_AREA", TEST_DATA_INT_1_FILENAME, &size_out);
 	assert_non_null(mapping);
 	assert_int_equal(TEST_DATA_INT_1_SIZE, size_out);
@@ -660,7 +660,7 @@ static void test_cbfs_unverified_area_map(void **state)
 	expect_cbfs_lookup(TEST_DATA_INT_2_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_int_2.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	mapping = cbfs_unverified_area_map("TEST_AREA", TEST_DATA_INT_2_FILENAME, &size_out);
 	assert_non_null(mapping);
 	assert_int_equal(TEST_DATA_INT_2_SIZE, size_out);
@@ -672,7 +672,7 @@ static void test_cbfs_unverified_area_map(void **state)
 	expect_cbfs_lookup(TEST_DATA_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&cbfs_buf[foffset],
 			   foffset + be32toh(test_file_1.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 	mapping = cbfs_unverified_area_map("TEST_AREA", TEST_DATA_1_FILENAME, &size_out);
 	assert_non_null(mapping);
 	assert_int_equal(TEST_DATA_1_SIZE, size_out);
@@ -725,5 +725,5 @@ int main(void)
 		TEST_CBFS_LOOKUP(test_cbfs_unverified_area_map),
 	};
 
-	return lp_run_group_tests(tests, NULL, NULL);
+	return lp_run_group_tests(tests, nullptr, nullptr);
 }

@@ -66,7 +66,7 @@ integerPARM;
 |
 |   Description   :  Allocate structure for integer type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error
+|   Return Values :  Pointer to argument structure or nullptr on error
 +--------------------------------------------------------------------------*/
 static void *
 Generic_This_Type(void *arg)
@@ -93,7 +93,7 @@ Generic_This_Type(void *arg)
 |
 |   Description   :  Allocate structure for integer type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error
+|   Return Values :  Pointer to argument structure or nullptr on error
 +--------------------------------------------------------------------------*/
 static void *
 Make_This_Type(va_list *ap)
@@ -113,7 +113,7 @@ Make_This_Type(va_list *ap)
 |
 |   Description   :  Copy structure for integer type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error.
+|   Return Values :  Pointer to argument structure or nullptr on error.
 +--------------------------------------------------------------------------*/
 static void *
 Copy_This_Type(const void *argp)
@@ -269,8 +269,8 @@ static FIELDTYPE typeTHIS =
   Free_This_Type,
   INIT_FT_FUNC(Check_This_Field),
   INIT_FT_FUNC(Check_This_Character),
-  INIT_FT_FUNC(NULL),
-  INIT_FT_FUNC(NULL),
+  INIT_FT_FUNC(nullptr),
+  INIT_FT_FUNC(nullptr),
 #if NCURSES_INTEROP_FUNCS
   Generic_This_Type
 #endif

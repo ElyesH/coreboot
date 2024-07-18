@@ -177,6 +177,6 @@ static void ptn3460_early_init(void *unused)
 	ptn3460_init(ptn_dev);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, ptn3460_early_init, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, ptn3460_early_init, nullptr);
 
 #endif /* CONFIG(PTN3460_EARLY_INIT) */

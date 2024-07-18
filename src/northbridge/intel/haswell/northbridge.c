@@ -23,14 +23,14 @@ static const char *northbridge_acpi_name(const struct device *dev)
 		return "PCI0";
 
 	if (!is_pci_dev_on_bus(dev, 0))
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pci.devfn) {
 	case PCI_DEVFN(0, 0):
 		return "MCHC";
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 struct device_operations haswell_pci_domain_ops = {

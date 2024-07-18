@@ -7,7 +7,7 @@
 const struct mb_cfg *__weak variant_memory_params(void)
 {
 	/* TODO */
-	return NULL;
+	return nullptr;
 }
 
 bool __weak variant_is_half_populated(void)

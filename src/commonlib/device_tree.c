@@ -107,7 +107,7 @@ int fdt_next_property(const void *blob, uint32_t offset,
  *
  * @params blob    address of FDT
  * @params offset  offset to the node to read the name from
- * @params name    parameter to hold the name that has been read or NULL
+ * @params name    parameter to hold the name that has been read or nullptr
  *
  * @returns  Either 0 on error or offset to the properties that come after the node name
  */
@@ -140,7 +140,7 @@ int fdt_skip_node(const void *blob, uint32_t start_offset)
 		return 0;
 	offset += size;
 
-	while ((size = fdt_next_property(blob, offset, NULL)))
+	while ((size = fdt_next_property(blob, offset, nullptr)))
 		offset += size;
 
 	while ((size = fdt_skip_node(blob, offset)))
@@ -168,7 +168,7 @@ u32 fdt_read_prop(const void *blob, u32 node_offset, const char *prop_name,
 {
 	u32 offset = node_offset;
 
-	offset += fdt_next_node_name(blob, offset, NULL); // skip node name
+	offset += fdt_next_node_name(blob, offset, nullptr); // skip node name
 
 	size_t size;
 	while ((size = fdt_next_property(blob, offset, fdt_prop))) {
@@ -254,7 +254,7 @@ static u32 fdt_read_cell_props(const void *blob, u32 node_offset, u32 *addrcp, u
  * @params parent_node_offset  offset to node from which to traverse the tree
  *
  * @params path  null terminated array of node names specifying a
- *               relative path (e.g: { "cpus", "cpu0", NULL })
+ *               relative path (e.g: { "cpus", "cpu0", nullptr })
  *
  * @params addrcp/sizecp  If any address-cells and size-cells properties are found that are
  *                        part of the parent node of the node we are looking, addrcp and sizecp
@@ -265,10 +265,10 @@ static u32 fdt_read_cell_props(const void *blob, u32 node_offset, u32 *addrcp, u
 static u32 fdt_find_node(const void *blob, u32 parent_node_offset, char **path,
 			 u32 *addrcp, u32 *sizecp)
 {
-	if (*path == NULL)
+	if (*path == nullptr)
 		return parent_node_offset; // node found
 
-	size_t size = fdt_next_node_name(blob, parent_node_offset, NULL); // skip node name
+	size_t size = fdt_next_node_name(blob, parent_node_offset, nullptr); // skip node name
 
 	/*
 	 * get address-cells and size-cells properties while skipping the others.
@@ -300,7 +300,7 @@ static u32 fdt_find_node(const void *blob, u32 parent_node_offset, char **path,
  *
  * @params addrcp/sizecp  Pointer that will be updated with any #address-cells and #size-cells
  *                        value found in the node of the node specified by node_offset. Either
- *                        may be NULL to ignore. If no #address-cells and #size-cells is found
+ *                        may be nullptr to ignore. If no #address-cells and #size-cells is found
  *                        default values of #address-cells=2 and #size-cells=1 are returned.
  *
  * @returns Either 0 on error or the offset to the node found behind the path
@@ -313,7 +313,7 @@ u32 fdt_find_node_by_path(const void *blob, const char *path, u32 *addrcp, u32 *
 		return 0;
 	}
 	if (!blob) {
-		printk(BIOS_ERR, "devicetree blob is NULL\n");
+		printk(BIOS_ERR, "devicetree blob is nullptr\n");
 		return 0;
 	}
 
@@ -336,7 +336,7 @@ u32 fdt_find_node_by_path(const void *blob, const char *path, u32 *addrcp, u32 *
 	char *cur = path_copy;
 	int i;
 	for (i = 0; i < FDT_PATH_MAX_DEPTH; i++) {
-		path_array[i] = strtok_r(NULL, "/", &cur);
+		path_array[i] = strtok_r(nullptr, "/", &cur);
 		if (!path_array[i])
 			break;
 	}
@@ -360,7 +360,7 @@ u32 fdt_find_node_by_path(const void *blob, const char *path, u32 *addrcp, u32 *
  *
  * @params addrcp/sizecp  Pointer that will be updated with any #address-cells and #size-cells
  *                        value found in the node of the node specified by node_offset. Either
- *                        may be NULL to ignore. If no #address-cells and #size-cells is found
+ *                        may be nullptr to ignore. If no #address-cells and #size-cells is found
  *                        addrcp and sizecp are left untouched.
  *
  * @params results      Array of offsets pointing to each node matching the given prefix.
@@ -380,7 +380,7 @@ size_t fdt_find_subnodes_by_prefix(const void *blob, u32 node_offset, const char
 	u32 offset = node_offset;
 
 	// we don't care about the name of the current node
-	u32 size = fdt_next_node_name(blob, offset, NULL);
+	u32 size = fdt_next_node_name(blob, offset, nullptr);
 	if (!size) {
 		printk(BIOS_ERR, "%s: node_offset: %x does not point to a node\n",
 		       __func__, node_offset);
@@ -422,15 +422,15 @@ size_t fdt_find_subnodes_by_prefix(const void *blob, u32 node_offset, const char
 
 static const char *fdt_read_alias_prop(const void *blob, const char *alias_name)
 {
-	u32 node_offset =  fdt_find_node_by_path(blob, "/aliases", NULL, NULL);
+	u32 node_offset =  fdt_find_node_by_path(blob, "/aliases", nullptr, nullptr);
 	if (!node_offset) {
 		printk(BIOS_DEBUG, "no /aliases node found\n");
-		return NULL;
+		return nullptr;
 	}
 	struct fdt_property alias_prop;
 	if (!fdt_read_prop(blob, node_offset, alias_name, &alias_prop)) {
 		printk(BIOS_DEBUG, "property %s in /aliases node not found\n", alias_name);
-		return NULL;
+		return nullptr;
 	}
 	return (const char *)alias_prop.data;
 }
@@ -442,7 +442,7 @@ static const char *fdt_read_alias_prop(const void *blob, const char *alias_name)
  * @params alias_name     node name alias that should be searched for.
  * @params addrcp/sizecp  Pointer that will be updated with any #address-cells and #size-cells
  *                        value found in the node of the node specified by node_offset. Either
- *                        may be NULL to ignore. If no #address-cells and #size-cells is found
+ *                        may be nullptr to ignore. If no #address-cells and #size-cells is found
  *                        default values of #address-cells=2 and #size-cells=1 are returned.
  *
  * @returns  offset to last node found behind path or 0 if no node has been found
@@ -742,7 +742,7 @@ struct device_tree *fdt_unflatten(const void *blob)
 	tree->header = header;
 
 	if (!fdt_is_valid(blob))
-		return NULL;
+		return nullptr;
 
 	uint32_t struct_offset = be32toh(header->structure_offset);
 	uint32_t strings_offset = be32toh(header->strings_offset);
@@ -984,8 +984,8 @@ void dt_print_node(const struct device_tree_node *node)
  * Read #address-cells and #size-cells properties from a node.
  *
  * @param node		The device tree node to read from.
- * @param addrcp	Pointer to store #address-cells in, skipped if NULL.
- * @param sizecp	Pointer to store #size-cells in, skipped if NULL.
+ * @param addrcp	Pointer to store #address-cells in, skipped if nullptr.
+ * @param sizecp	Pointer to store #size-cells in, skipped if nullptr.
  */
 void dt_read_cell_props(const struct device_tree_node *node, u32 *addrcp,
 			u32 *sizecp)
@@ -1005,19 +1005,19 @@ void dt_read_cell_props(const struct device_tree_node *node, u32 *addrcp,
  * @param parent	The node from which to start the relative path lookup.
  * @param path		An array of path component strings that will be looked
  *			up in order to find the node. Must be terminated with
- *			a NULL pointer. Example: {'firmware', 'coreboot', NULL}
+ *			a nullptr pointer. Example: {'firmware', 'coreboot', nullptr}
  * @param addrcp	Pointer that will be updated with any #address-cells
- *			value found in the path. May be NULL to ignore.
+ *			value found in the path. May be nullptr to ignore.
  * @param sizecp	Pointer that will be updated with any #size-cells
- *			value found in the path. May be NULL to ignore.
- * @param create	1: Create node(s) if not found. 0: Return NULL instead.
- * @return		The found/created node, or NULL.
+ *			value found in the path. May be nullptr to ignore.
+ * @param create	1: Create node(s) if not found. 0: Return nullptr instead.
+ * @return		The found/created node, or nullptr.
  */
 struct device_tree_node *dt_find_node(struct device_tree_node *parent,
 				      const char **path, u32 *addrcp,
 				      u32 *sizecp, int create)
 {
-	struct device_tree_node *node, *found = NULL;
+	struct device_tree_node *node, *found = nullptr;
 
 	/* Update #address-cells and #size-cells for this level. */
 	dt_read_cell_props(parent, addrcp, sizecp);
@@ -1033,15 +1033,15 @@ struct device_tree_node *dt_find_node(struct device_tree_node *parent,
 		}
 	}
 
-	/* Otherwise create it or return NULL. */
+	/* Otherwise create it or return nullptr. */
 	if (!found) {
 		if (!create)
-			return NULL;
+			return nullptr;
 
 		found = alloc_node();
 		found->name = strdup(*path);
 		if (!found->name)
-			return NULL;
+			return nullptr;
 
 		list_insert_after(&found->list_node, &parent->children);
 	}
@@ -1056,11 +1056,11 @@ struct device_tree_node *dt_find_node(struct device_tree_node *parent,
  * @param path          A string representing a path in the device tree, with
  *			nodes separated by '/'. Example: "/firmware/coreboot"
  * @param addrcp	Pointer that will be updated with any #address-cells
- *			value found in the path. May be NULL to ignore.
+ *			value found in the path. May be nullptr to ignore.
  * @param sizecp	Pointer that will be updated with any #size-cells
- *			value found in the path. May be NULL to ignore.
- * @param create	1: Create node(s) if not found. 0: Return NULL instead.
- * @return		The found/created node, or NULL.
+ *			value found in the path. May be nullptr to ignore.
+ * @param create	1: Create node(s) if not found. 0: Return nullptr instead.
+ * @return		The found/created node, or nullptr.
  *
  * It is the caller responsibility to provide a path string that doesn't end
  * with a '/' and doesn't contain any "//". If the path does not start with a
@@ -1076,7 +1076,7 @@ struct device_tree_node *dt_find_node_by_path(struct device_tree *tree,
 	/* Hopefully enough depth for any node. */
 	const char *path_array[15];
 	int i;
-	struct device_tree_node *node = NULL;
+	struct device_tree_node *node = nullptr;
 
 	if (path[0] == '/') { /* regular path */
 		if (path[1] == '\0') {	/* special case: "/" is root node */
@@ -1086,7 +1086,7 @@ struct device_tree_node *dt_find_node_by_path(struct device_tree *tree,
 
 		sub_path = duped_str = strdup(&path[1]);
 		if (!sub_path)
-			return NULL;
+			return nullptr;
 
 		parent = tree->root;
 	} else { /* alias */
@@ -1094,7 +1094,7 @@ struct device_tree_node *dt_find_node_by_path(struct device_tree *tree,
 
 		alias = duped_str = strdup(path);
 		if (!alias)
-			return NULL;
+			return nullptr;
 
 		sub_path = strchr(alias, '/');
 		if (sub_path)
@@ -1106,7 +1106,7 @@ struct device_tree_node *dt_find_node_by_path(struct device_tree *tree,
 			       "Could not find node '%s', alias '%s' does not exist\n",
 			       path, alias);
 			free(duped_str);
-			return NULL;
+			return nullptr;
 		}
 
 		if (!sub_path) {
@@ -1130,7 +1130,7 @@ struct device_tree_node *dt_find_node_by_path(struct device_tree *tree,
 	}
 
 	if (!next_slash) {
-		path_array[i] = NULL;
+		path_array[i] = nullptr;
 		node = dt_find_node(parent, path_array,
 				    addrcp, sizecp, create);
 	}
@@ -1144,7 +1144,7 @@ struct device_tree_node *dt_find_node_by_path(struct device_tree *tree,
  *
  * @param tree		The device tree.
  * @param alias		The alias name.
- * @return		The found node, or NULL.
+ * @return		The found node, or nullptr.
  */
 struct device_tree_node *dt_find_node_by_alias(struct device_tree *tree,
 					       const char *alias)
@@ -1152,22 +1152,22 @@ struct device_tree_node *dt_find_node_by_alias(struct device_tree *tree,
 	struct device_tree_node *node;
 	const char *alias_path;
 
-	node = dt_find_node_by_path(tree, "/aliases", NULL, NULL, 0);
+	node = dt_find_node_by_path(tree, "/aliases", nullptr, nullptr, 0);
 	if (!node)
-		return NULL;
+		return nullptr;
 
 	alias_path = dt_find_string_prop(node, alias);
 	if (!alias_path)
-		return NULL;
+		return nullptr;
 
-	return dt_find_node_by_path(tree, alias_path, NULL, NULL, 0);
+	return dt_find_node_by_path(tree, alias_path, nullptr, nullptr, 0);
 }
 
 struct device_tree_node *dt_find_node_by_phandle(struct device_tree_node *root,
 						 uint32_t phandle)
 {
 	if (!root)
-		return NULL;
+		return nullptr;
 
 	if (root->phandle == phandle)
 		return root;
@@ -1180,7 +1180,7 @@ struct device_tree_node *dt_find_node_by_phandle(struct device_tree_node *root,
 			return result;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /*
@@ -1220,7 +1220,7 @@ static int dt_check_compat_match(struct device_tree_node *node,
  *
  * @param parent	The parent node under which to look.
  * @param compat	The compatible string to find.
- * @return		The found node, or NULL.
+ * @return		The found node, or nullptr.
  */
 struct device_tree_node *dt_find_compat(struct device_tree_node *parent,
 					const char *compat)
@@ -1236,19 +1236,19 @@ struct device_tree_node *dt_find_compat(struct device_tree_node *parent,
 			return found;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /*
  * Find the next compatible child of a given parent. All children up to the
- * child passed in by caller are ignored. If child is NULL, it considers all the
+ * child passed in by caller are ignored. If child is nullptr, it considers all the
  * children to find the first child which is compatible.
  *
  * @param parent	The parent node under which to look.
- * @param child	The child node to start search from (exclusive). If NULL
+ * @param child	The child node to start search from (exclusive). If nullptr
  *                      consider all children.
  * @param compat	The compatible string to find.
- * @return		The found node, or NULL.
+ * @return		The found node, or nullptr.
  */
 struct device_tree_node *
 dt_find_next_compat_child(struct device_tree_node *parent,
@@ -1272,7 +1272,7 @@ dt_find_next_compat_child(struct device_tree_node *parent,
 			return next;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /*
@@ -1309,7 +1309,7 @@ struct device_tree_node *dt_find_prop_value(struct device_tree_node *parent,
 		if (found)
 			return found;
 	}
-	return NULL;
+	return nullptr;
 }
 
 /*
@@ -1378,7 +1378,7 @@ void dt_add_bin_prop(struct device_tree_node *node, const char *name,
  *
  * @param node		The device tree node to search.
  * @param name		The name of the property.
- * @return		The found string, or NULL.
+ * @return		The found string, or nullptr.
  */
 const char *dt_find_string_prop(const struct device_tree_node *node,
 				const char *name)
@@ -1404,7 +1404,7 @@ void dt_find_bin_prop(const struct device_tree_node *node, const char *name,
 {
 	struct device_tree_property *prop;
 
-	*data = NULL;
+	*data = nullptr;
 	*size = 0;
 
 	list_for_each(prop, node->properties, list_node) {
@@ -1525,8 +1525,8 @@ int dt_set_bin_prop_by_path(struct device_tree *tree, const char *path,
 
 	*prop_name++ = '\0'; /* Separate path from the property name. */
 
-	dt_node = dt_find_node_by_path(tree, path_copy, NULL,
-				       NULL, create);
+	dt_node = dt_find_node_by_path(tree, path_copy, nullptr,
+				       nullptr, create);
 
 	if (!dt_node) {
 		printk(BIOS_ERR, "Failed to %s %s in the device tree\n",
@@ -1548,7 +1548,7 @@ int dt_set_bin_prop_by_path(struct device_tree *tree, const char *path,
  * the node. But dt_add_u32_prop() may leak a bit of memory if you do.
  *
  * @tree: Device tree to add/retrieve from.
- * @return: The /reserved-memory/ node (or NULL, if error).
+ * @return: The /reserved-memory/ node (or nullptr, if error).
  */
 struct device_tree_node *dt_init_reserved_memory_node(struct device_tree *tree)
 {
@@ -1558,14 +1558,14 @@ struct device_tree_node *dt_init_reserved_memory_node(struct device_tree *tree)
 	reserved = dt_find_node_by_path(tree, "/reserved-memory", &addr,
 					&size, 1);
 	if (!reserved)
-		return NULL;
+		return nullptr;
 
 	/* Binding doc says this should have the same #{address,size}-cells as
 	   the root. */
 	dt_add_u32_prop(reserved, "#address-cells", addr);
 	dt_add_u32_prop(reserved, "#size-cells", size);
 	/* Binding doc says this should be empty (1:1 mapping from root). */
-	dt_add_bin_prop(reserved, "ranges", NULL, 0);
+	dt_add_bin_prop(reserved, "ranges", nullptr, 0);
 
 	return reserved;
 }
@@ -1657,7 +1657,7 @@ static int dt_fixup_locals(struct device_tree_node *node,
 	 * the base node and apply fixups to all offsets it specifies.
 	 */
 	list_for_each(fixup_prop, fixup->properties, list_node) {
-		struct device_tree_property *base_prop = NULL;
+		struct device_tree_property *base_prop = nullptr;
 		list_for_each(prop, node->properties, list_node)
 			if (!strcmp(prop->prop.name, fixup_prop->prop.name)) {
 				base_prop = prop;
@@ -1678,7 +1678,7 @@ static int dt_fixup_locals(struct device_tree_node *node,
 	/* Now recursively descend both the base tree and the /__local_fixups__
 	   subtree in sync to apply all fixups. */
 	list_for_each(fixup_child, fixup->children, list_node) {
-		struct device_tree_node *base_child = NULL;
+		struct device_tree_node *base_child = nullptr;
 		list_for_each(child, node->children, list_node)
 			if (!strcmp(child->name, fixup_child->name)) {
 				base_child = child;
@@ -1763,11 +1763,11 @@ static int dt_fixup_external(struct device_tree *overlay,
 		*entry++ = '\0';
 
 		struct device_tree_node *ovl_node = dt_find_node_by_path(
-			overlay, node_path, NULL, NULL, 0);
+			overlay, node_path, nullptr, nullptr, 0);
 		if (!ovl_node || !isdigit(*entry))
 			return -1;
 
-		struct device_tree_property *ovl_prop = NULL;
+		struct device_tree_property *ovl_prop = nullptr;
 		list_for_each(prop, ovl_node->properties, list_node)
 			if (!strcmp(prop->prop.name, prop_name)) {
 				ovl_prop = prop;
@@ -1830,7 +1830,7 @@ static int dt_fixup_all_externals(struct device_tree *tree,
 
 		/* Find node the label pointed to figure out its phandle. */
 		struct device_tree_node *node = dt_find_node_by_path(tree, path,
-			NULL, NULL, 0);
+			nullptr, nullptr, 0);
 		if (!node)
 			return -1;
 
@@ -1865,7 +1865,7 @@ static void dt_copy_subtree(struct device_tree_node *dst,
 			continue;
 		}
 
-		struct device_tree_property *dst_prop = NULL;
+		struct device_tree_property *dst_prop = nullptr;
 		list_for_each(prop, dst->properties, list_node)
 			if (!strcmp(prop->prop.name, src_prop->prop.name)) {
 				dst_prop = prop;
@@ -1891,7 +1891,7 @@ static void dt_copy_subtree(struct device_tree_node *dst,
 	struct device_tree_node *node;
 	struct device_tree_node *src_node;
 	list_for_each(src_node, src->children, list_node) {
-		struct device_tree_node *dst_node = NULL;
+		struct device_tree_node *dst_node = nullptr;
 		list_for_each(node, dst->children, list_node)
 			if (!strcmp(node->name, src_node->name)) {
 				dst_node = node;
@@ -1922,9 +1922,9 @@ static int dt_import_fragment(struct device_tree *tree,
 			      struct device_tree_node *overlay_symbols)
 {
 	/* The actual overlaid nodes/props are in an __overlay__ child node. */
-	static const char *overlay_path[] = { "__overlay__", NULL };
+	static const char *overlay_path[] = { "__overlay__", nullptr };
 	struct device_tree_node *overlay = dt_find_node(fragment, overlay_path,
-							NULL, NULL, 0);
+							nullptr, nullptr, 0);
 
 	/* If it doesn't have an __overlay__ child, it's not a fragment. */
 	if (!overlay)
@@ -1932,8 +1932,8 @@ static int dt_import_fragment(struct device_tree *tree,
 
 	/* Target node of the fragment can be given by path or by phandle. */
 	struct device_tree_property *prop;
-	struct device_tree_property *phandle = NULL;
-	struct device_tree_property *path = NULL;
+	struct device_tree_property *phandle = nullptr;
+	struct device_tree_property *path = nullptr;
 	list_for_each(prop, fragment->properties, list_node) {
 		if (!strcmp(prop->prop.name, "target")) {
 			phandle = prop;
@@ -1943,7 +1943,7 @@ static int dt_import_fragment(struct device_tree *tree,
 			path = prop;
 	}
 
-	struct device_tree_node *target = NULL;
+	struct device_tree_node *target = nullptr;
 	if (phandle) {
 		if (phandle->prop.size != sizeof(uint32_t))
 			return -1;
@@ -1952,7 +1952,7 @@ static int dt_import_fragment(struct device_tree *tree,
 		/* Symbols already updated as part of dt_fixup_external(). */
 	} else if (path) {
 		target = dt_find_node_by_path(tree, path->prop.data,
-					      NULL, NULL, 0);
+					      nullptr, nullptr, 0);
 		dt_fix_symbols(overlay_symbols, fragment, path->prop.data);
 	}
 	if (!target)
@@ -1991,7 +1991,7 @@ int dt_apply_overlay(struct device_tree *tree, struct device_tree *overlay)
 	/* Now that we changed phandles in the overlay, we need to update any
 	   nodes referring to them. Those are listed in /__local_fixups__. */
 	struct device_tree_node *local_fixups = dt_find_node_by_path(overlay,
-					"/__local_fixups__", NULL, NULL, 0);
+					"/__local_fixups__", nullptr, nullptr, 0);
 	if (local_fixups && dt_fixup_locals(overlay->root, local_fixups,
 					    phandle_base) < 0) {
 		printk(BIOS_ERR, "invalid local fixups in overlay\n");
@@ -2011,11 +2011,11 @@ int dt_apply_overlay(struct device_tree *tree, struct device_tree *overlay)
 	 * where we have all necessary information for that easily available.
 	 */
 	struct device_tree_node *symbols = dt_find_node_by_path(tree,
-		"/__symbols__", NULL, NULL, 0);
+		"/__symbols__", nullptr, nullptr, 0);
 	struct device_tree_node *fixups = dt_find_node_by_path(overlay,
-		"/__fixups__", NULL, NULL, 0);
+		"/__fixups__", nullptr, nullptr, 0);
 	struct device_tree_node *overlay_symbols = dt_find_node_by_path(overlay,
-		"/__symbols__", NULL, NULL, 0);
+		"/__symbols__", nullptr, nullptr, 0);
 	if (fixups && dt_fixup_all_externals(tree, symbols, overlay,
 					     fixups, overlay_symbols) < 0) {
 		printk(BIOS_ERR, "cannot match external fixups from overlay\n");

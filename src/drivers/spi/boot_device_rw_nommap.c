@@ -65,7 +65,7 @@ const struct region_device *boot_device_rw(void)
 	boot_device_rw_init();
 
 	if (sfg_init_done != true)
-		return NULL;
+		return nullptr;
 
 	return &spi_rw;
 }
@@ -75,7 +75,7 @@ const struct spi_flash *boot_device_spi_flash(void)
 	boot_device_rw_init();
 
 	if (sfg_init_done != true)
-		return NULL;
+		return nullptr;
 
 	return &sfg;
 }
@@ -90,7 +90,7 @@ int boot_device_wp_region(const struct region_device *rd,
 
 	const struct spi_flash *boot_dev = boot_device_spi_flash();
 
-	if (boot_dev == NULL)
+	if (boot_dev == nullptr)
 		return -1;
 
 	if (type == MEDIA_WP) {

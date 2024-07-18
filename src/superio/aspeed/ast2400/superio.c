@@ -37,11 +37,11 @@ static const char *ast2400_acpi_hid(const struct device *dev)
 {
 	/* Sanity checks */
 	if (dev->path.type != DEVICE_PATH_PNP)
-		return NULL;
+		return nullptr;
 	if (dev->path.pnp.port == 0)
-		return NULL;
+		return nullptr;
 	if ((dev->path.pnp.device & 0xff) > AST2400_MAILBOX)
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pnp.device & 0xff) {
 	case AST2400_SUART1: /* fallthrough */
@@ -72,17 +72,17 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, AST2400_SUART1,   PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0xfff8, },
-	{ NULL, AST2400_SUART2,   PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0xfff8, },
-	{ NULL, AST2400_SWC,      PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IO3
+	{ nullptr, AST2400_SUART1,   PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0xfff8, },
+	{ nullptr, AST2400_SUART2,   PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0xfff8, },
+	{ nullptr, AST2400_SWC,      PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IO3
 		| PNP_IRQ0, 0xfff8, 0xfff8, 0xfff8, 0xfff8, },
-	{ NULL, AST2400_KBC,      PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1
+	{ nullptr, AST2400_KBC,      PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1
 		| PNP_MSC0, 0xffff, 0xffff, },
-	{ NULL, AST2400_GPIO,     PNP_IRQ0, }, // GPIO LDN has no IO Region
-	{ NULL, AST2400_SUART3,   PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0xfff8, },
-	{ NULL, AST2400_SUART4,   PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0xfff8, },
-	{ NULL, AST2400_ILPC2AHB, PNP_IRQ0 },
-	{ NULL, AST2400_MAILBOX,  PNP_IO0 | PNP_IRQ0, 0xfffe, },
+	{ nullptr, AST2400_GPIO,     PNP_IRQ0, }, // GPIO LDN has no IO Region
+	{ nullptr, AST2400_SUART3,   PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0xfff8, },
+	{ nullptr, AST2400_SUART4,   PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0xfff8, },
+	{ nullptr, AST2400_ILPC2AHB, PNP_IRQ0 },
+	{ nullptr, AST2400_MAILBOX,  PNP_IO0 | PNP_IRQ0, 0xfffe, },
 };
 
 static void enable_dev(struct device *dev)

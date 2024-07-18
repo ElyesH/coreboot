@@ -266,7 +266,7 @@ int main(int argc, char *argv[])
     {
         w->orientation = w->head = 0;
 
-        if ((ip = malloc(sizeof(short) * (length + 1))) == NULL)
+        if ((ip = malloc(sizeof(short) * (length + 1))) == nullptr)
         {
             fprintf(stderr, "%s: out of memory\n", *argv);
             return EXIT_FAILURE;
@@ -277,7 +277,7 @@ int main(int argc, char *argv[])
         for (x = length; --x >= 0;)
             *ip++ = -1;
 
-        if ((ip = malloc(sizeof(short) * (length + 1))) == NULL)
+        if ((ip = malloc(sizeof(short) * (length + 1))) == nullptr)
         {
             fprintf(stderr, "%s: out of memory\n", *argv);
             return EXIT_FAILURE;

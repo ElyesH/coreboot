@@ -109,7 +109,7 @@ static void pm1_enable_pwrbtn_smi(void *unused)
 	pmc_update_pm1_enable(PWRBTN_EN);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT_CHIPS, BS_ON_EXIT, pm1_enable_pwrbtn_smi, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT_CHIPS, BS_ON_EXIT, pm1_enable_pwrbtn_smi, nullptr);
 
 static void pmc_fill_ssdt(const struct device *dev)
 {

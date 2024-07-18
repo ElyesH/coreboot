@@ -38,7 +38,7 @@ tpm_result_t tlcl1_set_deactivated(uint8_t flag);
 
 /**
  * Get flags of interest. Pointers for flags you aren't interested in may
- * be NULL. The TPM error code is returned.
+ * be nullptr. The TPM error code is returned.
  */
 tpm_result_t tlcl1_get_flags(uint8_t *disable, uint8_t *deactivated, uint8_t *nvlocked);
 

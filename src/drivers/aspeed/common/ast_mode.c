@@ -35,7 +35,7 @@ static bool ast_get_vbios_mode_info(struct drm_crtc *crtc, struct drm_display_mo
 	struct ast_private *ast = crtc->dev->dev_private;
 	const struct drm_framebuffer *fb = crtc->primary->fb;
 	u32 refresh_rate_index = 0, mode_id, color_index, refresh_rate;
-	const struct ast_vbios_enhtable *best = NULL;
+	const struct ast_vbios_enhtable *best = nullptr;
 	u32 hborder, vborder;
 	bool check_sync;
 

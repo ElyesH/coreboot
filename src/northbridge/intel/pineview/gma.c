@@ -37,8 +37,8 @@
 			   ADPA_CRT_HOTPLUG_VOLREF_325MV | \
 			   ADPA_CRT_HOTPLUG_ENABLE)
 
-static struct resource *gtt_res  = NULL;
-static struct resource *mmio_res = NULL;
+static struct resource *gtt_res  = nullptr;
+static struct resource *mmio_res = nullptr;
 
 static int gtt_setup(u8 *mmiobase)
 {

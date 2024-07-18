@@ -55,10 +55,10 @@ static FORM default_form =
   (FIELD *)0,			/* current    */
   (_PAGE *) 0,			/* page       */
   (char *)0,			/* usrptr     */
-  NULL,				/* forminit   */
-  NULL,				/* formterm   */
-  NULL,				/* fieldinit  */
-  NULL				/* fieldterm  */
+  nullptr,				/* forminit   */
+  nullptr,				/* formterm   */
+  nullptr,				/* fieldinit  */
+  nullptr				/* fieldterm  */
 };
 
 NCURSES_EXPORT_VAR(FORM *) _nc_Default_Form = &default_form;
@@ -287,7 +287,7 @@ Associate_Fields(FORM *form, FIELD **fields)
 |
 |   Description   :  Create new form with given array of fields.
 |
-|   Return Values :  Pointer to form. NULL if error occurred.
+|   Return Values :  Pointer to form. nullptr if error occurred.
 !                    Set errno:
 |                    E_OK            - success
 |                    E_BAD_ARGUMENT  - Invalid form pointer or field array
@@ -335,7 +335,7 @@ NCURSES_SP_NAME(new_form) (NCURSES_SP_DCLx FIELD **fields)
 |
 |   Description   :  Create new form with given array of fields.
 |
-|   Return Values :  Pointer to form. NULL if error occurred.
+|   Return Values :  Pointer to form. nullptr if error occurred.
 !                    Set errno:
 |                    E_OK            - success
 |                    E_BAD_ARGUMENT  - Invalid form pointer or field array

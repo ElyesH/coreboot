@@ -195,7 +195,7 @@ static void soundwire_cs42l42_fill_ssdt(const struct device *dev)
 	if (config->hs_bias_sense_disable)
 		acpi_dp_add_integer(dsd, "cirrus,hs-bias-sense-disable", 1);
 
-	soundwire_gen_codec(dsd, &cs42l42_codec, NULL);
+	soundwire_gen_codec(dsd, &cs42l42_codec, nullptr);
 	acpi_dp_write(dsd);
 
 	acpigen_pop_len(); /* Device */

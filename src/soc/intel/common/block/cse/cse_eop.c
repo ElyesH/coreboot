@@ -332,7 +332,7 @@ static void send_cse_eop_with_late_finalize(void *unused)
  * BS_PAYLOAD_BOOT instead.
  */
 #if !CONFIG(HECI_DISABLE_USING_SMM)
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, send_cse_eop_with_late_finalize, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, send_cse_eop_with_late_finalize, nullptr);
 #else
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, send_cse_eop_with_late_finalize, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, send_cse_eop_with_late_finalize, nullptr);
 #endif

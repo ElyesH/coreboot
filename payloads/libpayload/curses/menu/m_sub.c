@@ -86,7 +86,7 @@ set_menu_sub(MENU * menu, WINDOW *win)
 |
 |   Description   :  Returns a pointer to the subwindow of the menu
 |
-|   Return Values :  NULL on error, otherwise a pointer to the window
+|   Return Values :  nullptr on error, otherwise a pointer to the window
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(WINDOW *)
 menu_sub(const MENU * menu)

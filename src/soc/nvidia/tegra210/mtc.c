@@ -39,7 +39,7 @@ int tegra210_run_mtc(void)
 	       mtc_table_size, dvfs_table);
 
 	void *cbmem_tab = cbmem_add(CBMEM_ID_MTC, mtc_table_size);
-	if (cbmem_tab == NULL) {
+	if (cbmem_tab == nullptr) {
 		printk(BIOS_ERR, "MTC table allocation in cbmem failed!\n");
 		return -1;
 	}

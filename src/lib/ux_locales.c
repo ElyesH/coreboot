@@ -54,7 +54,7 @@ void ux_locales_unmap(void)
 			cbfs_unmap(cached_state.data);
 		cached_state.initialized = false;
 		cached_state.size = 0;
-		cached_state.data = NULL;
+		cached_state.data = nullptr;
 	}
 }
 
@@ -124,7 +124,7 @@ const char *ux_locales_get_text(const char *name)
 	if (!data || size == 0) {
 		printk(BIOS_ERR, "%s: %s not found.\n", __func__,
 		       PRERAM_LOCALES_NAME);
-		return NULL;
+		return nullptr;
 	}
 
 	if (CONFIG(VBOOT)) {
@@ -146,14 +146,14 @@ const char *ux_locales_get_text(const char *name)
 	if (version != PRERAM_LOCALES_VERSION_BYTE) {
 		printk(BIOS_ERR, "%s: The version %u is not the expected one %u\n",
 		       __func__, version, PRERAM_LOCALES_VERSION_BYTE);
-		return NULL;
+		return nullptr;
 	}
 
 	/* Search for name. Skip the version byte. */
 	offset = search_for_name(data, 1, size, name);
 	if (offset >= size) {
 		printk(BIOS_ERR, "%s: Name %s not found.\n", __func__, name);
-		return NULL;
+		return nullptr;
 	}
 	name_offset = offset;
 
@@ -171,21 +171,21 @@ const char *ux_locales_get_text(const char *name)
 			offset = search_for_id(data, name_offset, next_name_offset, 0);
 		if (offset >= next_name_offset) {
 			printk(BIOS_ERR, "%s: Neither %d nor 0 found.\n", __func__, lang_id);
-			return NULL;
+			return nullptr;
 		}
 	}
 
 	/* Move to the corresponding localized_string. */
 	offset = move_next(data, offset, next_name_offset, DELIM_STR);
 	if (offset >= next_name_offset)
-		return NULL;
+		return nullptr;
 
-	/* Validity check that the returned string must be NULL terminated. */
+	/* Validity check that the returned string must be nullptr terminated. */
 	next = move_next(data, offset, next_name_offset, DELIM_STR) - 1;
 	if (next >= next_name_offset || data[next] != '\0') {
-		printk(BIOS_ERR, "%s: %s is not NULL terminated.\n",
+		printk(BIOS_ERR, "%s: %s is not nullptr terminated.\n",
 		       __func__, PRERAM_LOCALES_NAME);
-		return NULL;
+		return nullptr;
 	}
 
 	return data + offset;

@@ -23,7 +23,7 @@ static enum cb_err ipmi_read_fru(const int port, struct ipmi_read_fru_data_req *
 	struct ipmi_read_fru_data_rsp rsp;
 	int retry_count = 0;
 
-	if (req == NULL || fru_data == NULL) {
+	if (req == nullptr || fru_data == nullptr) {
 		printk(BIOS_ERR, "%s failed, null pointer parameter\n",
 			 __func__);
 		return CB_ERR;
@@ -427,7 +427,7 @@ void read_fru_areas(const int port, const uint8_t id, uint16_t offset,
 	struct ipmi_fru_common_hdr fru_common_hdr;
 
 	/* Set all the char pointers to 0 first, to avoid mainboard
-	 * overwriting SMBIOS string with any non-NULL char pointer
+	 * overwriting SMBIOS string with any non-nullptr char pointer
 	 * by accident. */
 	memset(fru_info_str, 0, sizeof(*fru_info_str));
 	req.fru_device_id = id;
@@ -512,7 +512,7 @@ void read_fru_one_area(const int port, const uint8_t id, uint16_t offset,
 void print_fru_areas(struct fru_info_str *fru_info_str)
 {
 	int count = 0;
-	if (fru_info_str == NULL) {
+	if (fru_info_str == nullptr) {
 		printk(BIOS_ERR, "FRU data is null pointer\n");
 		return;
 	}
@@ -521,54 +521,54 @@ void print_fru_areas(struct fru_info_str *fru_info_str)
 	struct fru_chassis_info chassis_info = fru_info_str->chassis_info;
 
 	printk(BIOS_DEBUG, "Printing Product Info Area...\n");
-	if (prod_info.manufacturer != NULL)
+	if (prod_info.manufacturer != nullptr)
 		printk(BIOS_DEBUG, "manufacturer: %s\n", prod_info.manufacturer);
-	if (prod_info.product_name != NULL)
+	if (prod_info.product_name != nullptr)
 		printk(BIOS_DEBUG, "product name: %s\n", prod_info.product_name);
-	if (prod_info.product_partnumber != NULL)
+	if (prod_info.product_partnumber != nullptr)
 		printk(BIOS_DEBUG, "product part number: %s\n", prod_info.product_partnumber);
-	if (prod_info.product_version != NULL)
+	if (prod_info.product_version != nullptr)
 		printk(BIOS_DEBUG, "product version: %s\n", prod_info.product_version);
-	if (prod_info.serial_number != NULL)
+	if (prod_info.serial_number != nullptr)
 		printk(BIOS_DEBUG, "serial number: %s\n", prod_info.serial_number);
-	if (prod_info.asset_tag != NULL)
+	if (prod_info.asset_tag != nullptr)
 		printk(BIOS_DEBUG, "asset tag: %s\n", prod_info.asset_tag);
-	if (prod_info.fru_file_id != NULL)
+	if (prod_info.fru_file_id != nullptr)
 		printk(BIOS_DEBUG, "FRU file ID: %s\n", prod_info.fru_file_id);
 
 	for (count = 0; count < prod_info.custom_count; count++) {
-		if (*(prod_info.product_custom + count) != NULL)
+		if (*(prod_info.product_custom + count) != nullptr)
 			printk(BIOS_DEBUG, "product custom data %i: %s\n", count,
 				*(prod_info.product_custom + count));
 	}
 
 	printk(BIOS_DEBUG, "Printing Board Info Area...\n");
-	if (board_info.manufacturer != NULL)
+	if (board_info.manufacturer != nullptr)
 		printk(BIOS_DEBUG, "manufacturer: %s\n", board_info.manufacturer);
-	if (board_info.product_name != NULL)
+	if (board_info.product_name != nullptr)
 		printk(BIOS_DEBUG, "product name: %s\n", board_info.product_name);
-	if (board_info.serial_number != NULL)
+	if (board_info.serial_number != nullptr)
 		printk(BIOS_DEBUG, "serial number: %s\n", board_info.serial_number);
-	if (board_info.part_number != NULL)
+	if (board_info.part_number != nullptr)
 		printk(BIOS_DEBUG, "part number: %s\n", board_info.part_number);
-	if (board_info.fru_file_id != NULL)
+	if (board_info.fru_file_id != nullptr)
 		printk(BIOS_DEBUG, "FRU file ID: %s\n", board_info.fru_file_id);
 
 	for (count = 0; count < board_info.custom_count; count++) {
-		if (*(board_info.board_custom + count) != NULL)
+		if (*(board_info.board_custom + count) != nullptr)
 			printk(BIOS_DEBUG, "board custom data %i: %s\n", count,
 				*(board_info.board_custom + count));
 	}
 
 	printk(BIOS_DEBUG, "Printing Chassis Info Area...\n");
 	printk(BIOS_DEBUG, "chassis type: 0x%x\n", chassis_info.chassis_type);
-	if (chassis_info.chassis_partnumber != NULL)
+	if (chassis_info.chassis_partnumber != nullptr)
 		printk(BIOS_DEBUG, "part number: %s\n", chassis_info.chassis_partnumber);
-	if (chassis_info.serial_number != NULL)
+	if (chassis_info.serial_number != nullptr)
 		printk(BIOS_DEBUG, "serial number: %s\n", chassis_info.serial_number);
 
 	for (count = 0; count < chassis_info.custom_count; count++) {
-		if (*(chassis_info.chassis_custom + count) != NULL)
+		if (*(chassis_info.chassis_custom + count) != nullptr)
 			printk(BIOS_DEBUG, "chassis custom data %i: %s\n", count,
 				*(chassis_info.chassis_custom + count));
 	}

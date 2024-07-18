@@ -90,7 +90,7 @@ void fw_config_for_each_found(void (*cb)(const struct fw_config *config, void *a
  * fw_config_get_found() - Return a pointer to the fw_config struct for a given field.
  * @field_mask: A field mask from static.h, e.g., FW_CONFIG_FIELD_FEATURE_MASK
  *
- * Return pointer to cached `struct fw_config` if successfully probed, otherwise NULL.
+ * Return pointer to cached `struct fw_config` if successfully probed, otherwise nullptr.
 */
 const struct fw_config *fw_config_get_found(uint64_t field_mask);
 
@@ -117,7 +117,7 @@ static inline bool fw_config_probe_dev(const struct device *dev,
 {
 	/* Always return true when probing with disabled fw_config. */
 	if (matching_probe)
-		*matching_probe = NULL;
+		*matching_probe = nullptr;
 	return true;
 }
 

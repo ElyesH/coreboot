@@ -38,7 +38,7 @@ struct resource res_mock_1[] = {
 				  IORESOURCE_ASSIGNED },
 	[READONLY_TAG] = {.base = 0xFF0000,
 			  .size = 0x10000,
-			  .next = NULL,
+			  .next = nullptr,
 			  .flags = IORESOURCE_READONLY | IORESOURCE_MEM |
 				  IORESOURCE_ASSIGNED }
 };
@@ -57,7 +57,7 @@ struct resource res_mock_2[] = {
 				  IORESOURCE_ASSIGNED },
 	[READONLY_TAG] = {.base = 0,
 			  .size = 0x10000,
-			  .next = NULL,
+			  .next = nullptr,
 			  .flags = IORESOURCE_READONLY | IORESOURCE_MEM |
 				  IORESOURCE_ASSIGNED }
 };
@@ -76,7 +76,7 @@ struct resource res_mock_3[] = {
 				  IORESOURCE_ASSIGNED },
 	[READONLY_TAG] = {.base = 0xFF0000,
 			  .size = 0x10000,
-			  .next = NULL,
+			  .next = nullptr,
 			  .flags = IORESOURCE_READONLY | IORESOURCE_MEM |
 				  IORESOURCE_ASSIGNED}
 };
@@ -168,7 +168,7 @@ static void test_memrange_basic(void **state)
 	struct resource *res_mock = *state;
 	resource_t prev_base = 0;
 
-	memranges_init_empty(&test_memrange, NULL, 0);
+	memranges_init_empty(&test_memrange, nullptr, 0);
 	memranges_add_resources(&test_memrange, prefetchable, prefetchable, UNASSIGNED_TAG);
 	memranges_add_resources(&test_memrange, cacheable, cacheable, CACHEABLE_TAG);
 	memranges_add_resources(&test_memrange, reserved, reserved, RESERVED_TAG);
@@ -364,7 +364,7 @@ static void test_memrange_holes(void **state)
 	const unsigned long cacheable = IORESOURCE_CACHEABLE;
 	const unsigned long reserved = IORESOURCE_RESERVE;
 	struct range_entry *ptr;
-	struct range_entry *hole_ptr = NULL;
+	struct range_entry *hole_ptr = nullptr;
 	struct memranges test_memrange;
 	struct resource *res_mock = *state;
 	int holes_found = 0;
@@ -701,9 +701,9 @@ int main(void)
 	};
 
 	return cmocka_run_group_tests_name(__TEST_NAME__ "(Boundary on 4GiB)", tests,
-					   setup_test_1, NULL)
+					   setup_test_1, nullptr)
 	       + cmocka_run_group_tests_name(__TEST_NAME__ "(Boundaries 1 byte from 4GiB)",
-					     tests, setup_test_2, NULL)
+					     tests, setup_test_2, nullptr)
 	       + cmocka_run_group_tests_name(__TEST_NAME__ "(Range over 4GiB boundary)", tests,
-					     setup_test_3, NULL);
+					     setup_test_3, nullptr);
 }

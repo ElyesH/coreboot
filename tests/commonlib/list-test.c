@@ -14,7 +14,7 @@ struct test_container {
 void test_list_insert_after(void **state)
 {
 	int i = 0;
-	struct list_node root = { .prev = NULL, .next = NULL };
+	struct list_node root = { .prev = nullptr, .next = nullptr };
 	struct test_container *c1 = (struct test_container *)malloc(sizeof(*c1));
 	struct test_container *c2 = (struct test_container *)malloc(sizeof(*c2));
 	struct test_container *c3 = (struct test_container *)malloc(sizeof(*c2));
@@ -48,7 +48,7 @@ void test_list_insert_after(void **state)
 void test_list_insert_before(void **state)
 {
 	int i = 0;
-	struct list_node root = { .prev = NULL, .next = NULL };
+	struct list_node root = { .prev = nullptr, .next = nullptr };
 	struct test_container *c1 = (struct test_container *)malloc(sizeof(*c1));
 	struct test_container *c2 = (struct test_container *)malloc(sizeof(*c2));
 	struct test_container *c3 = (struct test_container *)malloc(sizeof(*c2));
@@ -82,7 +82,7 @@ void test_list_insert_before(void **state)
 
 void test_list_remove(void **state)
 {
-	struct list_node root = { .prev = NULL, .next = NULL };
+	struct list_node root = { .prev = nullptr, .next = nullptr };
 	struct test_container *c1 = (struct test_container *)malloc(sizeof(*c1));
 	struct test_container *c2 = (struct test_container *)malloc(sizeof(*c2));
 	struct test_container *ptr;
@@ -145,5 +145,5 @@ int main(void)
 	};
 
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

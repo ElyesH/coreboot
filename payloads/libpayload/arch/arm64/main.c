@@ -120,7 +120,7 @@ void start_main(void)
 	 * In the future we may care about the return value.
 	 */
 
-	(void) main(0, NULL);
+	(void) main(0, nullptr);
 
 	/*
 	 * Returning here will go to the _leave function to return

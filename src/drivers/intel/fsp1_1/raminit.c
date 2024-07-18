@@ -46,7 +46,7 @@ void raminit(struct romstage_params *params)
 	 * the platform callback code.  The platform callback code is also
 	 * responsible for assigning the UpdDataRngPtr to this buffer if any
 	 * updates are made.  The default state is to leave the UpdDataRngPtr
-	 * set to NULL.  This indicates that the FSP code will use the UPD
+	 * set to nullptr.  This indicates that the FSP code will use the UPD
 	 * region in the FSP binary.
 	 */
 	post_code(POSTCODE_MEM_PREINIT_PREP_START);
@@ -66,7 +66,7 @@ void raminit(struct romstage_params *params)
 	memset(&fsp_rt_common_buffer, 0, sizeof(fsp_rt_common_buffer));
 	if (s3wake) {
 		fsp_rt_common_buffer.BootMode = BOOT_ON_S3_RESUME;
-	} else if (params->saved_data != NULL) {
+	} else if (params->saved_data != nullptr) {
 		fsp_rt_common_buffer.BootMode =
 			BOOT_ASSUMING_NO_CONFIGURATION_CHANGES;
 	} else {
@@ -120,7 +120,7 @@ void raminit(struct romstage_params *params)
 	/* Locate the FSP reserved memory area */
 	fsp_reserved_bytes = 0;
 	fsp_memory = get_resource_hob(&fsp_reserved_guid, hob_list_ptr);
-	if (fsp_memory == NULL) {
+	if (fsp_memory == nullptr) {
 		fsp_verification_failure = 1;
 		printk(BIOS_ERR,
 			"7.2: FSP_RESERVED_MEMORY_RESOURCE_HOB missing!\n");
@@ -155,7 +155,7 @@ void raminit(struct romstage_params *params)
 
 	/* Lookup the FSP_BOOTLOADER_TOLUM_HOB */
 	cbmem_root = get_resource_hob(&bootldr_tolum_guid, hob_list_ptr);
-	if (cbmem_root == NULL) {
+	if (cbmem_root == nullptr) {
 		fsp_verification_failure = 1;
 		printk(BIOS_ERR, "7.4: FSP_BOOTLOADER_TOLUM_HOB missing!\n");
 		printk(BIOS_ERR, "BootLoaderTolumSize: 0x%08x bytes\n",
@@ -165,14 +165,14 @@ void raminit(struct romstage_params *params)
 	/* Locate the FSP_SMBIOS_MEMORY_INFO HOB */
 	memory_info_hob = get_guid_hob(&memory_info_hob_guid,
 		hob_list_ptr);
-	if (memory_info_hob == NULL) {
+	if (memory_info_hob == nullptr) {
 		printk(BIOS_ERR, "FSP_SMBIOS_MEMORY_INFO HOB missing!\n");
 		fsp_verification_failure = 1;
 	}
 
-	if (hob_list_ptr == NULL)
+	if (hob_list_ptr == nullptr)
 		die_with_post_code(POSTCODE_RAM_FAILURE,
-			"ERROR - HOB pointer is NULL!\n");
+			"ERROR - HOB pointer is nullptr!\n");
 
 	/*
 	 * Verify that FSP is generating the required HOBs:
@@ -185,7 +185,7 @@ void raminit(struct romstage_params *params)
 	 *	FSP_SMBIOS_MEMORY_INFO HOB verified above
 	 */
 	hob_ptr.Raw = get_guid_hob(&mrc_guid, hob_list_ptr);
-	if ((hob_ptr.Raw == NULL) && (params->saved_data == NULL)) {
+	if ((hob_ptr.Raw == nullptr) && (params->saved_data == nullptr)) {
 		printk(BIOS_ERR, "7.3: FSP_NON_VOLATILE_STORAGE_HOB missing!\n");
 		fsp_verification_failure = 1;
 	}
@@ -204,20 +204,20 @@ void raminit(struct romstage_params *params)
 		fsp_reserved_memory_area);
 
 	/* Verify the order of CBMEM root and FSP memory */
-	if ((fsp_memory != NULL) && (cbmem_root != NULL) &&
+	if ((fsp_memory != nullptr) && (cbmem_root != nullptr) &&
 		(cbmem_root->PhysicalStart <= fsp_memory->PhysicalStart)) {
 		fsp_verification_failure = 1;
 		printk(BIOS_ERR, "FSP reserved memory above CBMEM root!\n");
 	}
 
 	/* Verify that the FSP memory was properly reserved */
-	if ((fsp_memory != NULL) && ((fsp_reserved_memory_area == NULL) ||
+	if ((fsp_memory != nullptr) && ((fsp_reserved_memory_area == nullptr) ||
 		(fsp_memory->PhysicalStart !=
 			(unsigned int)fsp_reserved_memory_area))) {
 		fsp_verification_failure = 1;
 		printk(BIOS_ERR, "Reserving FSP memory area!\n");
 
-		if (CONFIG(HAVE_SMI_HANDLER) && cbmem_root != NULL) {
+		if (CONFIG(HAVE_SMI_HANDLER) && cbmem_root != nullptr) {
 			size_t delta_bytes = smm_base
 				- cbmem_root->PhysicalStart
 				- cbmem_root->ResourceLength;
@@ -236,7 +236,7 @@ void raminit(struct romstage_params *params)
 
 	/* Locate the memory configuration data to speed up the next reboot */
 	mrc_hob = get_guid_hob(&mrc_guid, hob_list_ptr);
-	if (mrc_hob == NULL) {
+	if (mrc_hob == nullptr) {
 		printk(BIOS_DEBUG,
 			"Memory Configuration Data HOB not present\n");
 	} else {

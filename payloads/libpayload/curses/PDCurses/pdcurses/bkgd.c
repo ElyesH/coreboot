@@ -39,7 +39,7 @@ RCSID("$Id: bkgd.c,v 1.39 2008/07/13 16:08:18 wmcbrine Exp $")
         there is a conflict (e.g., different color pairs).
 
   Return Value:
-        bkgd() and wbkgd() return OK, unless the window is NULL, in
+        bkgd() and wbkgd() return OK, unless the window is nullptr, in
         which case they return ERR.
 
   Portability                                X/Open    BSD    SYS V

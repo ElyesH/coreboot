@@ -24,7 +24,7 @@ static const char *thermal_zone_acpi_name(const struct device *dev)
 	char *name;
 
 	if (dev->path.type != DEVICE_PATH_GENERIC)
-		return NULL;
+		return nullptr;
 
 	name = malloc(ACPI_NAME_BUFFER_SIZE);
 	snprintf(name, ACPI_NAME_BUFFER_SIZE, "TM%02X", dev->path.generic.id);

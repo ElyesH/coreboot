@@ -90,7 +90,7 @@ static int get_mac_address(u32 *high_dword, u32 *low_dword,
 
 static void program_mac_address(u16 io_base)
 {
-	void *search_address = NULL;
+	void *search_address = nullptr;
 	size_t search_length = -1;
 
 	/* Default MAC Address of A0:00:BA:D0:0B:AD */
@@ -103,14 +103,14 @@ static void program_mac_address(u16 io_base)
 		if (fmap_locate_area_as_rdev("RO_VPD", &rdev) == 0) {
 			search_address = rdev_mmap_full(&rdev);
 
-			if (search_address != NULL)
+			if (search_address != nullptr)
 				search_length = region_device_sz(&rdev);
 		}
 	} else {
 		search_address = cbfs_map("vpd.bin", &search_length);
 	}
 
-	if (search_address == NULL)
+	if (search_address == nullptr)
 		printk(BIOS_ERR, "LAN: VPD not found.\n");
 	else
 		get_mac_address(&high_dword, &low_dword, search_address,
@@ -133,12 +133,12 @@ static void program_mac_address(u16 io_base)
 void lan_init(void)
 {
 	u16 io_base = 0;
-	struct device *ethernet_dev = NULL;
+	struct device *ethernet_dev = nullptr;
 
 	/* Get NIC's IO base address */
 	ethernet_dev = dev_find_device(NINJA_NIC_VENDOR_ID,
 				       NINJA_NIC_DEVICE_ID, 0);
-	if (ethernet_dev != NULL) {
+	if (ethernet_dev != nullptr) {
 		io_base = pci_read_config16(ethernet_dev, 0x10) & 0xfffe;
 
 		/*

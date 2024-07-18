@@ -45,9 +45,9 @@ RCSID("$Id: pdcclip.c,v 1.6 2008/07/14 04:24:52 wmcbrine Exp $")
 
 **man-end****************************************************************/
 
-/* global clipboard contents, should be NULL if none set */
+/* global clipboard contents, should be nullptr if none set */
 
-static char *pdc_SDL_clipboard = NULL;
+static char *pdc_SDL_clipboard = nullptr;
 
 int PDC_getclipboard(char **contents, long *length)
 {
@@ -59,7 +59,7 @@ int PDC_getclipboard(char **contents, long *length)
         return PDC_CLIP_EMPTY;
 
     len = strlen(pdc_SDL_clipboard);
-    if ((*contents = malloc(len + 1)) == NULL)
+    if ((*contents = malloc(len + 1)) == nullptr)
         return PDC_CLIP_MEMORY_ERROR;
 
     strcpy(*contents, pdc_SDL_clipboard);
@@ -75,12 +75,12 @@ int PDC_setclipboard(const char *contents, long length)
     if (pdc_SDL_clipboard)
     {
         free(pdc_SDL_clipboard);
-        pdc_SDL_clipboard = NULL;
+        pdc_SDL_clipboard = nullptr;
     }
 
     if (contents)
     {
-        if ((pdc_SDL_clipboard = malloc(length + 1)) == NULL)
+        if ((pdc_SDL_clipboard = malloc(length + 1)) == nullptr)
             return PDC_CLIP_MEMORY_ERROR;
 
         strcpy(pdc_SDL_clipboard, contents);
@@ -98,7 +98,7 @@ int PDC_freeclipboard(char *contents)
     if (contents)
     {
         /* NOTE: We free the memory, but we can not set caller's pointer
-           to NULL, so if caller calls again then will try to access
+           to nullptr, so if caller calls again then will try to access
            free'd memory.  We 1st overwrite memory with a string so if
            caller tries to use free memory they won't get what they
            expect & hopefully notice. */
@@ -121,7 +121,7 @@ int PDC_clearclipboard(void)
     if (pdc_SDL_clipboard)
     {
         free(pdc_SDL_clipboard);
-        pdc_SDL_clipboard = NULL;
+        pdc_SDL_clipboard = nullptr;
     }
 
     return PDC_CLIP_SUCCESS;

@@ -221,9 +221,9 @@ static const char *qemu_acpi_name(const struct device *dev)
 		return "PCI0";
 
 	if (!is_pci_dev_on_bus(dev, 0))
-		return NULL;
+		return nullptr;
 
-	return NULL;
+	return nullptr;
 }
 #endif
 

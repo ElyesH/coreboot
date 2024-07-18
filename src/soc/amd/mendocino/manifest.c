@@ -21,4 +21,4 @@ static void print_blob_version(void *arg)
 	cbfs_unmap(version);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, print_blob_version, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, print_blob_version, nullptr);

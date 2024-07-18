@@ -10,7 +10,7 @@ static void update_spd_len(struct spd_block *blk)
 {
 	u8 i, j = 0;
 	for (i = 0 ; i < CONFIG_DIMM_MAX; i++)
-		if (blk->spd_array[i] != NULL)
+		if (blk->spd_array[i] != nullptr)
 			j |= blk->spd_array[i][SPD_DRAM_TYPE];
 
 	/* If spd used is DDR4, then its length is 512 byte. */
@@ -79,14 +79,14 @@ void get_spd_smbus(struct spd_block *blk)
 	u8 i;
 	for (i = 0 ; i < CONFIG_DIMM_MAX; i++) {
 		if (blk->addr_map[i] == 0) {
-			blk->spd_array[i] = NULL;
+			blk->spd_array[i] = nullptr;
 			continue;
 		}
 
 		if (get_spd(&spd_data[i * CONFIG_DIMM_SPD_SIZE], blk->addr_map[i]) == 0)
 			blk->spd_array[i] = &spd_data[i * CONFIG_DIMM_SPD_SIZE];
 		else
-			blk->spd_array[i] = NULL;
+			blk->spd_array[i] = nullptr;
 	}
 
 	update_spd_len(blk);

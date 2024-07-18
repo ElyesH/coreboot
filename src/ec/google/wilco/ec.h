@@ -45,7 +45,7 @@ int wilco_ec_mailbox(enum wilco_ec_msg_type type, uint8_t command,
 static inline int wilco_ec_send(uint8_t command, uint8_t param)
 {
 	return wilco_ec_mailbox(WILCO_EC_MSG_DEFAULT, command,
-				&param, sizeof(param), NULL, 0);
+				&param, sizeof(param), nullptr, 0);
 }
 
 /**
@@ -60,7 +60,7 @@ static inline int wilco_ec_send(uint8_t command, uint8_t param)
 static inline int wilco_ec_send_noargs(uint8_t command)
 {
 	return wilco_ec_mailbox(WILCO_EC_MSG_DEFAULT, command,
-				NULL, 0, NULL, 0);
+				nullptr, 0, nullptr, 0);
 }
 
 /**
@@ -101,7 +101,7 @@ static inline int wilco_ec_sendrecv_noargs(uint8_t command,
 					   void *data, size_t size)
 {
 	return wilco_ec_mailbox(WILCO_EC_MSG_DEFAULT, command,
-				NULL, 0, data, size);
+				nullptr, 0, data, size);
 }
 
 #endif /* EC_GOOGLE_WILCO_EC_H */

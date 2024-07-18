@@ -205,7 +205,7 @@ static const struct hob_resource *find_resource_hob_by_addr(const uint64_t addr)
 
 	if (fsp_hob_iterator_init(&hob_iterator) != CB_SUCCESS) {
 		printk(BIOS_ERR, "Failed to find HOB list\n");
-		return NULL;
+		return nullptr;
 	}
 
 	while (fsp_hob_iterator_get_next_resource(&hob_iterator, &res) == CB_SUCCESS) {
@@ -213,7 +213,7 @@ static const struct hob_resource *find_resource_hob_by_addr(const uint64_t addr)
 			return res;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 void *vtd_get_dma_buffer(size_t *size)
@@ -243,7 +243,7 @@ void *vtd_get_dma_buffer(size_t *size)
 no_dma_buffer:
 	if (size)
 		*size = 0;
-	return NULL;
+	return nullptr;
 }
 
 void vtd_enable_dma_protection(void)
@@ -276,4 +276,4 @@ static void vtd_disable_pmr_on_resume(void *unused)
 	}
 }
 
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, vtd_disable_pmr_on_resume, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, vtd_disable_pmr_on_resume, nullptr);

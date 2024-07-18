@@ -17,4 +17,4 @@ static void fw_config_handle(void *unused)
 	if (fw_config_probe(FW_CONFIG(STYLUS, STYLUS_PRESENT)))
 		gpio_configure_pads(stylus_det_pads, ARRAY_SIZE(stylus_det_pads));
 }
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, nullptr);

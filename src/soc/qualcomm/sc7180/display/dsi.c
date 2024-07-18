@@ -211,7 +211,7 @@ static enum cb_err mdss_dsi_send_init_cmd(enum mipi_dsi_transaction type, const 
 	uint32_t size;
 	enum cb_err ret = CB_SUCCESS;
 	int data = 0;
-	uint32_t *bp = NULL;
+	uint32_t *bp = nullptr;
 
 	if (len > 2) {
 		pload[0] = len;
@@ -281,7 +281,7 @@ enum cb_err mdss_dsi_panel_initialize(const u8 *init_cmds)
 {
 	uint32_t ctrl_mode = 0;
 
-	assert(init_cmds != NULL);
+	assert(init_cmds != nullptr);
 	ctrl_mode = read32(&dsi0->ctrl);
 
 	/* Enable command mode before sending the commands */

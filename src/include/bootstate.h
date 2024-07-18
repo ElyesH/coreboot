@@ -130,7 +130,7 @@ static inline const char *bscb_location(const struct boot_state_callback *bscb)
 	{						\
 		.arg = arg_,				\
 		.callback = func_,			\
-		.next = NULL,				\
+		.next = nullptr,				\
 		BOOT_STATE_CALLBACK_INIT_DEBUG		\
 	}
 

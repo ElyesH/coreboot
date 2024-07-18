@@ -60,7 +60,7 @@ set_form_userptr(FORM *form, void *usrptr)
 |                    store application relevant information.
 |
 |   Return Values :  Value of pointer. If no such pointer has been set,
-|                    NULL is returned
+|                    nullptr is returned
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(void *)
 form_userptr(const FORM *form)

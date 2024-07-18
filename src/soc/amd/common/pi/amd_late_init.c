@@ -160,7 +160,7 @@ static void prepare_dmi_17(void *unused)
 	mem_info->dimm_cnt = dimm_cnt;
 }
 
-BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_ENTRY, prepare_dmi_17, NULL);
+BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_ENTRY, prepare_dmi_17, nullptr);
 
 static void agesawrapper_post_device(void *unused)
 {
@@ -176,4 +176,4 @@ static void agesawrapper_post_device(void *unused)
 }
 
 BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, agesawrapper_post_device,
-		      NULL);
+		      nullptr);

@@ -56,7 +56,7 @@ void *crosec_get_buffer(size_t size, int req)
 	if (size > PROTO3_MAX_PACKET_SIZE) {
 		printk(BIOS_DEBUG, "Proto v3 buffer request too large: %zu!\n",
 			size);
-		return NULL;
+		return nullptr;
 	}
 
 	if (req)

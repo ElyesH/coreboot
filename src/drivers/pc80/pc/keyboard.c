@@ -353,7 +353,7 @@ void set_kbc_ps2_mode(void)
 	enum cb_err err;
 
 	/* Run a keyboard controller self-test */
-	err = kbc_self_test(0, NULL);
+	err = kbc_self_test(0, nullptr);
 	/* Ignore interface failure as it's non-fatal.  */
 	if (err != CB_SUCCESS && err != CB_KBD_INTERFACE_FAILURE)
 		return;

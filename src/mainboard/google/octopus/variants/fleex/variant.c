@@ -40,10 +40,10 @@ const char *get_wifi_sar_cbfs_filename(void)
 
 void variant_update_devtree(struct device *dev)
 {
-	struct soc_intel_apollolake_config *cfg = NULL;
+	struct soc_intel_apollolake_config *cfg = nullptr;
 
 	cfg = (struct soc_intel_apollolake_config *)dev->chip_info;
 	// Force disable_xhci_lfps_pm to update if it is LTE sku
-	if (cfg != NULL && is_lte_sku())
+	if (cfg != nullptr && is_lte_sku())
 		cfg->disable_xhci_lfps_pm = 1;
 }

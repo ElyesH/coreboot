@@ -432,7 +432,7 @@ static const SI_PCH_DEVICE_INTERRUPT_CONFIG *pci_irq_to_fsp(size_t *out_count)
 	size_t cfg_count = 0;
 
 	if (!entry)
-		return NULL;
+		return nullptr;
 
 	/* Count PCH devices */
 	while (entry) {
@@ -602,7 +602,7 @@ static void fill_fsps_microcode_params(FSP_S_CONFIG *s_cfg,
 	/* Locate microcode and pass to FSP-S for 2nd microcode loading */
 	microcode_file = intel_microcode_find();
 
-	if (microcode_file != NULL) {
+	if (microcode_file != nullptr) {
 		microcode_len = get_microcode_size(microcode_file);
 		if (microcode_len != 0) {
 			/* Update CPU Microcode patch base address/size */
@@ -617,7 +617,7 @@ static void fill_fsps_cpu_params(FSP_S_CONFIG *s_cfg,
 {
 	/*
 	 * FIXME: FSP assumes ownership of the APs (Application Processors)
-	 * upon passing `NULL` pointer to the CpuMpPpi FSP-S UPD.
+	 * upon passing `nullptr` pointer to the CpuMpPpi FSP-S UPD.
 	 * Hence, pass a valid pointer to the CpuMpPpi UPD unconditionally.
 	 * This would avoid APs from getting hijacked by FSP while coreboot
 	 * decides to set SkipMpInit UPD.

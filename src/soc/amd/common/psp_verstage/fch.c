@@ -98,7 +98,7 @@ void *map_spi_rom(void)
 		printk(BIOS_DEBUG, "Error getting SPI ROM info.\n");
 
 	if (CONFIG(PSP_VERSTAGE_MAP_ENTIRE_SPIROM) && spi.SpiBiosSmnBase != 0) {
-		uintptr_t *addr = NULL;
+		uintptr_t *addr = nullptr;
 
 		if (svc_map_spi_rom(spi.SpiBiosSmnBase, CONFIG_ROM_SIZE, (void **)&addr))
 			printk(BIOS_DEBUG, "Error mapping SPI ROM to address.\n");
@@ -143,8 +143,8 @@ uint32_t unmap_fch_devices(void)
 			printk(BIOS_ERR, "Failed to unmap %s: %u\n", bar_map[i].name, err);
 			rtn = err;
 		} else {
-			bar_map[i]._bar = NULL;
-			bar_map[i].set_bar(NULL);
+			bar_map[i]._bar = nullptr;
+			bar_map[i].set_bar(nullptr);
 		}
 	}
 

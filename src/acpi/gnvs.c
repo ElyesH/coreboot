@@ -32,7 +32,7 @@ static void acpi_create_gnvs(void *unused)
 		dnvs = (char *)gnvs + gnvs_size;
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, acpi_create_gnvs, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, acpi_create_gnvs, nullptr);
 
 void *acpi_get_gnvs(void)
 {
@@ -44,7 +44,7 @@ void *acpi_get_gnvs(void)
 		return gnvs;
 
 	printk(BIOS_ERR, "Unable to locate Global NVS\n");
-	return NULL;
+	return nullptr;
 }
 
 void *acpi_get_device_nvs(void)

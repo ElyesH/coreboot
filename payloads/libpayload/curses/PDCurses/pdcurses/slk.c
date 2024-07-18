@@ -96,7 +96,7 @@ static struct SLK {
     int len;
     int format;
     int start_col;
-} *slk = (struct SLK *)NULL;
+} *slk = (struct SLK *)nullptr;
 
 /* slk_init() is the slk initialization routine.
    This must be called before initscr().
@@ -200,7 +200,7 @@ static void _redraw(void)
 /* slk_set() Used to set a slk label to a string.
 
    labnum  = 1 - 8 (or 10) (number of the label)
-   label   = string (8 or 7 bytes total), or NULL
+   label   = string (8 or 7 bytes total), or nullptr
    justify = 0 : left, 1 : center, 2 : right  */
 
 int slk_set(int labnum, const char *label, int justify)
@@ -382,7 +382,7 @@ int slk_color(short color_pair)
 
     PDC_LOG(("slk_color() - called\n"));
 
-    rc = wcolor_set(SP->slk_winptr, color_pair, NULL);
+    rc = wcolor_set(SP->slk_winptr, color_pair, nullptr);
     _redraw();
 
     return rc;
@@ -535,11 +535,11 @@ void PDC_slk_free(void)
         if (SP->slk_winptr)
         {
             delwin(SP->slk_winptr);
-            SP->slk_winptr = (WINDOW *)NULL;
+            SP->slk_winptr = (WINDOW *)nullptr;
         }
 
         free(slk);
-        slk = (struct SLK *)NULL;
+        slk = (struct SLK *)nullptr;
 
         label_length = 0;
         labels = 0;

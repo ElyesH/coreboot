@@ -85,7 +85,7 @@ void pmc_soc_init(struct device *dev)
 	pmc_gpe_init();
 	pmc_set_acpi_mode();
 
-	if (cfg != NULL)
+	if (cfg != nullptr)
 		set_slp_s3_assertion_width(cfg->slp_s3_assertion_width_usecs);
 
 	/* Log power state */

@@ -37,7 +37,7 @@ static inline void range_entry_init(struct range_entry *re,
 	re->begin = incl_begin;
 	re->end = excl_end - 1;
 	re->tag = tag;
-	re->next = NULL;
+	re->next = nullptr;
 }
 
 /* Return inclusive base address of memory range. */
@@ -71,7 +71,7 @@ static inline void range_entry_update_tag(struct range_entry *r,
 
 static inline bool memranges_is_empty(const struct memranges *ranges)
 {
-	return ranges->entries == NULL;
+	return ranges->entries == nullptr;
 }
 
 /* Iterate over each entry in a memranges structure. Ranges cannot
@@ -80,7 +80,7 @@ static inline bool memranges_is_empty(const struct memranges *ranges)
  * r - range_entry pointer.
  * ranges - memranges pointer */
 #define memranges_each_entry(r, ranges) \
-	for (r = (ranges)->entries; r != NULL; r = r->next)
+	for (r = (ranges)->entries; r != nullptr; r = r->next)
 
 /* Initialize memranges structure providing an optional array of range_entry
  * to use as the free list. Additionally, it accepts an align parameter that
@@ -156,7 +156,7 @@ void memranges_insert(struct memranges *ranges,
 void memranges_update_tag(struct memranges *ranges, unsigned long old_tag,
 			  unsigned long new_tag);
 
-/* Returns next entry after the provided entry. NULL if r is last. */
+/* Returns next entry after the provided entry. nullptr if r is last. */
 struct range_entry *memranges_next_entry(struct memranges *ranges,
 					 const struct range_entry *r);
 

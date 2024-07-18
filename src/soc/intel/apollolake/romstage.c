@@ -293,7 +293,7 @@ void platform_fsp_memory_init_params_cb(FSPM_UPD *mupd, uint32_t version)
 	parse_devicetree_setting(mupd);
 
 	/* Do NOT let FSP do any GPIO pad configuration */
-	mupd->FspmConfig.PreMemGpioTablePtr = (uintptr_t)NULL;
+	mupd->FspmConfig.PreMemGpioTablePtr = (uintptr_t)nullptr;
 
 	mupd->FspmConfig.SkipCseRbp = CONFIG(SKIP_CSE_RBP);
 
@@ -317,7 +317,7 @@ void platform_fsp_memory_init_params_cb(FSPM_UPD *mupd, uint32_t version)
 
 	mupd->FspmConfig.VariableNvsBufferPtr =
 		mrc_cache_current_mmap_leak(MRC_VARIABLE_DATA, version,
-					    NULL);
+					    nullptr);
 
 	assert(CONFIG(BOOT_DEVICE_MEMORY_MAPPED));
 

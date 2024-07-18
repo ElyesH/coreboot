@@ -32,21 +32,21 @@ static int dbgp_hub_enable(struct ehci_dbg_port *ehci_debug, unsigned char hub_a
 	/* Assign a devicenumber for the hub. */
 	ret = dbgp_control_msg(ehci_debug, 0,
 		USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-		USB_REQ_SET_ADDRESS, hub_addr, 0, NULL, 0);
+		USB_REQ_SET_ADDRESS, hub_addr, 0, nullptr, 0);
 	if (ret < 0)
 		goto err;
 
 	/* Enter configured state on hub. */
 	ret = dbgp_control_msg(ehci_debug, hub_addr,
 		USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-		USB_REQ_SET_CONFIGURATION, 1, 0, NULL, 0);
+		USB_REQ_SET_CONFIGURATION, 1, 0, nullptr, 0);
 	if (ret < 0)
 		goto err;
 
 	/* Set PORT_POWER, poll for PORT_CONNECTION. */
 	ret = dbgp_control_msg(ehci_debug, hub_addr,
 		USB_DIR_OUT | USB_TYPE_CLASS | USB_RECIP_OTHER,
-		USB_REQ_SET_FEATURE, USB_HUB_PORT_POWER, port, NULL, 0);
+		USB_REQ_SET_FEATURE, USB_HUB_PORT_POWER, port, nullptr, 0);
 	if (ret < 0)
 		goto err;
 
@@ -66,14 +66,14 @@ static int dbgp_hub_enable(struct ehci_dbg_port *ehci_debug, unsigned char hub_a
 
 	ret = dbgp_control_msg(ehci_debug, hub_addr,
 		USB_DIR_OUT | USB_TYPE_CLASS | USB_RECIP_OTHER,
-		USB_REQ_CLEAR_FEATURE, USB_HUB_C_PORT_CONNECTION, port, NULL, 0);
+		USB_REQ_CLEAR_FEATURE, USB_HUB_C_PORT_CONNECTION, port, nullptr, 0);
 	if (ret < 0)
 		goto err;
 
 	/* Set PORT_RESET, poll for C_PORT_RESET. */
 	ret = dbgp_control_msg(ehci_debug, hub_addr,
 		USB_DIR_OUT | USB_TYPE_CLASS | USB_RECIP_OTHER,
-		USB_REQ_SET_FEATURE, USB_HUB_PORT_RESET, port, NULL, 0);
+		USB_REQ_SET_FEATURE, USB_HUB_PORT_RESET, port, nullptr, 0);
 	if (ret < 0)
 		goto err;
 
@@ -93,7 +93,7 @@ static int dbgp_hub_enable(struct ehci_dbg_port *ehci_debug, unsigned char hub_a
 
 	ret = dbgp_control_msg(ehci_debug, hub_addr,
 		USB_DIR_OUT | USB_TYPE_CLASS | USB_RECIP_OTHER,
-		USB_REQ_CLEAR_FEATURE, USB_HUB_C_PORT_RESET, port, NULL, 0);
+		USB_REQ_CLEAR_FEATURE, USB_HUB_C_PORT_RESET, port, nullptr, 0);
 	if (ret < 0)
 		goto err;
 
@@ -157,7 +157,7 @@ debug_dev_found:
 	if (devnum != USB_DEBUG_DEVNUM) {
 		ret = dbgp_control_msg(ehci_debug, devnum,
 			USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-			USB_REQ_SET_ADDRESS, USB_DEBUG_DEVNUM, 0, NULL, 0);
+			USB_REQ_SET_ADDRESS, USB_DEBUG_DEVNUM, 0, nullptr, 0);
 		if (ret < 0) {
 			printk(BIOS_INFO, "Could not move attached device to %d.\n",
 				USB_DEBUG_DEVNUM);
@@ -170,7 +170,7 @@ debug_dev_found:
 	/* Enable the debug interface */
 	ret = dbgp_control_msg(ehci_debug, USB_DEBUG_DEVNUM,
 		USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-		USB_REQ_SET_FEATURE, USB_DEVICE_DEBUG_MODE, 0, NULL, 0);
+		USB_REQ_SET_FEATURE, USB_DEVICE_DEBUG_MODE, 0, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "Could not enable EHCI debug device.\n");
 		return -3;
@@ -194,7 +194,7 @@ small_write:
 			   only then endpoints other than 0 are enabled. */
 			if (dbgp_control_msg(ehci_debug, USB_DEBUG_DEVNUM,
 				USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-				USB_REQ_SET_CONFIGURATION, 1, 0, NULL, 0) >= 0) {
+				USB_REQ_SET_CONFIGURATION, 1, 0, nullptr, 0) >= 0) {
 				configured = 1;
 				goto small_write;
 			}
@@ -223,7 +223,7 @@ static int probe_for_ch347(struct ehci_dbg_port *ehci_debug, struct dbgp_pipe *p
 	/* Move the device to 127 if it isn't already there */
 	ret = dbgp_control_msg(ehci_debug, devnum,
 		USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-		USB_REQ_SET_ADDRESS, USB_DEBUG_DEVNUM, 0, NULL, 0);
+		USB_REQ_SET_ADDRESS, USB_DEBUG_DEVNUM, 0, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "Could not move attached device to %d.\n",
 			USB_DEBUG_DEVNUM);
@@ -235,7 +235,7 @@ static int probe_for_ch347(struct ehci_dbg_port *ehci_debug, struct dbgp_pipe *p
 	/* Send Set Configure request to device.  */
 	ret = dbgp_control_msg(ehci_debug, devnum,
 		USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-		USB_REQ_SET_CONFIGURATION, 1, 0, NULL, 0);
+		USB_REQ_SET_CONFIGURATION, 1, 0, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "CH347 set configuration failed.\n");
 		return -2;
@@ -314,7 +314,7 @@ static int probe_for_ftdi(struct ehci_dbg_port *ehci_debug, struct dbgp_pipe *pi
 	/* Move the device to 127 if it isn't already there */
 	ret = dbgp_control_msg(ehci_debug, devnum,
 		USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-		USB_REQ_SET_ADDRESS, USB_DEBUG_DEVNUM, 0, NULL, 0);
+		USB_REQ_SET_ADDRESS, USB_DEBUG_DEVNUM, 0, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "Could not move attached device to %d.\n",
 			USB_DEBUG_DEVNUM);
@@ -326,7 +326,7 @@ static int probe_for_ftdi(struct ehci_dbg_port *ehci_debug, struct dbgp_pipe *pi
 	/* Send Set Configure request to device.  */
 	ret = dbgp_control_msg(ehci_debug, devnum,
 		USB_DIR_OUT | USB_TYPE_STANDARD | USB_RECIP_DEVICE,
-		USB_REQ_SET_CONFIGURATION, 1, 0, NULL, 0);
+		USB_REQ_SET_CONFIGURATION, 1, 0, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "FTDI set configuration failed.\n");
 		return -2;
@@ -334,7 +334,7 @@ static int probe_for_ftdi(struct ehci_dbg_port *ehci_debug, struct dbgp_pipe *pi
 
 	ret = dbgp_control_msg(ehci_debug, devnum,
 		USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_DIR_OUT,
-		FTDI_SIO_SET_BITMODE_REQUEST, 0, uart_if, NULL, 0);
+		FTDI_SIO_SET_BITMODE_REQUEST, 0, uart_if, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "FTDI SET_BITMODE failed.\n");
 		return -3;
@@ -344,7 +344,7 @@ static int probe_for_ftdi(struct ehci_dbg_port *ehci_debug, struct dbgp_pipe *pi
 	ret = dbgp_control_msg(ehci_debug, devnum,
 		USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_DIR_OUT,
 		FTDI_SIO_SET_BAUDRATE_REQUEST,
-		baud_value, baud_index | uart_if, NULL, 0);
+		baud_value, baud_index | uart_if, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "FTDI SET_BAUDRATE failed.\n");
 		return -3;
@@ -352,7 +352,7 @@ static int probe_for_ftdi(struct ehci_dbg_port *ehci_debug, struct dbgp_pipe *pi
 	ret = dbgp_control_msg(ehci_debug, devnum,
 		USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_DIR_OUT,
 		FTDI_SIO_SET_DATA_REQUEST,
-		0x0008, uart_if, NULL, 0);
+		0x0008, uart_if, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "FTDI SET_DATA failed.\n");
 		return -3;
@@ -360,7 +360,7 @@ static int probe_for_ftdi(struct ehci_dbg_port *ehci_debug, struct dbgp_pipe *pi
 	ret = dbgp_control_msg(ehci_debug, devnum,
 		USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_DIR_OUT,
 		FTDI_SIO_SET_FLOW_CTRL_REQUEST,
-		0x0000, uart_if, NULL, 0);
+		0x0000, uart_if, nullptr, 0);
 	if (ret < 0) {
 		printk(BIOS_INFO, "FTDI SET_FLOW_CTRL failed.\n");
 		return -3;

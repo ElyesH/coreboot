@@ -54,7 +54,7 @@ static u32 count_resources(struct pptt_cpu_resources *res)
 {
 	u32 n_resources = 0;
 
-	while (res != NULL) {
+	while (res != nullptr) {
 		n_resources += 1;
 		res = res->next;
 	}
@@ -121,7 +121,7 @@ static u32 new_pptt_cache(unsigned long *current, struct pptt_cache *cache, stru
 	current_reference = node_to_reference(cache_node);
 	cache_list_append(cache_list, cache, current_reference);
 
-	if (cache->next_level != NULL)
+	if (cache->next_level != nullptr)
 		cache_node->next_level = new_pptt_cache(current, cache->next_level, cache_list);
 
 	return current_reference;
@@ -144,7 +144,7 @@ static u32 new_pptt_cpu(unsigned long *current, const struct pptt_topology *cpu,
 
 	*current += cpu_node->length;
 
-	for (struct pptt_cpu_resources *it = cpu->resources; it != NULL; it = it->next)
+	for (struct pptt_cpu_resources *it = cpu->resources; it != nullptr; it = it->next)
 		cpu_node->resources[cpu_node->n_resources++] = new_pptt_cache(current, it->cache, cache_list);
 
 	return node_to_reference(cpu_node);
@@ -157,7 +157,7 @@ static void setup_topology(const struct pptt_topology *node, const u32 parent_re
 		.n_caches   = 0
 	};
 
-	while (node != NULL) {
+	while (node != nullptr) {
 		const u32 cpu_ref = new_pptt_cpu(current, node, parent_ref, &cache_list);
 		setup_topology(node->child, cpu_ref, current);
 

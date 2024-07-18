@@ -79,4 +79,4 @@ static void init_fan_control(void *unused)
 	set_fan(&system_fan);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY, init_fan_control, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY, init_fan_control, nullptr);

@@ -282,7 +282,7 @@ __weak void finalize_gpios(int slp_typ)
 const __weak struct soc_amd_gpio *variant_bootblock_gpio_table(size_t *size, int slp_typ)
 {
 	*size = 0;
-	return NULL;
+	return nullptr;
 }
 
 static const struct soc_amd_gpio gpio_sleep_table[] = {

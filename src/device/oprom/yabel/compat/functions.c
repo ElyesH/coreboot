@@ -51,7 +51,7 @@ u8* vmem = (u8 *) CONFIG_YABEL_VIRTMEM_LOCATION;
 u8* vmem = (u8 *) (16*1024*1024); /* default to 16MB */
 #endif
 #else
-u8* vmem = NULL;
+u8* vmem = nullptr;
 #endif
 
 extern u8 *biosmem;

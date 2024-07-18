@@ -120,7 +120,7 @@ static void ecam0_fix_missing_devices(struct bus *link)
 
 		child = find_dev_path(link, &pci_path);
 		if (!child)
-			pci_probe_dev(NULL, link, i);
+			pci_probe_dev(nullptr, link, i);
 	}
 }
 
@@ -229,7 +229,7 @@ static void ecam0_init(struct device *dev)
 	ecam0_fix_missing_devices(bridge->downstream);
 
 	/* Program secure ARI capability on bus 1 */
-	child_last = NULL;
+	child_last = nullptr;
 	for (i = 0; i <= PCI_DEVFN(0x1f, 7); i++) {
 		child = pcidev_path_behind(bridge->downstream, i);
 		if (!child || !child->enabled)
@@ -248,7 +248,7 @@ static void ecam0_init(struct device *dev)
 	}
 
 	/* Program insecure ARI capability on bus 1 */
-	child_last = NULL;
+	child_last = nullptr;
 	for (i = 0; i <= PCI_DEVFN(0x1f, 7); i++) {
 		child = pcidev_path_behind(bridge->downstream, i);
 		if (!child)
@@ -272,7 +272,7 @@ static void ecam0_init(struct device *dev)
 	/* Enable / disable devices on bus 0 */
 	for (i = 0; i <= 0x1f; i++) {
 		child = pcidev_on_root(i, 0);
-		config = child ? child->chip_info : NULL;
+		config = child ? child->chip_info : nullptr;
 		if (child && child->enabled && config && !config->secure)
 			enable_device(i);
 		else
@@ -282,7 +282,7 @@ static void ecam0_init(struct device *dev)
 	/* Enable / disable devices and functions on bus 1 */
 	for (i = 0; i <= PCI_DEVFN(0x1f, 7); i++) {
 		child = pcidev_path_behind(bridge->downstream, i);
-		config = child ? child->chip_info : NULL;
+		config = child ? child->chip_info : nullptr;
 		if (child && child->enabled &&
 		    ((config && !config->secure) || !config))
 			enable_func(i);

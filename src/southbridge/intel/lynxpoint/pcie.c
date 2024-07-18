@@ -63,7 +63,7 @@ static bool is_rp_enabled(int rp)
 {
 	ASSERT(rp > 0 && rp <= ARRAY_SIZE(rpc.ports));
 
-	if (rpc.ports[rp - 1] == NULL)
+	if (rpc.ports[rp - 1] == nullptr)
 		return false;
 
 	return rpc.ports[rp - 1]->enabled;
@@ -144,7 +144,7 @@ static void root_port_init_config(struct device *dev)
 		rpc.pin_ownership = pci_read_config32(dev, 0x410);
 		root_port_config_update_gbe_port();
 
-		if (dev->chip_info != NULL) {
+		if (dev->chip_info != nullptr) {
 			struct southbridge_intel_lynxpoint_config *config;
 
 			config = dev->chip_info;
@@ -312,8 +312,8 @@ static void root_port_commit_config(void)
 
 		dev = rpc.ports[i];
 
-		if (dev == NULL) {
-			printk(BIOS_ERR, "Root Port %d device is NULL?\n", i+1);
+		if (dev == nullptr) {
+			printk(BIOS_ERR, "Root Port %d device is nullptr?\n", i+1);
 			continue;
 		}
 

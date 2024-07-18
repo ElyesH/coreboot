@@ -40,4 +40,4 @@ void smm_mainboard_pci_resource_store_init(struct smm_pci_resource_info *slots, 
 	soc_ubox_store_resources(slots, size);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, finalize_boot, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, finalize_boot, nullptr);

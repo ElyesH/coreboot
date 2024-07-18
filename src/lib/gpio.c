@@ -168,10 +168,10 @@ uint32_t _gpio_base3_value(const gpio_t gpio[], int num_gpio, int binary_first)
 	return result;
 }
 
-/* Default handler for ACPI path is to return NULL */
+/* Default handler for ACPI path is to return nullptr */
 __weak const char *gpio_acpi_path(gpio_t gpio)
 {
-	return NULL;
+	return nullptr;
 }
 
 /* Default handler returns 0 because type of gpio_t is unknown */

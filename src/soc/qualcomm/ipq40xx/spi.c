@@ -186,7 +186,7 @@ static struct ipq_spi_slave *to_ipq_spi(const struct spi_slave *slave)
 			return ds;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /*
@@ -584,13 +584,13 @@ static int spi_ctrlr_xfer(const struct spi_slave *slave, const void *dout,
 
 	write_force_cs(slave, 1);
 
-	if (dout != NULL) {
+	if (dout != nullptr) {
 		ret = blsp_spi_write(ds, txp, (unsigned int)out_bytes);
 		if (ret != SUCCESS)
 			goto out;
 	}
 
-	if (din != NULL) {
+	if (din != nullptr) {
 		ret = blsp_spi_read(ds, rxp, in_bytes);
 		if (ret != SUCCESS)
 			goto out;
@@ -610,7 +610,7 @@ out:
 
 static int spi_ctrlr_setup(const struct spi_slave *slave)
 {
-	struct ipq_spi_slave *ds = NULL;
+	struct ipq_spi_slave *ds = nullptr;
 	int i;
 	int bus = slave->bus;
 	int cs = slave->cs;

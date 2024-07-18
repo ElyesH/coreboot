@@ -222,5 +222,5 @@ void heci_cse_lockdown(void)
 		heci1_disable();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, fpf_blown, NULL);
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, print_me_fw_version, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, fpf_blown, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, print_me_fw_version, nullptr);

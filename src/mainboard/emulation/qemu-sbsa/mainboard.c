@@ -26,7 +26,7 @@ static void mainboard_init(void *chip_info)
 void smbios_cpu_get_core_counts(u16 *core_count, u16 *thread_count)
 {
 	*core_count = 0;
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 	while ((dev = dev_find_path(dev, DEVICE_PATH_GICC_V3)))
 		*core_count += 1;
 
@@ -38,7 +38,7 @@ static void qemu_aarch64_init(struct device *dev)
 	struct memory_info *mem_info;
 
 	mem_info = cbmem_add(CBMEM_ID_MEMINFO, sizeof(*mem_info));
-	if (mem_info == NULL)
+	if (mem_info == nullptr)
 		return;
 
 	memset(mem_info, 0, sizeof(*mem_info));
@@ -137,11 +137,11 @@ static void qemu_aarch64_scan_bus(struct device *dev)
 	struct mainboard_emulation_qemu_sbsa_config *config = dev->chip_info;
 
 	tree = fdt_unflatten((void *)fdt_blob);
-	if (tree == NULL)
+	if (tree == nullptr)
 		return;
 
 	snprintf(path, sizeof(path), "/cpus/cpu@%d", fdt_cpu_count);
-	while ((node = dt_find_node_by_path(tree, path, NULL, NULL, 0)) != NULL) {
+	while ((node = dt_find_node_by_path(tree, path, nullptr, nullptr, 0)) != nullptr) {
 		struct device_tree_property *prop;
 		int64_t mpidr = -1;
 		list_for_each(prop, node->properties, list_node) {

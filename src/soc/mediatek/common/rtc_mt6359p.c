@@ -9,7 +9,7 @@
 #include <soc/rtc_common.h>
 #include <timer.h>
 
-static struct pmif *pmif_arb = NULL;
+static struct pmif *pmif_arb = nullptr;
 
 void rtc_read(u16 addr, u16 *rdata)
 {

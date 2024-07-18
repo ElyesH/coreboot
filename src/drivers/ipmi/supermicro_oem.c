@@ -15,7 +15,7 @@
 
 struct ipmi_oem_set_bios_str {
 	uint16_t ver;
-	char str[16]; // NULL terminated string
+	char str[16]; // nullptr terminated string
 } __packed;
 
 static void set_coreboot_ver(const uint16_t kcs_port)

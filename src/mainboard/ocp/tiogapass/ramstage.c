@@ -20,68 +20,68 @@ static const struct port_information SMBIOS_type8_info[] = {
 	{
 		"J7F5 - BMC JTAG HEADER",
 		CONN_OTHER,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_OTHER_PORT
 	},
 	{
 		"J8A1 - MINISAS1",
 		CONN_SAS_SATA,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_SAS
 	},
 	{
 		"J8A2 - MINISAS2",
 		CONN_SAS_SATA,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_SAS
 	},
 	{
 		"J8A3 - SATA CONBINE1",
 		CONN_SAS_SATA,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_SAS
 	},
 	{
 		"J8B1 - ME_DBG",
 		CONN_OTHER,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_OTHER_PORT
 	},
 	{
 		"J8D1 - VR_DBG",
 		CONN_OTHER,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_OTHER_PORT
 	},
 	{
 		"J8E1 - TPM_MODULE",
 		CONN_OTHER,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_OTHER_PORT
 	},
 	{
 		"J8F1 - M.2 CONNECTOR",
 		CONN_OTHER,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_OTHER_PORT
 	},
 	{
 		"J9A1 - SATA RAID KEY",
 		CONN_OTHER,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_OTHER_PORT
 	},
 	{
-		NULL,
+		nullptr,
 		CONN_NONE,
 		"J9A2 - DEBUG 80 PORT",
 		CONN_OTHER,
@@ -90,12 +90,12 @@ static const struct port_information SMBIOS_type8_info[] = {
 	{
 		"J9A3 - CPU & PCH XDP",
 		CONN_OTHER,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_OTHER_PORT
 	},
 	{
-		NULL,
+		nullptr,
 		CONN_NONE,
 		"J9A5 - USB conn",
 		CONN_ACCESS_BUS_USB,
@@ -104,26 +104,26 @@ static const struct port_information SMBIOS_type8_info[] = {
 	{
 		"J9B1 - BMC_DBG",
 		CONN_OTHER,
-		NULL,
+		nullptr,
 		CONN_NONE,
 		TYPE_OTHER_PORT
 	},
 	{
-		NULL,
+		nullptr,
 		CONN_NONE,
 		"J9D1 - USB3.0 TYPE C",
 		CONN_ACCESS_BUS_USB,
 		TYPE_USB
 	},
 	{
-		NULL,
+		nullptr,
 		CONN_NONE,
 		"J9E1 - VGA",
 		CONN_OTHER,
 		TYPE_OTHER_PORT
 	},
 	{
-		NULL,
+		nullptr,
 		CONN_NONE,
 		"JA9G1 - ETH0",
 		CONN_RJ_45,
@@ -158,7 +158,7 @@ static void tp_oem_smbios_strings(struct device *dev, struct smbios_type11 *t)
 
 	/* OEM string 7 */
 	if (fru_strings.board_info.custom_count > 1 &&
-			*(fru_strings.board_info.board_custom + 1) != NULL)
+			*(fru_strings.board_info.board_custom + 1) != nullptr)
 		t->count = smbios_add_oem_string(t->eos,
 			*(fru_strings.board_info.board_custom + 1));
 	else

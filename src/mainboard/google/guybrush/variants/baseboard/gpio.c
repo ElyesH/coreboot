@@ -310,26 +310,26 @@ const struct soc_amd_gpio  *baseboard_gpio_table(size_t *size)
 const struct soc_amd_gpio *__weak variant_override_gpio_table(size_t *size)
 {
 	*size = 0;
-	return NULL;
+	return nullptr;
 }
 
 const struct soc_amd_gpio * __weak variant_early_override_gpio_table(size_t *size)
 {
 	/* Note that when overriding this, board ID & CBI is not available */
 	*size = 0;
-	return NULL;
+	return nullptr;
 }
 
 const struct soc_amd_gpio * __weak variant_bootblock_override_gpio_table(size_t *size)
 {
 	*size = 0;
-	return NULL;
+	return nullptr;
 }
 
 const struct soc_amd_gpio * __weak variant_romstage_override_gpio_table(size_t *size)
 {
 	*size = 0;
-	return NULL;
+	return nullptr;
 }
 
 const struct soc_amd_gpio *__weak variant_early_gpio_table(size_t *size)

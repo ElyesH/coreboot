@@ -62,7 +62,7 @@ int early_mmc_wake_hw(void)
 
 	/* Initialize sdhci */
 	mmc_ctrlr = new_pci_sdhci_controller(PCH_DEV_EMMC);
-	if (mmc_ctrlr == NULL)
+	if (mmc_ctrlr == nullptr)
 		goto out_err;
 
 	sdhci_ctrlr = container_of(mmc_ctrlr, struct sdhci_ctrlr, sd_mmc_ctrlr);

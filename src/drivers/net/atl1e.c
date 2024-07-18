@@ -108,7 +108,7 @@ static void atl1e_init(struct device *dev)
 	/* Get the resource of the NIC mmio */
 	struct resource *nic_res = probe_resource(dev, PCI_BASE_ADDRESS_0);
 
-	if (nic_res == NULL) {
+	if (nic_res == nullptr) {
 		printk(BIOS_ERR, "atl1e: resource not found\n");
 		return;
 	}

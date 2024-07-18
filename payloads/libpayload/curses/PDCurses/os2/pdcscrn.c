@@ -12,7 +12,7 @@ RCSID("$Id: pdcscrn.c,v 1.76 2008/07/14 04:24:51 wmcbrine Exp $")
 
 /* COLOR_PAIR to attribute encoding table. */
 
-unsigned char *pdc_atrtab = (unsigned char *)NULL;
+unsigned char *pdc_atrtab = (unsigned char *)nullptr;
 
 int pdc_font;  /* default font size */
 
@@ -25,7 +25,7 @@ static short curstoreal[16], realtocurs[16] =
 };
 
 #ifdef EMXVIDEO
-static unsigned char *saved_screen = NULL;
+static unsigned char *saved_screen = nullptr;
 static int saved_lines = 0;
 static int saved_cols = 0;
 #else
@@ -45,7 +45,7 @@ typedef struct {
 #  endif
 # endif
 
-static PCH saved_screen = NULL;
+static PCH saved_screen = nullptr;
 static USHORT saved_lines = 0;
 static USHORT saved_cols = 0;
 static VIOMODEINFO scrnmode;    /* default screen mode  */
@@ -99,10 +99,10 @@ void PDC_scr_close(void)
         v_putline(saved_screen, 0, 0, saved_lines * saved_cols);
 #else
         VioWrtCellStr(saved_screen, saved_lines * saved_cols * 2,
-            0, 0, (HVIO)NULL);
+            0, 0, (HVIO)nullptr);
 #endif
         free(saved_screen);
-        saved_screen = NULL;
+        saved_screen = nullptr;
     }
 
     reset_shell_mode();
@@ -122,7 +122,7 @@ void PDC_scr_free(void)
     if (pdc_atrtab)
         free(pdc_atrtab);
 
-    pdc_atrtab = (unsigned char *)NULL;
+    pdc_atrtab = (unsigned char *)nullptr;
 }
 
 /* open the physical screen -- allocate SP, miscellaneous intialization,
@@ -189,11 +189,11 @@ int PDC_scr_open(int argc, char **argv)
         v_getline(saved_screen, 0, 0, saved_lines * saved_cols);
 #else
         totchars = saved_lines * saved_cols * 2;
-        VioReadCellStr((PCH)saved_screen, &totchars, 0, 0, (HVIO)NULL);
+        VioReadCellStr((PCH)saved_screen, &totchars, 0, 0, (HVIO)nullptr);
 #endif
     }
 
-    SP->_preserve = (getenv("PDC_PRESERVE_SCREEN") != NULL);
+    SP->_preserve = (getenv("PDC_PRESERVE_SCREEN") != nullptr);
 
     can_change = (PDC_color_content(0, &r, &g, &b) == OK);
 

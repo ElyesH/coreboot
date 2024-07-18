@@ -42,7 +42,7 @@ void uart_bootblock_init(void);
  *
  * Returns:
  * Pointer to device structure = If device has a UART debug controller.
- * NULL = otherwise
+ * nullptr = otherwise
  */
 const struct device *uart_get_device(void);
 

@@ -15,7 +15,7 @@ static uint8_t *get_xhci_bar(void)
 	res = probe_resource(PCH_DEV_XHCI, PCI_BASE_ADDRESS_0);
 	if (!res) {
 		printk(BIOS_ERR, "XHCI BAR is not found\n");
-		return NULL;
+		return nullptr;
 	}
 	return (void *)(uintptr_t)res->base;
 }
@@ -25,7 +25,7 @@ void write_usb_oc_mapping(const struct usb_oc_mapping *config, uint8_t pins)
 	uint8_t *mbar = get_xhci_bar();
 	uint8_t i;
 
-	if (mbar == NULL) {
+	if (mbar == nullptr) {
 		printk(BIOS_ERR, "XHCI BAR is invalid, skip USB OC mapping configuration\n");
 		return;
 	}

@@ -12,7 +12,7 @@ void dump_spd_info(struct spd_block *blk)
 	u8 i;
 
 	for (i = 0; i < CONFIG_DIMM_MAX; i++)
-		if (blk->spd_array[i] != NULL && blk->spd_array[i][0] != 0) {
+		if (blk->spd_array[i] != nullptr && blk->spd_array[i][0] != 0) {
 			printk(BIOS_DEBUG, "SPD @ 0x%02X\n", blk->addr_map[i]);
 			print_spd_info(blk->spd_array[i]);
 		}
@@ -21,7 +21,7 @@ void dump_spd_info(struct spd_block *blk)
 const char * __weak mainboard_get_dram_part_num(void)
 {
 	/* Default weak implementation, no need to override part number. */
-	return NULL;
+	return nullptr;
 }
 
 static bool use_ddr4_params(int dram_type)
@@ -151,7 +151,7 @@ static int spd_get_busw(const uint8_t spd[], int dram_type)
 static void spd_get_name(const uint8_t spd[], int type, const char **spd_name, size_t *len)
 {
 	*spd_name = mainboard_get_dram_part_num();
-	if (*spd_name != NULL) {
+	if (*spd_name != nullptr) {
 		*len = strlen(*spd_name);
 		return;
 	}
@@ -185,7 +185,7 @@ static void spd_get_name(const uint8_t spd[], int type, const char **spd_name, s
 
 void print_spd_info(uint8_t spd[])
 {
-	const char *nameptr = NULL;
+	const char *nameptr = nullptr;
 	size_t len;
 	int type  = spd[SPD_DRAM_TYPE];
 	int banks = spd_get_banks(spd, type);

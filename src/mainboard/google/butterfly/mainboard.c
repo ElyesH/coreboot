@@ -162,7 +162,7 @@ static void mainboard_init(struct device *dev)
 	uintptr_t search_address = 0x0;
 	size_t search_length = -1;
 	u16 io_base = 0;
-	struct device *ethernet_dev = NULL;
+	struct device *ethernet_dev = nullptr;
 	void *vpd_file;
 
 	if (CONFIG(VPD)) {
@@ -171,7 +171,7 @@ static void mainboard_init(struct device *dev)
 		if (fmap_locate_area_as_rdev("RO_VPD", &rdev) == 0) {
 			vpd_file = rdev_mmap_full(&rdev);
 
-			if (vpd_file != NULL) {
+			if (vpd_file != nullptr) {
 				search_length = region_device_sz(&rdev);
 				search_address = (uintptr_t)vpd_file;
 			}
@@ -195,7 +195,7 @@ static void mainboard_init(struct device *dev)
 	/* Get NIC's IO base address */
 	ethernet_dev = dev_find_device(BUTTERFLY_NIC_VENDOR_ID,
 				       BUTTERFLY_NIC_DEVICE_ID, dev);
-	if (ethernet_dev != NULL) {
+	if (ethernet_dev != nullptr) {
 		io_base = pci_read_config16(ethernet_dev, 0x10) & 0xfffe;
 
 		/*

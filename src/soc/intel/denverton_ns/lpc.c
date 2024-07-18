@@ -249,7 +249,7 @@ dnv_get_ir_done:
 static u8 dnv_get_int_line(struct device *irq_dev)
 {
 	config_t *config;
-	struct device *targ_dev = NULL;
+	struct device *targ_dev = nullptr;
 	uint16_t parent_bdf = 0;
 	int8_t original_int_pin = 0, new_int_pin = 0, swiz_int_pin = 0;
 	uint8_t int_line = 0xff;
@@ -265,7 +265,7 @@ static u8 dnv_get_int_line(struct device *irq_dev)
 	 */
 	original_int_pin = pci_read_config8(irq_dev, PCI_INTERRUPT_PIN);
 	new_int_pin = get_pci_irq_pins(irq_dev, &targ_dev);
-	if (targ_dev == NULL || new_int_pin < 1)
+	if (targ_dev == nullptr || new_int_pin < 1)
 		goto dnv_get_int_line_done;
 
 	printk(BIOS_DEBUG, "%s: irq_dev %s, targ_dev %s:\n", __func__, dev_path(irq_dev),
@@ -539,5 +539,5 @@ static void finalize_chipset(void *unused)
 	apm_control(APM_CNT_FINALIZE);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, finalize_chipset, NULL);
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, finalize_chipset, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, finalize_chipset, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, finalize_chipset, nullptr);

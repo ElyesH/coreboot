@@ -209,7 +209,7 @@ static int ast_detect_chip(struct drm_device *dev, bool *need_post)
 				/* backup firmware */
 				if (ast_backup_fw(dev, ast->dp501_fw_addr, 32*1024)) {
 					kfree(ast->dp501_fw_addr);
-					ast->dp501_fw_addr = NULL;
+					ast->dp501_fw_addr = nullptr;
 				}
 			}
 			__fallthrough;
@@ -448,6 +448,6 @@ int ast_driver_load(struct drm_device *dev, unsigned long flags)
 	return 0;
 out_free:
 	kfree(ast);
-	dev->dev_private = NULL;
+	dev->dev_private = nullptr;
 	return ret;
 }

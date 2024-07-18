@@ -248,7 +248,7 @@ const char *mainboard_vbt_filename(void);
 
 /*
  * locate vbt.bin file. Returns a pointer to its content.
- * If vbt_size is non-NULL, also return the vbt's size.
+ * If vbt_size is non-nullptr, also return the vbt's size.
  */
 void *locate_vbt(size_t *vbt_size);
 

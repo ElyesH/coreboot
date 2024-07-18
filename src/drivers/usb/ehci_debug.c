@@ -51,7 +51,7 @@ static struct ehci_debug_info *glob_dbg_info_p;
 
 static inline struct ehci_debug_info *dbgp_ehci_info(void)
 {
-	if (glob_dbg_info_p == NULL) {
+	if (glob_dbg_info_p == nullptr) {
 		struct ehci_debug_info *info;
 		if (ENV_BOOTBLOCK || ENV_SEPARATE_VERSTAGE || ENV_SEPARATE_ROMSTAGE) {
 			/* The message likely does not show if we hit this. */
@@ -685,7 +685,7 @@ static void migrate_ehci_debug(int is_recovery)
 		struct ehci_debug_info *dbg_info = dbgp_ehci_info();
 		dbg_info_cbmem = cbmem_add(CBMEM_ID_EHCI_DEBUG,
 					sizeof(*dbg_info));
-		if (dbg_info_cbmem == NULL)
+		if (dbg_info_cbmem == nullptr)
 			return;
 		memcpy(dbg_info_cbmem, dbg_info, sizeof(*dbg_info));
 		glob_dbg_info_p = dbg_info_cbmem;

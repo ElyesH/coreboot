@@ -29,7 +29,7 @@ static void save_dimm_info_by_sku_config(void)
 void mainboard_save_dimm_info(void)
 {
 	char part_num_store[DIMM_INFO_PART_NUMBER_SIZE];
-	const char *part_num = NULL;
+	const char *part_num = nullptr;
 
 	if (CONFIG(DRAM_PART_NUM_NOT_ALWAYS_IN_CBI)) {
 		/* Fall back on part numbers encoded in lp4cfg array. */

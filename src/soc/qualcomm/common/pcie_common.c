@@ -425,7 +425,7 @@ enum cb_err fill_lb_pcie(struct lb_pcie *pcie)
 /* map_bus function for mapping pcie_s_{read/write}_configXX() functions */
 volatile union pci_bank *pci_map_bus(pci_devfn_t dev)
 {
-	void *config_addr = NULL;
+	void *config_addr = nullptr;
 
 	config_addr = qcom_dw_pcie_get_config_addr(&qcom_pcie_cfg, dev);
 	return (void *)config_addr;

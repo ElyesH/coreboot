@@ -65,5 +65,5 @@ int main(void)
 						teardown_console_log_level),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

@@ -88,7 +88,7 @@ enum cb_err exception_handler_unregister(uint64_t vid, struct exception_handler 
 
 	prev = &handlers[vid];
 
-	for (cur = handlers[vid]; cur != NULL; cur = cur->next) {
+	for (cur = handlers[vid]; cur != nullptr; cur = cur->next) {
 		if (cur != h)
 			continue;
 		/* Update previous pointer. */
@@ -138,7 +138,7 @@ static int handle_exception(struct exc_state *state, uint64_t idx)
 
 	struct exception_handler *h;
 
-	for (h = handlers[idx]; h != NULL; h = h->next) {
+	for (h = handlers[idx]; h != nullptr; h = h->next) {
 		int hret;
 
 		hret = h->handler(state, idx);

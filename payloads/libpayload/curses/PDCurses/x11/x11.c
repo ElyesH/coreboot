@@ -215,9 +215,9 @@ static GC normal_gc, block_cursor_gc, rect_cursor_gc, italic_gc, border_gc;
 static int font_height, font_width, font_ascent, font_descent,
            window_width, window_height;
 static int resize_window_width = 0, resize_window_height = 0;
-static char *bitmap_file = NULL;
+static char *bitmap_file = nullptr;
 #ifdef HAVE_XPM_H
-static char *pixmap_file = NULL;
+static char *pixmap_file = nullptr;
 #endif
 static KeySym keysym = 0;
 
@@ -239,7 +239,7 @@ static XtAppContext app_context;
 static Widget topLevel, drawing, scrollBox, scrollVert, scrollHoriz;
 static int received_map_notify = 0;
 static bool mouse_selection = FALSE;
-static chtype *tmpsel = NULL;
+static chtype *tmpsel = nullptr;
 static unsigned long tmpsel_length = 0;
 static int selection_start_x = 0, selection_start_y = 0,
            selection_end_x = 0, selection_end_y = 0;
@@ -358,7 +358,7 @@ static XtResource app_resources[] =
 
 /* Macros for options */
 
-#define COPT(name) {"-" #name, "*" #name, XrmoptionSepArg, NULL}
+#define COPT(name) {"-" #name, "*" #name, XrmoptionSepArg, nullptr}
 #define CCOLOR(name) COPT(color##name)
 
 static XrmOptionDescRec options[] =
@@ -397,8 +397,8 @@ static Pixel colors[MAX_COLORS + 2];
 static bool vertical_cursor = FALSE;
 
 #ifdef PDC_XIM
-static XIM Xim = NULL;
-static XIC Xic = NULL;
+static XIM Xim = nullptr;
+static XIC Xic = nullptr;
 #endif
 
 static const char *default_translations =
@@ -489,7 +489,7 @@ static int _from_utf8(wchar_t *pwc, const char *s, size_t n)
 #ifndef X_HAVE_UTF8_STRING
 static Atom XA_UTF8_STRING(Display *dpy)
 {
-    static AtomPtr p = NULL;
+    static AtomPtr p = nullptr;
 
     if (!p)
         p = XmuMakeAtom("UTF8_STRING");
@@ -798,7 +798,7 @@ static void _get_icon(void)
     XIconSize *icon_size;
     int size_count = 0;
     Status rc;
-    unsigned char *bitmap_bits = NULL;
+    unsigned char *bitmap_bits = nullptr;
     unsigned icon_bitmap_width = 0, icon_bitmap_height = 0,
              file_bitmap_width = 0, file_bitmap_height = 0;
 
@@ -864,7 +864,7 @@ static void _get_icon(void)
         XpmReadFileToPixmap(XtDisplay(topLevel),
                             RootWindowOfScreen(XtScreen(topLevel)),
                             (char *)xc_app_data.pixmap,
-                            &icon_pixmap, &icon_pixmap_mask, NULL);
+                            &icon_pixmap, &icon_pixmap_mask, nullptr);
         return;
     }
 #endif
@@ -1057,7 +1057,7 @@ static void XCursesKeyPress(Widget w, XEvent *event, String *params,
             }
 
             if (key)
-                _send_key_to_curses(key, NULL, TRUE);
+                _send_key_to_curses(key, nullptr, TRUE);
         }
 
         return;
@@ -1188,7 +1188,7 @@ static void XCursesKeyPress(Widget w, XEvent *event, String *params,
         }
 
         _send_key_to_curses(compose_keys[compose_index][char_idx],
-            NULL, FALSE);
+            nullptr, FALSE);
 
         compose_state = STATE_NORMAL;
         compose_index = 0;
@@ -1300,7 +1300,7 @@ static void XCursesKeyPress(Widget w, XEvent *event, String *params,
     {
         key |= (modifier << 24);
 
-        _send_key_to_curses(key, NULL, key_code);
+        _send_key_to_curses(key, nullptr, key_code);
     }
 }
 
@@ -1333,11 +1333,11 @@ static void XCursesHandleString(Widget w, XEvent *event, String *params,
         }
 
         if (c == '\0')
-            _send_key_to_curses(total, NULL, FALSE);
+            _send_key_to_curses(total, nullptr, FALSE);
     }
     else
         for (; *ptr; ptr++)
-            _send_key_to_curses((unsigned long)*ptr, NULL, FALSE);
+            _send_key_to_curses((unsigned long)*ptr, nullptr, FALSE);
 }
 
 static void _paste_string(Widget w, XtPointer data, Atom *selection, Atom *type,
@@ -1358,7 +1358,7 @@ static void _paste_string(Widget w, XtPointer data, Atom *selection, Atom *type,
         if (key == 10)      /* new line - convert to ^M */
             key = 13;
 
-        _send_key_to_curses(key, NULL, FALSE);
+        _send_key_to_curses(key, nullptr, FALSE);
     }
 
     XtFree(value);
@@ -1395,7 +1395,7 @@ static void _paste_utf8(Widget w, XtPointer event, Atom *selection, Atom *type,
         if (key == 10)      /* new line - convert to ^M */
             key = 13;
 
-        _send_key_to_curses(key, NULL, FALSE);
+        _send_key_to_curses(key, nullptr, FALSE);
 
         i += retval;
     }
@@ -1421,7 +1421,7 @@ static Boolean _convert_proc(Widget w, Atom *selection, Atom *target,
     if (*target == XA_TARGETS(XtDisplay(topLevel)))
     {
         XSelectionRequestEvent *req = XtGetSelectionRequest(w,
-            *selection, (XtRequestId)NULL);
+            *selection, (XtRequestId)nullptr);
 
         Atom *targetP;
         XPointer std_targets;
@@ -1486,7 +1486,7 @@ static void _lose_ownership(Widget w, Atom *type)
     if (tmpsel)
         free(tmpsel);
 
-    tmpsel = NULL;
+    tmpsel = nullptr;
     tmpsel_length = 0;
     _selection_off();
 }
@@ -1640,7 +1640,7 @@ static void _selection_set(void)
 {
     int i, j, start, end, start_x, end_x, start_y, end_y, num_cols,
         start_col, row, num_chars, ch, last_nonblank, length, newlen;
-    chtype *ptr = NULL;
+    chtype *ptr = nullptr;
 
     XC_LOG(("_selection_set() - called\n"));
 
@@ -1654,7 +1654,7 @@ static void _selection_set(void)
         if (tmpsel)
             free(tmpsel);
 
-        tmpsel = NULL;
+        tmpsel = nullptr;
         tmpsel_length = 0;
 
         return;
@@ -1926,7 +1926,7 @@ static void _blink_cursor(XtPointer unused, XtIntervalId *id)
     }
 
     XtAppAddTimeOut(app_context, xc_app_data.cursorBlinkRate,
-                    _blink_cursor, NULL);
+                    _blink_cursor, nullptr);
 }
 
 static void XCursesButton(Widget w, XEvent *event, String *params,
@@ -2087,7 +2087,7 @@ static void XCursesButton(Widget w, XEvent *event, String *params,
 
                         if (XtOwnSelection(topLevel, XA_PRIMARY,
                                            event->xbutton.time, _convert_proc,
-                                           _lose_ownership, NULL) == False)
+                                           _lose_ownership, nullptr) == False)
                             _selection_off();
                     }
                     else
@@ -2139,7 +2139,7 @@ static void XCursesButton(Widget w, XEvent *event, String *params,
 
             if (XtOwnSelection(topLevel, XA_PRIMARY,
                                event->xbutton.time, _convert_proc,
-                               _lose_ownership, NULL) == False)
+                               _lose_ownership, nullptr) == False)
                 _selection_off();
 
             _selection_set();
@@ -2214,7 +2214,7 @@ static void _scroll_up_down(Widget w, XtPointer client_data,
 
     /* Send a key: if pixels negative, send KEY_SCROLL_DOWN */
 
-    _send_key_to_curses(KEY_SF, NULL, TRUE);
+    _send_key_to_curses(KEY_SF, nullptr, TRUE);
 }
 
 static void _scroll_left_right(Widget w, XtPointer client_data,
@@ -2240,7 +2240,7 @@ static void _scroll_left_right(Widget w, XtPointer client_data,
     XawScrollbarSetThumb(w, (double)((double)cur_x / (double)total_x),
                          (double)((double)viewport_x / (double)total_x));
 
-    _send_key_to_curses(KEY_SR, NULL, TRUE);
+    _send_key_to_curses(KEY_SR, nullptr, TRUE);
 }
 
 static void _thumb_up_down(Widget w, XtPointer client_data,
@@ -2264,7 +2264,7 @@ static void _thumb_up_down(Widget w, XtPointer client_data,
     XawScrollbarSetThumb(w, (double)(cur_y / total_y),
                          (double)(viewport_y / total_y));
 
-    _send_key_to_curses(KEY_SF, NULL, TRUE);
+    _send_key_to_curses(KEY_SF, nullptr, TRUE);
 }
 
 static void _thumb_left_right(Widget w, XtPointer client_data,
@@ -2285,7 +2285,7 @@ static void _thumb_left_right(Widget w, XtPointer client_data,
     XawScrollbarSetThumb(w, (double)(cur_x / total_x),
                          (double)(viewport_x / total_x));
 
-    _send_key_to_curses(KEY_SR, NULL, TRUE);
+    _send_key_to_curses(KEY_SR, nullptr, TRUE);
 }
 
 static void _exit_process(int rc, int sig, char *msg)
@@ -2393,7 +2393,7 @@ static void _set_title(void)
         _exit_process(5, SIGKILL, "exiting from _set_title");
     }
 
-    XtVaSetValues(topLevel, XtNtitle, title, NULL);
+    XtVaSetValues(topLevel, XtNtitle, title, nullptr);
 }
 
 /* For color_content() */
@@ -2487,7 +2487,7 @@ static void _get_selection_utf8(Widget w, XtPointer data, Atom *selection,
     if (!*type || !*length)
     {
         XtGetSelectionValue(w, XA_PRIMARY, XA_STRING, _get_selection,
-                            (XtPointer)NULL, 0);
+                            (XtPointer)nullptr, 0);
         return;
     }
 
@@ -2570,11 +2570,11 @@ static void _set_selection(void)
     tmpsel[length] = 0;
 
     if (XtOwnSelection(topLevel, XA_PRIMARY, CurrentTime,
-                       _convert_proc, _lose_ownership, NULL) == False)
+                       _convert_proc, _lose_ownership, nullptr) == False)
     {
         status = PDC_CLIP_ACCESS_ERROR;
         free(tmpsel);
-        tmpsel = NULL;
+        tmpsel = nullptr;
         tmpsel_length = 0;
     }
     else
@@ -2615,8 +2615,8 @@ static void _process_curses_requests(XtPointer client_data, int *fid,
     FD_ZERO(&xc_readfds);
     FD_SET(xc_display_sock, &xc_readfds);
 
-    if ((s = select(FD_SETSIZE, (FD_SET_CAST)&xc_readfds, NULL,
-                    NULL, &socket_timeout)) < 0)
+    if ((s = select(FD_SETSIZE, (FD_SET_CAST)&xc_readfds, nullptr,
+                    nullptr, &socket_timeout)) < 0)
         _exit_process(2, SIGKILL, "exiting from _process_curses_requests"
                                   " - select failed");
 
@@ -2734,7 +2734,7 @@ static void _process_curses_requests(XtPointer client_data, int *fid,
 #else
                                 XA_STRING, _get_selection,
 #endif
-                                (XtPointer)NULL, 0);
+                                (XtPointer)nullptr, 0);
 
             break;
 
@@ -2791,7 +2791,7 @@ static void _handle_structure_notify(Widget w, XtPointer client_data,
 
         kill(xc_otherpid, SIGWINCH);
 #endif
-        _send_key_to_curses(KEY_RESIZE, NULL, TRUE);
+        _send_key_to_curses(KEY_RESIZE, nullptr, TRUE);
         break;
 
     case MapNotify:
@@ -2861,7 +2861,7 @@ static void _dummy_handler(Widget w, XtPointer client_data,
 
 int XCursesSetupX(int argc, char *argv[])
 {
-    char *myargv[] = {"PDCurses", NULL};
+    char *myargv[] = {"PDCurses", nullptr};
     extern bool sb_started;
 
     int italic_font_valid;
@@ -2899,7 +2899,7 @@ int XCursesSetupX(int argc, char *argv[])
     /* Start defining X Toolkit things */
 
 #if XtSpecificationRelease > 4
-    XtSetLanguageProc(NULL, (XtLanguageProc)NULL, NULL);
+    XtSetLanguageProc(nullptr, (XtLanguageProc)nullptr, nullptr);
 #endif
 
     /* Exit if no DISPLAY variable set */
@@ -2914,10 +2914,10 @@ int XCursesSetupX(int argc, char *argv[])
     /* Initialise the top level widget */
 
     topLevel = XtVaAppInitialize(&app_context, class_name, options,
-                                 XtNumber(options), &argc, argv, NULL, NULL);
+                                 XtNumber(options), &argc, argv, nullptr, nullptr);
 
     XtVaGetApplicationResources(topLevel, &xc_app_data, app_resources,
-                                XtNumber(app_resources), NULL);
+                                XtNumber(app_resources), nullptr);
 
     /* Check application resource values here */
 
@@ -2965,13 +2965,13 @@ int XCursesSetupX(int argc, char *argv[])
                       minheight, XtNbaseWidth, xc_app_data.borderWidth * 2,
                       XtNbaseHeight, xc_app_data.borderWidth * 2,
                       XtNiconPixmap, icon_pixmap,
-                      XtNiconMask, icon_pixmap_mask, NULL);
+                      XtNiconMask, icon_pixmap_mask, nullptr);
     else
 #endif
         XtVaSetValues(topLevel, XtNminWidth, minwidth, XtNminHeight,
                       minheight, XtNbaseWidth, xc_app_data.borderWidth * 2,
                       XtNbaseHeight, xc_app_data.borderWidth * 2,
-                      XtNiconPixmap, icon_bitmap, NULL);
+                      XtNiconPixmap, icon_bitmap, nullptr);
 
     /* Create a BOX widget in which to draw */
 
@@ -2981,17 +2981,17 @@ int XCursesSetupX(int argc, char *argv[])
             scrollBoxWidgetClass, topLevel, XtNwidth,
             window_width + xc_app_data.scrollbarWidth,
             XtNheight, window_height + xc_app_data.scrollbarWidth,
-            XtNwidthInc, font_width, XtNheightInc, font_height, NULL);
+            XtNwidthInc, font_width, XtNheightInc, font_height, nullptr);
 
         drawing = XtVaCreateManagedWidget(program_name,
             boxWidgetClass, scrollBox, XtNwidth,
             window_width, XtNheight, window_height, XtNwidthInc,
-            font_width, XtNheightInc, font_height, NULL);
+            font_width, XtNheightInc, font_height, nullptr);
 
         scrollVert = XtVaCreateManagedWidget("scrollVert",
             scrollbarWidgetClass, scrollBox, XtNorientation,
             XtorientVertical, XtNheight, window_height, XtNwidth,
-            xc_app_data.scrollbarWidth, NULL);
+            xc_app_data.scrollbarWidth, nullptr);
 
         XtAddCallback(scrollVert, XtNscrollProc, _scroll_up_down, drawing);
         XtAddCallback(scrollVert, XtNjumpProc, _thumb_up_down, drawing);
@@ -2999,7 +2999,7 @@ int XCursesSetupX(int argc, char *argv[])
         scrollHoriz = XtVaCreateManagedWidget("scrollHoriz",
             scrollbarWidgetClass, scrollBox, XtNorientation,
             XtorientHorizontal, XtNwidth, window_width, XtNheight,
-            xc_app_data.scrollbarWidth, NULL);
+            xc_app_data.scrollbarWidth, nullptr);
 
         XtAddCallback(scrollHoriz, XtNscrollProc, _scroll_left_right, drawing);
         XtAddCallback(scrollHoriz, XtNjumpProc, _thumb_left_right, drawing);
@@ -3008,10 +3008,10 @@ int XCursesSetupX(int argc, char *argv[])
     {
         drawing = XtVaCreateManagedWidget(program_name, boxWidgetClass,
             topLevel, XtNwidth, window_width, XtNheight, window_height,
-            XtNwidthInc, font_width, XtNheightInc, font_height, NULL);
+            XtNwidthInc, font_width, XtNheightInc, font_height, nullptr);
 
         XtVaSetValues(topLevel, XtNwidthInc, font_width, XtNheightInc,
-                      font_height, NULL);
+                      font_height, nullptr);
     }
 
     /* Process any default translations */
@@ -3073,24 +3073,24 @@ int XCursesSetupX(int argc, char *argv[])
 
     /* Add Event handlers to the drawing widget */
 
-    XtAddEventHandler(drawing, ExposureMask, False, _handle_expose, NULL);
+    XtAddEventHandler(drawing, ExposureMask, False, _handle_expose, nullptr);
     XtAddEventHandler(drawing, StructureNotifyMask, False,
-                      _handle_structure_notify, NULL);
+                      _handle_structure_notify, nullptr);
     XtAddEventHandler(drawing, EnterWindowMask | LeaveWindowMask, False,
-                      _handle_enter_leave, NULL);
-    XtAddEventHandler(topLevel, 0, True, _handle_nonmaskable, NULL);
+                      _handle_enter_leave, nullptr);
+    XtAddEventHandler(topLevel, 0, True, _handle_nonmaskable, nullptr);
 
     /* Add input handler from xc_display_sock (requests from curses
        program) */
 
     XtAppAddInput(app_context, xc_display_sock, (XtPointer)XtInputReadMask,
-                  _process_curses_requests, NULL);
+                  _process_curses_requests, nullptr);
 
     /* If there is a cursorBlink resource, start the Timeout event */
 
     if (xc_app_data.cursorBlinkRate)
         XtAppAddTimeOut(app_context, xc_app_data.cursorBlinkRate,
-                        _blink_cursor, NULL);
+                        _blink_cursor, nullptr);
 
     /* Leave telling the curses process that it can start to here so
        that when the curses process makes a request, the Xcurses
@@ -3188,23 +3188,23 @@ int XCursesSetupX(int argc, char *argv[])
     }
 
 #else
-    Xim = XOpenIM(XCURSESDISPLAY, NULL, NULL, NULL);
+    Xim = XOpenIM(XCURSESDISPLAY, nullptr, nullptr, nullptr);
 
     if (Xim)
     {
         Xic = XCreateIC(Xim, XNInputStyle,
                         XIMPreeditNothing | XIMStatusNothing,
-                        XNClientWindow, XCURSESWIN, NULL);
+                        XNClientWindow, XCURSESWIN, nullptr);
     }
 
     if (Xic)
     {
         long im_event_mask;
 
-        XGetICValues(Xic, XNFilterEvents, &im_event_mask, NULL);
+        XGetICValues(Xic, XNFilterEvents, &im_event_mask, nullptr);
         if (im_event_mask)
             XtAddEventHandler(drawing, im_event_mask, False,
-                              _dummy_handler, NULL);
+                              _dummy_handler, nullptr);
 
         XSetICFocus(Xic);
     }

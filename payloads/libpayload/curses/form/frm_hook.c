@@ -69,7 +69,7 @@ GEN_HOOK_SET_FUNCTION(field, init)
 |
 |   Description   :  Retrieve field initialization routine address.
 |
-|   Return Values :  The address or NULL if no hook defined.
+|   Return Values :  The address or nullptr if no hook defined.
 +--------------------------------------------------------------------------*/
 GEN_HOOK_GET_FUNCTION(field, init)
 
@@ -91,7 +91,7 @@ GEN_HOOK_SET_FUNCTION(field, term)
 |
 |   Description   :  Retrieve field finalization routine address.
 |
-|   Return Values :  The address or NULL if no hook defined.
+|   Return Values :  The address or nullptr if no hook defined.
 +--------------------------------------------------------------------------*/
 GEN_HOOK_GET_FUNCTION(field, term)
 
@@ -113,7 +113,7 @@ GEN_HOOK_SET_FUNCTION(form, init)
 |
 |   Description   :  Retrieve form initialization routine address.
 |
-|   Return Values :  The address or NULL if no hook defined.
+|   Return Values :  The address or nullptr if no hook defined.
 +--------------------------------------------------------------------------*/
 GEN_HOOK_GET_FUNCTION(form, init)
 
@@ -135,7 +135,7 @@ GEN_HOOK_SET_FUNCTION(form, term)
 |
 |   Description   :  Retrieve form finalization routine address.
 |
-|   Return Values :  The address or NULL if no hook defined.
+|   Return Values :  The address or nullptr if no hook defined.
 +--------------------------------------------------------------------------*/
 GEN_HOOK_GET_FUNCTION(form, term)
 

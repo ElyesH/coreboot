@@ -38,7 +38,7 @@ const struct dw_i2c_bus_config *dw_i2c_get_soc_cfg(unsigned int bus)
 
 	if (bus >= num_buses) {
 		printk(BIOS_ERR, "Bus ID %u is >= number of I2C buses %zu\n", bus, num_buses);
-		return NULL;
+		return nullptr;
 	}
 
 	return &cfg[bus];
@@ -52,8 +52,8 @@ static const char *i2c_acpi_name(const struct device *dev)
 	const struct soc_i2c_ctrlr_info *ctrlr = soc_get_i2c_ctrlr_info(&num_ctrlrs);
 
 	if (!(uintptr_t)dev->path.mmio.addr) {
-		printk(BIOS_ERR, "NULL MMIO address at %s\n", __func__);
-		return NULL;
+		printk(BIOS_ERR, "nullptr MMIO address at %s\n", __func__);
+		return nullptr;
 	}
 
 	for (i = 0; i < num_ctrlrs; i++) {
@@ -61,7 +61,7 @@ static const char *i2c_acpi_name(const struct device *dev)
 			return ctrlr[i].acpi_name;
 	}
 	printk(BIOS_ERR, "%s: Could not find %lu\n", __func__, (uintptr_t)dev->path.mmio.addr);
-	return NULL;
+	return nullptr;
 }
 
 static void i2c_acpi_fill_ssdt(const struct device *dev)
@@ -81,7 +81,7 @@ int dw_i2c_soc_dev_to_bus(const struct device *dev)
 	const struct soc_i2c_ctrlr_info *ctrlr = soc_get_i2c_ctrlr_info(&num_ctrlrs);
 
 	if (!(uintptr_t)dev->path.mmio.addr) {
-		printk(BIOS_ERR, "NULL MMIO address at %s\n", __func__);
+		printk(BIOS_ERR, "nullptr MMIO address at %s\n", __func__);
 		return -1;
 	}
 

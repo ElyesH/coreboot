@@ -252,7 +252,7 @@ static void post_mp_init(void)
 	global_smi_enable();
 
 	if (CONFIG(SOC_INTEL_COMMON_BLOCK_SGX_ENABLE))
-		mp_run_on_all_cpus(sgx_configure, NULL);
+		mp_run_on_all_cpus(sgx_configure, nullptr);
 }
 
 static const struct mp_ops mp_ops = {

@@ -155,7 +155,7 @@ static void configure_mipi_panel(void)
 
 static struct panel_serializable_data *get_mipi_panel(enum lb_fb_orientation *orientation)
 {
-	const char *cbfs_filename = NULL;
+	const char *cbfs_filename = nullptr;
 	int panel_id = sku_id() >> 8;
 
 	if (CONFIG(BOARD_GOOGLE_MRBLAND)) {
@@ -195,12 +195,12 @@ static struct panel_serializable_data *get_mipi_panel(enum lb_fb_orientation *or
 	}
 
 	if (!cbfs_filename)
-		return NULL;
+		return nullptr;
 
-	struct panel_serializable_data *panel = cbfs_map(cbfs_filename, NULL);
+	struct panel_serializable_data *panel = cbfs_map(cbfs_filename, nullptr);
 	if (!panel) {
 		printk(BIOS_ERR, "Could not find panel data for %s!\n", cbfs_filename);
-		return NULL;
+		return nullptr;
 	}
 
 	return panel;

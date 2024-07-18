@@ -46,7 +46,7 @@ MODULE_ID("$Id: fld_link.c,v 1.12 2010/01/23 21:14:35 tom Exp $")
 |                    E_BAD_ARGUMENT - invalid argument
 |                    E_SYSTEM_ERROR - system error
 |
-|   Return Values :  Pointer to the new field or NULL if failure
+|   Return Values :  Pointer to the new field or nullptr if failure
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(FIELD *)
 link_field(FIELD *field, int frow, int fcol)

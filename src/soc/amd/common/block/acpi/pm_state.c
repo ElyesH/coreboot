@@ -55,4 +55,4 @@ static void acpi_save_wake_source(void *unused)
 	pm_fill_gnvs(gnvs, &ps->gpe_state);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, acpi_save_wake_source, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, acpi_save_wake_source, nullptr);

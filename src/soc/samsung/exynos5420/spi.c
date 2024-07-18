@@ -179,9 +179,9 @@ static int spi_ctrlr_xfer(const struct spi_slave *slave, const void *dout, size_
 	}
 
 	if (bytes_in)
-		spi_transfer(regs, din, NULL, bytes_in);
+		spi_transfer(regs, din, nullptr, bytes_in);
 	else if (bytes_out)
-		spi_transfer(regs, NULL, dout, bytes_out);
+		spi_transfer(regs, nullptr, dout, bytes_out);
 
 	return 0;
 }
@@ -233,10 +233,10 @@ static int exynos_spi_read(struct spi_slave *slave, void *dest, uint32_t len,
 	// Send address.
 	ASSERT(off < (1 << 24));
 	command = htonl(SF_READ_DATA_CMD << 24 | off);
-	spi_transfer(regs, NULL, &command, sizeof(command));
+	spi_transfer(regs, nullptr, &command, sizeof(command));
 
 	// Read the data.
-	spi_transfer(regs, dest, NULL, len);
+	spi_transfer(regs, dest, nullptr, len);
 	spi_release_bus(slave);
 
 	return len;

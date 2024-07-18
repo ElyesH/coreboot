@@ -17,7 +17,7 @@ static inline void range_entry_unlink(struct range_entry **prev_ptr,
 				      struct range_entry *r)
 {
 	*prev_ptr = r->next;
-	r->next = NULL;
+	r->next = nullptr;
 }
 
 static inline void range_entry_unlink_and_free(struct memranges *ranges,
@@ -30,7 +30,7 @@ static inline void range_entry_unlink_and_free(struct memranges *ranges,
 
 static struct range_entry *alloc_range(struct memranges *ranges)
 {
-	if (ranges->free_list != NULL) {
+	if (ranges->free_list != nullptr) {
 		struct range_entry *r;
 
 		r = ranges->free_list;
@@ -39,7 +39,7 @@ static struct range_entry *alloc_range(struct memranges *ranges)
 	}
 	if (ENV_PAYLOAD_LOADER)
 		return malloc(sizeof(struct range_entry));
-	return NULL;
+	return nullptr;
 }
 
 static inline struct range_entry *
@@ -49,9 +49,9 @@ range_list_add(struct memranges *ranges, struct range_entry **prev_ptr,
 	struct range_entry *new_entry;
 
 	new_entry = alloc_range(ranges);
-	if (new_entry == NULL) {
+	if (new_entry == nullptr) {
 		printk(BIOS_ERR, "Could not allocate range_entry!\n");
-		return NULL;
+		return nullptr;
 	}
 	new_entry->begin = begin;
 	new_entry->end = end;
@@ -66,11 +66,11 @@ static void merge_neighbor_entries(struct memranges *ranges)
 	struct range_entry *cur;
 	struct range_entry *prev;
 
-	prev = NULL;
+	prev = nullptr;
 	/* Merge all neighbors and delete/free the leftover entry. */
-	for (cur = ranges->entries; cur != NULL; cur = cur->next) {
+	for (cur = ranges->entries; cur != nullptr; cur = cur->next) {
 		/* First entry. Just set prev. */
-		if (prev == NULL) {
+		if (prev == nullptr) {
 			prev = cur;
 			continue;
 		}
@@ -100,7 +100,7 @@ static void remove_memranges(struct memranges *ranges,
 	struct range_entry **prev_ptr;
 
 	prev_ptr = &ranges->entries;
-	for (cur = ranges->entries; cur != NULL; cur = next) {
+	for (cur = ranges->entries; cur != nullptr; cur = next) {
 		resource_t tmp_end;
 
 		/* Cache the next value to handle unlinks. */
@@ -172,7 +172,7 @@ static void merge_add_memranges(struct memranges *ranges,
 	/* Find the entry to place the new entry after. Since
 	 * remove_memranges() was called above there is a guaranteed
 	 * spot for this new entry. */
-	for (cur = ranges->entries; cur != NULL; cur = cur->next) {
+	for (cur = ranges->entries; cur != nullptr; cur = cur->next) {
 		/* Found insertion spot before current entry. */
 		if (end < cur->begin)
 			break;
@@ -251,7 +251,7 @@ static void collect_ranges(void *gp, struct device *dev, struct resource *res)
 	if (res->size == 0)
 		return;
 
-	if (ctx->filter == NULL || ctx->filter(dev, res))
+	if (ctx->filter == nullptr || ctx->filter(dev, res))
 		memranges_insert(ctx->ranges, res->base, res->size, ctx->tag);
 }
 
@@ -276,7 +276,7 @@ void memranges_add_resources(struct memranges *ranges,
 			     unsigned long mask, unsigned long match,
 			     unsigned long tag)
 {
-	memranges_add_resources_filter(ranges, mask, match, tag, NULL);
+	memranges_add_resources_filter(ranges, mask, match, tag, nullptr);
 }
 
 void memranges_init_empty_with_alignment(struct memranges *ranges,
@@ -285,8 +285,8 @@ void memranges_init_empty_with_alignment(struct memranges *ranges,
 {
 	size_t i;
 
-	ranges->entries = NULL;
-	ranges->free_list = NULL;
+	ranges->entries = nullptr;
+	ranges->free_list = nullptr;
 	ranges->align = align;
 
 	for (i = 0; i < num_free; i++)
@@ -297,7 +297,7 @@ void memranges_init_with_alignment(struct memranges *ranges,
 				   unsigned long mask, unsigned long match,
 				   unsigned long tag, unsigned char align)
 {
-	memranges_init_empty_with_alignment(ranges, NULL, 0, align);
+	memranges_init_empty_with_alignment(ranges, nullptr, 0, align);
 	memranges_add_resources(ranges, mask, match, tag);
 }
 
@@ -307,7 +307,7 @@ void memranges_clone(struct memranges *newranges, struct memranges *oldranges)
 	struct range_entry *r, *cur;
 	struct range_entry **prev_ptr;
 
-	memranges_init_empty_with_alignment(newranges, NULL, 0, oldranges->align);
+	memranges_init_empty_with_alignment(newranges, nullptr, 0, oldranges->align);
 
 	prev_ptr = &newranges->entries;
 	memranges_each_entry(r, oldranges) {
@@ -319,7 +319,7 @@ void memranges_clone(struct memranges *newranges, struct memranges *oldranges)
 
 void memranges_teardown(struct memranges *ranges)
 {
-	while (ranges->entries != NULL) {
+	while (ranges->entries != nullptr) {
 		range_entry_unlink_and_free(ranges, &ranges->entries,
 					    ranges->entries);
 	}
@@ -331,10 +331,10 @@ void memranges_fill_holes_up_to(struct memranges *ranges,
 	struct range_entry *cur;
 	struct range_entry *prev;
 
-	prev = NULL;
-	for (cur = ranges->entries; cur != NULL; cur = cur->next) {
+	prev = nullptr;
+	for (cur = ranges->entries; cur != nullptr; cur = cur->next) {
 		/* First entry. Just set prev. */
-		if (prev == NULL) {
+		if (prev == nullptr) {
 			prev = cur;
 			continue;
 		}
@@ -361,7 +361,7 @@ void memranges_fill_holes_up_to(struct memranges *ranges,
 
 	/* Handle the case where the limit was never reached. A new entry needs
 	 * to be added to cover the range up to the limit. */
-	if (prev != NULL && range_entry_end(prev) < limit)
+	if (prev != nullptr && range_entry_end(prev) < limit)
 		range_list_add(ranges, &prev->next, range_entry_end(prev),
 			       limit - 1, tag);
 
@@ -381,11 +381,11 @@ static const struct range_entry *
 memranges_find_entry(struct memranges *ranges, resource_t limit, resource_t size,
 		     unsigned char align, unsigned long tag, bool last)
 {
-	const struct range_entry *r, *last_entry = NULL;
+	const struct range_entry *r, *last_entry = nullptr;
 	resource_t base, end;
 
 	if (size == 0)
-		return NULL;
+		return nullptr;
 
 	memranges_each_entry(r, ranges) {
 		if (r->tag != tag)
@@ -421,7 +421,7 @@ bool memranges_steal(struct memranges *ranges, resource_t limit, resource_t size
 	const struct range_entry *r;
 
 	r = memranges_find_entry(ranges, limit, size, align, tag, from_top);
-	if (r == NULL)
+	if (r == nullptr)
 		return false;
 
 	if (from_top) {

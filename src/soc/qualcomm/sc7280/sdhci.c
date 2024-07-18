@@ -15,7 +15,7 @@ int qc_emmc_early_init(void)
 	struct storage_media media = {0};
 
 	ctrlr = new_sdhci_msm_host((void *)(uintptr_t)SDC1_HC_BASE);
-	if (ctrlr == NULL)
+	if (ctrlr == nullptr)
 		return -1;
 
 	media.ctrlr = ctrlr;

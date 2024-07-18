@@ -22,5 +22,5 @@ const struct spi_flash_vendor_info spi_flash_issi_vi = {
 	.ids = flash_table,
 	.nr_part_ids = ARRAY_SIZE(flash_table),
 	.desc = &spi_flash_pp_0x20_sector_desc,
-	.prot_ops = NULL,
+	.prot_ops = nullptr,
 };

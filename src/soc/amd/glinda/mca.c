@@ -33,7 +33,7 @@ bool mca_has_expected_bank_count(void)
 
 bool mca_is_valid_bank(unsigned int bank)
 {
-	return (bank < ARRAY_SIZE(mca_bank_name) && mca_bank_name[bank] != NULL);
+	return (bank < ARRAY_SIZE(mca_bank_name) && mca_bank_name[bank] != nullptr);
 }
 
 const char *mca_get_bank_name(unsigned int bank)

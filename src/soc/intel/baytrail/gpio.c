@@ -226,5 +226,5 @@ void setup_soc_gpios(struct soc_gpio_config *config, u8 enable_xdp_tap)
 struct soc_gpio_config* __weak mainboard_get_gpios(void)
 {
 	printk(BIOS_DEBUG, "Default/empty GPIO config\n");
-	return NULL;
+	return nullptr;
 }

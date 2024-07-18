@@ -33,7 +33,7 @@ struct panel_description *get_panel_description(int panel_id)
 {
 	/* The Innolux panel before Rev2 is no longer supported. */
 	if (board_id() < 2)
-		return NULL;
+		return nullptr;
 
 	/* Only one panel no matter what panel_id was provided. */
 	return get_panel_from_cbfs(&kukui_panel);

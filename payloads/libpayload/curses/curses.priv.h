@@ -192,8 +192,8 @@ extern NCURSES_EXPORT(void *) _nc_memmove (void *, const void *, size_t);
  */
 
 struct tries {
-	struct tries    *child;     /* ptr to child.  NULL if none          */
-	struct tries    *sibling;   /* ptr to sibling.  NULL if none        */
+	struct tries    *child;     /* ptr to child.  nullptr if none          */
+	struct tries    *sibling;   /* ptr to sibling.  nullptr if none        */
 	unsigned char    ch;        /* character at this node               */
 	unsigned short   value;     /* code of string so far.  0 if none.   */
 };
@@ -432,7 +432,7 @@ struct screen {
 					/* > 1 if in halfdelay mode	    */
 	int		_echo;		/* True if echo on		    */
 	int		_use_meta;	/* use the meta key?		    */
-	struct _SLK	*_slk;		/* ptr to soft key struct / NULL    */
+	struct _SLK	*_slk;		/* ptr to soft key struct / nullptr    */
 	int		slk_format;	/* selected format for this screen  */
 	/* cursor movement costs; units are 10ths of milliseconds */
 #if NCURSES_NO_PADDING

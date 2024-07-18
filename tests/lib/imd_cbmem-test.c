@@ -21,10 +21,10 @@
 
 static void reset_imd(void)
 {
-	imd.lg.limit = (uintptr_t)NULL;
-	imd.lg.r = NULL;
-	imd.sm.limit = (uintptr_t)NULL;
-	imd.sm.r = NULL;
+	imd.lg.limit = (uintptr_t)nullptr;
+	imd.lg.r = nullptr;
+	imd.sm.limit = (uintptr_t)nullptr;
+	imd.sm.r = nullptr;
 
 	cbmem_initialized = 0;
 }
@@ -47,7 +47,7 @@ static void *get_cbmem_ptr(void)
 	if (cbmem_top_ptr)
 		return cbmem_top_ptr - CBMEM_SIZE;
 	else
-		return NULL;
+		return nullptr;
 }
 
 static void clear_cbmem(void)
@@ -266,7 +266,7 @@ static void test_cbmem_entry_add(void **state)
 
 	cbmem_initialize_empty_id_size(id1, CBMEM_ROOT_SIZE);
 
-	/* Expect NULL while looking for nonexistent entries */
+	/* Expect nullptr while looking for nonexistent entries */
 	assert_null(cbmem_entry_find(id2));
 	assert_null(cbmem_entry_find(id3));
 
@@ -456,7 +456,7 @@ void bootmem_add_range(uint64_t start, uint64_t size, const enum bootmem_type ta
 
 static void test_cbmem_add_bootmem(void **state)
 {
-	void *base_ptr = NULL;
+	void *base_ptr = nullptr;
 	size_t size = 0;
 	const int id1 = 0xCA;
 	const int id2 = 0xEA;
@@ -488,7 +488,7 @@ static void test_cbmem_add_bootmem(void **state)
 static void test_cbmem_get_region(void **state)
 {
 	int i;
-	void *base_ptr = NULL;
+	void *base_ptr = nullptr;
 	size_t size = 0;
 	size_t size_counter = 0;
 	const size_t entry_size = 0x2000;

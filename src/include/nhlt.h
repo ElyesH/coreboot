@@ -38,7 +38,7 @@ struct nhlt_format_config;
  * nhlt_soc_serialize()
  */
 
-/* Obtain an nhlt object for adding endpoints. Returns NULL on error. */
+/* Obtain an nhlt object for adding endpoints. Returns nullptr on error. */
 struct nhlt *nhlt_init(void);
 
 /* Return the size of the NHLT table including ACPI header. */
@@ -82,7 +82,7 @@ int nhlt_add_ssp_endpoints(struct nhlt *nhlt, int virtual_bus_id,
 		const struct nhlt_endp_descriptor *epds, size_t num_epds);
 
 /*
- * Add endpoint to NHLT object. Returns NULL on error.
+ * Add endpoint to NHLT object. Returns nullptr on error.
  *
  * generic nhlt_add_endpoint() is called by the SoC code to provide
  * the specific assumptions/uses for NHLT for that platform. All fields
@@ -100,7 +100,7 @@ struct nhlt_endpoint *nhlt_add_endpoint(struct nhlt *nhlt, int link_type,
 int nhlt_endpoint_append_config(struct nhlt_endpoint *endpoint,
 				const void *config, size_t config_sz);
 
-/* Add a format type to the provided endpoint. Returns NULL on error. */
+/* Add a format type to the provided endpoint. Returns nullptr on error. */
 struct nhlt_format *nhlt_add_format(struct nhlt_endpoint *endpoint,
 					int num_channels,
 					int sample_freq_khz,

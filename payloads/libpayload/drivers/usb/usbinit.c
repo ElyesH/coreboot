@@ -192,6 +192,6 @@ hci_t *usb_add_mmio_hc(hc_type type, void *bar)
 #endif
 	default:
 		usb_debug("HC type %d (at %p) is not supported!\n", type, bar);
-		return NULL;
+		return nullptr;
 	}
 }

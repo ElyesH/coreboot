@@ -34,7 +34,7 @@ static struct device_operations ops = {
 
 /* TODO: FDC, PP, AUX. */
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, SIO10N268_KBDC, PNP_IO0 | PNP_IO1, 0x07f8, 0x07f8, },
+	{ nullptr, SIO10N268_KBDC, PNP_IO0 | PNP_IO1, 0x07f8, 0x07f8, },
 };
 
 static void enable_dev(struct device *dev)

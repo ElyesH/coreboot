@@ -37,7 +37,7 @@ int add_pi_resource(STM_RSC *resource_list, uint32_t num_entries);
  *  Delete resources in list to database.
  *
  *  @param resource_list  A pointer to resource list to be deleted
- *			  NULL means delete all resources.
+ *			  nullptr means delete all resources.
  *  @param num_entries    Optional number of entries.
  *			  If 0, list must be terminated by END_OF_RESOURCES.
  *

@@ -17,7 +17,7 @@
 /** Pointer to the last device */
 extern struct device *last_dev;
 /** Linked list of free resources */
-struct resource *free_resources = NULL;
+struct resource *free_resources = nullptr;
 /* Disable a PCI device based on bus, device and function. */
 void devfn_disable(const struct bus *bus, unsigned int devfn)
 {
@@ -213,7 +213,7 @@ static void read_resources(struct bus *bus)
 	       dev_path(bus->dev), __func__, bus->segment_group, bus->secondary);
 }
 
-struct device *vga_pri = NULL;
+struct device *vga_pri = nullptr;
 static void set_vga_bridge_bits(void)
 {
 	/*
@@ -230,7 +230,7 @@ static void set_vga_bridge_bits(void)
 	vga = 0;
 	vga_onboard = 0;
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_class(PCI_CLASS_DISPLAY_VGA << 8, dev))) {
 		if (!dev->enabled)
 			continue;

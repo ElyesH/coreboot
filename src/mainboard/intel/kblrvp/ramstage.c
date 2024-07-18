@@ -50,4 +50,4 @@ static void ioexpander_init(void *unused)
 		0x00);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, ioexpander_init, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, ioexpander_init, nullptr);

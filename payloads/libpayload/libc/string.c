@@ -47,7 +47,7 @@ size_t strnlen(const char *str, size_t maxlen)
 {
 	size_t len = 0;
 
-	/* NULL and empty strings have length 0. */
+	/* nullptr and empty strings have length 0. */
 	if (!str)
 		return 0;
 
@@ -68,7 +68,7 @@ size_t strlen(const char *str)
 {
 	size_t len = 0;
 
-	/* NULL and empty strings have length 0. */
+	/* nullptr and empty strings have length 0. */
 	if (!str)
 		return 0;
 
@@ -268,7 +268,7 @@ size_t strlcat(char *d, const char *s, size_t n)
  * @param s The string.
  * @param c The character.
  * @return A pointer to the first occurrence of the character in the
- * string, or NULL if the character was not encountered within the string.
+ * string, or nullptr if the character was not encountered within the string.
  */
 char *strchr(const char *s, int c)
 {
@@ -279,7 +279,7 @@ char *strchr(const char *s, int c)
 			return p;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /**
@@ -288,7 +288,7 @@ char *strchr(const char *s, int c)
  * @param s The string.
  * @param c The character.
  * @return A pointer to the last occurrence of the character in the
- * string, or NULL if the character was not encountered within the string.
+ * string, or nullptr if the character was not encountered within the string.
  */
 
 char *strrchr(const char *s, int c)
@@ -300,7 +300,7 @@ char *strrchr(const char *s, int c)
 			return p;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /**
@@ -314,7 +314,7 @@ char *strdup(const char *s)
 	size_t n = strlen(s);
 	char *p = malloc(n + 1);
 
-	if (p != NULL) {
+	if (p != nullptr) {
 		strncpy(p, s, n);
 		p[n] = 0;
 	}
@@ -333,7 +333,7 @@ char *strndup(const char *s, size_t size)
 	size_t n = strnlen(s, size);
 	char *p = malloc(n + 1);
 
-	if (p != NULL) {
+	if (p != nullptr) {
 		strncpy(p, s, n);
 		p[n] = 0;
 	}
@@ -346,7 +346,7 @@ char *strndup(const char *s, size_t size)
  * @param h The haystack string.
  * @param n The needle string (substring).
  * @return A pointer to the first occurrence of the substring in
- * the string, or NULL if the substring was not encountered within the string.
+ * the string, or nullptr if the substring was not encountered within the string.
  */
 char *strstr(const char *h, const char *n)
 {
@@ -354,13 +354,13 @@ char *strstr(const char *h, const char *n)
 	size_t nn = strlen(n);
 
 	if (hn < nn)
-		return NULL;
+		return nullptr;
 
 	for (size_t i = 0; i <= hn - nn; i++)
 		if (!memcmp(&h[i], n, nn))
 			return (char *)&h[i];
 
-	return NULL;
+	return nullptr;
 }
 
 /**
@@ -375,7 +375,7 @@ char *strsep(char **stringp, const char *delim)
 	char *walk, *token;
 
 	if (!stringp || !*stringp || !**stringp)
-		return NULL;
+		return nullptr;
 
 	token = walk = *stringp;
 
@@ -477,7 +477,7 @@ long int strtol(const char *ptr, char **endptr, int base)
 
 long atol(const char *nptr)
 {
-	return strtol(nptr, NULL, 10);
+	return strtol(nptr, nullptr, 10);
 }
 
 /**
@@ -492,7 +492,7 @@ unsigned long long int strtoull(const char *ptr, char **endptr, int base)
 {
 	unsigned long long int ret = 0;
 
-	if (endptr != NULL)
+	if (endptr != nullptr)
 		*endptr = (char *) ptr;
 
 	/* Purge whitespace */
@@ -526,7 +526,7 @@ unsigned long long int strtoull(const char *ptr, char **endptr, int base)
 	for ( ; *ptr && _valid(*ptr, base); ptr++)
 		ret = (ret * base) + _offset(*ptr, base);
 
-	if (endptr != NULL)
+	if (endptr != nullptr)
 		*endptr = (char *) ptr;
 
 	return ret;
@@ -599,14 +599,14 @@ size_t strcspn(const char *s, const char *a)
 char *strtok_r(char *str, const char *delim, char **ptr)
 {
 	/* start new tokenizing job or continue existing one? */
-	if (str == NULL)
+	if (str == nullptr)
 		str = *ptr;
 
 	/* skip over prefix delimiters */
 	char *start = str + strspn(str, delim);
 
 	if (start[0] == '\0')
-		return NULL;
+		return nullptr;
 
 	/* find first delimiter character */
 	char *end = start + strcspn(start, delim);

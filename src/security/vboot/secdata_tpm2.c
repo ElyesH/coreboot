@@ -188,7 +188,7 @@ static tpm_result_t setup_fwmp_space(struct vb2_context *ctx)
 	uint32_t fwmp_space_size = vb2api_secdata_fwmp_create(ctx);
 
 	return setup_space("FWMP", FWMP_NV_INDEX, ctx->secdata_fwmp, fwmp_space_size,
-			   fwmp_attr, NULL, 0);
+			   fwmp_attr, nullptr, 0);
 }
 
 static tpm_result_t setup_kernel_space(struct vb2_context *ctx)
@@ -196,7 +196,7 @@ static tpm_result_t setup_kernel_space(struct vb2_context *ctx)
 	uint32_t kernel_space_size = vb2api_secdata_kernel_create(ctx);
 
 	return setup_space("kernel", KERNEL_NV_INDEX, ctx->secdata_kernel,
-			    kernel_space_size, rw_space_attributes, NULL, 0);
+			    kernel_space_size, rw_space_attributes, nullptr, 0);
 }
 
 static tpm_result_t set_mrc_hash_space(uint32_t index, const uint8_t *data)
@@ -207,7 +207,7 @@ static tpm_result_t set_mrc_hash_space(uint32_t index, const uint8_t *data)
 				 sizeof(pcr0_allowed_policy));
 	} else {
 		return setup_space("RW MRC Hash", index, data, HASH_NV_SIZE,
-				   rw_space_attributes, NULL, 0);
+				   rw_space_attributes, nullptr, 0);
 	}
 }
 
@@ -297,7 +297,7 @@ static tpm_result_t setup_widevine_counter_spaces(void)
 				WIDEVINE_COUNTER_NV_INDEX(index),
 				WIDEVINE_COUNTER_SIZE,
 				rw_orderly_counter_attributes,
-				NULL,
+				nullptr,
 				0);
 		if (rc != TPM_SUCCESS)
 			return rc;
@@ -436,7 +436,7 @@ tpm_result_t antirollback_write_space_vbios_hash(const uint8_t *data, uint32_t s
 		 */
 		VBDEBUG("TPM: Initializing hash space.\n");
 		return setup_space("VBIOS Cache Hash", VBIOS_CACHE_NV_INDEX, data, HASH_NV_SIZE,
-				   rw_space_attributes, NULL, 0);
+				   rw_space_attributes, nullptr, 0);
 	}
 
 	if (rc != TPM_SUCCESS)

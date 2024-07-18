@@ -73,29 +73,29 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, NCT5572D_FDC}, /* no pins, removed from datasheet */
-	{ NULL, NCT5572D_PP}, /* no pins, removed from datasheet */
-	{ NULL, NCT5572D_SP1, PNP_IO0 | PNP_IRQ0, 0x0FF8, },
-	{ NULL, NCT5572D_IR, PNP_IO0 | PNP_IRQ0, 0x0FF8, },
-	{ NULL, NCT5572D_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
+	{ nullptr, NCT5572D_FDC}, /* no pins, removed from datasheet */
+	{ nullptr, NCT5572D_PP}, /* no pins, removed from datasheet */
+	{ nullptr, NCT5572D_SP1, PNP_IO0 | PNP_IRQ0, 0x0FF8, },
+	{ nullptr, NCT5572D_IR, PNP_IO0 | PNP_IRQ0, 0x0FF8, },
+	{ nullptr, NCT5572D_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
 		0x0FFF, 0x0FFF, },
-	{ NULL, NCT5572D_CIR, PNP_IO0 | PNP_IRQ0, 0x0FF8, },
-	{ NULL, NCT5572D_WDT1},
-	{ NULL, NCT5572D_ACPI},
-	{ NULL, NCT5572D_HWM_TSI_FPLED, PNP_IO0 | PNP_IO1 | PNP_IRQ0,
+	{ nullptr, NCT5572D_CIR, PNP_IO0 | PNP_IRQ0, 0x0FF8, },
+	{ nullptr, NCT5572D_WDT1},
+	{ nullptr, NCT5572D_ACPI},
+	{ nullptr, NCT5572D_HWM_TSI_FPLED, PNP_IO0 | PNP_IO1 | PNP_IRQ0,
 		0x0FFE, 0x0FFE, },
-	{ NULL, NCT5572D_PECI},
-	{ NULL, NCT5572D_SUSLED},
-	{ NULL, NCT5572D_CIRWKUP, PNP_IO0 | PNP_IRQ0, 0x0FF8, },
-	{ NULL, NCT5572D_GPIO_PP_OD},
-	{ NULL, NCT5572D_GPIO2},
-	{ NULL, NCT5572D_GPIO3},
-	{ NULL, NCT5572D_GPIO4}, /* no pins, removed from datasheet */
-	{ NULL, NCT5572D_GPIO5},
-	{ NULL, NCT5572D_GPIO6},
-	{ NULL, NCT5572D_GPIO7}, /* no pins, removed from datasheet */
-	{ NULL, NCT5572D_GPIO8},
-	{ NULL, NCT5572D_GPIO9},
+	{ nullptr, NCT5572D_PECI},
+	{ nullptr, NCT5572D_SUSLED},
+	{ nullptr, NCT5572D_CIRWKUP, PNP_IO0 | PNP_IRQ0, 0x0FF8, },
+	{ nullptr, NCT5572D_GPIO_PP_OD},
+	{ nullptr, NCT5572D_GPIO2},
+	{ nullptr, NCT5572D_GPIO3},
+	{ nullptr, NCT5572D_GPIO4}, /* no pins, removed from datasheet */
+	{ nullptr, NCT5572D_GPIO5},
+	{ nullptr, NCT5572D_GPIO6},
+	{ nullptr, NCT5572D_GPIO7}, /* no pins, removed from datasheet */
+	{ nullptr, NCT5572D_GPIO8},
+	{ nullptr, NCT5572D_GPIO9},
 };
 
 static void enable_dev(struct device *dev)

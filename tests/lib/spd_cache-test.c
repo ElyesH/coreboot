@@ -9,7 +9,7 @@
 #include <tests/lib/spd_cache_data.h>
 
 struct region_device flash_rdev_rw;
-static char *flash_buffer = NULL;
+static char *flash_buffer = nullptr;
 static size_t flash_buffer_size = 0;
 
 static int setup_spd_cache(void **state)
@@ -17,7 +17,7 @@ static int setup_spd_cache(void **state)
 	flash_buffer_size = SC_SPD_TOTAL_LEN + SC_CRC_LEN;
 	flash_buffer = malloc(flash_buffer_size);
 
-	if (flash_buffer == NULL) {
+	if (flash_buffer == nullptr) {
 		flash_buffer_size = 0;
 		return -1;
 	}
@@ -34,9 +34,9 @@ static int setup_spd_cache_test(void **state)
 
 static int teardown_spd_cache(void **state)
 {
-	rdev_chain_mem_rw(&flash_rdev_rw, NULL, 0);
+	rdev_chain_mem_rw(&flash_rdev_rw, nullptr, 0);
 	free(flash_buffer);
-	flash_buffer = NULL;
+	flash_buffer = nullptr;
 	flash_buffer_size = 0;
 	return 0;
 }

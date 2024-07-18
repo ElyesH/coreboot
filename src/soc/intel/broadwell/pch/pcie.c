@@ -286,8 +286,8 @@ static void root_port_commit_config(void)
 
 		dev = rpc.ports[i];
 
-		if (dev == NULL) {
-			printk(BIOS_ERR, "Root Port %d device is NULL?\n", i+1);
+		if (dev == nullptr) {
+			printk(BIOS_ERR, "Root Port %d device is nullptr?\n", i+1);
 			continue;
 		}
 

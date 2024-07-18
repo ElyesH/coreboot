@@ -33,7 +33,7 @@
  * coreboot only supports a single platform EC, so there is no need to
  * provide a context handle for the EC.
  */
-#define PLAT_EC NULL
+#define PLAT_EC nullptr
 
 #define INVALID_HCMD 0xFF
 
@@ -528,7 +528,7 @@ int google_chromeec_flash_write_block(const uint8_t *params_data,
 		.cmd_code = EC_CMD_FLASH_WRITE,
 		.cmd_version = EC_VER_FLASH_WRITE,
 		.cmd_size_out = 0,
-		.cmd_data_out = NULL,
+		.cmd_data_out = nullptr,
 		.cmd_size_in = bufsize,
 		.cmd_data_in = params_data,
 		.cmd_dev_index = 0,
@@ -553,7 +553,7 @@ int google_chromeec_efs_verify(enum ec_flash_region region)
 		.cmd_size_in = sizeof(params),
 		.cmd_data_in = &params,
 		.cmd_size_out = 0,
-		.cmd_data_out = NULL,
+		.cmd_data_out = nullptr,
 		.cmd_dev_index = 0,
 	};
 	int rv;
@@ -1478,7 +1478,7 @@ int google_chromeec_get_keybd_config(struct ec_response_keybd_config *keybd)
 
 int google_chromeec_ap_reset(void)
 {
-	if (ec_cmd_ap_reset(NULL))
+	if (ec_cmd_ap_reset(nullptr))
 		return -1;
 
 	return 0;

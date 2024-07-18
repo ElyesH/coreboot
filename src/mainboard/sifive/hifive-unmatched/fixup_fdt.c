@@ -74,9 +74,9 @@ static void fixup_fdt(void *unused)
 	struct device_tree *tree;
 
 	/* load flat dt from cbfs */
-	fdt_rom = cbfs_map("fallback/DTB", NULL);
+	fdt_rom = cbfs_map("fallback/DTB", nullptr);
 
-	if (fdt_rom == NULL) {
+	if (fdt_rom == nullptr) {
 		printk(BIOS_ERR, "Unable to load fallback/DTB from CBFS\n");
 		return;
 	}
@@ -91,7 +91,7 @@ static void fixup_fdt(void *unused)
 	/* convert the tree to a flat dt */
 	void *dt = malloc(dt_flat_size(tree));
 
-	if (dt == NULL) {
+	if (dt == nullptr) {
 		printk(BIOS_ERR, "Unable to allocate memory for flat device tree\n");
 		return;
 	}
@@ -103,4 +103,4 @@ static void fixup_fdt(void *unused)
 		OTHER_HLS(i)->fdt = dt;
 }
 
-BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_EXIT, fixup_fdt, NULL);
+BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_EXIT, fixup_fdt, nullptr);

@@ -81,7 +81,7 @@ WINDOW *newpad(int nlines, int ncols)
 
     if ( !(win = PDC_makenew(nlines, ncols, -1, -1))
         || !(win = PDC_makelines(win)) )
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
 
     werase(win);
 
@@ -111,14 +111,14 @@ WINDOW *subpad(WINDOW *orig, int nlines, int ncols, int begy, int begx)
              nlines, ncols, begy, begx));
 
     if (!orig || !(orig->_flags & _PAD))
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
 
     /* make sure window fits inside the original one */
 
     if ((begy < orig->_begy) || (begx < orig->_begx) ||
         (begy + nlines) > (orig->_begy + orig->_maxy) ||
         (begx + ncols)  > (orig->_begx + orig->_maxx))
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
 
     if (!nlines)
         nlines = orig->_maxy - 1 - j;
@@ -127,7 +127,7 @@ WINDOW *subpad(WINDOW *orig, int nlines, int ncols, int begy, int begx)
         ncols = orig->_maxx - 1 - k;
 
     if ( !(win = PDC_makenew(nlines, ncols, begy, begx)) )
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
 
     /* initialize window variables */
 

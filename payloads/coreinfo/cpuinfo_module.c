@@ -19,56 +19,56 @@
 /* CPUID 0x00000001 EDX flags */
 static const char *generic_cap_flags[] = {
 	"fpu", "vme", "de", "pse", "tsc", "msr", "pae", "mce",
-	"cx8", "apic", NULL, "sep", "mtrr", "pge", "mca", "cmov",
-	"pat", "pse36", "psn", "clflsh", NULL, "ds", "acpi", "mmx",
-	"fxsr", "sse", "sse2", "ss", "ht", "tm", NULL, "pbe"
+	"cx8", "apic", nullptr, "sep", "mtrr", "pge", "mca", "cmov",
+	"pat", "pse36", "psn", "clflsh", nullptr, "ds", "acpi", "mmx",
+	"fxsr", "sse", "sse2", "ss", "ht", "tm", nullptr, "pbe"
 };
 
 /* CPUID 0x00000001 ECX flags */
 static const char *intel_cap_generic_ecx_flags[] = {
-	"sse3", NULL, NULL, "monitor", "ds-cpl", "vmx", NULL, "est",
-	"tm2", "ssse3", "cntx-id", NULL, NULL, "cx16", "xTPR", NULL,
-	NULL, NULL, "dca", NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	"sse3", nullptr, nullptr, "monitor", "ds-cpl", "vmx", nullptr, "est",
+	"tm2", "ssse3", "cntx-id", nullptr, nullptr, "cx16", "xTPR", nullptr,
+	nullptr, nullptr, "dca", nullptr, nullptr, nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 /* CPUID 0x80000001 EDX flags */
 static const char *intel_cap_extended_edx_flags[] = {
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, "SYSCALL", NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, "xd", NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, "em64t", NULL, NULL,
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, "SYSCALL", nullptr, nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, "xd", nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, "em64t", nullptr, nullptr,
 };
 
 /* CPUID 0x80000001 ECX flags */
 static const char *intel_cap_extended_ecx_flags[] = {
-	"lahf_lm", NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	"lahf_lm", nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
 };
 
 static const char *amd_cap_generic_ecx_flags[] = {
-	"sse3", NULL, NULL, "mwait", NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, "cmpxchg16b", NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, "popcnt",
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	"sse3", nullptr, nullptr, "mwait", nullptr, nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, "cmpxchg16b", nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, "popcnt",
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 static const char *amd_cap_extended_edx_flags[] = {
 	"fpu", "vme", "de", "pse", "tsc", "msr", "pae", "mce",
-	"cx8", "apic", NULL, "sep", "mtrr", "pge", "mca", "cmov",
-	"pat", "pse36", NULL, "mp", "nx", NULL, "mmxext", "mmx",
+	"cx8", "apic", nullptr, "sep", "mtrr", "pge", "mca", "cmov",
+	"pat", "pse36", nullptr, "mp", "nx", nullptr, "mmxext", "mmx",
 	"fxsr", "ffxsr", "page1gb", "rdtscp",
-	NULL, "lm", "3dnowext", "3dnow"
+	nullptr, "lm", "3dnowext", "3dnow"
 }; /* "mp" defined for CPUs prior to AMD family 0xf */
 
 static const char *amd_cap_extended_ecx_flags[] = {
 	"lahf/sahf", "CmpLegacy", "svm", "ExtApicSpace",
 	"LockMovCr0", "abm", "sse4a", "misalignsse",
-	"3dnowPref", "osvw", "ibs", NULL, "skinit", "wdt", NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	"3dnowPref", "osvw", "ibs", nullptr, "skinit", "wdt", nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+	nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 static uint32_t vendor;
@@ -83,7 +83,7 @@ static void decode_flags(WINDOW *win, unsigned long reg, const char **flags,
 	wmove(win, lrow, 2);
 
 	for (i = 0; i < 32; i++) {
-		if (flags[i] == NULL)
+		if (flags[i] == nullptr)
 			continue;
 
 		if (reg & (1 << i))
@@ -169,7 +169,7 @@ static int cpuinfo_module_redraw(WINDOW *win)
 
 	print_module_title(win, "CPU Information");
 
-	docpuid(0, NULL, &vendor, NULL, NULL);
+	docpuid(0, nullptr, &vendor, nullptr, nullptr);
 
 	switch (vendor) {
 	case VENDOR_INTEL:

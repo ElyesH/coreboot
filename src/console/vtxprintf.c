@@ -194,7 +194,7 @@ repeat:
 		case 's':
 			s = va_arg(args, char *);
 			if (!s)
-				s = "<NULL>";
+				s = "<nullptr>";
 
 			len = strnlen(s, (size_t)precision);
 

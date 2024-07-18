@@ -171,7 +171,7 @@ void report_fspt_output(void);
 void soc_validate_fspm_header(const struct fsp_header *hdr);
 /*
  * This function finds the FSP resource HOB for the given GUID.
- * Returns the pointer to the HOB if found, otherwise NULL
+ * Returns the pointer to the HOB if found, otherwise nullptr
  */
 const void *fsp_find_resource_hob_by_guid(const uint8_t *guid);
 
@@ -182,7 +182,7 @@ struct fsp_load_descriptor {
 	/* fsp_prog object will have region_device initialized to final
 	 * load location in memory. */
 	struct prog fsp_prog;
-	/* CBFS allocator to place loaded FSP. NULL to map flash directly. */
+	/* CBFS allocator to place loaded FSP. nullptr to map flash directly. */
 	cbfs_allocator_t alloc;
 	/* Optional argument to be utilized by get_destination() callback. */
 	void *arg;

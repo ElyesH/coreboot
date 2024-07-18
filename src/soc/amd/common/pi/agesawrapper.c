@@ -62,7 +62,7 @@ static AGESA_STATUS amd_create_struct(AMD_INTERFACE_PARAMS *aip,
 
 	/* If we provide the buffer, API expects it to have
 	   StdHeader already filled. */
-	if (buf != NULL && len >= sizeof(aip->StdHeader)) {
+	if (buf != nullptr && len >= sizeof(aip->StdHeader)) {
 		memcpy(buf, &aip->StdHeader, sizeof(aip->StdHeader));
 		aip->AllocationMethod = ByHost;
 		aip->NewStructPtr = buf;
@@ -235,7 +235,7 @@ void *agesawrapper_getlateinitptr(int pick)
 	case PICK_CRAT:
 		return AcpiCrat;
 	default:
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -407,7 +407,7 @@ AGESA_STATUS agesa_execute_state(AGESA_STRUCT_NAME func)
 		memset(&sp, 0, sizeof(sp));
 		amd_create_struct(aip, func, &sp, sizeof(sp));
 	} else {
-		amd_create_struct(aip, func, NULL, 0);
+		amd_create_struct(aip, func, nullptr, 0);
 	}
 
 	StdHeader = aip->NewStructPtr;

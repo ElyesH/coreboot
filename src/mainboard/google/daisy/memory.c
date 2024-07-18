@@ -509,7 +509,7 @@ struct mem_timings *get_mem_timings(void)
 		break;
 	default:
 		printk(BIOS_CRIT, "Unknown board configuration.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	for (i = 0, mem = mem_timings; i < ARRAY_SIZE(mem_timings);
@@ -520,5 +520,5 @@ struct mem_timings *get_mem_timings(void)
 			return (struct mem_timings *)mem;
 	}
 
-	return NULL;
+	return nullptr;
 }

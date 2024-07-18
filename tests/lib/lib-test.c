@@ -66,5 +66,5 @@ int main(void)
 		cmocka_unit_test(test_log2_ceil),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

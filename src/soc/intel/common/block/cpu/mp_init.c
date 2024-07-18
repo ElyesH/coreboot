@@ -151,8 +151,8 @@ void get_microcode_info(const void **microcode, int *parallel)
  */
 void init_cpus(void)
 {
-	struct device *dev = dev_find_path(NULL, DEVICE_PATH_CPU_CLUSTER);
-	assert(dev != NULL);
+	struct device *dev = dev_find_path(nullptr, DEVICE_PATH_CPU_CLUSTER);
+	assert(dev != nullptr);
 
 	mp_cpu_bus_init(dev);
 }
@@ -202,10 +202,10 @@ void before_post_cpus_init(void)
 	if (!CONFIG(USE_COREBOOT_MP_INIT))
 		return;
 
-	if (mp_run_on_all_cpus(wrapper_init_core_prmrr, NULL) != CB_SUCCESS)
+	if (mp_run_on_all_cpus(wrapper_init_core_prmrr, nullptr) != CB_SUCCESS)
 		printk(BIOS_ERR, "core PRMRR sync failure\n");
 
-	if (mp_run_on_all_cpus(wrapper_set_bios_done, NULL) != CB_SUCCESS)
+	if (mp_run_on_all_cpus(wrapper_set_bios_done, nullptr) != CB_SUCCESS)
 		printk(BIOS_ERR, "Set BIOS Done failure\n");
 
 	intel_reload_microcode();
@@ -215,7 +215,7 @@ void before_post_cpus_init(void)
 static void post_cpus_init(void *unused)
 {
 	/* Ensure all APs finish the task and continue */
-	if (mp_run_on_all_cpus_synchronously(&wrapper_x86_setup_mtrrs, NULL) != CB_SUCCESS)
+	if (mp_run_on_all_cpus_synchronously(&wrapper_x86_setup_mtrrs, nullptr) != CB_SUCCESS)
 		printk(BIOS_ERR, "MTRR programming failure\n");
 
 	post_cpus_add_romcache();
@@ -223,6 +223,6 @@ static void post_cpus_init(void *unused)
 }
 
 /* Do CPU MP Init before FSP Silicon Init */
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT_CHIPS, BS_ON_ENTRY, coreboot_init_cpus, NULL);
-BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_EXIT, post_cpus_init, NULL);
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, post_cpus_init, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT_CHIPS, BS_ON_ENTRY, coreboot_init_cpus, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_EXIT, post_cpus_init, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, post_cpus_init, nullptr);

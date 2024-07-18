@@ -18,7 +18,7 @@ struct pad_func {
 
 static void nor_set_gpio_pinmux(void)
 {
-	const struct pad_func *ptr = NULL;
+	const struct pad_func *ptr = nullptr;
 
 	/* GPIO 140 ~ 143 */
 	struct pad_func nor_pinmux[] = {

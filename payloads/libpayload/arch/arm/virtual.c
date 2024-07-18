@@ -112,7 +112,7 @@ static void lpae_flush_work_block(void)
 
 /**
  * Maps a 2MB designated block to a requested physical address, and returns
- * the address to the block or NULL on error.
+ * the address to the block or nullptr on error.
  *
  * pa_mb: Physical address in MB. Has to be on a 2MB boundary.
  * policy: Data chache policy
@@ -135,7 +135,7 @@ void *lpae_map_phys_addr(unsigned long pa_mb, enum dcache_policy policy)
 		attr = ATTR_WT;
 		break;
 	default:
-		return NULL;
+		return nullptr;
 	}
 
 	ttb_buff[work_block >> BLOCK_SHIFT] =

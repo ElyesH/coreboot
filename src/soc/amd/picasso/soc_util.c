@@ -61,7 +61,7 @@ static uint32_t get_internal_silicon_type(void)
 
 	hob = fsp_find_extension_hob_by_guid(PICASSO_MISC_DATA_HOB_GUID.b, &hob_size);
 
-	if (hob == NULL || hob_size == 0) {
+	if (hob == nullptr || hob_size == 0) {
 		printk(BIOS_ERR, "Couldn't find Picasso misc data HOB.\n");
 		return 0;
 	}

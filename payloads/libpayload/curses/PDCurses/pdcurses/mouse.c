@@ -103,7 +103,7 @@ RCSID("$Id: mouse.c,v 1.45 2008/07/13 16:08:18 wmcbrine Exp $")
         relative coordinates. A to_screen parameter of TRUE means to
         convert from window to screen; otherwise the reverse. The
         function returns FALSE if the coordinates aren't within the
-        window, or if any of the parameters are NULL. The coordinates
+        window, or if any of the parameters are nullptr. The coordinates
         have been converted when the function returns TRUE.
 
         mouse_trafo() is the stdscr version of wmouse_trafo().

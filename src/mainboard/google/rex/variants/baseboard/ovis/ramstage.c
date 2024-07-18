@@ -15,7 +15,7 @@ struct soc_power_limits_config *variant_get_soc_power_limit_config(void)
 	size_t i = 0;
 
 	if (mchid == 0xffff)
-		return NULL;
+		return nullptr;
 
 	for (i = 0; i < ARRAY_SIZE(cpuid_to_mtl); i++) {
 		if (mchid == cpuid_to_mtl[i].cpu_id && tdp == cpuid_to_mtl[i].cpu_tdp) {
@@ -25,10 +25,10 @@ struct soc_power_limits_config *variant_get_soc_power_limit_config(void)
 
 	if (i == ARRAY_SIZE(cpuid_to_mtl)) {
 		printk(BIOS_ERR, "Cannot find correct ovis sku index.\n");
-		return NULL;
+		return nullptr;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /*

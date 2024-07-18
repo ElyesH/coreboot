@@ -114,8 +114,8 @@ struct devapc_init {
 } devapc_init[DEVAPC_AO_MAX] = {
 	{ DEVAPC_INFRA_AO_BASE, infra_master_init },
 	{ DEVAPC_PERI_AO_BASE, peri_master_init },
-	{ DEVAPC_PERI2_AO_BASE, NULL },
-	{ DEVAPC_PERI_PAR_AO_BASE, NULL },
+	{ DEVAPC_PERI2_AO_BASE, nullptr },
+	{ DEVAPC_PERI_PAR_AO_BASE, nullptr },
 	{ DEVAPC_FMEM_AO_BASE, fmem_master_init },
 	{ SCP_CFG_BASE, scp_master_init },
 };

@@ -61,7 +61,7 @@ static void resource_set_clk_config(struct resource_config *res_config,
 
 static const struct clk_config *resource_clk_config(const struct resource_config *res_config)
 {
-	return res_config ? res_config->clk_conf : NULL;
+	return res_config ? res_config->clk_conf : nullptr;
 }
 
 static void resource_set_gpio_config(struct resource_config *res_config,
@@ -75,7 +75,7 @@ static void resource_set_gpio_config(struct resource_config *res_config,
 
 static const struct gpio_config *resource_gpio_config(const struct resource_config *res_config)
 {
-	return res_config ? res_config->gpio_conf : NULL;
+	return res_config ? res_config->gpio_conf : nullptr;
 }
 
 /*
@@ -97,15 +97,15 @@ static void camera_fill_cio2(const struct device *dev)
 {
 	struct drivers_intel_mipi_camera_config *config = dev->chip_info;
 	struct acpi_dp *dsd = acpi_dp_new_table("_DSD");
-	char *ep_table_name[MAX_PORT_ENTRIES] = {NULL};
-	char *port_table_name[MAX_PORT_ENTRIES] = {NULL};
-	char *port_name[MAX_PORT_ENTRIES] = {NULL};
+	char *ep_table_name[MAX_PORT_ENTRIES] = {nullptr};
+	char *port_table_name[MAX_PORT_ENTRIES] = {nullptr};
+	char *port_name[MAX_PORT_ENTRIES] = {nullptr};
 	unsigned int i, j;
 	char name[BUS_PATH_MAX];
-	struct acpi_dp *ep_table = NULL;
-	struct acpi_dp *port_table = NULL;
-	struct acpi_dp *remote = NULL;
-	struct acpi_dp *lanes = NULL;
+	struct acpi_dp *ep_table = nullptr;
+	struct acpi_dp *port_table = nullptr;
+	struct acpi_dp *remote = nullptr;
+	struct acpi_dp *lanes = nullptr;
 
 	for (i = 0; i < config->cio2_num_ports && i < MAX_PORT_ENTRIES; ++i) {
 		snprintf(name, sizeof(name), "EP%u0", i);
@@ -119,15 +119,15 @@ static void camera_fill_cio2(const struct device *dev)
 
 			for (j = 1; j <= config->cio2_lanes_used[i] &&
 			     j <= MAX_PORT_ENTRIES; ++j)
-				acpi_dp_add_integer(lanes, NULL, j);
+				acpi_dp_add_integer(lanes, nullptr, j);
 			acpi_dp_add_array(ep_table, lanes);
 		}
 
 		if (config->cio2_lane_endpoint[i]) {
 			remote = acpi_dp_new_table("remote-endpoint");
-			acpi_dp_add_reference(remote, NULL, config->cio2_lane_endpoint[i]);
-			acpi_dp_add_integer(remote, NULL, 0);
-			acpi_dp_add_integer(remote, NULL, 0);
+			acpi_dp_add_reference(remote, nullptr, config->cio2_lane_endpoint[i]);
+			acpi_dp_add_integer(remote, nullptr, 0);
+			acpi_dp_add_integer(remote, nullptr, 0);
 			acpi_dp_add_array(ep_table, remote);
 		}
 
@@ -312,7 +312,7 @@ static void camera_fill_ssdb_defaults(struct drivers_intel_mipi_camera_config *c
 		config->ssdb.mclk_speed = CLK_FREQ_19_2MHZ;
 
 	if (!config->ssdb.lanes_used) {
-		cio2_config = cio2 ? cio2->chip_info : NULL;
+		cio2_config = cio2 ? cio2->chip_info : nullptr;
 
 		if (!cio2_config) {
 			printk(BIOS_ERR, "Failed to get CIO2 config\n");
@@ -352,12 +352,12 @@ static void camera_fill_ssdb_defaults(struct drivers_intel_mipi_camera_config *c
 static void camera_fill_sensor(const struct device *dev)
 {
 	struct drivers_intel_mipi_camera_config *config = dev->chip_info;
-	struct acpi_dp *ep00 = NULL;
-	struct acpi_dp *prt0 = NULL;
-	struct acpi_dp *dsd = NULL;
-	struct acpi_dp *remote = NULL;
-	const char *vcm_name = NULL;
-	struct acpi_dp *lens_focus = NULL;
+	struct acpi_dp *ep00 = nullptr;
+	struct acpi_dp *prt0 = nullptr;
+	struct acpi_dp *dsd = nullptr;
+	struct acpi_dp *remote = nullptr;
+	const char *vcm_name = nullptr;
+	struct acpi_dp *lens_focus = nullptr;
 	const char *remote_name;
 	struct device *cio2 = pcidev_on_root(CIO2_PCI_DEV, CIO2_PCI_FN);
 
@@ -376,7 +376,7 @@ static void camera_fill_sensor(const struct device *dev)
 		struct acpi_dp *lanes = acpi_dp_new_table("data-lanes");
 		uint32_t i;
 		for (i = 1; i <= config->ssdb.lanes_used; ++i)
-			acpi_dp_add_integer(lanes, NULL, i);
+			acpi_dp_add_integer(lanes, nullptr, i);
 		acpi_dp_add_array(ep00, lanes);
 	}
 
@@ -384,7 +384,7 @@ static void camera_fill_sensor(const struct device *dev)
 		struct acpi_dp *freq = acpi_dp_new_table("link-frequencies");
 		uint32_t i;
 		for (i = 0; i < config->num_freq_entries && i < MAX_LINK_FREQ_ENTRIES; ++i)
-			acpi_dp_add_integer(freq, NULL, config->link_freq[i]);
+			acpi_dp_add_integer(freq, nullptr, config->link_freq[i]);
 		acpi_dp_add_array(ep00, freq);
 	}
 
@@ -399,9 +399,9 @@ static void camera_fill_sensor(const struct device *dev)
 			remote_name = DEFAULT_REMOTE_NAME;
 	}
 
-	acpi_dp_add_reference(remote, NULL, remote_name);
-	acpi_dp_add_integer(remote, NULL, config->ssdb.link_used);
-	acpi_dp_add_integer(remote, NULL, DEFAULT_ENDPOINT);
+	acpi_dp_add_reference(remote, nullptr, remote_name);
+	acpi_dp_add_integer(remote, nullptr, config->ssdb.link_used);
+	acpi_dp_add_integer(remote, nullptr, DEFAULT_ENDPOINT);
 	acpi_dp_add_array(ep00, remote);
 
 	prt0 = acpi_dp_new_table("PRT0");
@@ -425,7 +425,7 @@ static void camera_fill_sensor(const struct device *dev)
 			};
 			struct device *vcm_dev = find_dev_path(dev->upstream, &path);
 			struct drivers_intel_mipi_camera_config *vcm_config;
-			vcm_config = vcm_dev ? vcm_dev->chip_info : NULL;
+			vcm_config = vcm_dev ? vcm_dev->chip_info : nullptr;
 
 			if (!vcm_config)
 				printk(BIOS_ERR, "Failed to get VCM\n");
@@ -438,7 +438,7 @@ static void camera_fill_sensor(const struct device *dev)
 
 	if (vcm_name) {
 		lens_focus = acpi_dp_new_table("lens-focus");
-		acpi_dp_add_reference(lens_focus, NULL, vcm_name);
+		acpi_dp_add_reference(lens_focus, nullptr, vcm_name);
 		acpi_dp_add_array(dsd, lens_focus);
 	}
 
@@ -570,7 +570,7 @@ static void call_guarded_method(struct resource_config *res_config)
 {
 	int res_index;
 
-	if (res_config == NULL)
+	if (res_config == nullptr)
 		return;
 
 	res_index = get_resource_index(res_config);
@@ -581,7 +581,7 @@ static void call_guarded_method(struct resource_config *res_config)
 
 static void add_clk_op(const struct clk_config *clk_config, enum action_type action)
 {
-	if (clk_config == NULL)
+	if (clk_config == nullptr)
 		return;
 
 	switch (action) {
@@ -611,7 +611,7 @@ static void add_clk_op(const struct clk_config *clk_config, enum action_type act
 
 static void add_gpio_op(const struct gpio_config *gpio_config, enum action_type action)
 {
-	if (gpio_config == NULL)
+	if (gpio_config == nullptr)
 		return;
 
 	switch (action) {
@@ -635,7 +635,7 @@ static void add_power_operation(const struct resource_config *res_config)
 	enum ctrl_type type = resource_get_ctrl_type(res_config);
 	enum action_type action = resource_get_action_type(res_config);
 
-	if (res_config == NULL)
+	if (res_config == nullptr)
 		return;
 
 	switch (type) {
@@ -812,7 +812,7 @@ static void write_i2c_camera_device(const struct device *dev, const char *scope)
 
 	/* add power resource */
 	if (config->has_power_resource) {
-		acpigen_write_power_res(POWER_RESOURCE_NAME, 0, 0, NULL, 0);
+		acpigen_write_power_res(POWER_RESOURCE_NAME, 0, 0, nullptr, 0);
 		acpigen_write_name_integer("STA", 0);
 		acpigen_write_STA_ext("STA");
 
@@ -930,7 +930,7 @@ static void write_camera_device_common(const struct device *dev)
 static void camera_fill_ssdt(const struct device *dev)
 {
 	struct drivers_intel_mipi_camera_config *config = dev->chip_info;
-	const char *scope = NULL;
+	const char *scope = nullptr;
 	const struct device *pdev;
 
 	if (config->has_power_resource) {
@@ -988,7 +988,7 @@ static void camera_fill_ssdt(const struct device *dev)
 
 static const char *camera_acpi_name(const struct device *dev)
 {
-	const char *prefix = NULL;
+	const char *prefix = nullptr;
 	static char name[ACPI_NAME_BUFFER_SIZE];
 	struct drivers_intel_mipi_camera_config *config = dev->chip_info;
 
@@ -1013,7 +1013,7 @@ static const char *camera_acpi_name(const struct device *dev)
 		break;
 	default:
 		printk(BIOS_ERR, "Invalid device type: %x\n", config->device_type);
-		return NULL;
+		return nullptr;
 	}
 
 	/*

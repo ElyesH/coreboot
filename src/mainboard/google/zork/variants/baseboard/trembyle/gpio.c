@@ -313,7 +313,7 @@ const __weak struct soc_amd_gpio *variant_bootblock_gpio_table(size_t *size, int
 {
 	if (variant_has_fingerprint()) {
 		if (slp_typ == ACPI_S3)
-			return NULL;
+			return nullptr;
 
 		*size = ARRAY_SIZE(gpio_fingerprint_bootblock_table);
 		return gpio_fingerprint_bootblock_table;

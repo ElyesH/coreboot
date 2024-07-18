@@ -281,7 +281,7 @@ const struct resource *fixed_mem_from_to_flags(struct device *dev, unsigned long
 					uint64_t base, uint64_t end, unsigned long flags)
 {
 	if (end <= base)
-		return NULL;
+		return nullptr;
 	return fixed_mem_range_flags(dev, index, base, end - base, flags);
 }
 
@@ -298,7 +298,7 @@ const struct resource *domain_mem_window_from_to(struct device *dev, unsigned lo
 					uint64_t base, uint64_t end)
 {
 	if (end <= base)
-		return NULL;
+		return nullptr;
 	return domain_mem_window_range(dev, index, base, end - base);
 }
 
@@ -315,7 +315,7 @@ const struct resource *ram_from_to(struct device *dev, unsigned long index, uint
 				 uint64_t end)
 {
 	if (end <= base)
-		return NULL;
+		return nullptr;
 	return ram_range(dev, index, base, end - base);
 }
 
@@ -332,7 +332,7 @@ const struct resource *reserved_ram_from_to(struct device *dev, unsigned long in
 					  uint64_t base, uint64_t end)
 {
 	if (end <= base)
-		return NULL;
+		return nullptr;
 	return reserved_ram_range(dev, index, base, end - base);
 }
 
@@ -348,7 +348,7 @@ const struct resource *mmio_from_to(struct device *dev, unsigned long index, uin
 				  uint64_t end)
 {
 	if (end <= base)
-		return NULL;
+		return nullptr;
 	return mmio_range(dev, index, base, end - base);
 }
 
@@ -372,9 +372,9 @@ const struct resource *fixed_io_from_to_flags(struct device *dev, unsigned long 
 				      uint16_t base, uint32_t end, unsigned long flags)
 {
 	if (end <= base)
-		return NULL;
+		return nullptr;
 	if (end > UINT16_MAX + 1)
-		return NULL;
+		return nullptr;
 	return fixed_io_range_flags(dev, index, base, end - base, flags);
 }
 
@@ -398,9 +398,9 @@ const struct resource *domain_io_window_from_to(struct device *dev, unsigned lon
 				      uint16_t base, uint32_t end)
 {
 	if (end <= base)
-		return NULL;
+		return nullptr;
 	if (end > UINT16_MAX + 1)
-		return NULL;
+		return nullptr;
 	return domain_io_window_range(dev, index, base, end - base);
 }
 
@@ -470,10 +470,10 @@ void devtree_bug(const char *func, pci_devfn_t devfn);
 void __noreturn devtree_die(void);
 
 /*
- * Dies if `dev` or `dev->chip_info` are NULL. Returns `dev->chip_info` otherwise.
+ * Dies if `dev` or `dev->chip_info` are nullptr. Returns `dev->chip_info` otherwise.
  *
  * Only use if missing `chip_info` is fatal and we can't boot. If it's
- * not fatal, please handle the NULL case gracefully.
+ * not fatal, please handle the nullptr case gracefully.
  */
 static inline DEVTREE_CONST void *config_of(const struct device *dev)
 {

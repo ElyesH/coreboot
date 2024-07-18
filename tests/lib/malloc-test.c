@@ -52,7 +52,7 @@ static int setup_calloc_test(void **state)
 static void test_malloc_out_of_memory(void **state)
 {
 	void *ptr = cb_malloc(TEST_HEAP_SZ);
-	assert_ptr_equal(ptr, NULL);
+	assert_ptr_equal(ptr, nullptr);
 }
 
 static void test_malloc_zero(void **state)
@@ -97,7 +97,7 @@ static void test_memalign_different_alignments(void **state)
 static void test_memalign_out_of_memory(void **state)
 {
 	void *ptr = cb_memalign(16, TEST_HEAP_SZ);
-	assert_ptr_equal(ptr, NULL);
+	assert_ptr_equal(ptr, nullptr);
 }
 
 static void test_memalign_zero(void **state)
@@ -158,5 +158,5 @@ int main(void)
 		cmocka_unit_test_setup(test_calloc_memory_is_zeroed, setup_calloc_test),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

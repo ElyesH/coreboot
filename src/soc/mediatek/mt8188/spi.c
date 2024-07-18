@@ -100,7 +100,7 @@ static const struct pad_func nor_pinmux[4] = {
 
 void mtk_snfc_init(void)
 {
-	const struct pad_func *ptr = NULL;
+	const struct pad_func *ptr = nullptr;
 
 	ptr = nor_pinmux;
 	for (size_t i = 0; i < ARRAY_SIZE(nor_pinmux); i++) {

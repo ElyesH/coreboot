@@ -174,7 +174,7 @@ static void elog_debug_dump_buffer(const char *msg)
 
 	buffer = rdev_mmap_full(rdev);
 
-	if (buffer == NULL)
+	if (buffer == nullptr)
 		return;
 
 	hexdump(buffer, region_device_sz(rdev));
@@ -196,7 +196,7 @@ static int elog_is_buffer_clear(size_t offset)
 
 	elog_debug("%s(offset=%zu size=%zu)\n", __func__, offset, size);
 
-	if (buffer == NULL)
+	if (buffer == nullptr)
 		return 0;
 
 	for (i = 0; i < size; i++) {
@@ -282,7 +282,7 @@ static void elog_nv_write(size_t offset, size_t size)
 	elog_debug("%s(address=%p offset=0x%08zx size=%zu)\n", __func__,
 		 address, offset, size);
 
-	if (address == NULL)
+	if (address == nullptr)
 		return;
 
 	/* Write the data to flash */
@@ -420,7 +420,7 @@ static void elog_move_events_to_front(size_t offset, size_t size)
 	src = rdev_mmap(rdev, offset, size);
 	dest = rdev_mmap(rdev, start_offset, size);
 
-	if (src == NULL || dest == NULL) {
+	if (src == nullptr || dest == nullptr) {
 		printk(BIOS_ERR, "ELOG: failure moving events!\n");
 		rdev_munmap(rdev, dest);
 		rdev_munmap(rdev, src);
@@ -436,7 +436,7 @@ static void elog_move_events_to_front(size_t offset, size_t size)
 	offset = start_offset + size;
 	size = region_device_sz(rdev) - offset;
 	dest = rdev_mmap(rdev, offset, size);
-	if (dest == NULL) {
+	if (dest == nullptr) {
 		printk(BIOS_ERR, "ELOG: failure filling EOL!\n");
 		return;
 	}
@@ -542,10 +542,10 @@ static inline u8 *elog_flash_offset_to_address(void)
 {
 	/* Only support memory-mapped devices. */
 	if (!CONFIG(BOOT_DEVICE_MEMORY_MAPPED))
-		return NULL;
+		return nullptr;
 
 	if (!region_device_sz(&elog_state.nv_dev))
-		return NULL;
+		return nullptr;
 
 	/* Get a view into the read-only boot device. */
 	return rdev_mmap(boot_device_ro(),
@@ -813,7 +813,7 @@ int elog_add_event_raw(u8 event_type, void *data, u8 data_size)
 
 	/* Make sure event data can fit */
 	event = elog_get_next_event_buffer(event_size);
-	if (event == NULL) {
+	if (event == nullptr) {
 		printk(BIOS_ERR, "ELOG: Event(%X) does not fit\n",
 		       event_type);
 		return -1;
@@ -858,7 +858,7 @@ int elog_add_event_raw(u8 event_type, void *data, u8 data_size)
 
 int elog_add_event(u8 event_type)
 {
-	return elog_add_event_raw(event_type, NULL, 0);
+	return elog_add_event_raw(event_type, nullptr, 0);
 }
 
 int elog_add_event_byte(u8 event_type, u8 data)
@@ -898,4 +898,4 @@ int elog_add_extended_event(u8 type, u32 complement)
 
 /* Make sure elog_init() runs at least once to log System Boot event. */
 static void elog_bs_init(void *unused) { elog_init(); }
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY, elog_bs_init, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY, elog_bs_init, nullptr);

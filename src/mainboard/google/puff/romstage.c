@@ -47,7 +47,7 @@ void mainboard_memory_init_params(FSPM_UPD *memupd)
 			printk(BIOS_WARNING, "update SPD cache failed\n");
 	}
 
-	if (blk.spd_array[0] == NULL) {
+	if (blk.spd_array[0] == nullptr) {
 		memcfg.spd[0].read_type = NOT_EXISTING;
 	} else {
 		memcfg.spd[0].read_type = READ_SPD_MEMPTR;
@@ -57,7 +57,7 @@ void mainboard_memory_init_params(FSPM_UPD *memupd)
 
 	memcfg.spd[1].read_type = NOT_EXISTING;
 
-	if (blk.spd_array[1] == NULL) {
+	if (blk.spd_array[1] == nullptr) {
 		memcfg.spd[2].read_type = NOT_EXISTING;
 	} else {
 		memcfg.spd[2].read_type = READ_SPD_MEMPTR;

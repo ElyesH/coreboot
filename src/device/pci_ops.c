@@ -74,7 +74,7 @@ u16 pci_s_find_capability(pci_devfn_t dev, u16 cap)
 
 void __noreturn pcidev_die(void)
 {
-	die("PCI: dev is NULL!\n");
+	die("PCI: dev is nullptr!\n");
 }
 
 bool pci_dev_is_wake_source(pci_devfn_t dev)

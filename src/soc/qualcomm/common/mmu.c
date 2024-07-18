@@ -9,8 +9,8 @@ __weak bool soc_modem_carve_out(void **start, void **end) { return false; }
 
 void qc_mmu_dram_config_post_dram_init(void *ddr_base, size_t ddr_size)
 {
-	void *start = NULL;
-	void *end = NULL;
+	void *start = nullptr;
+	void *end = nullptr;
 
 	if (!soc_modem_carve_out(&start, &end)) {
 		mmu_config_range((void *)ddr_base, ddr_size, CACHED_RAM);

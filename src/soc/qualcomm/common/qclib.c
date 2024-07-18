@@ -35,7 +35,7 @@ static void write_mem_chip_information(struct qclib_cb_if_table_entry *te)
 
 static void add_mem_chip_info(int unused)
 {
-	void *mem_region_base = NULL;
+	void *mem_region_base = nullptr;
 	size_t size;
 
 	if (!mem_chip_info || !mem_chip_info->num_entries ||
@@ -48,7 +48,7 @@ static void add_mem_chip_info(int unused)
 
 	/* Add cbmem table */
 	mem_region_base = cbmem_add(CBMEM_ID_MEM_CHIP_INFO, size);
-	ASSERT(mem_region_base != NULL);
+	ASSERT(mem_region_base != nullptr);
 
 	/* Migrate the data into CBMEM */
 	memcpy(mem_region_base, mem_chip_info, size);
@@ -184,7 +184,7 @@ void qclib_load_and_run(void)
 				REGION_SIZE(qclib_serial_log), 0);
 
 	/* output area, QCLib fills in DDR details */
-	qclib_add_if_table_entry(QCLIB_TE_DDR_INFORMATION, NULL, 0, 0);
+	qclib_add_if_table_entry(QCLIB_TE_DDR_INFORMATION, nullptr, 0, 0);
 
 	/* Attempt to load DDR Training Blob */
 	data_size = mrc_cache_load_current(MRC_TRAINING_DATA, QCLIB_VERSION,
@@ -197,7 +197,7 @@ void qclib_load_and_run(void)
 				 _ddr_training, REGION_SIZE(ddr_training), 0);
 
 	/* Address and size of this entry will be filled in by QcLib. */
-	qclib_add_if_table_entry(QCLIB_TE_MEM_CHIP_INFO, NULL, 0, 0);
+	qclib_add_if_table_entry(QCLIB_TE_MEM_CHIP_INFO, nullptr, 0, 0);
 
 	/* Attempt to load PMICCFG Blob */
 	data_size = cbfs_load(qclib_file(QCLIB_CBFS_PMICCFG),

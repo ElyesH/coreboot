@@ -47,7 +47,7 @@ void *memalign(size_t boundary, size_t size)
 		printk(BIOS_ERR, "Error! %s: Out of memory "
 				"(free_mem_ptr >= free_mem_end_ptr)",
 				__func__);
-		return NULL;
+		return nullptr;
 	}
 
 	MALLOCDBG("%s %p\n", __func__, p);
@@ -71,7 +71,7 @@ void *calloc(size_t nitems, size_t size)
 
 void free(void *ptr)
 {
-	if (ptr == NULL)
+	if (ptr == nullptr)
 		return;
 
 	if (ptr < (void *)&_heap || ptr >= free_mem_end_ptr) {
@@ -86,6 +86,6 @@ void free(void *ptr)
 	 */
 	if (ptr == free_last_alloc_ptr) {
 		free_mem_ptr = free_last_alloc_ptr;
-		free_last_alloc_ptr = NULL;
+		free_last_alloc_ptr = nullptr;
 	}
 }

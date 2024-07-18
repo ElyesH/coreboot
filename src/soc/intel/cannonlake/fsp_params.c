@@ -278,9 +278,9 @@ static void configure_gspi_cs(int idx, const config_t *config,
 			else
 				*polarity = 1;
 
-			if (defaultcs != NULL)
+			if (defaultcs != nullptr)
 				*defaultcs = 0;
-			if (enable != NULL)
+			if (enable != nullptr)
 				*enable = 1;
 		}
 	}
@@ -294,7 +294,7 @@ static const SI_PCH_DEVICE_INTERRUPT_CONFIG *pci_irq_to_fsp(size_t *out_count)
 	size_t cfg_count = 0;
 
 	if (!entry)
-		return NULL;
+		return nullptr;
 
 	/* Count PCH devices */
 	while (entry) {
@@ -659,7 +659,7 @@ void platform_fsp_silicon_init_params_cb(FSPS_UPD *supd)
 #else
 	for (i = 0; i < CONFIG_SOC_INTEL_COMMON_BLOCK_GSPI_MAX; i++)
 		configure_gspi_cs(i, config,
-				&params->SerialIoSpiCsPolarity[0], NULL, NULL);
+				&params->SerialIoSpiCsPolarity[0], nullptr, nullptr);
 #endif
 
 	/* Chipset Lockdown */

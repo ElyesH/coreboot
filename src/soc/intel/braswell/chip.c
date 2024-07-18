@@ -34,7 +34,7 @@ static void enable_dev(struct device *dev)
 	} else if (dev->path.type == DEVICE_PATH_PCI) {
 		/* Handle south cluster enablement. */
 		if (PCI_SLOT(dev->path.pci.devfn) > GFX_DEV &&
-		    (dev->ops == NULL || dev->ops->enable == NULL)) {
+		    (dev->ops == nullptr || dev->ops->enable == nullptr)) {
 			southcluster_enable_dev(dev);
 		}
 	}

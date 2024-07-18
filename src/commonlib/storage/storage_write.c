@@ -48,7 +48,7 @@ static uint32_t storage_write(struct storage_media *media, uint32_t start,
 		cmd.cmdarg = 0;
 		cmd.resp_type = CARD_RSP_R1b;
 		cmd.flags = CMD_FLAG_IGNORE_INHIBIT;
-		if (ctrlr->send_cmd(ctrlr, &cmd, NULL)) {
+		if (ctrlr->send_cmd(ctrlr, &cmd, nullptr)) {
 			sd_mmc_error("Failed to send stop cmd\n");
 			return 0;
 		}

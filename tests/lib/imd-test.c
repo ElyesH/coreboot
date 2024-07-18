@@ -65,11 +65,11 @@ static void test_imd_handle_init(void **state)
 
 		assert_int_equal(imd.lg.limit % LIMIT_ALIGN, 0);
 		assert_int_equal(imd.lg.limit, ALIGN_DOWN(test_inputs[i], LIMIT_ALIGN));
-		assert_ptr_equal(imd.lg.r, NULL);
+		assert_ptr_equal(imd.lg.r, nullptr);
 
 		/* Small allocations not initialized */
-		assert_ptr_equal(imd.sm.limit, NULL);
-		assert_ptr_equal(imd.sm.r, NULL);
+		assert_ptr_equal(imd.sm.limit, nullptr);
+		assert_ptr_equal(imd.sm.r, nullptr);
 	}
 }
 
@@ -84,7 +84,7 @@ static void test_imd_handle_init_partial_recovery(void **state)
 	assert_null(imd.sm.limit);
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
@@ -117,7 +117,7 @@ static void test_imd_create_empty(void **state)
 	/* Expect imd_create_empty to fail, since imd handle is not initialized */
 	assert_int_equal(-1, imd_create_empty(&imd, LG_ROOT_SIZE, LG_ENTRY_ALIGN));
 	base = malloc(sizeof(struct imd_root_pointer) + sizeof(struct imd_root));
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
@@ -164,7 +164,7 @@ static void test_imd_create_tiered_empty(void **state)
 						     LG_ROOT_SIZE, SM_ENTRY_ALIGN));
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
@@ -232,12 +232,12 @@ static void test_imd_recover(void **state)
 	const struct imd_entry *lg_entry;
 
 	/* Fail when the limit for lg was not set. */
-	imd.lg.limit = (uintptr_t)NULL;
+	imd.lg.limit = (uintptr_t)nullptr;
 	assert_int_equal(-1, imd_recover(&imd));
 
 	/* Set the limit for lg. */
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
@@ -331,7 +331,7 @@ static void test_imd_limit_size(void **state)
 	assert_int_equal(-1, imd_limit_size(&imd, max_size));
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
 
@@ -357,7 +357,7 @@ static void test_imd_lockdown(void **state)
 	assert_int_equal(-1, imd_lockdown(&imd));
 
 	imd.lg.r = malloc(sizeof(struct imd_root));
-	if (imd.lg.r == NULL)
+	if (imd.lg.r == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 
 	r_lg = (struct imd_root *)(imd.lg.r);
@@ -366,7 +366,7 @@ static void test_imd_lockdown(void **state)
 	assert_true(r_lg->flags & IMD_FLAG_LOCKED);
 
 	imd.sm.r = malloc(sizeof(struct imd_root));
-	if (imd.sm.r == NULL)
+	if (imd.sm.r == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 	r_sm = (struct imd_root *)(imd.sm.r);
 
@@ -389,7 +389,7 @@ static void test_imd_region_used(void **state)
 	assert_int_equal(-1, imd_region_used(&imd, &base, &size));
 
 	imd_base = malloc(LIMIT_ALIGN);
-	if (imd_base == NULL)
+	if (imd_base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)imd_base));
 
@@ -433,7 +433,7 @@ static void test_imd_entry_add(void **state)
 	assert_null(imd_entry_add(&imd, LG_ENTRY_ID, entry_size));
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
@@ -529,7 +529,7 @@ static void test_imd_entry_find(void **state)
 	void *base;
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
 
@@ -555,7 +555,7 @@ static void test_imd_entry_find_or_add(void **state)
 	void *base;
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
 
@@ -589,18 +589,18 @@ static void test_imd_entry_at(void **state)
 {
 	struct imd imd = {0};
 	struct imd_root *r;
-	struct imd_entry *e = NULL;
+	struct imd_entry *e = nullptr;
 	const struct imd_entry *entry;
 	void *base;
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
 
 	assert_int_equal(0, imd_create_empty(&imd, LG_ROOT_SIZE, LG_ENTRY_ALIGN));
 
-	/* Fail when entry is NULL */
+	/* Fail when entry is nullptr */
 	assert_null(imd_entry_at(&imd, e));
 
 	entry = imd_entry_add(&imd, LG_ENTRY_ID, LG_ENTRY_SIZE);
@@ -625,13 +625,13 @@ static void test_imd_entry_remove(void **state)
 	struct imd imd = {0};
 	struct imd_root *r;
 	const struct imd_entry *fst_lg_entry, *snd_lg_entry, *fst_sm_entry;
-	const struct imd_entry *e = NULL;
+	const struct imd_entry *e = nullptr;
 
 	/* Uninitialized handle */
 	assert_int_equal(-1, imd_entry_remove(&imd, e));
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
@@ -674,9 +674,9 @@ static void test_imd_cursor_init(void **state)
 	struct imd imd = {0};
 	struct imd_cursor cursor;
 
-	assert_int_equal(-1, imd_cursor_init(NULL, NULL));
-	assert_int_equal(-1, imd_cursor_init(NULL, &cursor));
-	assert_int_equal(-1, imd_cursor_init(&imd, NULL));
+	assert_int_equal(-1, imd_cursor_init(nullptr, nullptr));
+	assert_int_equal(-1, imd_cursor_init(nullptr, &cursor));
+	assert_int_equal(-1, imd_cursor_init(&imd, nullptr));
 	assert_int_equal(0, imd_cursor_init(&imd, &cursor));
 
 	assert_ptr_equal(cursor.imdr[0], &imd.lg);
@@ -701,7 +701,7 @@ static void test_imd_cursor_next(void **state)
 	assert_null(imd_cursor_next(&cursor));
 
 	base = malloc(LIMIT_ALIGN);
-	if (base == NULL)
+	if (base == nullptr)
 		fail_msg("Cannot allocate enough memory - fail test");
 	imd_handle_init(&imd, (void *)(LIMIT_ALIGN + (uintptr_t)base));
 
@@ -757,5 +757,5 @@ int main(void)
 		cmocka_unit_test(test_imd_cursor_next),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

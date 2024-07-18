@@ -61,9 +61,9 @@ struct boot_state {
 		.name = #state_,				\
 		.id = state_,					\
 		.post_code = POSTCODE_ ## state_,		\
-		.phases = { { NULL, 0 }, { NULL, 0 } },		\
+		.phases = { { nullptr, 0 }, { nullptr, 0 } },		\
 		.run_state = run_func_,				\
-		.arg = NULL,					\
+		.arg = nullptr,					\
 		.complete = false,				\
 	}
 #define BS_INIT_ENTRY(state_, run_func_)	\
@@ -149,12 +149,12 @@ static boot_state_t bs_post_device(void *arg)
 
 static boot_state_t bs_os_resume_check(void *arg)
 {
-	void *wake_vector = NULL;
+	void *wake_vector = nullptr;
 
 	if (CONFIG(HAVE_ACPI_RESUME))
 		wake_vector = acpi_find_wakeup_vector();
 
-	if (wake_vector != NULL) {
+	if (wake_vector != nullptr) {
 		boot_states[BS_OS_RESUME].arg = wake_vector;
 		return BS_OS_RESUME;
 	}
@@ -266,13 +266,13 @@ static void bs_call_callbacks(struct boot_state *state,
 	struct mono_time mt_start, mt_stop;
 
 	while (1) {
-		if (phase->callbacks != NULL) {
+		if (phase->callbacks != nullptr) {
 			struct boot_state_callback *bscb;
 
 			/* Remove the first callback. */
 			bscb = phase->callbacks;
 			phase->callbacks = bscb->next;
-			bscb->next = NULL;
+			bscb->next = nullptr;
 
 			if (CONFIG(DEBUG_BOOT_STATE)) {
 				printk(BIOS_DEBUG, "BS: callback (%p) @ %s.\n",
@@ -411,7 +411,7 @@ static void boot_state_schedule_static_entries(void)
 	extern struct boot_state_init_entry *_bs_init_begin[];
 	struct boot_state_init_entry **slot;
 
-	for (slot = &_bs_init_begin[0]; *slot != NULL; slot++) {
+	for (slot = &_bs_init_begin[0]; *slot != nullptr; slot++) {
 		struct boot_state_init_entry *cur = *slot;
 
 		if (cur->when == BS_ON_ENTRY)

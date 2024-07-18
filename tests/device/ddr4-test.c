@@ -35,5 +35,5 @@ int main(void)
 {
 	const struct CMUnitTest tests[] = {cmocka_unit_test(ddr4_speed_mhz_to_mts_test)};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

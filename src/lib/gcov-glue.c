@@ -23,8 +23,8 @@ typedef struct file {
 
 #define COVERAGE_MAGIC 0x584d4153
 
-static FILE *current_file = NULL;
-static FILE *previous_file = NULL;
+static FILE *current_file = nullptr;
+static FILE *previous_file = nullptr;
 
 static FILE *fopen(const char *path, const char *mode)
 {
@@ -43,7 +43,7 @@ static FILE *fopen(const char *path, const char *mode)
 	// TODO check if we're at the end of the CBMEM region (ENOMEM)
 	if (current_file) {
 		current_file->magic = COVERAGE_MAGIC;
-		current_file->next = NULL;
+		current_file->next = nullptr;
 		if (previous_file)
 			previous_file->next = current_file;
 		current_file->filename = (char *)&current_file[1];
@@ -121,7 +121,7 @@ static void coverage_init(void *unused)
 	extern long __CTOR_LIST__;
 	typedef void (*func_ptr)(void);
 	func_ptr *ctor = (func_ptr *) &__CTOR_LIST__;
-	if (ctor == NULL)
+	if (ctor == nullptr)
 		return;
 
 	for (; *ctor != (func_ptr) 0; ctor++)
@@ -137,6 +137,6 @@ static void coverage_exit(void *unused)
 	__gcov_flush();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, coverage_init, NULL);
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, coverage_exit, NULL);
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, coverage_exit, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, coverage_init, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, coverage_exit, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, coverage_exit, nullptr);

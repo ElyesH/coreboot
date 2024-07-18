@@ -53,7 +53,7 @@ void setup_mmu(enum dram_state dram)
 
 	mmu_disable_range(DRAM_END, 4096 - DRAM_END);
 
-	/* disable Page 0 for trapping NULL pointer references. */
+	/* disable Page 0 for trapping nullptr pointer references. */
 	mmu_disable_range_kb(0, 1);
 
 	mmu_init();

@@ -75,7 +75,7 @@ GEN_HOOK_SET_FUNCTION(menu, init)
 |                    when a menu is posted or just after the top row
 |                    changes.
 |
-|   Return Values :  Menu init function address or NULL
+|   Return Values :  Menu init function address or nullptr
 +--------------------------------------------------------------------------*/
 GEN_HOOK_GET_FUNCTION(menu, init)
 
@@ -98,7 +98,7 @@ GEN_HOOK_SET_FUNCTION(menu, term)
 |                    when a menu is unposted or just before the top row
 |                    changes.
 |
-|   Return Values :  Menu finalization function address or NULL
+|   Return Values :  Menu finalization function address or nullptr
 +--------------------------------------------------------------------------*/
 GEN_HOOK_GET_FUNCTION(menu, term)
 
@@ -121,7 +121,7 @@ GEN_HOOK_SET_FUNCTION(item, init)
 |                    when a menu is posted or just after the current item
 |                    changes.
 |
-|   Return Values :  Item init function address or NULL
+|   Return Values :  Item init function address or nullptr
 +--------------------------------------------------------------------------*/
 GEN_HOOK_GET_FUNCTION(item, init)
 
@@ -144,7 +144,7 @@ GEN_HOOK_SET_FUNCTION(item, term)
 |                    when a menu is unposted or just before the current item
 |                    changes.
 |
-|   Return Values :  Item finalization function address or NULL
+|   Return Values :  Item finalization function address or nullptr
 +--------------------------------------------------------------------------*/
 GEN_HOOK_GET_FUNCTION(item, term)
 

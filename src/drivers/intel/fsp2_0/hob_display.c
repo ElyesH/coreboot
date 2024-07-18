@@ -125,7 +125,7 @@ const char *fsp_get_hob_type_name(const struct hob_header *hob)
 
 	/* Get name for SOC specific HOB */
 	name = soc_get_hob_type_name(hob);
-	if (name != NULL)
+	if (name != nullptr)
 		return name;
 	return "Unknown HOB type";
 }
@@ -142,7 +142,7 @@ const char *fsp_get_guid_name(const uint8_t *guid)
 
 	/* Get GUID name from SOC */
 	name = soc_get_guid_name(guid);
-	if (name != NULL)
+	if (name != nullptr)
 		return name;
 	return "Unknown GUID";
 }
@@ -150,7 +150,7 @@ const char *fsp_get_guid_name(const uint8_t *guid)
 __weak const char *soc_get_hob_type_name(
 	const struct hob_header *hob)
 {
-	return NULL;
+	return nullptr;
 }
 
 void fsp_print_guid_extension_hob(const struct hob_header *hob)
@@ -168,7 +168,7 @@ void fsp_print_guid_extension_hob(const struct hob_header *hob)
 
 __weak const char *soc_get_guid_name(const uint8_t *guid)
 {
-	return NULL;
+	return nullptr;
 }
 
 void fsp_display_hobs(void)

@@ -115,7 +115,7 @@ static int i2c_do_xfer(unsigned int bus, struct i2c_msg segment,
 	unsigned int cmd = (segment.flags & I2C_M_RD) ? 2 : 1;
 	unsigned int master_cmd_reg_val = (cmd << M_OPCODE_SHFT);
 	struct qup_regs *regs = qup[bus].regs;
-	void *dout = NULL, *din = NULL;
+	void *dout = nullptr, *din = nullptr;
 	struct stopwatch timeout;
 
 	if (!(segment.flags & I2C_M_RD)) {

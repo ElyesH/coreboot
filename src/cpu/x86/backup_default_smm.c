@@ -12,7 +12,7 @@ void *backup_default_smm_area(void)
 	const void *default_smm = (void *)SMM_DEFAULT_BASE;
 
 	if (!CONFIG(HAVE_ACPI_RESUME))
-		return NULL;
+		return nullptr;
 
 	/*
 	 * The buffer needs to be preallocated regardless. In the non-resume
@@ -21,9 +21,9 @@ void *backup_default_smm_area(void)
 	 */
 	save_area = cbmem_add(CBMEM_ID_SMM_SAVE_SPACE, SMM_DEFAULT_SIZE);
 
-	if (save_area == NULL) {
+	if (save_area == nullptr) {
 		printk(BIOS_DEBUG, "SMM save area not added.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* Only back up the area on S3 resume. */
@@ -36,14 +36,14 @@ void *backup_default_smm_area(void)
 	 * Not the S3 resume path. No need to restore memory contents after
 	 * SMM relocation.
 	 */
-	return NULL;
+	return nullptr;
 }
 
 void restore_default_smm_area(void *smm_save_area)
 {
 	void *default_smm = (void *)SMM_DEFAULT_BASE;
 
-	if (smm_save_area == NULL)
+	if (smm_save_area == nullptr)
 		return;
 
 	memcpy(default_smm, smm_save_area, SMM_DEFAULT_SIZE);

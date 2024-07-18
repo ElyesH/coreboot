@@ -36,7 +36,7 @@ static void save_dimm_info(void)
 	const MEMORY_INFO_DATA_HOB *meminfo_hob;
 	const uint8_t smbios_memory_info_guid[sizeof(EFI_GUID)] = FSP_SMBIOS_MEMORY_INFO_GUID;
 	const uint8_t *serial_num;
-	const char *dram_part_num = NULL;
+	const char *dram_part_num = nullptr;
 	size_t dram_part_num_len = 0;
 
 	/* Locate the memory info HOB, presence validated by raminit */

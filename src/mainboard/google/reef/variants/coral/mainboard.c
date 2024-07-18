@@ -186,7 +186,7 @@ const struct pad_config *variant_sku_gpio_table(size_t *num)
 		break;
 	default:
 		*num = 0;
-		board_gpio_tables = NULL;
+		board_gpio_tables = nullptr;
 		break;
 	}
 	return board_gpio_tables;

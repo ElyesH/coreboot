@@ -55,7 +55,7 @@ struct panel_description *get_panel_description(void)
 {
 	uint32_t id = panel_id() & 0xF;
 	if (id >= ARRAY_SIZE(wugtrio_panels))
-		return NULL;
+		return nullptr;
 
 	return &wugtrio_panels[id];
 }

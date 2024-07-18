@@ -36,12 +36,12 @@ static void raminit_common(struct romstage_params *params)
 
 	/* Check recovery and MRC cache */
 	params->saved_data_size = 0;
-	params->saved_data = NULL;
+	params->saved_data = nullptr;
 	if (!params->disable_saved_data) {
 		/* Assume boot device is memory mapped. */
 		assert(CONFIG(BOOT_DEVICE_MEMORY_MAPPED));
 
-		params->saved_data = NULL;
+		params->saved_data = nullptr;
 		if (CONFIG(CACHE_MRC_SETTINGS))
 			params->saved_data =
 				mrc_cache_current_mmap_leak(MRC_TRAINING_DATA,
@@ -74,7 +74,7 @@ static void raminit_common(struct romstage_params *params)
 			params->data_to_save, params->data_to_save_size);
 		if (!s3wake
 			&& (params->data_to_save_size != 0)
-			&& (params->data_to_save != NULL))
+			&& (params->data_to_save != nullptr))
 			mrc_cache_stash_data(MRC_TRAINING_DATA,
 				params->fsp_version,
 				params->data_to_save,
@@ -196,7 +196,7 @@ __weak void mainboard_save_dimm_info(
 	 */
 	mem_info = cbmem_add(CBMEM_ID_MEMINFO, sizeof(*mem_info));
 	printk(BIOS_DEBUG, "CBMEM entry for DIMM info: %p\n", mem_info);
-	if (mem_info == NULL)
+	if (mem_info == nullptr)
 		return;
 	memset(mem_info, 0, sizeof(*mem_info));
 

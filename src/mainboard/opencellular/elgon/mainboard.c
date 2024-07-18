@@ -26,7 +26,7 @@ static void mainboard_print_info(void)
 		printk(BIOS_ERR, "MB: Could not find region '%s'\n", "WP_RO");
 	} else {
 		const struct spi_flash *flash = boot_device_spi_flash();
-		const bool prot = (flash != NULL) &&
+		const bool prot = (flash != nullptr) &&
 			    (spi_flash_is_write_protected(flash, &region) == 1);
 		printk(BIOS_INFO, "MB: WP_RO is %swrite protected\n",
 		       prot ? "" : "not ");
@@ -91,7 +91,7 @@ static void mainboard_init(struct device *dev)
 
 	/* Init CPUs */
 	for (i = 1; i < CONFIG_MAX_CPUS; i++)
-		start_cpu(i, NULL);
+		start_cpu(i, nullptr);
 }
 
 static void mainboard_enable(struct device *dev)

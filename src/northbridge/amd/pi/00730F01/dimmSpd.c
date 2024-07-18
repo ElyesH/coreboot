@@ -16,12 +16,12 @@ AGESA_STATUS AmdMemoryReadSPD(UINT32 unused1, UINTN unused2, AGESA_READ_SPD_PARA
 	int spdAddress;
 	DEVTREE_CONST struct device *dev = pcidev_on_root(0x18, 2);
 
-	if (dev == NULL)
+	if (dev == nullptr)
 		return AGESA_ERROR;
 
 	DEVTREE_CONST struct northbridge_amd_pi_00730F01_config *config = dev->chip_info;
 
-	if (config == NULL)
+	if (config == nullptr)
 		return AGESA_ERROR;
 
 	if (info->SocketId >= ARRAY_SIZE(config->spdAddrLookup))

@@ -32,7 +32,7 @@ bool fit_payload_arch(struct prog *payload, struct fit_config_node *config,
 		      struct region *fdt,
 		      struct region *initrd)
 {
-	void *arg = NULL;
+	void *arg = nullptr;
 
 	/**
 	 * The kernel ARM documentation recommends loading the kernel above 32MiB

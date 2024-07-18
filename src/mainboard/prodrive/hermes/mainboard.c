@@ -300,7 +300,7 @@ static void mainboard_early(void *unused)
 	log_reset_causes();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, mainboard_early, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, mainboard_early, nullptr);
 
 /*
  * coreboot only exposes the last framebuffer that is set up.
@@ -313,11 +313,11 @@ static void mainboard_configure_internal_gfx(void *unused)
 	struct device *dev;
 
 	if (get_board_settings()->primary_video == PRIMARY_VIDEO_INTEL) {
-		dev = dev_find_device(PCI_VID_ASPEED, PCI_DID_ASPEED_AST2050_VGA, NULL);
+		dev = dev_find_device(PCI_VID_ASPEED, PCI_DID_ASPEED_AST2050_VGA, nullptr);
 		dev->on_mainboard = false;
 		dev->enabled = false;
-		dev->ops->init = NULL;
+		dev->ops->init = nullptr;
 	}
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_RESOURCES, BS_ON_ENTRY, mainboard_configure_internal_gfx, NULL)
+BOOT_STATE_INIT_ENTRY(BS_DEV_RESOURCES, BS_ON_ENTRY, mainboard_configure_internal_gfx, nullptr)

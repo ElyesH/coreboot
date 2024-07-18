@@ -10,7 +10,7 @@ static struct panel_description kodama_panels[] = {
 struct panel_description *get_panel_description(int panel_id)
 {
 	if (panel_id < 0 || panel_id >= ARRAY_SIZE(kodama_panels))
-		return NULL;
+		return nullptr;
 
 	return get_panel_from_cbfs(&kodama_panels[panel_id]);
 }

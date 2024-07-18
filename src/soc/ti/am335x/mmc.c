@@ -199,7 +199,7 @@ static int am335x_send_cmd(struct sd_mmc_ctrlr *ctrlr, struct mmc_command *cmd,
 		break;
 	}
 
-	if (data != NULL && data->flags & DATA_FLAG_READ) {
+	if (data != nullptr && data->flags & DATA_FLAG_READ) {
 		if (am335x_wait_for_reg(&reg->stat, IE_BRR, AM335X_TIMEOUT_MSEC))
 			return -1;
 

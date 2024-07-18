@@ -32,7 +32,7 @@ static tpm_result_t tpm_send_receive(const uint8_t *request,
 	size_t len = *response_length;
 	tpm_result_t rc;
 
-	if (tlcl_tis_sendrecv == NULL) {
+	if (tlcl_tis_sendrecv == nullptr) {
 		printk(BIOS_ERR, "Attempted use of uninitialized TSS 1.2 stack\n");
 		return TPM_FAIL;
 	}
@@ -315,7 +315,7 @@ tpm_result_t tlcl1_get_flags(uint8_t *disable, uint8_t *deactivated, uint8_t *nv
 tpm_result_t tlcl1_set_global_lock(void)
 {
 	VBDEBUG("TPM: Set global lock\n");
-	return tlcl1_write(TPM_NV_INDEX0, NULL, 0);
+	return tlcl1_write(TPM_NV_INDEX0, nullptr, 0);
 }
 
 tpm_result_t tlcl1_extend(int pcr_num, const uint8_t *digest_data,

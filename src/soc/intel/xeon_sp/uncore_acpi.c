@@ -316,12 +316,12 @@ static unsigned long acpi_create_drhd(unsigned long current, struct device *iomm
 	// Add PCIe Ports
 	if (!is_dev_on_domain0(iommu)) {
 		const struct device *domain = dev_get_domain(iommu);
-		struct device *dev = NULL;
+		struct device *dev = nullptr;
 		while ((dev = dev_bus_each_child(domain->downstream, dev)))
 			if (is_pci_bridge(dev))
 				current +=
 				acpi_create_dmar_ds_pci_br_for_port(
-				current, dev, pcie_seg, false, NULL);
+				current, dev, pcie_seg, false, nullptr);
 
 #if CONFIG(SOC_INTEL_SKYLAKE_SP) || CONFIG(SOC_INTEL_COOPERLAKE_SP)
 		// Add VMD
@@ -338,7 +338,7 @@ static unsigned long acpi_create_drhd(unsigned long current, struct device *iomm
 
 	// Add IOAT End Points (with memory resources. We don't report every End Point device.)
 	if (CONFIG(HAVE_IOAT_DOMAINS) && is_dev_on_ioat_domain(iommu)) {
-		struct device *dev = NULL;
+		struct device *dev = nullptr;
 		while ((dev = dev_find_all_devices_on_stack(socket, stack,
 			XEONSP_VENDOR_MAX, XEONSP_DEVICE_MAX, dev)))
 			/* This may also require a check for IORESOURCE_PREFETCH,
@@ -395,7 +395,7 @@ static unsigned long acpi_create_atsr(unsigned long current)
 		unsigned long tmp = current;
 		bool first = true;
 
-		dev = NULL;
+		dev = nullptr;
 		while ((dev = dev_find_device(PCI_VID_INTEL, MMAP_VTD_CFG_REG_DEVID, dev))) {
 			/* Only add devices for the current socket */
 			if (iio_pci_domain_socket_from_dev(dev) != socket)
@@ -443,7 +443,7 @@ static unsigned long acpi_create_rmrr(unsigned long current)
 
 static unsigned long acpi_create_rhsa(unsigned long current)
 {
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 	struct resource *resource;
 
 	while ((dev = dev_find_device(PCI_VID_INTEL, MMAP_VTD_CFG_REG_DEVID, dev))) {
@@ -462,7 +462,7 @@ static unsigned long acpi_create_rhsa(unsigned long current)
 
 static unsigned long xeonsp_create_satc(unsigned long current, struct device *domain)
 {
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 	while ((dev = dev_bus_each_child(domain->downstream, dev))) {
 		if (pciexp_find_extended_cap(dev, PCIE_EXT_CAP_ID_ATS, 0)) {
 			const uint32_t b = domain->downstream->secondary;
@@ -497,7 +497,7 @@ static unsigned long acpi_create_satc(unsigned long current)
 		if (!soc_cpu_is_enabled(socket))
 			continue;
 
-		dev = NULL;
+		dev = nullptr;
 		while ((dev = dev_find_path(dev, DEVICE_PATH_DOMAIN))) {
 			/* Only add devices for the current socket */
 			if (iio_pci_domain_socket_from_dev(dev) != socket)
@@ -529,8 +529,8 @@ static unsigned long acpi_fill_dmar(unsigned long current)
 	const IIO_UDS *hob = get_iio_uds();
 
 	// DRHD - iommu0 must be the last DRHD entry.
-	struct device *dev = NULL;
-	struct device *iommu0 = NULL;
+	struct device *dev = nullptr;
+	struct device *iommu0 = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, MMAP_VTD_CFG_REG_DEVID, dev))) {
 		if (is_domain0(dev_get_domain(dev))) {
 			iommu0 = dev;

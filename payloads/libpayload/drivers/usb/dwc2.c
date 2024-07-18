@@ -288,7 +288,7 @@ dwc2_do_xfer(endpoint_t *ep, int size, int pid, ep_dir_t dir,
 		if (do_copy && (dir == EPDIR_IN))
 			memcpy(data_buf, aligned_buf, transferred);
 
-		if ((short_pkt != NULL) && (dir == EPDIR_IN))
+		if ((short_pkt != nullptr) && (dir == EPDIR_IN))
 			*short_pkt = (ret > 0) ? 1 : 0;
 
 	}
@@ -331,7 +331,7 @@ dwc2_split_transfer(endpoint_t *ep, int size, int pid, ep_dir_t dir,
 
 	/* Handle Start-Split */
 	ret = dwc2_do_xfer(ep, dir == EPDIR_IN ? 0 : size, pid, dir, ch_num,
-			   data_buf, NULL);
+			   data_buf, nullptr);
 	if (ret < 0)
 		goto out;
 
@@ -464,7 +464,7 @@ dwc2_control(usbdev_t *dev, direction_t dir, int drlen, void *setup,
 	}
 
 	/* Status Phase */
-	if (dwc2_transfer(ep, 0, PID_DATA1, !data_dir, 0, NULL, 0) < 0)
+	if (dwc2_transfer(ep, 0, PID_DATA1, !data_dir, 0, nullptr, 0) < 0)
 		return -1;
 
 	return ret;
@@ -538,7 +538,7 @@ dwc2_destroy_intr_queue(endpoint_t *ep, void *_q)
 
 /*
  * read one intr-packet from queue, if available. extend the queue for
- * new input. Return NULL if nothing new available.
+ * new input. Return nullptr if nothing new available.
  * Recommended use: while (data=poll_intr_queue(q)) process(data);
  */
 static u8 *
@@ -553,7 +553,7 @@ dwc2_poll_intr_queue(void *_q)
 	 * an interrupt transfer immediately
 	 */
 	if (timestamp - q->timestamp < q->reqtiming)
-		return NULL;
+		return nullptr;
 
 	q->timestamp = timestamp;
 
@@ -562,7 +562,7 @@ dwc2_poll_intr_queue(void *_q)
 	if (ret > 0)
 		return q->data;
 	else
-		return NULL;
+		return nullptr;
 }
 
 hci_t *dwc2_init(void *bar)
@@ -585,8 +585,8 @@ hci_t *dwc2_init(void *bar)
 	controller->bulk = dwc2_bulk;
 	controller->control = dwc2_control;
 	controller->set_address = generic_set_address;
-	controller->finish_device_config = NULL;
-	controller->destroy_device = NULL;
+	controller->finish_device_config = nullptr;
+	controller->destroy_device = nullptr;
 	controller->create_intr_queue = dwc2_create_intr_queue;
 	controller->destroy_intr_queue = dwc2_destroy_intr_queue;
 	controller->poll_intr_queue = dwc2_poll_intr_queue;
@@ -606,5 +606,5 @@ free_dwc2:
 	detach_controller(controller);
 	free(DWC2_INST(controller));
 	free(controller);
-	return NULL;
+	return nullptr;
 }

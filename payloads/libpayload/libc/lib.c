@@ -128,7 +128,7 @@ int errno;
 
 char *getenv(const char *name)
 {
-	return NULL;
+	return nullptr;
 }
 
 /*

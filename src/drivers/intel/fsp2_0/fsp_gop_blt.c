@@ -8,7 +8,7 @@
 
 static bool is_bmp_image_valid(efi_bmp_image_header *header)
 {
-	if (header == NULL)
+	if (header == nullptr)
 		return false;
 
 	/* Check if the BMP Header Signature is valid */
@@ -30,7 +30,7 @@ static bool is_bmp_image_valid(efi_bmp_image_header *header)
 
 static bool is_bmp_image_compressed(efi_bmp_image_header *header)
 {
-	if (header == NULL)
+	if (header == nullptr)
 		return false;
 
 	if (header->CompressionType != 0)
@@ -41,7 +41,7 @@ static bool is_bmp_image_compressed(efi_bmp_image_header *header)
 
 static bool is_bitmap_format_supported(efi_bmp_image_header *header)
 {
-	if (header == NULL)
+	if (header == nullptr)
 		return false;
 
 	/*
@@ -57,7 +57,7 @@ static bool is_bitmap_format_supported(efi_bmp_image_header *header)
 
 static bool do_bmp_image_authentication(efi_bmp_image_header *header)
 {
-	if (header == NULL)
+	if (header == nullptr)
 		return false;
 
 	if (!is_bmp_image_valid(header)) {
@@ -87,7 +87,7 @@ static uint32_t calculate_blt_buffer_size(efi_bmp_image_header *header)
 {
 	uint32_t blt_buffer_size;
 
-	if (header == NULL)
+	if (header == nullptr)
 		return 0;
 
 	/* Calculate the size required for BLT buffer */
@@ -103,7 +103,7 @@ static uint32_t get_color_map_num(efi_bmp_image_header *header)
 {
 	uint32_t col_map_number = 0;
 
-	if (header == NULL)
+	if (header == nullptr)
 		return 0;
 
 	switch (header->BitPerPixel) {
@@ -143,8 +143,8 @@ static void *fill_blt_buffer(efi_bmp_image_header *header,
 	efi_bmp_color_map *bmp_color_map;
 	size_t image_index;
 
-	if (header == NULL)
-		return NULL;
+	if (header == nullptr)
+		return nullptr;
 
 	gop_blt_ptr = malloc(sizeof(blt_buffer_size));
 	if (!gop_blt_ptr)
@@ -216,11 +216,11 @@ static void *fill_blt_buffer(efi_bmp_image_header *header,
 			/* Other bit format of BMP is not supported. */
 			default:
 				free(gop_blt_ptr);
-				gop_blt_ptr = NULL;
+				gop_blt_ptr = nullptr;
 
 				printk(BIOS_ERR, "%s, BMP Bit format not supported. 0x%X\n", __func__,
 					 header->BitPerPixel);
-				return NULL;
+				return nullptr;
 			}
 		}
 		image_index = (uintptr_t)bmp_image - (uintptr_t)bmp_image_header;

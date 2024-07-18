@@ -40,5 +40,5 @@ const struct xhci_usb_info *soc_get_xhci_usb_info(pci_devfn_t xhci_dev)
 	else if (xhci_dev == SA_DEVFN_TCSS_XHCI)
 		return &tcss_usb_info;
 
-	return NULL;
+	return nullptr;
 }

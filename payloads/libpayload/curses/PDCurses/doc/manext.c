@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 
     for (i = 1; i < argc; i++)
     {
-        if ((fp = fopen(argv[i], "r")) == NULL)
+        if ((fp = fopen(argv[i], "r")) == nullptr)
         {
             fprintf(stderr, "\nCould not open %s\n", argv[i]);
             continue;
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 
         while (!feof(fp))
         {
-            if (fgets(s, (int)sizeof(s), fp) == NULL)
+            if (fgets(s, (int)sizeof(s), fp) == nullptr)
             {
                 if (ferror(fp) != 0)
                 {
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
             {
                 /* read next line of manual entry */
 
-                if (fgets(s, (int)sizeof(s), fp) == NULL)
+                if (fgets(s, (int)sizeof(s), fp) == nullptr)
                 {
                     if (ferror(fp) != 0)
                     {

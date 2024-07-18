@@ -74,5 +74,5 @@ int start_main(void)
 	 * Returning from main() will go to the _leave function to return
 	 * us to the original context.
 	 */
-	return main(main_argc, (main_argc != 0) ? main_argv : NULL);
+	return main(main_argc, (main_argc != 0) ? main_argv : nullptr);
 }

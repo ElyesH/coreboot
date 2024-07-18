@@ -61,13 +61,13 @@ RCSID("$Id: panel.c,v 1.8 2008/07/14 12:35:23 wmcbrine Exp $")
         deck.
 
         panel_above() returns a pointer to the panel in the deck above
-        pan, or NULL if pan is the top panel. If the value of pan passed
-        is NULL, this function returns a pointer to the bottom panel in
+        pan, or nullptr if pan is the top panel. If the value of pan passed
+        is nullptr, this function returns a pointer to the bottom panel in
         the deck.
 
         panel_below() returns a pointer to the panel in the deck below
-        pan, or NULL if pan is the bottom panel. If the value of pan
-        passed is NULL, this function returns a pointer to the top panel
+        pan, or nullptr if pan is the bottom panel. If the value of pan
+        passed is nullptr, this function returns a pointer to the top panel
         in the deck.
 
         panel_hidden() returns OK if pan is hidden and ERR if it is not.
@@ -97,7 +97,7 @@ RCSID("$Id: panel.c,v 1.8 2008/07/14 12:35:23 wmcbrine Exp $")
         must use doupdate() to refresh the physical screen.
 
   Return Value:
-        Each routine that returns a pointer to an object returns NULL if
+        Each routine that returns a pointer to an object returns nullptr if
         an error occurs. Each panel routine that returns an integer,
         returns OK if it executes successfully and ERR if it does not.
 
@@ -268,7 +268,7 @@ static void _calculate_obscure(void)
         {
             if (_panels_overlapped(pan, pan2))
             {
-                if ((tobs = malloc(sizeof(PANELOBS))) == NULL)
+                if ((tobs = malloc(sizeof(PANELOBS))) == nullptr)
                     return;
 
                 tobs->pan = pan2;
@@ -539,7 +539,7 @@ int panel_hidden(const PANEL *pan)
 
 const void *panel_userptr(const PANEL *pan)
 {
-    return pan ? pan->user : NULL;
+    return pan ? pan->user : nullptr;
 }
 
 WINDOW *panel_window(const PANEL *pan)

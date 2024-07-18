@@ -42,17 +42,17 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, IT8659E_SP1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2, 0x0ff8, },
-	{ NULL, IT8659E_SP2, PNP_IO0 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2, 0x0ff8, },
-	{ NULL, IT8659E_EC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2 |
+	{ nullptr, IT8659E_SP1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2, 0x0ff8, },
+	{ nullptr, IT8659E_SP2, PNP_IO0 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2, 0x0ff8, },
+	{ nullptr, IT8659E_EC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2 |
 			    PNP_MSC3 | PNP_MSC4 | PNP_MSC5 | PNP_MSC6 | PNP_MSCA | PNP_MSCB |
 			    PNP_MSCD, 0x0ff0, 0x0ff0, },
-	{ NULL, IT8659E_KBCK, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0, 0x0fff, 0x0fff, },
-	{ NULL, IT8659E_KBCM, PNP_IRQ0 | PNP_MSC0, },
-	{ NULL, IT8659E_GPIO, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2 |
+	{ nullptr, IT8659E_KBCK, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0, 0x0fff, 0x0fff, },
+	{ nullptr, IT8659E_KBCM, PNP_IRQ0 | PNP_MSC0, },
+	{ nullptr, IT8659E_GPIO, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2 |
 			      PNP_MSC3 | PNP_MSC4 | PNP_MSC5 | PNP_MSC6 | PNP_MSC7 |
 			      PNP_MSC8 | PNP_MSC9 | PNP_MSCA | PNP_MSCB, 0x0ff8, 0x0ff8, },
-	{ NULL, IT8659E_CIR, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
+	{ nullptr, IT8659E_CIR, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
 };
 
 static void enable_dev(struct device *dev)

@@ -262,7 +262,7 @@ bool selfload_check(struct prog *payload, enum bootmem_type dest_type)
 		return false;
 
 	payload->cbfs_type = CBFS_TYPE_SELF;
-	void *mapping = cbfs_type_map(prog_name(payload), NULL, &payload->cbfs_type);
+	void *mapping = cbfs_type_map(prog_name(payload), nullptr, &payload->cbfs_type);
 	if (!mapping)
 		return false;
 

@@ -31,7 +31,7 @@
 #ifdef __SIMPLE_DEVICE__
 #define EMPTY_DEV 0
 #else
-#define EMPTY_DEV NULL
+#define EMPTY_DEV nullptr
 #endif
 
 #ifdef __SIMPLE_DEVICE__
@@ -43,7 +43,7 @@ static inline void reg_script_set_dev(struct reg_script_context *ctx,
 #endif
 {
 	ctx->dev = dev;
-	ctx->res = NULL;
+	ctx->res = nullptr;
 }
 
 static inline void reg_script_set_step(struct reg_script_context *ctx,
@@ -61,14 +61,14 @@ reg_script_get_step(struct reg_script_context *ctx)
 static struct resource *reg_script_get_resource(struct reg_script_context *ctx)
 {
 #ifdef __SIMPLE_DEVICE__
-	return NULL;
+	return nullptr;
 #else
 	struct resource *res;
 	const struct reg_script *step = reg_script_get_step(ctx);
 
 	res = ctx->res;
 
-	if (res != NULL && res->index == step->res_index)
+	if (res != nullptr && res->index == step->res_index)
 		return res;
 
 	res = find_resource(ctx->dev, step->res_index);
@@ -183,7 +183,7 @@ static uint32_t reg_script_read_res(struct reg_script_context *ctx)
 
 	res = reg_script_get_resource(ctx);
 
-	if (res == NULL)
+	if (res == nullptr)
 		return val;
 
 	if (res->flags & IORESOURCE_IO) {
@@ -212,7 +212,7 @@ static void reg_script_write_res(struct reg_script_context *ctx)
 
 	res = reg_script_get_resource(ctx);
 
-	if (res == NULL)
+	if (res == nullptr)
 		return;
 
 	if (res->flags & IORESOURCE_IO) {
@@ -410,14 +410,14 @@ static const struct reg_script_bus_entry
 	}
 
 	/* Bus not found */
-	return NULL;
+	return nullptr;
 }
 
 static void reg_script_display(struct reg_script_context *ctx,
 	const struct reg_script *step, const char *arrow, uint64_t value)
 {
 	/* Display the register address and data */
-	if (ctx->display_prefix != NULL)
+	if (ctx->display_prefix != nullptr)
 		printk(BIOS_INFO, "%s: ", ctx->display_prefix);
 	if (ctx->display_features & REG_SCRIPT_DISPLAY_REGISTER)
 		printk(BIOS_INFO, "0x%08x %s ", step->reg, arrow);
@@ -478,7 +478,7 @@ static uint64_t reg_script_read(struct reg_script_context *ctx)
 
 			/* Read from the platform specific bus */
 			bus = find_bus(step);
-			if (bus != NULL) {
+			if (bus != nullptr) {
 				value = bus->reg_script_read(ctx);
 				break;
 			}
@@ -534,7 +534,7 @@ static void reg_script_write(struct reg_script_context *ctx)
 
 			/* Write to the platform specific bus */
 			bus = find_bus(step);
-			if (bus != NULL) {
+			if (bus != nullptr) {
 				bus->reg_script_write(ctx);
 				break;
 			}
@@ -614,7 +614,7 @@ static void reg_script_run_step(struct reg_script_context *ctx,
 	uint64_t value = 0, try;
 
 	ctx->display_features = ctx->display_state;
-	ctx->display_prefix = NULL;
+	ctx->display_prefix = nullptr;
 	switch (step->command) {
 	case REG_SCRIPT_COMMAND_READ:
 		(void)reg_script_read(ctx);

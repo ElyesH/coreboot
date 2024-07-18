@@ -38,7 +38,7 @@ permissions described in the GCC Runtime Library Exception, version
    stored as two 32 bit numbers, the low part first.  Strings are
    padded with 1 to 4 NUL bytes, to bring the length up to a multiple
    of 4. The number of 4 bytes is stored, followed by the padded
-   string. Zero length and NULL strings are simply stored as a length
+   string. Zero length and nullptr strings are simply stored as a length
    of zero (they have no trailing NUL or padding).
 
 	int32:  byte3 byte2 byte1 byte0 | byte0 byte1 byte2 byte3
@@ -108,7 +108,7 @@ permissions described in the GCC Runtime Library Exception, version
 	arcs: header int32:block_no arc*
 	arc:  int32:dest_block int32:flags
 	lines: header int32:block_no line*
-		int32:0 string:NULL
+		int32:0 string:nullptr
 	line:  int32:line_no | int32:0 string:filename
 
    The BASIC_BLOCK record holds per-bb flags.  The number of blocks
@@ -118,7 +118,7 @@ permissions described in the GCC Runtime Library Exception, version
    There is one LINES record per basic block, it enumerates the source
    lines which belong to that basic block.  Source file names are
    introduced by a line number of 0, following lines are from the new
-   source file.  The initial source file for the function is NULL, but
+   source file.  The initial source file for the function is nullptr, but
    the current source file should be remembered from one LINES record
    to the next.  The end of a block is indicated by an empty filename
    - this does not reset the current source file.  Note there is no

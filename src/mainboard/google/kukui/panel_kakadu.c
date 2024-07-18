@@ -9,7 +9,7 @@ static struct panel_description kakadu_panels[] = {
 struct panel_description *get_panel_description(int panel_id)
 {
 	if (panel_id < 0 || panel_id >= ARRAY_SIZE(kakadu_panels))
-		return NULL;
+		return nullptr;
 
 	return get_panel_from_cbfs(&kakadu_panels[panel_id]);
 }

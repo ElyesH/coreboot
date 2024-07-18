@@ -75,33 +75,33 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, IT8720F_FDC,
+	{ nullptr, IT8720F_FDC,
 		PNP_IO0 | PNP_IRQ0 | PNP_DRQ0 | PNP_MSC0 | PNP_MSC1,
 		0x0ff8, },
-	{ NULL, IT8720F_SP1,
+	{ nullptr, IT8720F_SP1,
 		PNP_IO0 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1,
 		0x0ff8, },
-	{ NULL, IT8720F_SP2,
+	{ nullptr, IT8720F_SP2,
 		PNP_IO0 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1,
 		0x0ff8, },
-	{ NULL, IT8720F_PP,
+	{ nullptr, IT8720F_PP,
 		PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_DRQ0 | PNP_MSC0,
 		0x0ff8, 0x0ffc, },
-	{ NULL, IT8720F_EC,
+	{ nullptr, IT8720F_EC,
 		PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2 |
 		PNP_MSC3 | PNP_MSC4 | PNP_MSC5 | PNP_MSC6,
 		0x0ff8, 0x0ffc, },
-	{ NULL, IT8720F_KBCK,
+	{ nullptr, IT8720F_KBCK,
 		PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0,
 		0x0fff, 0x0fff, },
-	{ NULL, IT8720F_KBCM,
+	{ nullptr, IT8720F_KBCM,
 		PNP_IRQ0 | PNP_MSC0, },
-	{ NULL, IT8720F_GPIO,
+	{ nullptr, IT8720F_GPIO,
 		PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_MSC0 | PNP_MSC1 | PNP_MSC2 |
 		PNP_MSC3 | PNP_MSC4 | PNP_MSC5 | PNP_MSC6 | PNP_MSC7 |
 		PNP_MSC8 | PNP_MSC9 | PNP_MSCA | PNP_MSCB | PNP_MSCD | PNP_MSCE,
 		0x0ff8, 0x0ff8, 0x0ff8, },
-	{ NULL, IT8720F_CIR,
+	{ nullptr, IT8720F_CIR,
 		PNP_IO0 | PNP_IRQ0 | PNP_MSC0,
 		0x0ff8, },
 };

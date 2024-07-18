@@ -51,7 +51,7 @@ static const struct funit_cfg audio_funit[] = {
 
 static const struct funit_cfg funits[] = {
 	FUNIT_CFG_USB(USBD),
-	FUNIT_CFG(SDMMC4, PLLP, 48000, NULL, 0),
+	FUNIT_CFG(SDMMC4, PLLP, 48000, nullptr, 0),
 	/* I2C6 for audio, temp sensor, etc. Enable codec via GPIOs/muxes */
 	FUNIT_CFG(I2C6, PLLP, 400, audio_codec_pads, ARRAY_SIZE(audio_codec_pads)),
 };

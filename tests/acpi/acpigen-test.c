@@ -39,7 +39,7 @@ static int setup_acpigen(void **state)
 {
 	void *buffer = malloc(ACPIGEN_TEST_BUFFER_SZ);
 
-	if (buffer == NULL)
+	if (buffer == nullptr)
 		return -1;
 
 	memset(buffer, 0, ACPIGEN_TEST_BUFFER_SZ);
@@ -217,5 +217,5 @@ int main(void)
 						teardown_acpigen),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

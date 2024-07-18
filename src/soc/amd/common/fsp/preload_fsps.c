@@ -8,4 +8,4 @@ static void start_fsps_preload(void *unused)
 	preload_fsps();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, start_fsps_preload, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, start_fsps_preload, nullptr);

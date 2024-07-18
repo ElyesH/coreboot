@@ -19,7 +19,7 @@
 
 static const void *microcode_patch;
 
-static const config_t *chip_config = NULL;
+static const config_t *chip_config = nullptr;
 
 bool cpu_soc_is_in_untrusted_mode(void)
 {

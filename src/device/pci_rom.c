@@ -36,12 +36,12 @@ static void *cbfs_boot_map_optionrom(uint16_t vendor, uint16_t device)
 
 	snprintf(name, sizeof(name), "pci%04hx,%04hx.rom", vendor, device);
 
-	return cbfs_map(name, NULL);
+	return cbfs_map(name, nullptr);
 }
 
 struct rom_header *pci_rom_probe(const struct device *dev)
 {
-	struct rom_header *rom_header = NULL;
+	struct rom_header *rom_header = nullptr;
 	struct pci_data *rom_data;
 	u32 vendev = (dev->vendor << 16) | dev->device;
 	u32 mapped_vendev = vendev;
@@ -73,7 +73,7 @@ struct rom_header *pci_rom_probe(const struct device *dev)
 			if (CONFIG(CPU_QEMU_X86) && (dev->class >> 8) == PCI_CLASS_DISPLAY_VGA)
 				rom_address = 0xc0000;
 			else
-				return NULL;
+				return nullptr;
 		} else {
 			/* Enable expansion ROM address decoding. */
 			pci_write_config32(dev, PCI_ROM_ADDRESS,
@@ -88,7 +88,7 @@ struct rom_header *pci_rom_probe(const struct device *dev)
 	} else {
 		printk(BIOS_DEBUG, "PCI Option ROM loading disabled for %s\n",
 		       dev_path(dev));
-		return NULL;
+		return nullptr;
 	}
 
 	printk(BIOS_SPEW,
@@ -99,7 +99,7 @@ struct rom_header *pci_rom_probe(const struct device *dev)
 	if (le32_to_cpu(rom_header->signature) != PCI_ROM_HDR) {
 		printk(BIOS_ERR, "Incorrect expansion ROM header signature %04x\n",
 		       le32_to_cpu(rom_header->signature));
-		return NULL;
+		return nullptr;
 	}
 
 	rom_data = (((void *)rom_header) + le32_to_cpu(rom_header->data));
@@ -112,7 +112,7 @@ struct rom_header *pci_rom_probe(const struct device *dev)
 	    && (vendev == mapped_vendev)) {
 		printk(BIOS_ERR, "ID mismatch: vendor ID %04x, device ID %04x\n",
 		       dev->vendor, dev->device);
-		return NULL;
+		return nullptr;
 	}
 
 	printk(BIOS_SPEW, "PCI ROM image, Class Code %04x%02x, Code Type %02x\n",
@@ -123,7 +123,7 @@ struct rom_header *pci_rom_probe(const struct device *dev)
 		printk(BIOS_DEBUG, "Class Code mismatch ROM %08x, dev %08x\n",
 		       (rom_data->class_hi << 8) | rom_data->class_lo,
 		       dev->class);
-		// return NULL;
+		// return nullptr;
 	}
 
 	return rom_header;
@@ -150,7 +150,7 @@ struct rom_header *pci_rom_load(struct device *dev,
 	} while ((rom_data->type != 0) && (rom_data->indicator != 0)); // make sure we got x86 version
 
 	if (rom_data->type != 0)
-		return NULL;
+		return nullptr;
 
 	rom_size = rom_header->size * 512;
 
@@ -161,7 +161,7 @@ struct rom_header *pci_rom_load(struct device *dev,
 	 */
 	if ((dev->class >> 8) == PCI_CLASS_DISPLAY_VGA) {
 		extern struct device *vga_pri; /* Primary VGA device (device.c). */
-		if (dev != vga_pri) return NULL; /* Only one VGA supported. */
+		if (dev != vga_pri) return nullptr; /* Only one VGA supported. */
 		if ((void *)PCI_VGA_RAM_IMAGE_START != rom_header) {
 			printk(BIOS_DEBUG,
 			       "Copying VGA ROM Image from %p to 0x%x, 0x%x bytes\n",
@@ -190,11 +190,11 @@ static struct rom_header *check_initialized(const struct device *dev)
 	struct pci_data *rom_data;
 
 	if (!CONFIG(VGA_ROM_RUN) && !CONFIG(RUN_FSP_GOP))
-		return NULL;
+		return nullptr;
 
 	run_rom = (struct rom_header *)(uintptr_t)PCI_VGA_RAM_IMAGE_START;
 	if (read_le16(&run_rom->signature) != PCI_ROM_HDR)
-		return NULL;
+		return nullptr;
 
 	rom_data = (struct pci_data *)((u8 *)run_rom
 			+ read_le16(&run_rom->data));
@@ -204,7 +204,7 @@ static struct rom_header *check_initialized(const struct device *dev)
 			&& read_le16(&rom_data->vendor) == dev->vendor)
 		return run_rom;
 	else
-		return NULL;
+		return nullptr;
 }
 
 static unsigned long

@@ -23,11 +23,11 @@ void *metadata_hash_export_anchor(void)
 	return get_anchor();
 }
 #else
-static struct metadata_hash_anchor *anchor_ptr = NULL;
+static struct metadata_hash_anchor *anchor_ptr = nullptr;
 
 static struct metadata_hash_anchor *get_anchor(void)
 {
-	assert(anchor_ptr != NULL);
+	assert(anchor_ptr != nullptr);
 	return anchor_ptr;
 }
 

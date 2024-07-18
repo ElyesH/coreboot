@@ -120,7 +120,7 @@ static void GpioGetPadOwnership(GPIO_PAD GpioPad, GPIO_PAD_OWN *PadOwnVal)
 void gpio_configure_dnv_pads(const struct dnv_pad_config *gpio, size_t num)
 {
 	/* Return if gpio not valid */
-	if ((gpio == NULL) || (num == 0))
+	if ((gpio == nullptr) || (num == 0))
 		return;
 
 	uint32_t Index;

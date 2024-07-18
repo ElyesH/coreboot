@@ -124,7 +124,7 @@ static void pm1_enable_pwrbtn_smi(void *unused)
 	pmc_update_pm1_enable(PWRBTN_EN);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, pm1_enable_pwrbtn_smi, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, pm1_enable_pwrbtn_smi, nullptr);
 
 /*
  * Check if WAKE# pin is enabled based on DSX_EN_WAKE_PIN setting in
@@ -143,5 +143,5 @@ static void pm1_handle_wake_pin(void *unused)
 	pmc_update_pm1_enable(PCIEXPWAK_DIS);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, pm1_handle_wake_pin, NULL);
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, pm1_handle_wake_pin, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, pm1_handle_wake_pin, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, pm1_handle_wake_pin, nullptr);

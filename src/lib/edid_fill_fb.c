@@ -16,7 +16,7 @@ static struct list_node list;
 
 /*
  * Allocate a new framebuffer info struct on heap.
- * Returns NULL on error.
+ * Returns nullptr on error.
  */
 static struct fb_info *fb_new_framebuffer_info(void)
 {
@@ -30,7 +30,7 @@ static struct fb_info *fb_new_framebuffer_info(void)
 
 /*
  * Fills a provided framebuffer info struct and adds it to the internal list if it's
- * valid. Returns NULL on error.
+ * valid. Returns nullptr on error.
  */
 struct fb_info *
 fb_add_framebuffer_info_ex(const struct lb_framebuffer *fb)
@@ -42,7 +42,7 @@ fb_add_framebuffer_info_ex(const struct lb_framebuffer *fb)
 	if (!fb || !fb->x_resolution || !fb->y_resolution || !fb->bytes_per_line ||
 	    !fb->bits_per_pixel) {
 		printk(BIOS_ERR, "%s: Invalid framebuffer data provided\n", __func__);
-		return NULL;
+		return nullptr;
 	}
 
 	bpp_mask = fb->blue_mask_size + fb->green_mask_size + fb->red_mask_size +
@@ -52,7 +52,7 @@ fb_add_framebuffer_info_ex(const struct lb_framebuffer *fb)
 		       "%s: channel bit mask=%d is greater than BPP=%d ."
 		       " This is a driver bug. Framebuffer is invalid.\n",
 		       __func__, bpp_mask, fb->bits_per_pixel);
-		return NULL;
+		return nullptr;
 	} else if (bpp_mask != fb->bits_per_pixel) {
 		printk(BIOS_WARNING,
 		       "%s: channel bit mask=%d and BPP=%d don't match."
@@ -62,7 +62,7 @@ fb_add_framebuffer_info_ex(const struct lb_framebuffer *fb)
 
 	info = fb_new_framebuffer_info();
 	if (!info)
-		return NULL;
+		return nullptr;
 
 	printk(BIOS_INFO, "framebuffer_info: bytes_per_line: %d, bits_per_pixel: %d\n "
 			  "                  x_res x y_res: %d x %d, size: %d at 0x%llx\n",
@@ -90,7 +90,7 @@ fb_add_framebuffer_info(uintptr_t fb_addr, uint32_t x_resolution,
 			uint32_t y_resolution, uint32_t bytes_per_line,
 			uint8_t bits_per_pixel)
 {
-	struct fb_info *info = NULL;
+	struct fb_info *info = nullptr;
 
 	switch (bits_per_pixel) {
 	case 32:

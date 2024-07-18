@@ -267,7 +267,7 @@ static unsigned int get_mem_min_tck(void)
 {
 	u32 reg32;
 	u8 rev;
-	const struct northbridge_intel_sandybridge_config *cfg = NULL;
+	const struct northbridge_intel_sandybridge_config *cfg = nullptr;
 
 	/* Actually, config of MCH or Host Bridge */
 	cfg = config_of_soc();

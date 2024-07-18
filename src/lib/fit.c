@@ -78,7 +78,7 @@ static struct fit_image_node *find_image(const char *name)
 			return image;
 	}
 	printk(BIOS_ERR, "Cannot find image node %s!\n", name);
-	return NULL;
+	return nullptr;
 }
 
 static struct fit_image_node *find_image_with_overlays(const char *name,
@@ -86,7 +86,7 @@ static struct fit_image_node *find_image_with_overlays(const char *name,
 {
 	struct fit_image_node *base = find_image(name);
 	if (!base)
-		return NULL;
+		return nullptr;
 
 	int len = strnlen(name, bytes) + 1;
 	bytes -= len;
@@ -95,7 +95,7 @@ static struct fit_image_node *find_image_with_overlays(const char *name,
 		struct fit_overlay_chain *next = xzalloc(sizeof(*next));
 		next->overlay = find_image(name);
 		if (!next->overlay)
-			return NULL;
+			return nullptr;
 		list_insert_after(&next->list_node, prev);
 		prev = &next->list_node;
 		len = strnlen(name, bytes) + 1;
@@ -158,13 +158,13 @@ static void fit_unpack(struct device_tree *tree, const char **default_config)
 {
 	struct device_tree_node *child;
 	struct device_tree_node *images = dt_find_node_by_path(tree, "/images",
-							       NULL, NULL, 0);
+							       nullptr, nullptr, 0);
 	if (images)
 		list_for_each(child, images->children, list_node)
 			image_node(child);
 
 	struct device_tree_node *configs = dt_find_node_by_path(tree,
-		"/configurations", NULL, NULL, 0);
+		"/configurations", nullptr, nullptr, 0);
 	if (configs) {
 		*default_config = dt_find_string_prop(configs, "default");
 		list_for_each(child, configs->children, list_node)
@@ -178,7 +178,7 @@ static int fdt_find_compat(const void *blob, uint32_t start_offset,
 	int offset = start_offset;
 	int size;
 
-	size = fdt_next_node_name(blob, offset, NULL);
+	size = fdt_next_node_name(blob, offset, nullptr);
 	if (!size)
 		return -1;
 	offset += size;
@@ -190,7 +190,7 @@ static int fdt_find_compat(const void *blob, uint32_t start_offset,
 		offset += size;
 	}
 
-	prop->name = NULL;
+	prop->name = nullptr;
 	return -1;
 }
 
@@ -212,9 +212,9 @@ static int fit_check_compat(struct fdt_property *compat_prop,
 
 void fit_update_chosen(struct device_tree *tree, const char *cmd_line)
 {
-	const char *path[] = { "chosen", NULL };
+	const char *path[] = { "chosen", nullptr };
 	struct device_tree_node *node;
-	node = dt_find_node(tree->root, path, NULL, NULL, 1);
+	node = dt_find_node(tree->root, path, nullptr, nullptr, 1);
 
 	dt_add_string_prop(node, "bootargs", cmd_line);
 }
@@ -222,9 +222,9 @@ void fit_update_chosen(struct device_tree *tree, const char *cmd_line)
 void fit_add_ramdisk(struct device_tree *tree, void *ramdisk_addr,
 		     size_t ramdisk_size)
 {
-	const char *path[] = { "chosen", NULL };
+	const char *path[] = { "chosen", nullptr };
 	struct device_tree_node *node;
-	node = dt_find_node(tree->root, path, NULL, NULL, 1);
+	node = dt_find_node(tree->root, path, nullptr, nullptr, 1);
 
 	u64 start = (uintptr_t)ramdisk_addr;
 	u64 end = start + ramdisk_size;
@@ -334,8 +334,8 @@ void fit_update_memory(struct device_tree *tree)
 	list_insert_after(&node->list_node, &tree->root->children);
 	dt_add_string_prop(node, "device_type", (char *)"memory");
 
-	memranges_init_empty(&map.mem, NULL, 0);
-	memranges_init_empty(&map.reserved, NULL, 0);
+	memranges_init_empty(&map.mem, nullptr, 0);
+	memranges_init_empty(&map.reserved, nullptr, 0);
 
 	bootmem_walk_os_mem(walk_memory_table, &map);
 
@@ -441,12 +441,12 @@ struct fit_config_node *fit_load(void *fit)
 	struct device_tree *tree = fdt_unflatten(fit);
 	if (!tree) {
 		printk(BIOS_ERR, "Failed to unflatten FIT image!\n");
-		return NULL;
+		return nullptr;
 	}
 
-	const char *default_config_name = NULL;
-	struct fit_config_node *default_config = NULL;
-	struct fit_config_node *compat_config = NULL;
+	const char *default_config_name = nullptr;
+	struct fit_config_node *default_config = nullptr;
+	struct fit_config_node *compat_config = nullptr;
 
 	fit_unpack(tree, &default_config_name);
 
@@ -521,7 +521,7 @@ struct fit_config_node *fit_load(void *fit)
 		printk(BIOS_DEBUG, "\n");
 	}
 
-	struct fit_config_node *to_boot = NULL;
+	struct fit_config_node *to_boot = nullptr;
 	if (compat_config) {
 		to_boot = compat_config;
 		printk(BIOS_INFO, "FIT: Choosing best match %s for compat "
@@ -533,7 +533,7 @@ struct fit_config_node *fit_load(void *fit)
 	} else {
 		printk(BIOS_ERR, "FIT: No compatible or default configs. "
 		       "Giving up.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	return to_boot;

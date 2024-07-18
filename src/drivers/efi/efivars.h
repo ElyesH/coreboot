@@ -13,7 +13,7 @@
  * Use the provided EFI variable store inside the region device as variable store.
  * @rdev: the readable region to operate on
  * @guid: the vendor guid to look for
- * @name: the variable name to look for. NULL terminated.
+ * @name: the variable name to look for. nullptr terminated.
  * @dest: memory buffer to place the result into
  * @size: on input the size of buffer pointed to by dest.
  *        on output the number of bytes written.
@@ -32,7 +32,7 @@ enum cb_err efi_fv_get_option(struct region_device *rdev,
  * to the region device.
  * @rdev: the read/writable region to operate on
  * @guid: the vendor guid to write
- * @name: the variable name to write. NULL terminated.
+ * @name: the variable name to write. nullptr terminated.
  * @data: memory buffer where to read data from
  * @size: the size of buffer pointed to by data
  */

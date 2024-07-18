@@ -26,8 +26,8 @@ struct nhlt *nhlt_init(void)
 
 	nhlt = malloc(sizeof(*nhlt));
 
-	if (nhlt == NULL)
-		return NULL;
+	if (nhlt == nullptr)
+		return nullptr;
 
 	memset(nhlt, 0, sizeof(*nhlt));
 	nhlt->subsystem_id = NHLT_SSID;
@@ -42,10 +42,10 @@ struct nhlt_endpoint *nhlt_add_endpoint(struct nhlt *nhlt, int link_type,
 	struct nhlt_endpoint *endp;
 
 	if (link_type < NHLT_LINK_HDA || link_type >= NHLT_MAX_LINK_TYPES)
-		return NULL;
+		return nullptr;
 
 	if (nhlt->num_endpoints >= MAX_ENDPOINTS)
-		return NULL;
+		return nullptr;
 
 	endp = &nhlt->endpoints[nhlt->num_endpoints];
 
@@ -70,14 +70,14 @@ static int append_specific_config(struct nhlt_specific_config *spec_cfg,
 	size_t new_sz;
 	void *new_cfg;
 
-	if (config == NULL || config_sz == 0)
+	if (config == nullptr || config_sz == 0)
 		return 0;
 
 	new_sz = spec_cfg->size + config_sz;
 
 	new_cfg = malloc(new_sz);
 
-	if (new_cfg == NULL)
+	if (new_cfg == nullptr)
 		return -1;
 
 	/* Append new config. */
@@ -110,7 +110,7 @@ struct nhlt_format *nhlt_add_format(struct nhlt_endpoint *endp,
 	struct nhlt_waveform *wave;
 
 	if (endp->num_formats >= MAX_FORMATS)
-		return NULL;
+		return nullptr;
 
 	fmt = &endp->formats[endp->num_formats];
 	wave = &fmt->waveform;
@@ -159,10 +159,10 @@ int nhlt_endpoint_add_formats(struct nhlt_endpoint *endp,
 					cfg->valid_bits_per_sample,
 					cfg->speaker_mask);
 
-		if (fmt == NULL)
+		if (fmt == nullptr)
 			return -1;
 
-		if (cfg->settings_file == NULL)
+		if (cfg->settings_file == nullptr)
 			continue;
 
 		/* Find the settings file in CBFS and place it in format. */
@@ -363,7 +363,7 @@ static void nhlt_serialize_endpoints(struct nhlt *nhlt, struct cursor *cur)
 
 uintptr_t nhlt_serialize(struct nhlt *nhlt, uintptr_t acpi_addr)
 {
-	return nhlt_serialize_oem_overrides(nhlt, acpi_addr, NULL, NULL, 0);
+	return nhlt_serialize_oem_overrides(nhlt, acpi_addr, nullptr, nullptr, 0);
 }
 
 uintptr_t nhlt_serialize_oem_overrides(struct nhlt *nhlt,
@@ -387,10 +387,10 @@ uintptr_t nhlt_serialize_oem_overrides(struct nhlt *nhlt,
 	write_le32(&header->length, sz);
 	write_le8(&header->revision, get_acpi_table_revision(NHLT));
 
-	if (oem_id == NULL)
+	if (oem_id == nullptr)
 		oem_id = OEM_ID;
 
-	if (oem_table_id == NULL)
+	if (oem_table_id == nullptr)
 		oem_table_id = ACPI_TABLE_CREATOR;
 
 	oem_id_len = MIN(strlen(oem_id), 6);
@@ -422,7 +422,7 @@ static int _nhlt_add_single_endpoint(struct nhlt *nhlt, int virtual_bus_id,
 	endp = nhlt_add_endpoint(nhlt, epd->link, epd->device, epd->direction,
 				epd->vid, epd->did);
 
-	if (endp == NULL)
+	if (endp == nullptr)
 		return -1;
 
 	endp->virtual_bus_id = virtual_bus_id;

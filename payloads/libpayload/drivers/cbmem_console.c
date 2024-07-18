@@ -105,7 +105,7 @@ char *cbmem_console_snapshot(void)
 
 	if (!console_p) {
 		printf("ERROR: No cbmem console found in coreboot table\n");
-		return NULL;
+		return nullptr;
 	}
 
 	cursor = console_p->cursor & CURSOR_MASK;
@@ -119,14 +119,14 @@ char *cbmem_console_snapshot(void)
 	if (!console_c) {
 		printf("ERROR: Not enough memory for console (size = %u)\n",
 		       size);
-		return NULL;
+		return nullptr;
 	}
 
 	newc = 0;
 	if (overflow) {
 		if (cursor >= size) {
 			printf("ERROR: CBMEM console struct is corrupted\n");
-			return NULL;
+			return nullptr;
 		}
 		for (oldc = cursor; oldc < size; oldc++)
 			snapshot_putc(console_c, &newc, console_p->body[oldc]);

@@ -107,7 +107,7 @@ static void check_secrets_txt(void *unused)
 	}
 }
 
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY, check_secrets_txt, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY, check_secrets_txt, nullptr);
 
 /**
  * Log TXT startup errors, check all bits for TXT, run BIOSACM using
@@ -183,7 +183,7 @@ static void init_intel_txt(void *unused)
 	}
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, init_intel_txt, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, init_intel_txt, nullptr);
 
 static void push_sinit_heap(u8 **heap_ptr, void *data, size_t data_length)
 {
@@ -265,7 +265,7 @@ static void txt_heap_push_bdr_for_two_acms(u8 **heap_struct)
 		txt_dump_acm_info(sinit_base);
 
 	data.heap_acm.acm_addrs[0] =
-		(uintptr_t)cbfs_map(CONFIG_INTEL_TXT_CBFS_BIOS_ACM, NULL);
+		(uintptr_t)cbfs_map(CONFIG_INTEL_TXT_CBFS_BIOS_ACM, nullptr);
 
 	data.heap_acm.header.size = sizeof(data.heap_acm);
 
@@ -302,7 +302,7 @@ static void txt_heap_push_bdr_for_one_acm(u8 **heap_struct)
 	/* Extended elements - ACM addresses */
 	data.heap_acm.header.type = HEAP_EXTDATA_TYPE_ACM;
 	data.heap_acm.acm_addrs[0] =
-		(uintptr_t)cbfs_map(CONFIG_INTEL_TXT_CBFS_BIOS_ACM, NULL);
+		(uintptr_t)cbfs_map(CONFIG_INTEL_TXT_CBFS_BIOS_ACM, nullptr);
 	data.heap_acm.num_acms = 1;
 
 	data.heap_acm.header.size = sizeof(data.heap_acm);
@@ -335,15 +335,15 @@ static void txt_initialize_heap(void)
 
 	/* OsMLEData */
 	/* FIXME: Does firmware need to write this? */
-	push_sinit_heap(&heap_struct, NULL, 0);
+	push_sinit_heap(&heap_struct, nullptr, 0);
 
 	/* OsSinitData */
 	/* FIXME: Does firmware need to write this? */
-	push_sinit_heap(&heap_struct, NULL, 0);
+	push_sinit_heap(&heap_struct, nullptr, 0);
 
 	/* SinitMLEData */
 	/* FIXME: Does firmware need to write this? */
-	push_sinit_heap(&heap_struct, NULL, 0);
+	push_sinit_heap(&heap_struct, nullptr, 0);
 }
 
 __weak bool skip_intel_txt_lockdown(void)
@@ -381,7 +381,7 @@ static void lockdown_intel_txt(void *unused)
 	 * Chapter 5.4.3 Detection of Intel TXT Capability
 	 */
 
-	if (!getsec_parameter(NULL, NULL, NULL, NULL, NULL, &txt_feature_flags))
+	if (!getsec_parameter(nullptr, nullptr, nullptr, nullptr, nullptr, &txt_feature_flags))
 		return;
 
 	/* LockConfig only exists on Intel TXT for Servers */
@@ -485,4 +485,4 @@ static void lockdown_intel_txt(void *unused)
 		txt_dump_regions();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, lockdown_intel_txt, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, lockdown_intel_txt, nullptr);

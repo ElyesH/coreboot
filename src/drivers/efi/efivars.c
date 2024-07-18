@@ -413,7 +413,7 @@ enum cb_err efi_fv_print_options(struct region_device *rdev)
 	if (ret != CB_SUCCESS)
 		return ret;
 
-	return walk_variables(rdev, auth_format, print_var, NULL);
+	return walk_variables(rdev, auth_format, print_var, nullptr);
 }
 
 /*
@@ -620,7 +620,7 @@ enum cb_err efi_fv_set_option(struct region_device *rdev,
 	}
 
 	/* Walk to end of variable store */
-	ret = walk_variables(rdev, auth_format, noop, NULL);
+	ret = walk_variables(rdev, auth_format, noop, nullptr);
 	if (ret != CB_EFI_OPTION_NOT_FOUND)
 		return ret;
 

@@ -47,14 +47,14 @@ extern "C" {
 
 static inline int ec_cmd_battery_config(CROS_EC_COMMAND_INFO *h, uint8_t *r)
 {
-	return CROS_EC_COMMAND(h, EC_CMD_BATTERY_CONFIG, 0, NULL, 0, r,
+	return CROS_EC_COMMAND(h, EC_CMD_BATTERY_CONFIG, 0, nullptr, 0, r,
 			       BATT_CONF_MAX_SIZE);
 }
 
 static inline int ec_cmd_get_sku_id(CROS_EC_COMMAND_INFO *h,
 				    struct ec_sku_id_info *r)
 {
-	return CROS_EC_COMMAND(h, EC_CMD_GET_SKU_ID, 0, NULL, 0, r, sizeof(*r));
+	return CROS_EC_COMMAND(h, EC_CMD_GET_SKU_ID, 0, nullptr, 0, r, sizeof(*r));
 }
 
 static inline int
@@ -69,7 +69,7 @@ ec_cmd_mkbp_info_get_next_data(CROS_EC_COMMAND_INFO *h,
 static inline int ec_cmd_set_sku_id(CROS_EC_COMMAND_INFO *h,
 				    const struct ec_sku_id_info *p)
 {
-	return CROS_EC_COMMAND(h, EC_CMD_SET_SKU_ID, 0, p, sizeof(*p), NULL, 0);
+	return CROS_EC_COMMAND(h, EC_CMD_SET_SKU_ID, 0, p, sizeof(*p), nullptr, 0);
 }
 
 static inline int ec_cmd_thermal_get_threshold_v1(
@@ -104,7 +104,7 @@ ec_cmd_usb_pd_set_amode(CROS_EC_COMMAND_INFO *h,
 			const struct ec_params_usb_pd_set_mode_request *p)
 {
 	return CROS_EC_COMMAND(h, EC_CMD_USB_PD_SET_AMODE, 0, p, sizeof(*p),
-			       NULL, 0);
+			       nullptr, 0);
 }
 
 static inline int ec_cmd_fp_frame(CROS_EC_COMMAND_INFO *h,
@@ -119,7 +119,7 @@ static inline int ec_cmd_fp_template(CROS_EC_COMMAND_INFO *h,
 				     const struct ec_params_fp_template *p,
 				     int size)
 {
-	return CROS_EC_COMMAND(h, EC_CMD_FP_TEMPLATE, 0, p, size, NULL, 0);
+	return CROS_EC_COMMAND(h, EC_CMD_FP_TEMPLATE, 0, p, size, nullptr, 0);
 }
 /*
  * Section 2: EC interface functions that can be generated with the help
@@ -173,7 +173,7 @@ static inline int ec_cmd_fp_template(CROS_EC_COMMAND_INFO *h,
 	static inline int ec_cmd_##_fn(CROS_EC_COMMAND_INFO *h,              \
 				       const struct ec_params_##_in *p)      \
 	{                                                                    \
-		return CROS_EC_COMMAND(h, (_cmd), (_v), p, sizeof(*p), NULL, \
+		return CROS_EC_COMMAND(h, (_cmd), (_v), p, sizeof(*p), nullptr, \
 				       0);                                   \
 	}
 
@@ -185,7 +185,7 @@ static inline int ec_cmd_fp_template(CROS_EC_COMMAND_INFO *h,
 	static inline int ec_cmd_##_fn(CROS_EC_COMMAND_INFO *h,      \
 				       struct ec_response_##_out *r) \
 	{                                                            \
-		return CROS_EC_COMMAND(h, (_cmd), (_v), NULL, 0, r,  \
+		return CROS_EC_COMMAND(h, (_cmd), (_v), nullptr, 0, r,  \
 				       sizeof(*r));                  \
 	}
 
@@ -196,7 +196,7 @@ static inline int ec_cmd_fp_template(CROS_EC_COMMAND_INFO *h,
 #define _CROS_EC_CV_F(_cmd, _v, _fn)                                       \
 	static inline int ec_cmd_##_fn(CROS_EC_COMMAND_INFO *h)            \
 	{                                                                  \
-		return CROS_EC_COMMAND(h, (_cmd), (_v), NULL, 0, NULL, 0); \
+		return CROS_EC_COMMAND(h, (_cmd), (_v), nullptr, 0, nullptr, 0); \
 	}
 
 /*

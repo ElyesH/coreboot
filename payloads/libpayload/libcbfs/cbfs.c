@@ -34,7 +34,7 @@ static const struct cbfs_boot_device *cbfs_get_boot_device(bool force_ro)
 		return &ro;
 
 	if (fmap_locate_area("COREBOOT", &ro.dev.offset, &ro.dev.size))
-		return NULL;
+		return nullptr;
 
 	ro.mcache = phys_to_virt(lib_sysinfo.cbfs_ro_mcache_offset);
 	ro.mcache_size = lib_sysinfo.cbfs_ro_mcache_size;
@@ -55,7 +55,7 @@ ssize_t _cbfs_boot_lookup(const char *name, bool force_ro, union cbfs_mdata *mda
 					 &data_offset);
 
 	if (err == CB_CBFS_CACHE_FULL)
-		err = cbfs_lookup(&cbd->dev, name, mdata, &data_offset, NULL);
+		err = cbfs_lookup(&cbd->dev, name, mdata, &data_offset, nullptr);
 
 	/* Fallback to RO if possible. */
 	if (CONFIG(LP_ENABLE_CBFS_FALLBACK) && !force_ro && err == CB_CBFS_NOT_FOUND) {
@@ -175,13 +175,13 @@ static void *do_load(union cbfs_mdata *mdata, ssize_t offset, void *buf, size_t 
 	if (buf) {
 		if (!size_inout || buf_size < out_size) {
 			ERROR("'%s' buffer too small\n", mdata->h.filename);
-			return NULL;
+			return nullptr;
 		}
 	} else {
 		buf = malloc(out_size);
 		if (!buf) {
 			ERROR("'%s' allocation failure\n", mdata->h.filename);
-			return NULL;
+			return nullptr;
 		}
 		malloced = true;
 	}
@@ -191,7 +191,7 @@ static void *do_load(union cbfs_mdata *mdata, ssize_t offset, void *buf, size_t 
 	    != out_size) {
 		if (malloced)
 			free(buf);
-		return NULL;
+		return nullptr;
 	}
 
 	return buf;
@@ -207,7 +207,7 @@ void *_cbfs_load(const char *name, void *buf, size_t *size_inout, bool force_ro)
 
 	offset = _cbfs_boot_lookup(name, force_ro, &mdata);
 	if (offset < 0)
-		return NULL;
+		return nullptr;
 
 	return do_load(&mdata, offset, buf, size_inout, false);
 }
@@ -222,11 +222,11 @@ void *_cbfs_unverified_area_load(const char *area, const char *name, void *buf,
 	DEBUG("%s(area='%s', name='%s', buf=%p)\n", __func__, area, name, buf);
 
 	if (fmap_locate_area(area, &dev.offset, &dev.size) != CB_SUCCESS)
-		return NULL;
+		return nullptr;
 
-	if (cbfs_lookup(&dev, name, &mdata, &data_offset, NULL)) {
+	if (cbfs_lookup(&dev, name, &mdata, &data_offset, nullptr)) {
 		ERROR("'%s' not found in '%s'\n", name, area);
-		return NULL;
+		return nullptr;
 	}
 
 	return do_load(&mdata, dev.offset + data_offset, buf, size_inout, true);

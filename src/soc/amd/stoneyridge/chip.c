@@ -50,11 +50,11 @@ const char *soc_acpi_name(const struct device *dev)
 			}
 			break;
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pci.devfn) {
 	case GFX_DEVFN:
@@ -76,7 +76,7 @@ const char *soc_acpi_name(const struct device *dev)
 	case XHCI_DEVFN:
 		return "XHC0";
 	default:
-		return NULL;
+		return nullptr;
 	}
 };
 
@@ -121,4 +121,4 @@ static void earliest_ramstage(void *unused)
 	}
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, earliest_ramstage, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, earliest_ramstage, nullptr);

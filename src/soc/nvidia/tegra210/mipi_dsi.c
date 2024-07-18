@@ -20,12 +20,12 @@
 
 struct mipi_dsi_device mipi_dsi_device_data[NUM_DSI] = {
 	{
-		.master = NULL,
+		.master = nullptr,
 		.slave = &mipi_dsi_device_data[DSI_B],
 	},
 	{
 		.master = &mipi_dsi_device_data[DSI_A],
-		.slave = NULL,
+		.slave = nullptr,
 	},
 };
 
@@ -133,8 +133,8 @@ int mipi_dsi_liberate(struct mipi_dsi_device *master,
 	if (master->ops && master->ops->liberate)
 		err = master->ops->liberate(master, slave);
 
-	master->slave = NULL;
-	slave->master = NULL;
+	master->slave = nullptr;
+	slave->master = nullptr;
 
 	return err;
 }
@@ -232,7 +232,7 @@ int mipi_dsi_dcs_exit_sleep_mode(struct mipi_dsi_device *dsi)
 {
 	ssize_t err;
 
-	err = mipi_dsi_dcs_write(dsi, MIPI_DCS_EXIT_SLEEP_MODE, NULL, 0);
+	err = mipi_dsi_dcs_write(dsi, MIPI_DCS_EXIT_SLEEP_MODE, nullptr, 0);
 	if (err < 0)
 		return err;
 
@@ -250,7 +250,7 @@ int mipi_dsi_dcs_set_display_on(struct mipi_dsi_device *dsi)
 {
 	ssize_t err;
 
-	err = mipi_dsi_dcs_write(dsi, MIPI_DCS_SET_DISPLAY_ON, NULL, 0);
+	err = mipi_dsi_dcs_write(dsi, MIPI_DCS_SET_DISPLAY_ON, nullptr, 0);
 	if (err < 0)
 		return err;
 

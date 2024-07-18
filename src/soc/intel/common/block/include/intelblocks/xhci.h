@@ -78,7 +78,7 @@ const struct xhci_usb_info *soc_get_xhci_usb_info(pci_devfn_t xhci_dev);
  * is probed from the XHCI controller block and the port is disabled if it is not
  * connected. For the external USB ports, the mainboard provides the connect status
  * of the concerned port depending on the variants and their SKUs. If the mainboard
- * supplied callback function is NULL, then all the externally visible USB devices
+ * supplied callback function is nullptr, then all the externally visible USB devices
  * in the device tree are enabled.
  */
 void usb_xhci_disable_unused(bool (*ext_usb_xhci_en_cb)(unsigned int port_type,

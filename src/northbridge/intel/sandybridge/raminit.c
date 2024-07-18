@@ -341,7 +341,7 @@ static void init_dram_ddr3(int s3resume, const u32 cpuid)
 	ramctr_timing ctrl;
 	spd_ddr3_raw_data spds[4];
 	size_t mrc_size;
-	ramctr_timing *ctrl_cached = NULL;
+	ramctr_timing *ctrl_cached = nullptr;
 
 	timestamp_add_now(TS_INITRAM_START);
 
@@ -373,7 +373,7 @@ static void init_dram_ddr3(int s3resume, const u32 cpuid)
 						  MRC_CACHE_VERSION,
 						  &mrc_size);
 	if (mrc_size < sizeof(ctrl))
-		ctrl_cached = NULL;
+		ctrl_cached = nullptr;
 
 	/* Before reusing training data, assert that the CPU has not been replaced */
 	if (ctrl_cached && cpuid != ctrl_cached->cpu) {
@@ -383,7 +383,7 @@ static void init_dram_ddr3(int s3resume, const u32 cpuid)
 				cpuid, ctrl_cached->cpu);
 
 		/* Invalidate the stored data, it likely does not apply to the current CPU */
-		ctrl_cached = NULL;
+		ctrl_cached = nullptr;
 	}
 
 	if (s3resume && !ctrl_cached) {

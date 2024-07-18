@@ -22,7 +22,7 @@
 
 struct proximity_domains pds = {
 	.num_pds = 0,
-	.pds = NULL,
+	.pds = nullptr,
 };
 
 struct map_entry {

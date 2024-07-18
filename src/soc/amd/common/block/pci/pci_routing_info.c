@@ -28,7 +28,7 @@ const struct pci_routing_info *get_pci_routing_info(unsigned int devfn)
 	routing_info = get_pci_routing_table(&entries);
 
 	if (!routing_info || !entries)
-		return NULL;
+		return nullptr;
 
 	for (size_t i = 0; i < entries; ++i, ++routing_info)
 		if (routing_info->devfn == devfn)
@@ -37,7 +37,7 @@ const struct pci_routing_info *get_pci_routing_info(unsigned int devfn)
 	printk(BIOS_ERR, "Failed to find PCIe routing info for dev: %#x, fn: %#x\n",
 	       PCI_SLOT(devfn), PCI_FUNC(devfn));
 
-	return NULL;
+	return nullptr;
 }
 
 unsigned int pci_calculate_irq(const struct pci_routing_info *routing_info,

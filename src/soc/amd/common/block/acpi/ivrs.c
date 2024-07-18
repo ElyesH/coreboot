@@ -175,7 +175,7 @@ static unsigned long acpi_ivhd_misc(unsigned long current, struct device *dev)
 	current = ivhd_dev_range(current, PCI_DEVFN(0, 3) | (dev->downstream->secondary << 8),
 				 0xff | (dev->downstream->subordinate << 8), 0);
 
-	add_ivhd_device_entries(NULL, dev, 0, -1, &root_level,
+	add_ivhd_device_entries(nullptr, dev, 0, -1, &root_level,
 		&current, dev->downstream->secondary);
 
 	res = probe_resource(dev, IOMMU_IOAPIC_IDX);
@@ -305,16 +305,16 @@ static unsigned long acpi_fill_ivrs(acpi_ivrs_t *ivrs, unsigned long current)
 	struct acpi_ivrs_ivhd *ivhd;
 	struct device *iommu_dev;
 	struct device *nb_dev;
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 
-	if (ivrs == NULL) {
-		printk(BIOS_WARNING, "%s: ivrs is NULL\n", __func__);
+	if (ivrs == nullptr) {
+		printk(BIOS_WARNING, "%s: ivrs is nullptr\n", __func__);
 		return current;
 	}
 
 	ivhd = &ivrs->ivhd;
 
-	while ((dev = dev_find_path(dev, DEVICE_PATH_DOMAIN)) != NULL) {
+	while ((dev = dev_find_path(dev, DEVICE_PATH_DOMAIN)) != nullptr) {
 		nb_dev = pcidev_path_behind(dev->downstream, PCI_DEVFN(0, 0));
 		iommu_dev = pcidev_path_behind(dev->downstream, PCI_DEVFN(0, 2));
 		if (!nb_dev) {

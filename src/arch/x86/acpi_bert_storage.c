@@ -42,7 +42,7 @@ bool bert_errors_present(void)
 void bert_errors_region(void **start, size_t *size)
 {
 	if (bert_region_broken) {
-		*start = NULL;
+		*start = nullptr;
 		*size = 0;
 		return;
 	}
@@ -57,9 +57,9 @@ static void *bert_allocate_storage(size_t size)
 	size_t alloc;
 
 	if (bert_region_broken)
-		return NULL;
+		return nullptr;
 	if (bert_region_used + size > bert_region_size)
-		return NULL;
+		return nullptr;
 
 	alloc = bert_region_used;
 	bert_region_used += size;
@@ -80,7 +80,7 @@ static void *acpi_hest_generic_data_nth(
 	size_t struct_size;
 
 	if (!num || num > bert_entry_count(status))
-		return NULL;
+		return nullptr;
 
 	ptr = (acpi_hest_generic_data_v300_t *)(status + 1);
 	while (--num) {
@@ -129,7 +129,7 @@ static acpi_generic_error_status_t *new_bert_status(void)
 
 	if (!status) {
 		printk(BIOS_ERR, "New BERT error entry would exceed available region\n");
-		return NULL;
+		return nullptr;
 	}
 
 	status->error_severity = ACPI_GENERROR_SEV_NONE;
@@ -161,13 +161,13 @@ static acpi_hest_generic_data_v300_t *new_generic_error_entry(
 
 	if (bert_entry_count(status) == GENERIC_ERR_STS_ENTRY_COUNT_MAX) {
 		printk(BIOS_ERR, "New BERT error would exceed maximum entries\n");
-		return NULL;
+		return nullptr;
 	}
 
 	entry = bert_allocate_storage(sizeof(*entry));
 	if (!entry) {
 		printk(BIOS_ERR, "New BERT error entry would exceed available region\n");
-		return NULL;
+		return nullptr;
 	}
 
 	entry->revision = HEST_GENERIC_ENTRY_V300;
@@ -202,7 +202,7 @@ void *new_cper_fw_error_crashlog(acpi_generic_error_status_t *status, size_t cl_
 	if (!cl_data) {
 		printk(BIOS_ERR, "Crashlog entry (size %zu) would exceed available region\n",
 			cl_size);
-		return NULL;
+		return nullptr;
 	}
 
 	revise_error_sizes(status, cl_size);
@@ -218,7 +218,7 @@ acpi_hest_generic_data_v300_t *bert_append_fw_err(acpi_generic_error_status_t *s
 
 	entry = bert_append_error_datasection(status, &CPER_SEC_FW_ERR_REC_REF_GUID);
 	if (!entry)
-		return NULL;
+		return nullptr;
 
 	status->block_status |= GENERIC_ERR_STS_UNCORRECTABLE_VALID;
 	status->error_severity = ACPI_GENERROR_SEV_FATAL;
@@ -248,19 +248,19 @@ acpi_hest_generic_data_v300_t *bert_append_error_datasection(
 
 	sect_size = sizeof_error_section(guid);
 	if (!sect_size)
-		return NULL; /* Don't allocate structure if bad GUID passed */
+		return nullptr; /* Don't allocate structure if bad GUID passed */
 
 	if (sizeof(*entry) + sect_size > bert_storage_remaining())
-		return NULL;
+		return nullptr;
 
 	entry = new_generic_error_entry(status);
 	if (!entry)
-		return NULL;
+		return nullptr;
 
 	/* error section immediately follows the Generic Error Data Entry */
 	sect = bert_allocate_storage(sect_size);
 	if (!sect)
-		return NULL;
+		return nullptr;
 
 	revise_error_sizes(status, sect_size);
 
@@ -281,7 +281,7 @@ acpi_hest_generic_data_v300_t *bert_append_genproc(
 	entry = bert_append_error_datasection(status,
 					&CPER_SEC_PROC_GENERIC_GUID);
 	if (!entry)
-		return NULL;
+		return nullptr;
 
 	status->block_status |= GENERIC_ERR_STS_UNCORRECTABLE_VALID;
 	status->error_severity = ACPI_GENERROR_SEV_FATAL;
@@ -346,12 +346,12 @@ cper_ia32x64_context_t *new_cper_ia32x64_ctx(
 	};
 
 	if (type > CPER_IA32X64_CTX_MEMMAPPED)
-		return NULL;
+		return nullptr;
 
 	if (cper_ia32x64_proc_num_ctxs(x86err) == I32X64SEC_VALID_CTXNUM_MAX) {
 		printk(BIOS_ERR, "New IA32X64 %s context entry would exceed max allowable contexts\n",
 				ctx_names[type]);
-		return NULL;
+		return nullptr;
 	}
 
 	size = cper_ia32x64_ctx_sz_bytype(type, num);
@@ -359,7 +359,7 @@ cper_ia32x64_context_t *new_cper_ia32x64_ctx(
 	if (!ctx) {
 		printk(BIOS_ERR, "New IA32X64 %s context entry would exceed available region\n",
 				ctx_names[type]);
-		return NULL;
+		return nullptr;
 	}
 
 	revise_error_sizes(status, size);
@@ -400,19 +400,19 @@ cper_ia32x64_proc_error_info_t *new_cper_ia32x64_check(
 	};
 
 	if (type > X86_PROCESSOR_CHK_MAX)
-		return NULL;
+		return nullptr;
 
 	if (cper_ia32x64_proc_num_chks(x86err) == I32X64SEC_VALID_ERRNUM_MAX) {
 		printk(BIOS_ERR, "New IA32X64 %s check entry would exceed max allowable errors\n",
 				check_names[type]);
-		return NULL;
+		return nullptr;
 	}
 
 	check = bert_allocate_storage(sizeof(*check));
 	if (!check) {
 		printk(BIOS_ERR, "New IA32X64 %s check entry would exceed available region\n",
 				check_names[type]);
-		return NULL;
+		return nullptr;
 	}
 
 	revise_error_sizes(status, sizeof(*check));
@@ -437,7 +437,7 @@ acpi_hest_generic_data_v300_t *bert_append_ia32x64(
 	entry = bert_append_error_datasection(status,
 					&CPER_SEC_PROC_IA32X64_GUID);
 	if (!entry)
-		return NULL;
+		return nullptr;
 
 	status->block_status |= GENERIC_ERR_STS_UNCORRECTABLE_VALID;
 	status->error_severity = ACPI_GENERROR_SEV_FATAL;
@@ -521,12 +521,12 @@ acpi_generic_error_status_t *bert_new_event(guid_t *guid)
 	if (size > bert_storage_remaining()) {
 		printk(BIOS_ERR, "Not enough BERT region space to add event for type %s\n",
 				generic_error_name(guid));
-		return NULL;
+		return nullptr;
 	}
 
 	status = new_bert_status();
 	if (!status)
-		return NULL;
+		return nullptr;
 
 	if (!guidcmp(guid, &CPER_SEC_PROC_GENERIC_GUID))
 		r = bert_append_genproc(status);
@@ -536,11 +536,11 @@ acpi_generic_error_status_t *bert_new_event(guid_t *guid)
 		r = bert_append_fw_err(status);
 	/* else if other types not implemented */
 	else
-		r = NULL;
+		r = nullptr;
 
 	if (r)
 		return status;
-	return NULL;
+	return nullptr;
 }
 
 /* Helper to add an MSR context to an existing IA32/X64-type error entry */
@@ -554,7 +554,7 @@ cper_ia32x64_context_t *cper_new_ia32x64_context_msr(
 
 	ctx = new_cper_ia32x64_ctx(status, x86err, CPER_IA32X64_CTX_MSR, num);
 	if (!ctx)
-		return NULL;
+		return nullptr;
 
 	/* already filled ctx->type = CPER_IA32X64_CTX_MSR; */
 	ctx->msr_addr = addr;
@@ -570,7 +570,7 @@ cper_ia32x64_context_t *cper_new_ia32x64_context_msr(
 static void bert_reserved_region(void **start, size_t *size)
 {
 	if (!CONFIG(ACPI_BERT)) {
-		*start = NULL;
+		*start = nullptr;
 		*size = 0;
 	} else {
 		*start = cbmem_add(CBMEM_ID_ACPI_BERT, CONFIG_ACPI_BERT_SIZE);
@@ -598,4 +598,4 @@ static void bert_storage_setup(void *unused)
 	memset(bert_region_base, 0, bert_region_size);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, bert_storage_setup, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, bert_storage_setup, nullptr);

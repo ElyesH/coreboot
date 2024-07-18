@@ -24,12 +24,12 @@ static void *load_ipq_blob(const char *file_name)
 
 	blob_mbn = cbfs_map(file_name, &blob_size);
 	if (!blob_mbn)
-		return NULL;
+		return nullptr;
 
 	/* some sanity checks on the headers */
 	if ((blob_mbn->mbn_version != 3) ||
 	    (blob_mbn->mbn_total_size > blob_size))
-		return NULL;
+		return nullptr;
 
 	blob_dest = (void *)blob_mbn->mbn_destination;
 
@@ -84,7 +84,7 @@ int initialize_dram(void)
 	cdt_header.cdt_ptr = (uint8_t *)(cdt + 1);
 
 	sbl_rw_ret_info = ddr_init_function(&cdt_header);
-	if (sbl_rw_ret_info == NULL)
+	if (sbl_rw_ret_info == nullptr)
 		die("Fail to Initialize DDR\n");
 
 	/*

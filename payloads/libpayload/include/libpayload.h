@@ -297,7 +297,7 @@ void cbmem_console_write(const void *buffer, size_t count);
  * Take a snapshot of the CBMEM memory console. This function will allocate a
  * range of memory. Callers must free the returned buffer by themselves.
  *
- * @return The allocated buffer on success, NULL on failure.
+ * @return The allocated buffer on success, nullptr on failure.
  */
 char *cbmem_console_snapshot(void);
 /** @} */

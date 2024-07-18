@@ -25,7 +25,7 @@ void soc_save_dimm_info(void)
 	/* Get the memory info HOB */
 	memory_info_hob = soc_get_fsp_smbios_memory_info_hob();
 
-	if (memory_info_hob == NULL)
+	if (memory_info_hob == nullptr)
 		return;
 
 	/* Display the data in the FSP_SMBIOS_MEMORY_INFO HOB */
@@ -38,7 +38,7 @@ void soc_save_dimm_info(void)
 	 */
 	mem_info = cbmem_add(CBMEM_ID_MEMINFO, sizeof(*mem_info));
 	printk(BIOS_DEBUG, "CBMEM entry for DIMM info: %p\n", mem_info);
-	if (mem_info == NULL)
+	if (mem_info == nullptr)
 		return;
 	memset(mem_info, 0, sizeof(*mem_info));
 

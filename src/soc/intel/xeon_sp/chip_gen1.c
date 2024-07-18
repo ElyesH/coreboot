@@ -21,7 +21,7 @@ static const STACK_RES *domain_to_stack_res(const struct device *dev)
 	};
 
 	const IIO_UDS *hob = get_iio_uds();
-	assert(hob != NULL);
+	assert(hob != nullptr);
 
 	return &hob->PlatformData.IIO_resource[dn.socket].StackRes[dn.stack];
 }

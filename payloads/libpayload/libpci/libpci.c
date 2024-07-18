@@ -98,7 +98,7 @@ static char invalid_pci_device_string[] = "invalid pci device string";
 
 /* parse domain:bus:dev.func (with all components but "dev" optional)
  * into filter.
- * Returns NULL on success, a string pointer to the error message otherwise.
+ * Returns nullptr on success, a string pointer to the error message otherwise.
  */
 char *pci_filter_parse_slot(struct pci_filter* filter, const char* id)
 {
@@ -119,7 +119,7 @@ char *pci_filter_parse_slot(struct pci_filter* filter, const char* id)
 		filter->dev = strtol(devp+1, &endptr, 0);
 	}
 	if (endptr != funcp) return invalid_pci_device_string;
-	if (!devp) return NULL;
+	if (!devp) return nullptr;
 
 	char *busp = strchr(id, ':');
 	if (busp == devp) {
@@ -128,12 +128,12 @@ char *pci_filter_parse_slot(struct pci_filter* filter, const char* id)
 		filter->bus = strtol(busp+1, &endptr, 0);
 	}
 	if (endptr != funcp) return invalid_pci_device_string;
-	if (busp == devp) return NULL;
+	if (busp == devp) return nullptr;
 
 	filter->domain = strtol(id, &endptr, 0);
 	if (endptr != busp) return invalid_pci_device_string;
 
-	return NULL;
+	return nullptr;
 }
 
 int pci_filter_match(struct pci_filter* pf, struct pci_dev* dev)

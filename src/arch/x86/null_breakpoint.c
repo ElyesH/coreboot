@@ -28,10 +28,10 @@ static int handle_deref_breakpoint(struct breakpoint_handle handle, struct eregs
 static void create_deref_breakpoint(void)
 {
 	enum breakpoint_result res =
-		breakpoint_create_data(&null_deref_bp, NULL, sizeof(uintptr_t), false);
+		breakpoint_create_data(&null_deref_bp, nullptr, sizeof(uintptr_t), false);
 
 	if (res != BREAKPOINT_RES_OK) {
-		printk(BIOS_ERR, "Failed to create NULL dereference breakpoint\n");
+		printk(BIOS_ERR, "Failed to create nullptr dereference breakpoint\n");
 		return;
 	}
 
@@ -41,7 +41,7 @@ static void create_deref_breakpoint(void)
 
 static void create_instruction_breakpoint(void)
 {
-	enum breakpoint_result res = breakpoint_create_instruction(&null_fetch_bp, NULL);
+	enum breakpoint_result res = breakpoint_create_instruction(&null_fetch_bp, nullptr);
 
 	if (res != BREAKPOINT_RES_OK) {
 		printk(BIOS_ERR, "Failed to create address zero instruction fetch breakpoint\n");
@@ -69,5 +69,5 @@ static void null_breakpoint_disable_hook(void *unused)
 	null_breakpoint_disable();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, null_breakpoint_disable_hook, NULL);
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, null_breakpoint_disable_hook, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, null_breakpoint_disable_hook, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, null_breakpoint_disable_hook, nullptr);

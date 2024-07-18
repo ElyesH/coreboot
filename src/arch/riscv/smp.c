@@ -55,7 +55,7 @@ void smp_resume(void (*fn)(void *), void *arg)
 {
 	int hartid = read_csr(mhartid);
 
-	if (fn == NULL)
+	if (fn == nullptr)
 		die("must pass a non-null function pointer\n");
 
 	for (int i = 0; i < CONFIG_MAX_CPUS; i++) {
@@ -67,7 +67,7 @@ void smp_resume(void (*fn)(void *), void *arg)
 		if (i != hartid)
 			set_msip(i, 1);
 
-	if (HLS()->entry.fn == NULL)
+	if (HLS()->entry.fn == nullptr)
 		die("entry fn not set\n");
 
 	HLS()->entry.fn(HLS()->entry.arg);

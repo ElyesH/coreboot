@@ -94,11 +94,11 @@ int imd_lockdown(struct imd *imd);
 /* Fill in base address and size of region used by imd. */
 int imd_region_used(struct imd *imd, void **base, size_t *size);
 
-/* Add an entry to the imd. If id already exists NULL is returned. */
+/* Add an entry to the imd. If id already exists nullptr is returned. */
 const struct imd_entry *imd_entry_add(const struct imd *imd, uint32_t id,
 					size_t size);
 
-/* Locate an entry within the imd. NULL is returned when not found. */
+/* Locate an entry within the imd. nullptr is returned when not found. */
 const struct imd_entry *imd_entry_find(const struct imd *imd, uint32_t id);
 
 /* Find an existing entry or add a new one. */
@@ -108,7 +108,7 @@ const struct imd_entry *imd_entry_find_or_add(const struct imd *imd,
 /* Returns size of entry. */
 size_t imd_entry_size(const struct imd_entry *entry);
 
-/* Returns pointer to region described by entry or NULL on failure. */
+/* Returns pointer to region described by entry or nullptr on failure. */
 void *imd_entry_at(const struct imd *imd, const struct imd_entry *entry);
 
 /* Returns id for the imd entry. */
@@ -130,7 +130,7 @@ struct imd_cursor;
 /* Initialize an imd_cursor object to walk the IMD entries. */
 int imd_cursor_init(const struct imd *imd, struct imd_cursor *cursor);
 
-/* Retrieve the next imd entry the cursor is referencing. Returns NULL when
+/* Retrieve the next imd entry the cursor is referencing. Returns nullptr when
  * no more entries exist. */
 const struct imd_entry *imd_cursor_next(struct imd_cursor *cursor);
 

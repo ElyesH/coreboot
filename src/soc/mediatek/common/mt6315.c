@@ -6,7 +6,7 @@
 #include <soc/pmif.h>
 #include <soc/pmif_spmi.h>
 
-static struct pmif *pmif_arb = NULL;
+static struct pmif *pmif_arb = nullptr;
 
 static void mt6315_read(u32 slvid, u32 reg, u32 *data)
 {

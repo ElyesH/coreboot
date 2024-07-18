@@ -18,7 +18,7 @@ static int boot_device_subregion(const struct region *sub,
 				struct region_device *subrd,
 				const struct region_device *parent)
 {
-	if (parent == NULL)
+	if (parent == nullptr)
 		return -1;
 
 	return rdev_chain(subrd, parent, region_offset(sub), region_sz(sub));

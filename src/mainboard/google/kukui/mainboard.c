@@ -67,7 +67,7 @@ struct panel_description __weak *get_panel_description(int panel_id)
 {
 	printk(BIOS_ERR, "%s: ERROR: No panels defined for board: %s.\n",
 	       __func__, mainboard_part_number);
-	return NULL;
+	return nullptr;
 }
 
 /* Set up backlight control pins as output pin and power-off by default */
@@ -108,7 +108,7 @@ struct panel_description *get_panel_from_cbfs(struct panel_description *desc)
 	} buffer;
 
 	if (!desc->name)
-		return NULL;
+		return nullptr;
 
 	snprintf(cbfs_name, sizeof(cbfs_name), "panel-%s", desc->name);
 	if (cbfs_load(cbfs_name, buffer.raw, sizeof(buffer)))
@@ -116,7 +116,7 @@ struct panel_description *get_panel_from_cbfs(struct panel_description *desc)
 	else
 		printk(BIOS_ERR, "Missing %s in CBFS.\n", cbfs_name);
 
-	return desc->s ? desc : NULL;
+	return desc->s ? desc : nullptr;
 }
 
 static struct panel_description *get_active_panel(void)
@@ -128,7 +128,7 @@ static struct panel_description *get_active_panel(void)
 	if (!panel) {
 		printk(BIOS_ERR, "%s: Panel %d is not supported.\n",
 		       __func__, panel_id);
-		return NULL;
+		return nullptr;
 	}
 	assert(panel->s);
 

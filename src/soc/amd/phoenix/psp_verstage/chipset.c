@@ -99,7 +99,7 @@ static void update_one_psp_fw_hash_table_v2(enum verstage_cmd_id cmd, uint8_t *s
 
 static void update_one_psp_fw_hash_table(enum verstage_cmd_id cmd, const char *fname)
 {
-	void *hash_file = cbfs_map(fname, NULL);
+	void *hash_file = cbfs_map(fname, nullptr);
 	uint16_t version;
 
 	if (!hash_file) {

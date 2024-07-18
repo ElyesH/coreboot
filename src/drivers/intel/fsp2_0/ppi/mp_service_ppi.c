@@ -27,8 +27,8 @@ static void efi_ap_procedure_caller(void *arg)
 efi_return_status_t mp_get_number_of_processors(efi_uintn_t *number_of_processors,
 	efi_uintn_t *number_of_enabled_processors)
 {
-	if (number_of_processors == NULL || number_of_enabled_processors ==
-			NULL)
+	if (number_of_processors == nullptr || number_of_enabled_processors ==
+			nullptr)
 		return FSP_INVALID_PARAMETER;
 
 	*number_of_processors = get_cpu_count();
@@ -50,7 +50,7 @@ efi_return_status_t mp_get_processor_info(efi_uintn_t processor_number,
 
 	struct device *dev = info->cpu;
 
-	if (processor_info_buffer == NULL)
+	if (processor_info_buffer == nullptr)
 		return FSP_INVALID_PARAMETER;
 
 	processor_info_buffer->StatusFlag = PROCESSOR_HEALTH_STATUS_BIT
@@ -78,7 +78,7 @@ efi_return_status_t mp_startup_all_aps(efi_ap_procedure procedure,
 	if (!cpu_info())
 		return FSP_DEVICE_ERROR;
 
-	if (procedure == NULL)
+	if (procedure == nullptr)
 		return FSP_INVALID_PARAMETER;
 
 	if (mp_run_on_all_aps((void *)efi_ap_procedure_caller, &params,
@@ -101,7 +101,7 @@ efi_return_status_t mp_startup_all_cpus(efi_ap_procedure procedure,
 	if (!cpu_info())
 		return FSP_DEVICE_ERROR;
 
-	if (procedure == NULL)
+	if (procedure == nullptr)
 		return FSP_INVALID_PARAMETER;
 
 	/* Run on BSP */
@@ -147,7 +147,7 @@ efi_return_status_t mp_startup_this_ap(efi_ap_procedure procedure,
 	if (processor_number == BSP_CPU_SLOT)
 		return FSP_INVALID_PARAMETER;
 
-	if (procedure == NULL)
+	if (procedure == nullptr)
 		return FSP_INVALID_PARAMETER;
 
 	if (mp_run_on_aps((void *)efi_ap_procedure_caller, &params,
@@ -163,7 +163,7 @@ efi_return_status_t mp_identify_processor(efi_uintn_t *processor_number)
 {
 	int index;
 
-	if (processor_number == NULL)
+	if (processor_number == nullptr)
 		return FSP_INVALID_PARAMETER;
 
 	index = cpu_index();

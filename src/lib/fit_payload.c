@@ -96,7 +96,7 @@ static struct device_tree *unpack_fdt(struct fit_image_node *image_node)
 		data = malloc(r.size);
 		r.offset = (uintptr_t)data;
 		if (!data || extract(&r, image_node))
-			return NULL;
+			return nullptr;
 	}
 
 	return fdt_unflatten(data);
@@ -110,17 +110,17 @@ static void add_cb_fdt_data(struct device_tree *tree)
 {
 	u32 addr_cells = 1, size_cells = 1;
 	u64 reg_addrs[2], reg_sizes[2];
-	void *baseptr = NULL;
+	void *baseptr = nullptr;
 	size_t size = 0;
 
-	static const char *firmware_path[] = {"firmware", NULL};
+	static const char *firmware_path[] = {"firmware", nullptr};
 	struct device_tree_node *firmware_node = dt_find_node(tree->root,
 		firmware_path, &addr_cells, &size_cells, 1);
 
 	/* Need to add 'ranges' to the intermediate node to make 'reg' work. */
-	dt_add_bin_prop(firmware_node, "ranges", NULL, 0);
+	dt_add_bin_prop(firmware_node, "ranges", nullptr, 0);
 
-	static const char *coreboot_path[] = {"coreboot", NULL};
+	static const char *coreboot_path[] = {"coreboot", nullptr};
 	struct device_tree_node *coreboot_node = dt_find_node(firmware_node,
 		coreboot_path, &addr_cells, &size_cells, 1);
 
@@ -168,7 +168,7 @@ static void add_cb_fdt_data(struct device_tree *tree)
  */
 void fit_payload(struct prog *payload, void *data)
 {
-	struct device_tree *dt = NULL;
+	struct device_tree *dt = nullptr;
 	struct region kernel = {0}, fdt = {0}, initrd = {0};
 
 	printk(BIOS_INFO, "FIT: Examine payload %s\n", payload->name);
@@ -228,7 +228,7 @@ void fit_payload(struct prog *payload, void *data)
 	if (config->ramdisk &&
 	    extract(&initrd, config->ramdisk)) {
 		printk(BIOS_ERR, "Failed to extract initrd\n");
-		prog_set_entry(payload, NULL, NULL);
+		prog_set_entry(payload, nullptr, nullptr);
 		return;
 	}
 
@@ -236,7 +236,7 @@ void fit_payload(struct prog *payload, void *data)
 
 	if (extract(&kernel, config->kernel)) {
 		printk(BIOS_ERR, "Failed to extract kernel\n");
-		prog_set_entry(payload, NULL, NULL);
+		prog_set_entry(payload, nullptr, nullptr);
 		return;
 	}
 

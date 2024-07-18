@@ -272,7 +272,7 @@ static void add_entry(struct pci_irq_entry **head, pci_devfn_t devfn, enum pci_p
 	entry->devfn = devfn;
 	entry->pin = pin;
 	entry->irq = irq;
-	entry->next = NULL;
+	entry->next = nullptr;
 
 	while (*tmp)
 		tmp = &(*tmp)->next;

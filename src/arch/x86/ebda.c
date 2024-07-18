@@ -61,4 +61,4 @@ static void setup_default_ebda(void *unused)
 }
 
 /* Ensure EBDA is prepared before Option ROMs. */
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, setup_default_ebda, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, setup_default_ebda, nullptr);

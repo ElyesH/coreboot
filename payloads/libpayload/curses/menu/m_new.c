@@ -48,7 +48,7 @@ MODULE_ID("$Id: m_new.c,v 1.21 2010/01/23 21:20:11 tom Exp $")
 |                    The new menu is initialized with the values from the
 |                    default menu.
 |
-|   Return Values :  NULL on error
+|   Return Values :  nullptr on error
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(MENU *)
 NCURSES_SP_NAME(new_menu) (NCURSES_SP_DCLx ITEM ** items)
@@ -98,7 +98,7 @@ NCURSES_SP_NAME(new_menu) (NCURSES_SP_DCLx ITEM ** items)
 |                    The new menu is initialized with the values from the
 |                    default menu.
 |
-|   Return Values :  NULL on error
+|   Return Values :  nullptr on error
 +--------------------------------------------------------------------------*/
 #if NCURSES_SP_FUNCS
 NCURSES_EXPORT(MENU *)

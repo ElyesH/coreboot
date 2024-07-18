@@ -10,7 +10,7 @@ static const char *const mca_bank_name[] = {
 	[2] = "Combined unit",
 	/* Bank 3 is reserved and not all corresponding MSRs are implemented in Family 15h.
 	   Accessing non-existing MSRs causes a general protection fault. */
-	[3] = NULL,
+	[3] = nullptr,
 	[4] = "Northbridge",
 	[5] = "Execution unit",
 	[6] = "Floating point unit"
@@ -23,7 +23,7 @@ bool mca_has_expected_bank_count(void)
 
 bool mca_is_valid_bank(unsigned int bank)
 {
-	return (bank < ARRAY_SIZE(mca_bank_name) && mca_bank_name[bank] != NULL);
+	return (bank < ARRAY_SIZE(mca_bank_name) && mca_bank_name[bank] != nullptr);
 }
 
 const char *mca_get_bank_name(unsigned int bank)

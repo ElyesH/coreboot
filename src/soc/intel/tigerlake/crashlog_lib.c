@@ -31,7 +31,7 @@ bool pmc_cl_discovery(void)
 	u32 tmp_bar_addr = 0, desc_table_addr = 0;
 
 	const struct pmc_ipc_buffer *req = { 0 };
-	struct pmc_ipc_buffer *res = NULL;
+	struct pmc_ipc_buffer *res = nullptr;
 	uint32_t cmd_reg;
 	int r;
 

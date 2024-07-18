@@ -380,8 +380,8 @@ static tpm_result_t pc80_tpm_probe(enum tpm_family *family)
 {
 	static enum tpm_family tpm_family;
 
-	const char *device_name = NULL;
-	const char *vendor_name = NULL;
+	const char *device_name = nullptr;
+	const char *vendor_name = nullptr;
 	const struct device_name *dev;
 	u32 didvid, intf_id;
 	u16 vid, did;
@@ -390,7 +390,7 @@ static tpm_result_t pc80_tpm_probe(enum tpm_family *family)
 	const char *family_str;
 
 	if (vendor_dev_id) {
-		if (family != NULL)
+		if (family != nullptr)
 			*family = tpm_family;
 		return TPM_SUCCESS;  /* Already probed. */
 	}
@@ -450,9 +450,9 @@ static tpm_result_t pc80_tpm_probe(enum tpm_family *family)
 	}
 
 	family_str = (tpm_family == TPM_1 ? "TPM 1.2" : "TPM 2.0");
-	if (vendor_name == NULL) {
+	if (vendor_name == nullptr) {
 		printk(BIOS_INFO, "Found %s 0x%04x by 0x%04x\n", family_str, did, vid);
-	} else if (device_name == NULL) {
+	} else if (device_name == nullptr) {
 		printk(BIOS_INFO, "Found %s 0x%04x by %s (0x%04x)\n", family_str, did,
 		       vendor_name, vid);
 	} else {
@@ -460,7 +460,7 @@ static tpm_result_t pc80_tpm_probe(enum tpm_family *family)
 		       device_name, did, vendor_name, vid);
 	}
 
-	if (family != NULL)
+	if (family != nullptr)
 		*family = tpm_family;
 	return TPM_SUCCESS;
 }
@@ -726,15 +726,15 @@ static tpm_result_t pc80_tpm_sendrecv(const uint8_t *sendbuf, size_t send_size,
  *
  * @tpm_family - pointer to tpm_family which is set to TPM family of the device.
  *
- * Returns pointer to send-receive function on success or NULL on failure.
+ * Returns pointer to send-receive function on success or nullptr on failure.
  */
 tis_sendrecv_fn pc80_tis_probe(enum tpm_family *family)
 {
 	if (pc80_tpm_probe(family))
-		return NULL;
+		return nullptr;
 
 	if (pc80_tis_open())
-		return NULL;
+		return nullptr;
 
 	return &pc80_tpm_sendrecv;
 }
@@ -906,7 +906,7 @@ static struct pnp_info pnp_dev_info[] = {
 static void enable_dev(struct device *dev)
 {
 	if (CONFIG(TPM)) {
-		if (pc80_tis_probe(NULL) == NULL) {
+		if (pc80_tis_probe(nullptr) == nullptr) {
 			dev->enabled = 0;
 			return;
 		}

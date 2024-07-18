@@ -22,7 +22,7 @@ void *crosec_get_buffer(size_t size, int req)
 	if (size > PROTO3_MAX_PACKET_SIZE) {
 		printk(BIOS_DEBUG, "Proto v3 buffer request too large: %zu!\n",
 			size);
-		return NULL;
+		return nullptr;
 	}
 
 	if (req)
@@ -45,7 +45,7 @@ static int crosec_spi_io(size_t req_size, size_t resp_size, void *context)
 	  * See chrome-os-partner:32223 for more details. */
 	udelay(CONFIG_EC_GOOGLE_CHROMEEC_SPI_WAKEUP_DELAY_US);
 
-	if (spi_xfer(slave, req_buf, req_size, NULL, 0)) {
+	if (spi_xfer(slave, req_buf, req_size, nullptr, 0)) {
 		printk(BIOS_ERR, "%s: Failed to send request.\n", __func__);
 		ret = -1;
 		goto out;
@@ -56,7 +56,7 @@ static int crosec_spi_io(size_t req_size, size_t resp_size, void *context)
 	// Wait 1s for a framing byte.
 	stopwatch_init_usecs_expire(&sw, USECS_PER_SEC);
 	while (1) {
-		if (spi_xfer(slave, NULL, 0, &byte, sizeof(byte))) {
+		if (spi_xfer(slave, nullptr, 0, &byte, sizeof(byte))) {
 			printk(BIOS_ERR, "%s: Failed to receive byte.\n",
 			       __func__);
 			ret = -1;
@@ -74,7 +74,7 @@ static int crosec_spi_io(size_t req_size, size_t resp_size, void *context)
 		}
 	}
 
-	if (spi_xfer(slave, NULL, 0, resp_buf, resp_size)) {
+	if (spi_xfer(slave, nullptr, 0, resp_buf, resp_size)) {
 		printk(BIOS_ERR, "%s: Failed to receive response.\n", __func__);
 		ret = -1;
 	}

@@ -8,8 +8,8 @@ RCSID("$Id: pdcscrn.c,v 1.34 2008/07/14 04:24:52 wmcbrine Exp $")
 #include "deffont.h"
 #include "deficon.h"
 
-SDL_Surface *pdc_screen = NULL, *pdc_font = NULL, *pdc_icon = NULL,
-            *pdc_back = NULL, *pdc_tileback = NULL;
+SDL_Surface *pdc_screen = nullptr, *pdc_font = nullptr, *pdc_icon = nullptr,
+            *pdc_back = nullptr, *pdc_tileback = nullptr;
 int pdc_sheight = 0, pdc_swidth = 0, pdc_yoffset = 0, pdc_xoffset = 0;
 
 SDL_Color pdc_color[16];
@@ -136,7 +136,7 @@ int PDC_scr_open(int argc, char **argv)
                                                     sizeof(deficon)), 0);
 
         if (pdc_icon)
-            SDL_WM_SetIcon(pdc_icon, NULL);
+            SDL_WM_SetIcon(pdc_icon, nullptr);
     }
 
     if (pdc_own_screen)

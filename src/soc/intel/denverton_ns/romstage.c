@@ -26,7 +26,7 @@ static void display_fsp_smbios_memory_info_hob(void)
 	/* Get the memory info HOB */
 	memory_info_hob = soc_get_fsp_smbios_memory_info_hob();
 
-	if (memory_info_hob == NULL)
+	if (memory_info_hob == nullptr)
 		return;
 
 	soc_display_fsp_smbios_memory_info_hob(memory_info_hob);

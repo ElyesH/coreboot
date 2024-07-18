@@ -196,5 +196,5 @@ int main(void)
 		cmocka_unit_test(efi_test_new_write)
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

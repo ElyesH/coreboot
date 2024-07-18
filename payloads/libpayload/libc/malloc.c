@@ -56,7 +56,7 @@ struct memory_type {
 extern char _heap, _eheap;	/* Defined in the ldscript. */
 
 static struct memory_type default_type =
-	{ (void *)&_heap, (void *)&_eheap, NULL
+	{ (void *)&_heap, (void *)&_eheap, nullptr
 #if CONFIG(LP_DEBUG_MALLOC)
 	, 0, 0, "HEAP"
 #endif
@@ -101,7 +101,7 @@ void init_dma_memory(void *start, u32 size)
 	dma = malloc(sizeof(*dma));
 	dma->start = start;
 	dma->end = start + size;
-	dma->align_regions = NULL;
+	dma->align_regions = nullptr;
 
 #if CONFIG(LP_DEBUG_MALLOC)
 	dma->minimal_free = 0;
@@ -130,7 +130,7 @@ void dma_allocator_range(void **start_out, size_t *size_out)
 		*start_out = dma->start;
 		*size_out = dma->end - dma->start;
 	} else {
-		*start_out = NULL;
+		*start_out = nullptr;
 		*size_out = 0;
 	}
 }
@@ -145,7 +145,7 @@ static hdrtype_t volatile *find_free_block(int len, struct memory_type *type)
 	len = ALIGN_UP(len, HDRSIZE);
 
 	if (!len || len > MAX_SIZE)
-		return (void *)NULL;
+		return (void *)nullptr;
 
 	/* Make sure the region is setup correctly. */
 	if (!HAS_MAGIC(*ptr)) {
@@ -177,7 +177,7 @@ static hdrtype_t volatile *find_free_block(int len, struct memory_type *type)
 	} while (ptr < (hdrtype_t *) type->end);
 
 	/* Nothing available. */
-	return NULL;
+	return nullptr;
 }
 
 /* Mark the block with length 'len' as used */
@@ -211,8 +211,8 @@ static void *alloc(int len, struct memory_type *type)
 {
 	hdrtype_t volatile *ptr = find_free_block(len, type);
 
-	if (ptr == NULL)
-		return NULL;
+	if (ptr == nullptr)
+		return nullptr;
 
 	use_block(ptr, len);
 	return (void *)((uintptr_t)ptr + HDRSIZE);
@@ -258,8 +258,8 @@ void free(void *ptr)
 	hdrtype_t hdr;
 	struct memory_type *type = heap;
 
-	/* No action occurs on NULL. */
-	if (ptr == NULL)
+	/* No action occurs on nullptr. */
+	if (ptr == nullptr)
 		return;
 
 	/* Sanity check. */
@@ -314,13 +314,13 @@ void *realloc(void *ptr, size_t size)
 	unsigned int osize;
 	struct memory_type *type = heap;
 
-	if (ptr == NULL)
+	if (ptr == nullptr)
 		return alloc(size, type);
 
 	pptr = ptr - HDRSIZE;
 
 	if (!HAS_MAGIC(*((hdrtype_t *) pptr)))
-		return NULL;
+		return nullptr;
 
 	if (ptr < type->start || ptr >= type->end)
 		type = dma;
@@ -336,8 +336,8 @@ void *realloc(void *ptr, size_t size)
 	free(ptr);
 
 	block = find_free_block(size, type);
-	if (block == NULL)
-		return NULL;
+	if (block == nullptr)
+		return nullptr;
 
 	ret = (void *)((uintptr_t)block + HDRSIZE);
 
@@ -402,8 +402,8 @@ static struct align_region_t *allocate_region(int alignment, int num_elements,
 
 	r = malloc(sizeof(*r));
 
-	if (r == NULL)
-		return NULL;
+	if (r == nullptr)
+		return nullptr;
 
 	memset(r, 0, sizeof(*r));
 
@@ -423,9 +423,9 @@ static struct align_region_t *allocate_region(int alignment, int num_elements,
 
 	r->start = alloc(r->size + alignment + extra_space, type);
 
-	if (r->start == NULL) {
+	if (r->start == nullptr) {
 		free(r);
-		return NULL;
+		return nullptr;
 	}
 
 	r->start_data = (void *)ALIGN_UP((uintptr_t)r->start + extra_space,
@@ -464,7 +464,7 @@ static int free_aligned(void* addr, struct memory_type *type)
 {
 	struct align_region_t **prev_link = &type->align_regions;
 
-	while (*prev_link != NULL)
+	while (*prev_link != nullptr)
 	{
 		if (!addr_in_region(*prev_link, addr)) {
 			prev_link = &((*prev_link)->next);
@@ -500,16 +500,16 @@ static void *alloc_aligned(size_t align, size_t size, struct memory_type *type)
 	if (size == 0) return 0;
 	if (type->align_regions == 0) {
 		type->align_regions = malloc(sizeof(struct align_region_t));
-		if (type->align_regions == NULL)
-			return NULL;
+		if (type->align_regions == nullptr)
+			return nullptr;
 		memset(type->align_regions, 0, sizeof(struct align_region_t));
 	}
 	struct align_region_t *reg = type->align_regions;
 
 	if (size >= large_request || align >= large_request) {
 		reg = allocate_region(align, 0, size, type);
-		if (reg == NULL)
-			return NULL;
+		if (reg == nullptr)
+			return nullptr;
 		return reg->start_data;
 	}
 
@@ -538,7 +538,7 @@ look_further:
 	}
 	if (reg == 0) {
 		/* Nothing available. */
-		return (void *)NULL;
+		return (void *)nullptr;
 	}
 
 	int i, count = 0, target = (size+align-1)/align;

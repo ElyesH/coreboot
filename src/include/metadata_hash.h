@@ -19,7 +19,7 @@ vb2_error_t metadata_hash_verify_fmap(const void *fmap_base, size_t fmap_size);
    verification. This function is only available in the bootblock. */
 struct vb2_hash *metadata_hash_get(void);
 #else
-static inline struct vb2_hash *metadata_hash_get(void) { return NULL; }
+static inline struct vb2_hash *metadata_hash_get(void) { return nullptr; }
 #endif
 
 #endif

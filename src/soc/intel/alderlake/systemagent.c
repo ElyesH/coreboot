@@ -68,8 +68,8 @@ static void set_mmio_resource(
 	uint64_t size,
 	const char *description)
 {
-	if (resource == NULL) {
-		printk(BIOS_ERR, "%s: argument resource is NULL for %s\n",
+	if (resource == nullptr) {
+		printk(BIOS_ERR, "%s: argument resource is nullptr for %s\n",
 		__func__, description);
 		return;
 	}

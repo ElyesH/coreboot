@@ -278,37 +278,37 @@ static struct device_operations ops = {
 
 static struct pnp_info pnp_dev_info[] = {
 	/* Serial Port 1 (UART1) */
-	{ NULL,	ITE_SP1,	PNP_IO0 | PNP_IRQ0,		0x0ff8,		},
+	{ nullptr,	ITE_SP1,	PNP_IO0 | PNP_IRQ0,		0x0ff8,		},
 	/* Serial Port 2 (UART2) */
-	{ NULL, ITE_SP2,	PNP_IO0 | PNP_IRQ0,		0x0ff8,		},
+	{ nullptr, ITE_SP2,	PNP_IO0 | PNP_IRQ0,		0x0ff8,		},
 	/* System Wake-Up Control (SWUC) */
-	{ NULL,	ITE_SWUC,	PNP_IO0 | PNP_IRQ0,		0xfff0,		},
+	{ nullptr,	ITE_SWUC,	PNP_IO0 | PNP_IRQ0,		0xfff0,		},
 	/* KBC / Mouse Interface */
-	{ NULL, ITE_SWUC,	PNP_IRQ0,					},
+	{ nullptr, ITE_SWUC,	PNP_IRQ0,					},
 	/* KBC / Keyboard Interface */
-	{ NULL, ITE_KBCK,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, ITE_KBCK,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 	/* Consumer IR (CIR) */
-	{ NULL, ITE_IR,		PNP_IO0 | PNP_IRQ0,		0xfff8,		},
+	{ nullptr, ITE_IR,		PNP_IO0 | PNP_IRQ0,		0xfff8,		},
 	/* Shared Memory / Flash Interface (SMFI) */
-	{ NULL, ITE_SMFI,	PNP_IO0 | PNP_IRQ0,		0xfff0,		},
+	{ nullptr, ITE_SMFI,	PNP_IO0 | PNP_IRQ0,		0xfff0,		},
 	/* RTC-like Timer (RCTC) */
-	{ NULL, ITE_RTCT,	PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IO3 | PNP_IRQ0,
+	{ nullptr, ITE_RTCT,	PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IO3 | PNP_IRQ0,
 				0xfffe, 0xfffe, 0xfffe, 0xfffe,			},
 	/* Power Management I/F Channel 1 (PMC1) */
-	{ NULL, ITE_PMC1,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, ITE_PMC1,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 	/* Power Management I/F Channel 2 (PMC2) */
-	{ NULL, ITE_PMC2,	PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IRQ0,	0x07fc,
+	{ nullptr, ITE_PMC2,	PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IRQ0,	0x07fc,
 				0x07fc, 0xfff0,					},
 	/* Serial Peripheral Interface (SSPI) */
-	{ NULL,	ITE_SSPI,	PNP_IO0 | PNP_IRQ0,		0xfff8,		},
+	{ nullptr,	ITE_SSPI,	PNP_IO0 | PNP_IRQ0,		0xfff8,		},
 	/* Platform Environment Control Interface (PECI) */
-	{ NULL, ITE_PECI,	PNP_IRQ0,			0xfff8,		},
+	{ nullptr, ITE_PECI,	PNP_IRQ0,			0xfff8,		},
 	/* Power Management I/F Channel 3 (PMC3) */
-	{ NULL, ITE_PMC3,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, ITE_PMC3,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 	/* Power Management I/F Channel 4 (PMC4) */
-	{ NULL, ITE_PMC4,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, ITE_PMC4,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 	/* Power Management I/F Channel 5 (PMC5) */
-	{ NULL, ITE_PMC5,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, ITE_PMC5,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 };
 
 static void enable_dev(struct device *dev)

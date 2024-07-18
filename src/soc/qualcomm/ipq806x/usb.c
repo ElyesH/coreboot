@@ -173,7 +173,7 @@ static void crport_write(struct usb_qc_phy *phy, u16 addr, u16 data)
 {
 	crport_handshake(&phy->crport_data_in, &phy->crport_cap_addr, addr);
 	crport_handshake(&phy->crport_data_in, &phy->crport_cap_data, data);
-	crport_handshake(NULL, &phy->crport_ack_write, 0);
+	crport_handshake(nullptr, &phy->crport_ack_write, 0);
 }
 
 static void tune_phy(struct usb_qc_phy *phy)

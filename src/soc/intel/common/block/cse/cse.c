@@ -591,7 +591,7 @@ enum cse_tx_rx_status heci_send_receive(const void *snd_msg, size_t snd_sz, void
 		return ret;
 	}
 
-	if (rcv_msg != NULL) {
+	if (rcv_msg != nullptr) {
 		ret = heci_receive(rcv_msg, rcv_sz);
 		if (ret) {
 			printk(BIOS_ERR, "HECI: receive Failed\n");
@@ -869,7 +869,7 @@ static enum cb_err get_me_fw_version(struct me_fw_ver_resp *resp)
 		.command = MKHI_GEN_GET_FW_VERSION,
 	};
 
-	if (resp == NULL) {
+	if (resp == nullptr) {
 		printk(BIOS_ERR, "%s failed, null pointer parameter\n", __func__);
 		return CB_ERR;
 	}
@@ -1423,7 +1423,7 @@ static void intel_cse_get_rw_version(void)
 		return;
 
 	struct cse_specific_info *info = cbmem_find(CBMEM_ID_CSE_INFO);
-	if (info == NULL)
+	if (info == nullptr)
 		return;
 
 	printk(BIOS_DEBUG, "CSE RW Firmware Version: %d.%d.%d.%d\n",

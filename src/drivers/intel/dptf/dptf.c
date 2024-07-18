@@ -228,7 +228,7 @@ static void write_generic_devices(const struct drivers_intel_dptf_config *config
 	for (i = 0, participant = DPTF_TEMP_SENSOR_0; i < DPTF_MAX_TSR; ++i, ++participant) {
 		snprintf(name, sizeof(name), "TSR%1d", i);
 		dptf_write_generic_participant(name, DPTF_GENERIC_PARTICIPANT_TYPE_TSR,
-					       NULL, get_STA_value(config, participant),
+					       nullptr, get_STA_value(config, participant),
 					       platform_info);
 	}
 }
@@ -239,7 +239,7 @@ static const char *get_pmc_ipcs_method(void)
 				pcidev_path_on_root(PCH_DEVFN_PMC), "IPCS");
 	if (!method) {
 		printk(BIOS_ERR, "%s: Unable to find PMC device IPCS method\n", __func__);
-		return NULL;
+		return nullptr;
 	}
 	return method;
 }
@@ -406,7 +406,7 @@ static void write_create_tpwr(const struct drivers_intel_dptf_config *config,
 {
 	acpigen_write_device("TPWR");
 	acpigen_write_name("_HID");
-	if (platform_info->tpwr_device_hid != NULL)
+	if (platform_info->tpwr_device_hid != nullptr)
 		dptf_write_hid(platform_info->use_eisa_hids, platform_info->tpwr_device_hid);
 	acpigen_write_name_string("_UID", "TPWR");
 	acpigen_write_name_unicode("_STR", DEFAULT_POWER_STR);
@@ -433,7 +433,7 @@ static void write_create_tbat(const struct dptf_platform_info *platform_info)
 {
 	acpigen_write_device("TBAT");
 	acpigen_write_name("_HID");
-	if (platform_info->tbat_device_hid != NULL)
+	if (platform_info->tbat_device_hid != nullptr)
 		dptf_write_hid(platform_info->use_eisa_hids, platform_info->tbat_device_hid);
 	acpigen_write_name_string("_UID", "1");
 	acpigen_write_name_unicode("_STR", DEFAULT_BATTERY_STR);
@@ -510,7 +510,7 @@ static void write_device_definitions(const struct device *dev)
 	enum dptf_participant p;
 
 	/* The CPU device gets an _ADR that matches the ACPI PCI address for 00:04.00 */
-	parent = dev && dev->upstream ? dev->upstream->dev : NULL;
+	parent = dev && dev->upstream ? dev->upstream->dev : nullptr;
 	if (!parent || parent->path.type != DEVICE_PATH_PCI) {
 		printk(BIOS_ERR, "%s: DPTF objects must live under 00:04.0 PCI device\n",
 		       __func__);

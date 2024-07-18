@@ -335,7 +335,7 @@ unsigned long southcluster_write_acpi_tables(const struct device *device, unsign
 		current = acpi_align_current(current);
 
 	} else {
-		ssdt2 = NULL;
+		ssdt2 = nullptr;
 		printk(BIOS_DEBUG, "ACPI:     * SSDT2 not generated.\n");
 	}
 

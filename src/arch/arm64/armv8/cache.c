@@ -51,7 +51,7 @@ enum cb_err cpu_get_cache_info(const enum cache_level level, const enum cache_ty
 {
 	uint64_t ccsidr_el1;
 
-	if (info == NULL || level < CACHE_L1 || level > CACHE_L7)
+	if (info == nullptr || level < CACHE_L1 || level > CACHE_L7)
 		return CB_ERR_ARG;
 
 	/*

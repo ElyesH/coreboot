@@ -12,7 +12,7 @@
 void *__weak crosec_get_buffer(size_t size, int req)
 {
 	printk(BIOS_DEBUG, "crosec_get_buffer() implementation required.\n");
-	return NULL;
+	return nullptr;
 }
 
 /* Dumps EC command / response data into debug output.
@@ -198,9 +198,9 @@ static int send_command_proto3(struct chromeec_command *cec_command,
 	struct ec_command_v3 *cmd;
 	struct ec_response_v3 *resp;
 
-	if ((cmd = crosec_get_buffer(sizeof(*cmd), 1)) == NULL)
+	if ((cmd = crosec_get_buffer(sizeof(*cmd), 1)) == nullptr)
 		return -EC_RES_ERROR;
-	if ((resp = crosec_get_buffer(sizeof(*resp), 0)) == NULL)
+	if ((resp = crosec_get_buffer(sizeof(*resp), 0)) == nullptr)
 		return -EC_RES_ERROR;
 
 	/* Create request packet */

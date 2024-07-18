@@ -70,7 +70,7 @@ static int label_value(const char *haystack, size_t haystack_sz,
 
 	memset(dest, 0, dest_sz);
 
-	/* Allow for NULL termination. */
+	/* Allow for nullptr termination. */
 	dest_sz--;
 	val_index = find_label(haystack, haystack_sz, label);
 	if (val_index < 0)
@@ -178,7 +178,7 @@ static void save_mma_results_data(void *unused)
 
 	mma_data = cbmem_add(CBMEM_ID_MMA_DATA, mma_data_size);
 
-	if (mma_data == NULL) {
+	if (mma_data == nullptr) {
 		printk(BIOS_DEBUG,
 			"MMA: CBMEM was not available to save the MMA data.\n");
 		return;
@@ -198,4 +198,4 @@ static void save_mma_results_data(void *unused)
 }
 
 BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_ENTRY,
-			save_mma_results_data, NULL);
+			save_mma_results_data, nullptr);

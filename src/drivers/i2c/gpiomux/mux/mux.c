@@ -21,7 +21,7 @@ static void i2c_gpiomux_mux_fill_ssdt(const struct device *dev)
 	const char *scope = acpi_device_scope(dev);
 	const char *path = acpi_device_path(dev);
 	struct drivers_i2c_gpiomux_mux_config *config = config_of(dev);
-	struct acpi_dp *dsd = NULL;
+	struct acpi_dp *dsd = nullptr;
 	const char *compat_string = "i2c-mux-gpio";
 	struct acpi_gpio_res_params param[MAX_NUM_MUX_GPIOS];
 	int i;

@@ -64,7 +64,7 @@ set_item_userptr(ITEM * item, void *userptr)
 |                    application relevant information.
 |
 |   Return Values :  Value of the pointer. If no such pointer has been set,
-|                    NULL is returned.
+|                    nullptr is returned.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(void *)
 item_userptr(const ITEM * item)

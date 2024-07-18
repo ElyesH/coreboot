@@ -176,7 +176,7 @@ static void test_rdev_success(void **state)
 
 static void test_rdev_failure(void **state)
 {
-	will_return(mock_mmap, NULL);
+	will_return(mock_mmap, nullptr);
 	will_return(mock_unmap, -1);
 	will_return(mock_readat, -1);
 	will_return(mock_writeat, -1);
@@ -404,5 +404,5 @@ int main(void)
 		cmocka_unit_test(test_mem_rdev),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

@@ -287,11 +287,11 @@ int pci_msix_table_bar(struct device *dev, u32 *offset, u8 *idx)
 }
 
 /**
- * Given a device, return a msix_entry pointer or NULL if no table was found.
+ * Given a device, return a msix_entry pointer or nullptr if no table was found.
  *
  * @param dev Pointer to the device structure.
  *
- * @return NULL on error
+ * @return nullptr on error
  */
 struct msix_entry *pci_msix_get_table(struct device *dev)
 {
@@ -300,18 +300,18 @@ struct msix_entry *pci_msix_get_table(struct device *dev)
 	u8 idx;
 
 	if (pci_msix_table_bar(dev, &offset, &idx))
-		return NULL;
+		return nullptr;
 
 	if (idx > 5)
-		return NULL;
+		return nullptr;
 
 	res = probe_resource(dev, idx * 4 + PCI_BASE_ADDRESS_0);
 	if (!res || !res->base || offset >= res->size)
-		return NULL;
+		return nullptr;
 
 	if ((res->flags & IORESOURCE_PCI64) &&
 	    (uintptr_t)res->base != res->base)
-		return NULL;
+		return nullptr;
 
 	return (struct msix_entry *)((uintptr_t)res->base + offset);
 }
@@ -471,7 +471,7 @@ static void pci_record_bridge_resource(struct device *dev, resource_t moving,
 	unsigned long gran;
 	resource_t step;
 
-	resource = NULL;
+	resource = nullptr;
 
 	if (!moving)
 		return;
@@ -739,7 +739,7 @@ void pci_dev_set_resources(struct device *dev)
 
 void pci_dev_enable_resources(struct device *dev)
 {
-	const struct pci_operations *ops = NULL;
+	const struct pci_operations *ops = nullptr;
 	u16 command;
 
 	/* Set the subsystem vendor and device ID for mainboard devices. */
@@ -850,7 +850,7 @@ static int should_run_oprom(struct device *dev, struct rom_header *rom)
 	}
 
 	if (CONFIG(VENDORCODE_ELTAN_VBOOT))
-		if (rom != NULL)
+		if (rom != nullptr)
 			if (!verified_boot_should_run_oprom(rom))
 				return 0;
 
@@ -882,7 +882,7 @@ static int should_load_oprom(struct device *dev)
 		return 0;
 	if (CONFIG(ALWAYS_LOAD_OPROM))
 		return 1;
-	if (should_run_oprom(dev, NULL))
+	if (should_run_oprom(dev, nullptr))
 		return 1;
 
 	return 0;
@@ -911,11 +911,11 @@ void pci_dev_init(struct device *dev)
 	timestamp_add_now(TS_OPROM_INITIALIZE);
 
 	rom = pci_rom_probe(dev);
-	if (rom == NULL)
+	if (rom == nullptr)
 		return;
 
 	ram = pci_rom_load(dev, rom);
-	if (ram == NULL)
+	if (ram == nullptr)
 		return;
 	timestamp_add_now(TS_OPROM_COPY_END);
 
@@ -1153,7 +1153,7 @@ bad:
  *
  * @param bus Pointer to the bus structure.
  * @param devfn A device/function number.
- * @return Pointer to the device structure found or NULL if we have not
+ * @return Pointer to the device structure found or nullptr if we have not
  *	   allocated a device for this devfn yet.
  */
 static struct device *pci_scan_get_dev(struct bus *bus, unsigned int devfn)
@@ -1165,7 +1165,7 @@ static struct device *pci_scan_get_dev(struct bus *bus, unsigned int devfn)
 		if (dev->path.type == DEVICE_PATH_PCI && dev->path.pci.devfn == devfn) {
 			/* Unlink from the list. */
 			*prev = dev->sibling;
-			dev->sibling = NULL;
+			dev->sibling = nullptr;
 			break;
 		}
 		prev = &dev->sibling;
@@ -1198,12 +1198,12 @@ static struct device *pci_scan_get_dev(struct bus *bus, unsigned int devfn)
  * Scan a PCI bus.
  *
  * Determine the existence of a given PCI device. Allocate a new struct device
- * if dev==NULL was passed in and the device exists in hardware.
+ * if dev==nullptr was passed in and the device exists in hardware.
  *
  * @param dev Pointer to the dev structure.
  * @param bus Pointer to the bus structure.
  * @param devfn A device/function number to look at.
- * @return The device structure for the device (if found), NULL otherwise.
+ * @return The device structure for the device (if found), nullptr otherwise.
  */
 struct device *pci_probe_dev(struct device *dev, struct bus *bus,
 				unsigned int devfn)
@@ -1225,13 +1225,13 @@ struct device *pci_probe_dev(struct device *dev, struct bus *bus,
 		 * slot is empty, but the expected answer is 0xffffffff.
 		 */
 		if (id == 0xffffffff)
-			return NULL;
+			return nullptr;
 
 		if ((id == 0x00000000) || (id == 0x0000ffff) ||
 		    (id == 0xffff0000)) {
 			printk(BIOS_SPEW, "%s, bad id 0x%x\n",
 			       dev_path(&dummy), id);
-			return NULL;
+			return nullptr;
 		}
 		dev = alloc_dev(bus, &dummy.path);
 	} else {
@@ -1374,7 +1374,7 @@ static void pci_scan_hidden_device(struct device *dev)
 	 * be enumerated, so this provides scan_static_bus for the .scan_bus
 	 * callback.
 	 */
-	if (dev->ops == NULL)
+	if (dev->ops == nullptr)
 		dev->ops = &default_hidden_pci_ops_dev;
 
 	if (dev->ops->enable)
@@ -1624,10 +1624,10 @@ void do_pci_scan_bridge(struct device *dev,
 
 	printk(BIOS_SPEW, "%s for %s\n", __func__, dev_path(dev));
 
-	if (dev->downstream == NULL) {
+	if (dev->downstream == nullptr) {
 		struct bus *link;
 		link = malloc(sizeof(*link));
-		if (link == NULL)
+		if (link == nullptr)
 			die("Couldn't allocate a link!\n");
 		memset(link, 0, sizeof(*link));
 		link->dev = dev;
@@ -1814,7 +1814,7 @@ int get_pci_irq_pins(struct device *dev, struct device **parent_bdg)
 		target_pin = swizzle_irq_pins(dev, parent_bdg);
 
 		/* Make sure the swizzle returned valid structures */
-		if (parent_bdg == NULL) {
+		if (parent_bdg == nullptr) {
 			printk(BIOS_WARNING, "Could not find parent bridge for this device!\n");
 			return -2;
 		}

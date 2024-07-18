@@ -30,7 +30,7 @@ struct mipi_dsi_msg {
 	const void *tx_buf;	/**< data to be written */
 
 	size_t rx_len;	/**< length of rx_buf */
-	void *rx_buf;	/**< data to be read, or NULL */
+	void *rx_buf;	/**< data to be read, or nullptr */
 };
 
 /**
@@ -117,8 +117,8 @@ struct mipi_dsi_master_ops {
  * @brief mipi_dsi_device - DSI peripheral device
  *
  * For dual-channel interfaces, the master interface can be identified by the
- * fact that it's .slave field is set to non-NULL. The slave interface will
- * have the .master field set to non-NULL.
+ * fact that it's .slave field is set to non-nullptr. The slave interface will
+ * have the .master field set to non-nullptr.
  */
 struct mipi_dsi_device {
 	struct mipi_dsi_host *host;	/**< DSI host for this peripheral */

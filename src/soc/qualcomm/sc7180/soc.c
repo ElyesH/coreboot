@@ -9,8 +9,8 @@
 
 static void soc_read_resources(struct device *dev)
 {
-	void *start = NULL;
-	void *end = NULL;
+	void *start = nullptr;
+	void *end = nullptr;
 
 	ram_range(dev, 0, (uintptr_t)region_offset(ddr_region), region_sz(ddr_region));
 	reserved_ram_range(dev, 1, (uintptr_t)_dram_aop, REGION_SIZE(dram_aop));

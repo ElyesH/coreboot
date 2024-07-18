@@ -36,7 +36,7 @@ static void save_dimm_info(void)
 	const uint8_t smbios_memory_info_guid[16] =
 			FSP_SMBIOS_MEMORY_INFO_GUID;
 	const uint8_t *serial_num;
-	const char *dram_part_num = NULL;
+	const char *dram_part_num = nullptr;
 	size_t dram_part_num_len = 0;
 	bool is_dram_part_overridden = false;
 
@@ -44,7 +44,7 @@ static void save_dimm_info(void)
 	meminfo_hob = fsp_find_extension_hob_by_guid(
 						smbios_memory_info_guid,
 						&hob_size);
-	if (meminfo_hob == NULL || hob_size == 0) {
+	if (meminfo_hob == nullptr || hob_size == 0) {
 		printk(BIOS_ERR, "SMBIOS MEMORY_INFO_DATA_HOB not found\n");
 		return;
 	}
@@ -54,7 +54,7 @@ static void save_dimm_info(void)
 	 * table 17
 	 */
 	mem_info = cbmem_add(CBMEM_ID_MEMINFO, sizeof(*mem_info));
-	if (mem_info == NULL) {
+	if (mem_info == nullptr) {
 		printk(BIOS_ERR, "CBMEM entry for DIMM info missing\n");
 		return;
 	}

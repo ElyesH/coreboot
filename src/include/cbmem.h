@@ -67,12 +67,12 @@ uintptr_t cbmem_top(void);
  */
 uintptr_t cbmem_top_chipset(void);
 
-/* Add a cbmem entry of a given size and id. These return NULL on failure. The
+/* Add a cbmem entry of a given size and id. These return nullptr on failure. The
  * add function performs a find first and do not check against the original
  * size. */
 const struct cbmem_entry *cbmem_entry_add(u32 id, u64 size);
 
-/* Find a cbmem entry of a given id. These return NULL on failure. */
+/* Find a cbmem entry of a given id. These return nullptr on failure. */
 const struct cbmem_entry *cbmem_entry_find(u32 id);
 
 /* Remove a region defined by a cbmem_entry. Returns 0 on success, < 0 on
@@ -87,11 +87,11 @@ u64 cbmem_entry_size(const struct cbmem_entry *entry);
 /* Returns 0 if old cbmem was recovered. Recovery is only attempted if
  * s3resume is non-zero. */
 int cbmem_recovery(int s3resume);
-/* Add a cbmem entry of a given size and id. These return NULL on failure. The
+/* Add a cbmem entry of a given size and id. These return nullptr on failure. The
  * add function performs a find first and do not check against the original
  * size. */
 void *cbmem_add(u32 id, u64 size);
-/* Find a cbmem entry of a given id. These return NULL on failure. */
+/* Find a cbmem entry of a given id. These return nullptr on failure. */
 void *cbmem_find(u32 id);
 
 /* Indicate to each hook if cbmem is being recovered or not. */

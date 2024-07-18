@@ -31,7 +31,7 @@
  background         Background         Pixel        XtDefaultBackground
  border             BorderColor        Pixel        XtDefaultForeground
  borderWidth        BorderWidth        Dimension    1
- destroyCallback    Callback           Pointer      NULL
+ destroyCallback    Callback           Pointer      nullptr
  hSpace             HSpace             Dimension    4
  height             Height             Dimension    0
  mappedWhenManaged  MappedWhenManaged  Boolean      True

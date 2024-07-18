@@ -317,7 +317,7 @@ void acpigen_emit_namestring(const char *namepath)
 	int dotcount = 0, i;
 	int dotpos = 0;
 
-	/* Check for NULL pointer */
+	/* Check for nullptr pointer */
 	if (!namepath)
 		return;
 
@@ -1560,7 +1560,7 @@ void acpigen_write_debug_sprintf(const char *fmt, ...)
 
 	acpigen_emit_byte(STRING_PREFIX);
 	va_start(args, fmt);
-	vtxprintf(acpigen_tx_byte, fmt, args, NULL);
+	vtxprintf(acpigen_tx_byte, fmt, args, nullptr);
 	va_end(args);
 	acpigen_emit_byte('\0');
 

@@ -95,7 +95,7 @@ xhci_reap_slots(xhci_t *const xhci, int skip_slot)
 			xhci_spew("Successfully reaped slot %d\n", i);
 		xhci->dcbaa[i] = 0;
 		free(xhci->dev[i].ctx.raw);
-		xhci->dev[i].ctx.raw = NULL;
+		xhci->dev[i].ctx.raw = nullptr;
 	}
 }
 
@@ -110,7 +110,7 @@ xhci_make_inputctx(const size_t ctxsize)
 	if (!ic || !dma_buffer) {
 		free(ic);
 		free(dma_buffer);
-		return NULL;
+		return nullptr;
 	}
 
 	memset(dma_buffer, 0, size);
@@ -128,8 +128,8 @@ xhci_set_address(hci_t *controller, usb_speed speed, int hubport, int hubaddr)
 {
 	xhci_t *const xhci = XHCI_INST(controller);
 	const size_t ctxsize = CTXSIZE(xhci);
-	devinfo_t *di = NULL;
-	usbdev_t *dev = NULL;
+	devinfo_t *di = nullptr;
+	usbdev_t *dev = nullptr;
 	int i;
 
 	inputctx_t *const ic = xhci_make_inputctx(ctxsize);
@@ -247,7 +247,7 @@ _disable_return:
 	xhci_cmd_disable_slot(xhci, slot_id);
 	xhci->dcbaa[slot_id] = 0;
 	usb_detach_device(controller, slot_id);
-	dev = NULL;
+	dev = nullptr;
 _free_return:
 	if (tr)
 		free((void *)tr->ring);
@@ -424,7 +424,7 @@ _free_ep_ctx_return:
 		if (di->transfer_rings[i])
 			free((void *)di->transfer_rings[i]->ring);
 		free(di->transfer_rings[i]);
-		di->transfer_rings[i] = NULL;
+		di->transfer_rings[i] = nullptr;
 	}
 _free_return:
 	free(ic->raw);
@@ -467,5 +467,5 @@ xhci_destroy_dev(hci_t *const controller, const int slot_id)
 	}
 
 	xhci_spew("Stopped slot %d, but not disabling it yet.\n", slot_id);
-	di->transfer_rings[1] = NULL;
+	di->transfer_rings[1] = nullptr;
 }

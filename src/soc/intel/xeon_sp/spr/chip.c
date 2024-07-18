@@ -61,7 +61,7 @@ static void chip_enable_dev(struct device *dev)
 
 static void set_pcu_locks(void)
 {
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR0_DEVID, dev))) {
 		printk(BIOS_SPEW, "%s: locking registers\n", dev_path(dev));
@@ -72,7 +72,7 @@ static void set_pcu_locks(void)
 				TURBO_ACTIVATION_RATIO_LOCK);
 	}
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR2_DEVID, dev))) {
 		printk(BIOS_SPEW, "%s: locking registers\n", dev_path(dev));
 		pci_or_config32(dev, PCU_CR2_DRAM_POWER_INFO_UPR,
@@ -81,13 +81,13 @@ static void set_pcu_locks(void)
 				PP_PWR_LIM_LOCK_UPR);
 	}
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR3_DEVID, dev))) {
 		printk(BIOS_SPEW, "%s: locking registers\n", dev_path(dev));
 		pci_or_config32(dev, PCU_CR3_CONFIG_TDP_CONTROL, TDP_LOCK);
 	}
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR6_DEVID, dev))) {
 		printk(BIOS_SPEW, "%s: locking registers\n", dev_path(dev));
 		pci_or_config32(dev, PCU_CR6_PLATFORM_RAPL_LIMIT_CFG_UPR,

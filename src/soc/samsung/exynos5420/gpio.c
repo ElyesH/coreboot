@@ -56,7 +56,7 @@ static struct gpio_bank *gpio_get_bank(unsigned int gpio)
 	}
 
 	ASSERT(gpio < GPIO_MAX_PORT);	/* ...which it will not be */
-	return NULL;
+	return nullptr;
 }
 
 /* Common GPIO API - only available on Exynos5 */

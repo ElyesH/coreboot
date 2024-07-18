@@ -105,7 +105,7 @@ static int setup_test_cbfs(void **state)
 
 static void test_cbfs_map_no_hash(void **state)
 {
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	assert_int_equal(0, rdev_chain_mem(&cbd.rdev, &file_no_hash, sizeof(file_no_hash)));
 
 	if (CONFIG(CBFS_VERIFICATION)) {
@@ -113,19 +113,19 @@ static void test_cbfs_map_no_hash(void **state)
 		   so mapping will not be completed successfully. */
 		expect_value(cbfs_get_boot_device, force_ro, false);
 		will_return(cbfs_lookup, CB_SUCCESS);
-		mapping = cbfs_map(TEST_DATA_1_FILENAME, NULL);
+		mapping = cbfs_map(TEST_DATA_1_FILENAME, nullptr);
 		assert_null(mapping);
 	} else {
 		expect_value(cbfs_get_boot_device, force_ro, false);
 		will_return(cbfs_lookup, CB_SUCCESS);
-		mapping = cbfs_map(TEST_DATA_1_FILENAME, NULL);
+		mapping = cbfs_map(TEST_DATA_1_FILENAME, nullptr);
 		assert_ptr_equal(mapping, file_no_hash.attrs_and_data);
 	}
 }
 
 static void test_cbfs_map_valid_hash(void **state)
 {
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	assert_int_equal(0,
 			 rdev_chain_mem(&cbd.rdev, &file_valid_hash, sizeof(file_valid_hash)));
 
@@ -135,19 +135,19 @@ static void test_cbfs_map_valid_hash(void **state)
 			     &file_valid_hash.attrs_and_data[HASH_ATTR_SIZE]);
 		expect_value(vb2_hash_verify, size, TEST_DATA_1_SIZE);
 		will_return(cbfs_lookup, CB_SUCCESS);
-		mapping = cbfs_map(TEST_DATA_1_FILENAME, NULL);
+		mapping = cbfs_map(TEST_DATA_1_FILENAME, nullptr);
 		assert_ptr_equal(mapping, &file_valid_hash.attrs_and_data[HASH_ATTR_SIZE]);
 	} else {
 		expect_value(cbfs_get_boot_device, force_ro, false);
 		will_return(cbfs_lookup, CB_SUCCESS);
-		mapping = cbfs_map(TEST_DATA_1_FILENAME, NULL);
+		mapping = cbfs_map(TEST_DATA_1_FILENAME, nullptr);
 		assert_ptr_equal(mapping, &file_valid_hash.attrs_and_data[HASH_ATTR_SIZE]);
 	}
 }
 
 static void test_cbfs_map_invalid_hash(void **state)
 {
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	assert_int_equal(
 		0, rdev_chain_mem(&cbd.rdev, &file_broken_hash, sizeof(file_broken_hash)));
 
@@ -157,12 +157,12 @@ static void test_cbfs_map_invalid_hash(void **state)
 			     &file_broken_hash.attrs_and_data[HASH_ATTR_SIZE]);
 		expect_value(vb2_hash_verify, size, TEST_DATA_1_SIZE);
 		will_return(cbfs_lookup, CB_SUCCESS);
-		mapping = cbfs_map(TEST_DATA_1_FILENAME, NULL);
+		mapping = cbfs_map(TEST_DATA_1_FILENAME, nullptr);
 		assert_null(mapping);
 	} else {
 		expect_value(cbfs_get_boot_device, force_ro, false);
 		will_return(cbfs_lookup, CB_SUCCESS);
-		mapping = cbfs_map(TEST_DATA_1_FILENAME, NULL);
+		mapping = cbfs_map(TEST_DATA_1_FILENAME, nullptr);
 		assert_ptr_equal(mapping, &file_broken_hash.attrs_and_data[HASH_ATTR_SIZE]);
 	}
 }
@@ -196,5 +196,5 @@ int main(void)
 		cmocka_unit_test(test_init_boot_device_verify),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

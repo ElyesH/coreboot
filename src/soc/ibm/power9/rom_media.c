@@ -4,5 +4,5 @@
 
 const struct region_device *boot_device_ro(void)
 {
-	return NULL;
+	return nullptr;
 }

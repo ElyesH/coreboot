@@ -145,7 +145,7 @@ void soc_ubox_store_resources(struct smm_pci_resource_info *slots, size_t size)
 {
 	struct device *devices[CONFIG_MAX_SOCKET] = {0};
 	size_t devices_count = 0;
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 
 	/*
 	 * Collect all UBOX DFX devices. Depending on the actual socket count

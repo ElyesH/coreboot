@@ -17,7 +17,7 @@ static const char *pcie_gpp_acpi_name(const struct device *dev)
 	char *name;
 
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	name = malloc(ACPI_NAME_BUFFER_SIZE);
 	snprintf(name, ACPI_NAME_BUFFER_SIZE, "GP%02X", dev->path.pci.devfn);

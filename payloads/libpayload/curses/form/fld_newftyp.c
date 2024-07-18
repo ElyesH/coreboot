@@ -40,15 +40,15 @@ static FIELDTYPE default_fieldtype =
   0L,				/* reference count                             */
   (FIELDTYPE *)0,		/* pointer to left  operand                    */
   (FIELDTYPE *)0,		/* pointer to right operand                    */
-  NULL,				/* makearg function                            */
-  NULL,				/* copyarg function                            */
-  NULL,				/* freearg function                            */
-  INIT_FT_FUNC(NULL),		/* field validation function                   */
-  INIT_FT_FUNC(NULL),		/* Character check function                    */
-  INIT_FT_FUNC(NULL),		/* enumerate next function                     */
-  INIT_FT_FUNC(NULL),		/* enumerate previous function                 */
+  nullptr,				/* makearg function                            */
+  nullptr,				/* copyarg function                            */
+  nullptr,				/* freearg function                            */
+  INIT_FT_FUNC(nullptr),		/* field validation function                   */
+  INIT_FT_FUNC(nullptr),		/* Character check function                    */
+  INIT_FT_FUNC(nullptr),		/* enumerate next function                     */
+  INIT_FT_FUNC(nullptr),		/* enumerate previous function                 */
 #if NCURSES_INTEROP_FUNCS
-  NULL				/* generic callback alternative to makearg     */
+  nullptr				/* generic callback alternative to makearg     */
 #endif
 };
 
@@ -68,7 +68,7 @@ _nc_Default_FieldType = &default_fieldtype;
 |                       E_BAD_ARGUMENT  - invalid arguments
 |                       E_SYSTEM_ERROR  - system error (no memory)
 |
-|   Return Values :  Fieldtype pointer or NULL if error occurred
+|   Return Values :  Fieldtype pointer or nullptr if error occurred
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(FIELDTYPE *)
 new_fieldtype(bool (*const field_check) (FIELD *, const void *),

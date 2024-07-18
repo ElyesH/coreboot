@@ -100,4 +100,4 @@ static void enable_plld(void *unused)
  * is the first thing called. This ensures PLLD is up and functional before
  * anything that mainboard can do that implicitly relies on PLLD.
  */
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, enable_plld, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, enable_plld, nullptr);

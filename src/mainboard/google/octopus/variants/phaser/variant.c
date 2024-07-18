@@ -13,7 +13,7 @@ void variant_update_devtree(struct device *dev)
 
 	touchscreen_i2c_host = pcidev_path_on_root(PCH_DEVFN_I2C7);
 
-	if (touchscreen_i2c_host == NULL)
+	if (touchscreen_i2c_host == nullptr)
 		return;
 
 	/* SKU ID 1, 6 does not have a touchscreen device, hence disable it. */

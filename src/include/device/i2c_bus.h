@@ -22,21 +22,21 @@ bool i2c_dev_detect(struct device *dev, unsigned int addr);
  * Returns the first upstream facing link whose bus implements either
  * `i2c_bus_operations` *or* `smbus_bus_operations`.
  *
- * If not NULL, guarantees that `->dev`, `->dev->ops` and either
+ * If not nullptr, guarantees that `->dev`, `->dev->ops` and either
  * `->dev->ops->ops_i2c_bus` or `->dev->ops->ops_smbus_bus` are
- * not NULL.
+ * not nullptr.
  */
 struct bus *i2c_link(const struct device *dev);
 
 /*
  * Shorthand for `i2c_link(dev)->dev`.
  *
- * Returns NULL if i2c_link(dev) returns NULL.
+ * Returns nullptr if i2c_link(dev) returns nullptr.
  */
 static inline DEVTREE_CONST struct device *i2c_busdev(const struct device *dev)
 {
 	struct bus *const link = i2c_link(dev);
-	return link ? link->dev : NULL;
+	return link ? link->dev : nullptr;
 }
 
 /*

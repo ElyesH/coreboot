@@ -89,7 +89,7 @@ static const char digits_big[] = "0123456789ABCDEF";
 /**
  * Print one or more characters without adding newline.
  *
- * @param buf	Buffer of >= count bytesi size. NULL pointer is not allowed!
+ * @param buf	Buffer of >= count bytesi size. nullptr pointer is not allowed!
  * @param count	Number of characters to print.
  * @param ps	Output method and its data.
  * @return	Number of characters printed.
@@ -197,8 +197,8 @@ static int print_string(char *s, int width, unsigned int precision,
 	int counter = 0, retval;
 	size_t size;
 
-	if (s == NULL)
-		return printf_putstr("(NULL)", ps);
+	if (s == nullptr)
+		return printf_putstr("(nullptr)", ps);
 	size = strlen(s);
 	/* Print leading spaces. */
 	if (precision == 0)
@@ -412,8 +412,8 @@ static int print_number(uint64_t num, int width, int precision, int base,
  *
  * 	- c	Print single character.
  *
- * 	- s	Print zero terminated string. If a NULL value is passed as
- *		value, "(NULL)" is printed instead.
+ * 	- s	Print zero terminated string. If a nullptr value is passed as
+ *		value, "(nullptr)" is printed instead.
  *
  * 	- P, p	Print value of a pointer. Void * value is expected and it is
  *		printed in hexadecimal notation with prefix (as with \%#X / \%#x
@@ -436,7 +436,7 @@ static int print_number(uint64_t num, int width, int precision, int base,
  * All other characters from fmt except the formatting directives are printed in
  * verbatim.
  *
- * @param fmt	Formatting NULL terminated string.
+ * @param fmt	Formatting nullptr terminated string.
  * @param ps	TODO.
  * @param ap	TODO.
  * @return	Number of characters printed, negative value on failure.
@@ -819,7 +819,7 @@ static int vprintf_write(const char *str, size_t count, void *unused)
 
 int vprintf(const char *fmt, va_list ap)
 {
-	struct printf_spec ps = { vprintf_write, NULL };
+	struct printf_spec ps = { vprintf_write, nullptr };
 
 	return printf_core(fmt, &ps, ap);
 }

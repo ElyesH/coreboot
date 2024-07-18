@@ -96,7 +96,7 @@ static void iio_enable_masks(void)
 
 static void set_pcu_locks(void)
 {
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR0_DEVID, dev))) {
 		printk(BIOS_SPEW, "%s: locking registers\n", dev_path(dev));
@@ -107,13 +107,13 @@ static void set_pcu_locks(void)
 				TURBO_ACTIVATION_RATIO_LOCK);
 	}
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR1_DEVID, dev))) {
 		printk(BIOS_SPEW, "%s: locking registers\n", dev_path(dev));
 		pci_or_config32(dev, PCU_CR1_SAPMCTL, SAPMCTL_LOCK_MASK);
 	}
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR2_DEVID, dev))) {
 		printk(BIOS_SPEW, "%s: locking registers\n", dev_path(dev));
 		pci_or_config32(dev, PCU_CR2_DRAM_PLANE_POWER_LIMIT,
@@ -122,7 +122,7 @@ static void set_pcu_locks(void)
 				DRAM_POWER_INFO_LOCK_UPR);
 	}
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR3_DEVID, dev))) {
 		printk(BIOS_SPEW, "%s: locking registers\n", dev_path(dev));
 		pci_or_config32(dev, PCU_CR3_CONFIG_TDP_CONTROL, TDP_LOCK);

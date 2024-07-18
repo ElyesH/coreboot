@@ -30,5 +30,5 @@ const struct pad_config *variant_gpio_override_table(size_t *num)
 		*num = ARRAY_SIZE(override_gpio_table);
 		return override_gpio_table;
 	}
-	return NULL;
+	return nullptr;
 }

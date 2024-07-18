@@ -33,7 +33,7 @@ const struct pad_config *variant_gpio_table(size_t *num)
 const struct pad_config *variant_gpio_override_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 const struct pad_config *variant_early_gpio_table(size_t *num)

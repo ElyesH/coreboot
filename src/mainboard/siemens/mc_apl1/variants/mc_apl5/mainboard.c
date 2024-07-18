@@ -18,7 +18,7 @@
 
 void variant_mainboard_final(void)
 {
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 
 	/* PIR6 register mapping for PCIe root ports
 	   INTA#->PIRQB#, INTB#->PIRQC#, INTC#->PIRQD#, INTD#-> PIRQA# */
@@ -77,4 +77,4 @@ static void finalize_boot(void *unused)
 	gpio_output(CNV_RGI_DT, 1);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, finalize_boot, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, finalize_boot, nullptr);

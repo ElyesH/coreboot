@@ -21,7 +21,7 @@ static tpm_result_t tpm1_invoke_state_machine(void)
 		return rc;
 
 	/* Check that the TPM is enabled and activated. */
-	rc = tlcl1_get_flags(&disabled, &deactivated, NULL);
+	rc = tlcl1_get_flags(&disabled, &deactivated, nullptr);
 	if (rc != TPM_SUCCESS) {
 		printk(BIOS_ERR, "TPM Error (%#x): Can't read capabilities.\n", rc);
 		return rc;

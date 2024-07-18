@@ -71,7 +71,7 @@ static const PCIe_COMPLEX_DESCRIPTOR PcieComplex = {
 	.Flags        = DESCRIPTOR_TERMINATE_LIST,
 	.SocketId     = 0,
 	.PciePortList = PortList,
-	.DdiLinkList  = NULL,
+	.DdiLinkList  = nullptr,
 };
 
 void board_BeforeInitEarly(struct sysinfo *cb, AMD_EARLY_PARAMS *InitEarly)

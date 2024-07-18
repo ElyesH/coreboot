@@ -139,7 +139,7 @@ static int timestamps_module_init(void)
 
 	struct timestamp_table *timestamps = phys_to_virt(lib_sysinfo.tstamp_table);
 
-	if (timestamps == NULL)
+	if (timestamps == nullptr)
 		return -1;
 
 	/* Extract timestamps information */
@@ -158,7 +158,7 @@ static int timestamps_module_init(void)
 	 * entries plus the other information (number entries, total time). */
 	buffer = malloc((max_entries + 4) * SCREEN_X * sizeof(char));
 
-	if (buffer == NULL)
+	if (buffer == nullptr)
 		return -3;
 
 	/* Write the content */
@@ -208,7 +208,7 @@ static int timestamps_module_init(void)
 				chars_count, SCREEN_X) < 0) {
 		free(buffer);
 		free(g_buf);
-		g_buf = NULL;
+		g_buf = nullptr;
 		return -4;
 	}
 

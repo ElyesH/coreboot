@@ -57,7 +57,7 @@ enum cb_err dbg_feature_cntrl_init(void)
 {
 	const struct spi_flash *spi_flash_dev = boot_device_spi_flash();
 
-	if (spi_flash_dev == NULL) {
+	if (spi_flash_dev == nullptr) {
 		printk(BIOS_ERR, "Failed to Initialize boot device SPI flash\n");
 		return CB_ERR;
 	}

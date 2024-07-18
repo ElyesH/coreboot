@@ -67,7 +67,7 @@ static void *find_save_state(const struct smm_save_state_ops *save_state_ops,
 	int cmd)
 {
 	int node;
-	void *state = NULL;
+	void *state = nullptr;
 	uint32_t io_misc_info;
 	uint8_t reg_al;
 
@@ -246,7 +246,7 @@ static void southbridge_smi_gsmi(
 	const struct smm_save_state_ops *save_state_ops)
 {
 	u8 sub_command, ret;
-	void *io_smi = NULL;
+	void *io_smi = nullptr;
 	uint32_t reg_ebx;
 
 	io_smi = find_save_state(save_state_ops, APM_CNT_ELOG_GSMI);
@@ -319,7 +319,7 @@ static void southbridge_smi_store(
 __weak const struct gpio_lock_config *soc_gpio_lock_config(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 static void soc_lock_gpios(void)
@@ -540,7 +540,7 @@ void southbridge_smi_handler(void)
 		if (!(smi_sts & (1 << i)))
 			continue;
 
-		if (southbridge_smi[i] != NULL) {
+		if (southbridge_smi[i] != nullptr) {
 			southbridge_smi[i](save_state_ops);
 		} else {
 			printk(BIOS_DEBUG,

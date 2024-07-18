@@ -28,7 +28,7 @@ static struct thread *active_thread;
 
 static inline int thread_can_yield(const struct thread *t)
 {
-	return (t != NULL && t->can_yield > 0);
+	return (t != nullptr && t->can_yield > 0);
 }
 
 static inline void set_current_thread(struct thread *t)
@@ -40,14 +40,14 @@ static inline void set_current_thread(struct thread *t)
 static inline struct thread *current_thread(void)
 {
 	if (!initialized || !boot_cpu())
-		return NULL;
+		return nullptr;
 
 	return active_thread;
 }
 
 static inline int thread_list_empty(struct thread **list)
 {
-	return *list == NULL;
+	return *list == nullptr;
 }
 
 static inline struct thread *pop_thread(struct thread **list)
@@ -56,7 +56,7 @@ static inline struct thread *pop_thread(struct thread **list)
 
 	t = *list;
 	*list = t->next;
-	t->next = NULL;
+	t->next = nullptr;
 	return t;
 }
 
@@ -81,7 +81,7 @@ static inline struct thread *get_free_thread(void)
 	struct thread *t;
 
 	if (thread_list_empty(&free_threads))
-		return NULL;
+		return nullptr;
 
 	t = pop_thread(&free_threads);
 
@@ -114,8 +114,8 @@ static void schedule(struct thread *t)
 {
 	struct thread *current = current_thread();
 
-	/* If t is NULL need to find new runnable thread. */
-	if (t == NULL) {
+	/* If t is nullptr need to find new runnable thread. */
+	if (t == nullptr) {
 		if (thread_list_empty(&runnable_threads))
 			die("Runnable thread list is empty!\n");
 		t = pop_runnable();
@@ -140,7 +140,7 @@ static void terminate_thread(struct thread *t, enum cb_err error)
 	}
 
 	free_thread(t);
-	schedule(NULL);
+	schedule(nullptr);
 }
 
 static asmlinkage void call_wrapper(void *unused)
@@ -204,11 +204,11 @@ static void idle_thread_init(void)
 
 	t = get_free_thread();
 
-	if (t == NULL)
+	if (t == nullptr)
 		die("No threads available for idle thread!\n");
 
 	/* Queue idle thread to run once all other threads have yielded. */
-	prepare_thread(t, NULL, idle_thread, NULL, call_wrapper, NULL);
+	prepare_thread(t, nullptr, idle_thread, nullptr, call_wrapper, nullptr);
 	push_runnable(t);
 }
 
@@ -225,7 +225,7 @@ thread_yield_timed_callback(struct timeout_callback *tocb,
 		return -1;
 
 	/* The timer callback will wake up the current thread. */
-	schedule(NULL);
+	schedule(nullptr);
 	return 0;
 }
 
@@ -251,7 +251,7 @@ static void threads_initialize(void)
 
 	set_current_thread(t);
 
-	t->stack_orig = (uintptr_t)NULL; /* We never free the main thread */
+	t->stack_orig = (uintptr_t)nullptr; /* We never free the main thread */
 	t->id = 0;
 	t->can_yield = 1;
 
@@ -286,12 +286,12 @@ int thread_run(struct thread_handle *handle, enum cb_err (*func)(void *), void *
 
 	t = get_free_thread();
 
-	if (t == NULL) {
+	if (t == nullptr) {
 		printk(BIOS_ERR, "%s: No more threads!\n", __func__);
 		return -1;
 	}
 
-	prepare_thread(t, handle, func, arg, call_wrapper, NULL);
+	prepare_thread(t, handle, func, arg, call_wrapper, nullptr);
 	schedule(t);
 
 	return 0;
@@ -320,7 +320,7 @@ int thread_run_until(struct thread_handle *handle, enum cb_err (*func)(void *), 
 
 	t = get_free_thread();
 
-	if (t == NULL) {
+	if (t == nullptr) {
 		printk(BIOS_ERR, "%s: No more threads!\n", __func__);
 		return -1;
 	}
@@ -361,7 +361,7 @@ void thread_coop_enable(void)
 
 	current = current_thread();
 
-	if (current == NULL)
+	if (current == nullptr)
 		return;
 
 	assert(current->can_yield <= 0);
@@ -375,7 +375,7 @@ void thread_coop_disable(void)
 
 	current = current_thread();
 
-	if (current == NULL)
+	if (current == nullptr)
 		return;
 
 	current->can_yield--;

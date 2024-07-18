@@ -53,7 +53,7 @@ enum cb_err update_spd_cache(struct spd_block *blk)
 
 	/* Write SPD data */
 	for (i = 0; i < SC_SPD_NUMS; i++) {
-		if (blk->spd_array[i] == NULL) {
+		if (blk->spd_array[i] == nullptr) {
 			/* If DIMM is not present, we calculate the CRC with 0xff. */
 			for (j = 0; j < SC_SPD_LEN; j++)
 				data_crc = crc16_byte(data_crc, 0xff);
@@ -102,7 +102,7 @@ enum cb_err load_spd_cache(uint8_t **spd_cache, size_t *spd_cache_sz)
 	assert(CONFIG(BOOT_DEVICE_MEMORY_MAPPED));
 	*spd_cache = rdev_mmap_full(&rdev);
 
-	if (*spd_cache == NULL)
+	if (*spd_cache == nullptr)
 		return CB_ERR;
 
 	*spd_cache_sz = region_device_sz(&rdev);
@@ -218,7 +218,7 @@ enum cb_err spd_fill_from_cache(uint8_t *spd_cache, struct spd_block *blk)
 		if (get_cached_dimm_present(spd_cache, i))
 			blk->spd_array[i] = spd_cache + SC_SPD_OFFSET(i);
 		else
-			blk->spd_array[i] = NULL;
+			blk->spd_array[i] = nullptr;
 
 	return CB_SUCCESS;
 }

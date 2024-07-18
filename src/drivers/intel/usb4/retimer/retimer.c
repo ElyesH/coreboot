@@ -466,7 +466,7 @@ struct chip_operations drivers_intel_usb4_retimer_ops = {
 
 __weak const char *ec_retimer_fw_update_path(void)
 {
-	return NULL;
+	return nullptr;
 }
 
 __weak void ec_retimer_fw_update(uint8_t data)

@@ -43,7 +43,7 @@ static void psp_set_spl_fuse(void *unused)
 
 	printk(BIOS_DEBUG, "PSP: SPL Fusing Update Requested.\n");
 	cmd_status = send_psp_command(MBOX_BIOS_CMD_SET_SPL_FUSE, &buffer);
-	psp_print_cmd_status(cmd_status, NULL);
+	psp_print_cmd_status(cmd_status, nullptr);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, psp_set_spl_fuse, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, psp_set_spl_fuse, nullptr);

@@ -73,7 +73,7 @@ static uint32_t update_boot_region(struct vb2_context *ctx)
 	const char *fname;
 	void *amdfw_location;
 	struct region fw_slot;
-	void *map_base = NULL;
+	void *map_base = nullptr;
 
 	/* Continue booting from RO */
 	if (ctx->flags & VB2_CONTEXT_RECOVERY_MODE) {
@@ -101,7 +101,7 @@ static uint32_t update_boot_region(struct vb2_context *ctx)
 		return POSTCODE_MAP_SPI_ROM_FAILED;
 	}
 
-	amdfw_location = cbfs_map(fname, NULL);
+	amdfw_location = cbfs_map(fname, nullptr);
 	if (!amdfw_location) {
 		printk(BIOS_ERR, "AMD Firmware table not found.\n");
 		rdev_munmap(boot_device_ro(), map_base);
@@ -235,7 +235,7 @@ static void psp_verstage_s0i3_resume(void)
 void Main(void)
 {
 	uint32_t retval;
-	struct vb2_context *ctx = NULL;
+	struct vb2_context *ctx = nullptr;
 	uint32_t bootmode;
 	void *boot_dev_base;
 

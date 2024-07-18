@@ -29,7 +29,7 @@ static const char *pch_pcie_acpi_name(const struct device *dev)
 		return names[PCI_FUNC(dev->path.pci.devfn)];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static bool pci_is_hotplugable(struct device *dev)
@@ -42,7 +42,7 @@ static bool pci_is_hotplugable(struct device *dev)
 static void pch_pcie_pm_early(struct device *dev)
 {
 	u16 link_width_p0, link_width_p4;
-	struct device *child = NULL;
+	struct device *child = nullptr;
 	u8 slot_power_limit = 10; /* 10W for x1 */
 	static u8 slot_number = 1;
 	u32 reg32, cap;

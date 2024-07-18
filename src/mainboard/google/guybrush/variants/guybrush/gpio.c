@@ -95,7 +95,7 @@ const struct soc_amd_gpio *variant_romstage_override_gpio_table(size_t *size)
 		return bid1_romstage_gpio_table;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 const struct soc_amd_gpio *variant_tpm_gpio_table(size_t *size)

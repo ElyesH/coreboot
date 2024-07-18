@@ -44,7 +44,7 @@ static const struct pmic_efuse efuse_setting[] = {
 	{1690, 0xc88, 0x7, 0x0},
 };
 
-static struct pmif *pmif_arb = NULL;
+static struct pmif *pmif_arb = nullptr;
 static void mt6359p_write(u32 reg, u32 data)
 {
 	pmif_arb->write(pmif_arb, 0, reg, data);

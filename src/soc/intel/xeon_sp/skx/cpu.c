@@ -18,7 +18,7 @@
 #include <cpu/intel/em64t101_save_state.h>
 #include <types.h>
 
-static const config_t *chip_config = NULL;
+static const config_t *chip_config = nullptr;
 
 bool cpu_soc_is_in_untrusted_mode(void)
 {

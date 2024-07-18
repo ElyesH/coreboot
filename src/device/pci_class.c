@@ -212,7 +212,7 @@ static const PCI_CLASS class_list[] = {
 	{ 0x10, &encryption[0], ARRAY_SIZE(encryption), "Encryption" },
 	{ 0x11, &signal_processing[0], ARRAY_SIZE(signal_processing),
 			"Signal processing" },
-	{ 0xff, NULL, 0, "Unassigned class" }
+	{ 0xff, nullptr, 0, "Unassigned class" }
 };
 static const unsigned int class_entries = ARRAY_SIZE(class_list);
 
@@ -233,7 +233,7 @@ static const PCI_CLASS *get_pci_class_entry(struct device *dev)
 			return class_entry;
 		class_entry += 1;
 	}
-	return NULL;
+	return nullptr;
 }
 
 const char *get_pci_class_name(struct device *dev)
@@ -258,8 +258,8 @@ const char *get_pci_subclass_name(struct device *dev)
 	/* Locate the subclass name */
 	subclass_name = "???";
 	class_entry = get_pci_class_entry(dev);
-	subclass_entry = class_entry ? class_entry->subclass_list : NULL;
-	if (subclass_entry != NULL) {
+	subclass_entry = class_entry ? class_entry->subclass_list : nullptr;
+	if (subclass_entry != nullptr) {
 		subclass_list_end =
 			&subclass_entry[class_entry->subclass_entries];
 		while (subclass_list_end > subclass_entry) {

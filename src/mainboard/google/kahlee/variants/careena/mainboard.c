@@ -12,21 +12,21 @@ extern struct chip_operations drivers_i2c_da7219_ops;
 void variant_devtree_update(void)
 {
 	uint32_t sku = google_chromeec_get_sku_id();
-	struct device *mmio_dev = NULL, *child = NULL;
-	struct device *alc_dev = NULL, *da7219_dev = NULL;
+	struct device *mmio_dev = nullptr, *child = nullptr;
+	struct device *alc_dev = nullptr, *da7219_dev = nullptr;
 
 	while (1) {
 		mmio_dev = dev_find_path(mmio_dev, DEVICE_PATH_MMIO);
-		if (mmio_dev == NULL)
+		if (mmio_dev == nullptr)
 			break;
 		if (mmio_dev->path.mmio.addr == 0xfedc2000)
 			break;
 	}
 
-	if (mmio_dev == NULL)
+	if (mmio_dev == nullptr)
 		return;
 
-	while ((child = dev_bus_each_child(mmio_dev->downstream, child)) != NULL) {
+	while ((child = dev_bus_each_child(mmio_dev->downstream, child)) != nullptr) {
 		if (child->path.type != DEVICE_PATH_I2C)
 			continue;
 		if (child->path.i2c.device != 0x1a)

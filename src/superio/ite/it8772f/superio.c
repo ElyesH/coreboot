@@ -69,23 +69,23 @@ static struct device_operations ops = {
 
 static struct pnp_info pnp_dev_info[] = {
 	/* Floppy Disk Controller */
-	{ NULL, IT8772F_FDC, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
+	{ nullptr, IT8772F_FDC, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
 	/* Serial Port 1 */
-	{ NULL, IT8772F_SP1, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
+	{ nullptr, IT8772F_SP1, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
 	/* Environmental Controller */
-	{ NULL, IT8772F_EC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 |
+	{ nullptr, IT8772F_EC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 |
 		PNP_MSC4 | PNP_MSCA,
 	  0x0ff8, 0x0ffc, },
 	/* KBC Keyboard */
-	{ NULL, IT8772F_KBCK, PNP_IO0 | PNP_IO1 | PNP_IRQ0,
+	{ nullptr, IT8772F_KBCK, PNP_IO0 | PNP_IO1 | PNP_IRQ0,
 	  0x0fff, 0x0fff, },
 	/* KBC Mouse */
-	{ NULL, IT8772F_KBCM, PNP_IRQ0, },
+	{ nullptr, IT8772F_KBCM, PNP_IRQ0, },
 	/* 27 GPIOs */
-	{ NULL, IT8772F_GPIO, PNP_IO0 | PNP_IO1,
+	{ nullptr, IT8772F_GPIO, PNP_IO0 | PNP_IO1,
 	  0x0fff, 0x0ff8, },
 	/* Infrared */
-	{ NULL, IT8772F_IR, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
+	{ nullptr, IT8772F_IR, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
 };
 
 static void enable_dev(struct device *dev)

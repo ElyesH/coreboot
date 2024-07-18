@@ -20,7 +20,7 @@ static enum cb_err get_amd_misc_data_hob(const struct amd_misc_data **fsp_misc_d
 
 	hob = fsp_find_extension_hob_by_guid(AMD_MISC_DATA_HOB_GUID.b, &hob_size);
 
-	if (hob == NULL || hob_size < sizeof(struct amd_misc_data)) {
+	if (hob == nullptr || hob_size < sizeof(struct amd_misc_data)) {
 		printk(BIOS_ERR, "Couldn't find fsp misc data HOB.\n");
 		return CB_ERR;
 	}
@@ -37,7 +37,7 @@ static enum cb_err get_amd_misc_data_hob(const struct amd_misc_data **fsp_misc_d
 
 enum cb_err get_amd_smu_reported_tdp(uint32_t *tdp)
 {
-	const struct amd_misc_data *fsp_misc_data = NULL;
+	const struct amd_misc_data *fsp_misc_data = nullptr;
 
 	if (get_amd_misc_data_hob(&fsp_misc_data, AMD_MISC_DATA_VERSION) != CB_SUCCESS)
 		return CB_ERR;

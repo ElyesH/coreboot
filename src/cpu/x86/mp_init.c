@@ -47,7 +47,7 @@ static char processor_name[49];
  * the bsp_call is called with bsp_arg and upon returning releases the
  * barrier allowing the APs to make further progress.
  *
- * Note that ap_call() and bsp_call() can be NULL. In the NULL case the
+ * Note that ap_call() and bsp_call() can be nullptr. In the nullptr case the
  * callback will just not be called.
  */
 struct mp_flight_record {
@@ -166,7 +166,7 @@ static void ap_do_flight_plan(void)
 		atomic_inc(&rec->cpus_entered);
 		barrier_wait(&rec->barrier);
 
-		if (rec->ap_call != NULL)
+		if (rec->ap_call != nullptr)
 			rec->ap_call();
 	}
 }
@@ -217,7 +217,7 @@ static asmlinkage void ap_init(unsigned int index)
 	ap_do_flight_plan();
 
 	/* Park the AP. */
-	park_this_cpu(NULL);
+	park_this_cpu(nullptr);
 }
 
 static __aligned(16) uint8_t ap_stack[CONFIG_AP_STACK_SIZE * CONFIG_MAX_CPUS];
@@ -301,7 +301,7 @@ static atomic_t *load_sipi_vector(struct mp_params *mp_params)
 	struct sipi_params *sp;
 	char *mod_loc = (void *)sipi_vector_location;
 	const int loc_size = sipi_vector_location_size;
-	atomic_t *ap_count = NULL;
+	atomic_t *ap_count = nullptr;
 
 	if (rmodule_parse(&_binary_sipi_vector_start, &sipi_mod)) {
 		printk(BIOS_CRIT, "Unable to parse sipi module.\n");
@@ -344,7 +344,7 @@ static atomic_t *load_sipi_vector(struct mp_params *mp_params)
 
 	sp = rmodule_parameters(&sipi_mod);
 
-	if (sp == NULL) {
+	if (sp == nullptr) {
 		printk(BIOS_CRIT, "SIPI module has no parameters.\n");
 		return ap_count;
 	}
@@ -393,7 +393,7 @@ static int allocate_cpu_devices(struct bus *cpu_bus, struct mp_params *p)
 		/* Assuming linear APIC space allocation. AP will set its own
 		   APIC id in the ap_init() path above. */
 		struct device *new = add_cpu_device(cpu_bus, info->cpu->path.apic.apic_id + i, 1);
-		if (new == NULL) {
+		if (new == nullptr) {
 			printk(BIOS_CRIT, "Could not allocate CPU device\n");
 			max_cpus--;
 			continue;
@@ -533,7 +533,7 @@ static enum cb_err bsp_do_flight_plan(struct mp_params *mp_params)
 			}
 		}
 
-		if (rec->bsp_call != NULL)
+		if (rec->bsp_call != nullptr)
 			rec->bsp_call();
 
 		release_barrier(&rec->barrier);
@@ -557,7 +557,7 @@ static enum cb_err init_bsp(struct bus *cpu_bus)
 	setup_lapic_interrupts();
 
 	struct device *bsp = add_cpu_device(cpu_bus, lapicid(), 1);
-	if (bsp == NULL) {
+	if (bsp == nullptr) {
 		printk(BIOS_CRIT, "Failed to find or allocate BSP struct device\n");
 		return CB_ERR;
 	}
@@ -606,7 +606,7 @@ static enum cb_err mp_init(struct bus *cpu_bus, struct mp_params *p)
 		return CB_ERR;
 	}
 
-	if (p == NULL || p->flight_plan == NULL || p->num_records < 1) {
+	if (p == nullptr || p->flight_plan == nullptr || p->num_records < 1) {
 		printk(BIOS_CRIT, "Invalid MP parameters\n");
 		return CB_ERR;
 	}
@@ -631,7 +631,7 @@ static enum cb_err mp_init(struct bus *cpu_bus, struct mp_params *p)
 
 	/* Load the SIPI vector. */
 	ap_count = load_sipi_vector(p);
-	if (ap_count == NULL)
+	if (ap_count == nullptr)
 		return CB_ERR;
 
 	/* Start the APs providing number of APs and the cpus_entered field. */
@@ -833,7 +833,7 @@ static void load_smm_handlers(void)
 	 * Indicate that the SMM handlers have been loaded and MP
 	 * initialization is about to start.
 	 */
-	if (is_smm_enabled() && mp_state.ops.pre_mp_smm_init != NULL)
+	if (is_smm_enabled() && mp_state.ops.pre_mp_smm_init != nullptr)
 		mp_state.ops.pre_mp_smm_init();
 }
 
@@ -841,7 +841,7 @@ static void load_smm_handlers(void)
 static void trigger_smm_relocation(void)
 {
 	/* Do nothing if SMM is disabled.*/
-	if (!is_smm_enabled() || mp_state.ops.per_cpu_smm_trigger == NULL)
+	if (!is_smm_enabled() || mp_state.ops.per_cpu_smm_trigger == nullptr)
 		return;
 	/* Trigger SMM mode for the currently running processor. */
 	mp_state.ops.per_cpu_smm_trigger();
@@ -918,7 +918,7 @@ static enum cb_err run_ap_work(struct mp_callback *val, long expire_us, bool wai
 			if (cur_cpu == i)
 				continue;
 
-			if (read_callback(&ap_callbacks[i]) == NULL) {
+			if (read_callback(&ap_callbacks[i]) == nullptr) {
 				cpus_accepted++;
 				/* Only increase cpus_finish if AP took the task and not busy */
 				if (atomic_read(&ap_status[i]) == AP_NOT_BUSY)
@@ -965,12 +965,12 @@ static void ap_wait_for_instruction(void)
 	while (1) {
 		struct mp_callback *cb = read_callback(per_cpu_slot);
 
-		if (cb == NULL) {
+		if (cb == nullptr) {
 			asm ("pause");
 			continue;
 		}
 		/*
-		 * Set ap_status to AP_BUSY before store_callback(per_cpu_slot, NULL).
+		 * Set ap_status to AP_BUSY before store_callback(per_cpu_slot, nullptr).
 		 * it's to let BSP know APs take tasks and busy to avoid race condition.
 		 */
 		atomic_set(&ap_status[cur_cpu], AP_BUSY);
@@ -978,7 +978,7 @@ static void ap_wait_for_instruction(void)
 		/* Copy to local variable before signaling consumption. */
 		memcpy(&lcb, cb, sizeof(lcb));
 		mfence();
-		store_callback(per_cpu_slot, NULL);
+		store_callback(per_cpu_slot, nullptr);
 
 		if (lcb.logical_cpu_number == MP_RUN_ON_ALL_CPUS ||
 				(cur_cpu == lcb.logical_cpu_number))
@@ -1054,7 +1054,7 @@ enum cb_err mp_park_aps(void)
 
 	stopwatch_init(&sw);
 
-	ret = mp_run_on_aps(park_this_cpu, NULL, MP_RUN_ON_ALL_CPUS,
+	ret = mp_run_on_aps(park_this_cpu, nullptr, MP_RUN_ON_ALL_CPUS,
 				1000 * USECS_PER_MSEC);
 
 	duration_msecs = stopwatch_duration_msecs(&sw);
@@ -1071,18 +1071,18 @@ enum cb_err mp_park_aps(void)
 
 static struct mp_flight_record mp_steps[] = {
 	/* Once the APs are up load the SMM handlers. */
-	MP_FR_BLOCK_APS(NULL, load_smm_handlers),
+	MP_FR_BLOCK_APS(nullptr, load_smm_handlers),
 	/* Perform SMM relocation. */
 	MP_FR_NOBLOCK_APS(trigger_smm_relocation, trigger_smm_relocation),
 	/* Initialize each CPU through the driver framework. */
 	MP_FR_BLOCK_APS(cpu_initialize, cpu_initialize),
 	/* Wait for APs to finish then optionally start looking for work. */
-	MP_FR_BLOCK_APS(ap_wait_for_instruction, NULL),
+	MP_FR_BLOCK_APS(ap_wait_for_instruction, nullptr),
 };
 
 static void fill_mp_state_smm(struct mp_state *state, const struct mp_ops *ops)
 {
-	if (ops->get_smm_info != NULL)
+	if (ops->get_smm_info != nullptr)
 		ops->get_smm_info(&state->perm_smbase, &state->perm_smsize,
 				  &state->smm_save_state_size);
 
@@ -1095,7 +1095,7 @@ static void fill_mp_state_smm(struct mp_state *state, const struct mp_ops *ops)
 	 * Default to smm_initiate_relocation() if trigger callback isn't
 	 * provided.
 	 */
-	if (ops->per_cpu_smm_trigger == NULL)
+	if (ops->per_cpu_smm_trigger == nullptr)
 		mp_state.ops.per_cpu_smm_trigger = smm_initiate_relocation;
 }
 
@@ -1107,7 +1107,7 @@ static void fill_mp_state(struct mp_state *state, const struct mp_ops *ops)
 	 */
 	memcpy(&state->ops, ops, sizeof(*ops));
 
-	if (ops->get_cpu_count != NULL)
+	if (ops->get_cpu_count != nullptr)
 		state->cpu_count = ops->get_cpu_count();
 
 	if (CONFIG(HAVE_SMI_HANDLER))
@@ -1120,7 +1120,7 @@ static enum cb_err do_mp_init_with_smm(struct bus *cpu_bus, const struct mp_ops 
 	void *default_smm_area;
 	struct mp_params mp_params;
 
-	if (mp_ops->pre_mp_init != NULL)
+	if (mp_ops->pre_mp_init != nullptr)
 		mp_ops->pre_mp_init();
 
 	fill_mp_state(&mp_state, mp_ops);
@@ -1138,7 +1138,7 @@ static enum cb_err do_mp_init_with_smm(struct bus *cpu_bus, const struct mp_ops 
 		smm_disable();
 	if (mp_state.smm_save_state_size == 0)
 		smm_disable();
-	if (!CONFIG(X86_SMM_SKIP_RELOCATION_HANDLER) && mp_state.ops.relocation_handler == NULL)
+	if (!CONFIG(X86_SMM_SKIP_RELOCATION_HANDLER) && mp_state.ops.relocation_handler == nullptr)
 		smm_disable();
 
 	if (is_smm_enabled())
@@ -1146,7 +1146,7 @@ static enum cb_err do_mp_init_with_smm(struct bus *cpu_bus, const struct mp_ops 
 
 	mp_params.num_cpus = mp_state.cpu_count;
 	/* Gather microcode information. */
-	if (mp_state.ops.get_microcode_info != NULL)
+	if (mp_state.ops.get_microcode_info != nullptr)
 		mp_state.ops.get_microcode_info(&mp_params.microcode_pointer,
 			&mp_params.parallel_microcode_load);
 	mp_params.flight_plan = &mp_steps[0];
@@ -1162,7 +1162,7 @@ static enum cb_err do_mp_init_with_smm(struct bus *cpu_bus, const struct mp_ops 
 		restore_default_smm_area(default_smm_area);
 
 	/* Signal callback on success if it's provided. */
-	if (ret == CB_SUCCESS && mp_state.ops.post_mp_init != NULL)
+	if (ret == CB_SUCCESS && mp_state.ops.post_mp_init != nullptr)
 		mp_state.ops.post_mp_init();
 
 	return ret;

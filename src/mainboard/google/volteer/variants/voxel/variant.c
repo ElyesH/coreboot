@@ -5,7 +5,7 @@
 
 const char *get_wifi_sar_cbfs_filename(void)
 {
-	const char *filename = NULL;
+	const char *filename = nullptr;
 
 	if (fw_config_probe(FW_CONFIG(TABLETMODE, TABLETMODE_DISABLED)))
 		filename = "wifi_sar-volta.hex";

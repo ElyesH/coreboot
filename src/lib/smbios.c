@@ -36,7 +36,7 @@ int smbios_add_string(u8 *start, const char *str)
 	 * Return 0 as required for empty strings.
 	 * See Section 6.1.3 "Text Strings" of the SMBIOS specification.
 	 */
-	if (str == NULL || *str == '\0')
+	if (str == nullptr || *str == '\0')
 		return 0;
 
 	for (;;) {
@@ -321,13 +321,13 @@ static const char *vpd_get_bios_version(void)
 	s = vpd_find(VERSION_VPD, &size, VPD_RO);
 	if (!s) {
 		printk(BIOS_ERR, "Find version from VPD %s failed\n", VERSION_VPD);
-		return NULL;
+		return nullptr;
 	}
 
 	version = malloc(size + 1);
 	if (!version) {
 		printk(BIOS_ERR, "Failed to malloc %d bytes for VPD version\n", size + 1);
-		return NULL;
+		return nullptr;
 	}
 	memcpy(version, s, size);
 	version[size] = '\0';
@@ -347,12 +347,12 @@ static const char *get_bios_version(void)
 
 	if (CONFIG(VPD_SMBIOS_VERSION)) {
 		s = vpd_get_bios_version();
-		if (s != NULL)
+		if (s != nullptr)
 			return s;
 	}
 
 	s = smbios_mainboard_bios_version();
-	if (s != NULL)
+	if (s != nullptr)
 		return s;
 
 	if (strlen(CONFIG_LOCALVERSION) != 0) {
@@ -694,7 +694,7 @@ static int smbios_write_type16(unsigned long *current, int *handle)
 
 	struct memory_info *meminfo;
 	meminfo = cbmem_find(CBMEM_ID_MEMINFO);
-	if (meminfo == NULL)
+	if (meminfo == nullptr)
 		return 0;	/* can't find mem info in cbmem */
 
 	printk(BIOS_INFO, "Create SMBIOS type 16\n");
@@ -740,7 +740,7 @@ static int smbios_write_type17(unsigned long *current, int *handle, int type16)
 
 	struct memory_info *meminfo;
 	meminfo = cbmem_find(CBMEM_ID_MEMINFO);
-	if (meminfo == NULL)
+	if (meminfo == nullptr)
 		return 0;	/* can't find mem info in cbmem */
 
 	printk(BIOS_INFO, "Create SMBIOS type 17\n");
@@ -770,7 +770,7 @@ static int smbios_write_type19(unsigned long *current, int *handle, int type16)
 
 	struct memory_info *meminfo;
 	meminfo = cbmem_find(CBMEM_ID_MEMINFO);
-	if (meminfo == NULL)
+	if (meminfo == nullptr)
 		return 0;	/* can't find mem info in cbmem */
 
 	struct smbios_type19 *t = smbios_carve_table(*current,
@@ -841,7 +841,7 @@ static int smbios_write_type20(unsigned long *current, int *handle,
 
 	struct memory_info *meminfo;
 	meminfo = cbmem_find(CBMEM_ID_MEMINFO);
-	if (meminfo == NULL)
+	if (meminfo == nullptr)
 		return 0;	/* can't find mem info in cbmem */
 
 	printk(BIOS_INFO, "Create SMBIOS type 20\n");
@@ -1203,7 +1203,7 @@ static int smbios_walk_device_tree(struct device *tree, int *handle, unsigned lo
 
 unsigned long smbios_write_tables(unsigned long current)
 {
-	struct smbios_entry *se = NULL;
+	struct smbios_entry *se = nullptr;
 	struct smbios_entry30 *se3;
 	unsigned long tables;
 	int len = 0;

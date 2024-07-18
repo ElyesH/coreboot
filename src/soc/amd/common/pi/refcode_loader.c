@@ -31,7 +31,7 @@ static void *agesa_map_stage_file_ramstage(const char *name, size_t *size)
 		stage_cache_load_stage(STAGE_REFCODE, &prog);
 	} else {
 		if (rmodule_stage_load(&rmod_agesa) < 0)
-			return NULL;
+			return nullptr;
 
 		stage_cache_add(STAGE_REFCODE, &prog);
 	}
@@ -74,12 +74,12 @@ const void *agesawrapper_locate_module(const char name[8])
 		agesa = agesa_map_raw_file(fname, &file_size);
 
 	if (!agesa)
-		return NULL;
+		return nullptr;
 
 	image =  amd_find_image(agesa, agesa + file_size, 4096, name);
 
 	if (!image)
-		return NULL;
+		return nullptr;
 
 	return (AMD_MODULE_HEADER *)image->ModuleInfoOffset;
 }
@@ -91,12 +91,12 @@ MODULE_ENTRY agesa_get_dispatcher(void)
 	const AMD_MODULE_HEADER *module;
 	static const char id[8] = AGESA_ID;
 
-	if (agesa_dispatcher != NULL)
+	if (agesa_dispatcher != nullptr)
 		return agesa_dispatcher;
 
 	module = agesawrapper_locate_module(id);
 	if (!module)
-		return NULL;
+		return nullptr;
 
 	agesa_dispatcher = module->ModuleDispatcher;
 	return agesa_dispatcher;

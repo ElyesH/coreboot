@@ -101,7 +101,7 @@ void config_reset_cpl3_csrs(void)
 	uint32_t data, plat_info, max_min_turbo_limit_ratio;
 	struct device *dev;
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR0_DEVID, dev))) {
 		data = pci_read_config32(dev, PCU_CR0_P_STATE_LIMITS);
 		data |= P_STATE_LIMITS_LOCK;
@@ -116,7 +116,7 @@ void config_reset_cpl3_csrs(void)
 			plat_info, max_min_turbo_limit_ratio);
 	}
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR1_DEVID, dev))) {
 		data = pci_read_config32(dev, PCU_CR1_SAPMCTL);
 		/* clear bits 27:31 - FSP sets this with 0x7 which needs to be cleared */
@@ -125,7 +125,7 @@ void config_reset_cpl3_csrs(void)
 		pci_write_config32(dev, PCU_CR1_SAPMCTL, data);
 	}
 
-	dev = NULL;
+	dev = nullptr;
 	while ((dev = dev_find_device(PCI_VID_INTEL, PCU_CR2_DEVID, dev))) {
 		data = PCIE_IN_PKGCSTATE_L1_MASK;
 		pci_write_config32(dev, PCU_CR2_PKG_CST_ENTRY_CRITERIA_MASK, data);

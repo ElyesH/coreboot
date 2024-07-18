@@ -53,7 +53,7 @@ RCSID("$Id: kernel.c,v 1.78 2008/07/15 17:13:26 wmcbrine Exp $")
         newterm(), so ripoffline() must be called before either of these
         functions.  The init function receives a pointer to a one-line
         WINDOW, and the width of the window. Calling ripoffline() with a
-        NULL init function pointer is an error.
+        nullptr init function pointer is an error.
 
         napms() suspends the program for the specified number of
         milliseconds. draino() is an archaic equivalent.

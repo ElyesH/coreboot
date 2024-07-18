@@ -20,7 +20,7 @@ static struct psp_fw_entry_hash_384 hash_384[MAX_NUM_HASH_ENTRIES];
 
 void update_psp_fw_hash_table(const char *fname)
 {
-	uint8_t *spi_ptr = (uint8_t *)cbfs_map(fname, NULL);
+	uint8_t *spi_ptr = (uint8_t *)cbfs_map(fname, nullptr);
 	uint32_t len;
 
 	if (!spi_ptr) {

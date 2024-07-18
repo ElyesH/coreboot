@@ -187,5 +187,5 @@ __weak const struct soc_amd_gpio *variant_override_gpio_table(size_t *size)
 {
 	/* Default weak implementation - No overrides. */
 	*size = 0;
-	return NULL;
+	return nullptr;
 }

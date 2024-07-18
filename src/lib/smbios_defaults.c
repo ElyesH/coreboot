@@ -34,7 +34,7 @@ __weak smbios_wakeup_type smbios_system_wakeup_type(void)
 
 __weak const char *smbios_mainboard_bios_version(void)
 {
-	return NULL;
+	return nullptr;
 }
 
 __weak const char *smbios_mainboard_serial_number(void)

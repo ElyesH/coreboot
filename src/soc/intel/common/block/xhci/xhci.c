@@ -81,7 +81,7 @@ static bool is_usb_port_connected(const struct xhci_usb_info *info,
 void usb_xhci_disable_unused(bool (*ext_usb_xhci_en_cb)(unsigned int port_type,
 							unsigned int port_id))
 {
-	struct device *xhci, *hub = NULL, *port = NULL;
+	struct device *xhci, *hub = nullptr, *port = nullptr;
 	const struct xhci_usb_info *info = soc_get_xhci_usb_info(PCH_DEVFN_XHCI);
 	struct drivers_usb_acpi_config *config;
 	bool enable;
@@ -92,8 +92,8 @@ void usb_xhci_disable_unused(bool (*ext_usb_xhci_en_cb)(unsigned int port_type,
 		return;
 	}
 
-	while ((hub = dev_bus_each_child(xhci->downstream, hub)) != NULL) {
-		while ((port = dev_bus_each_child(hub->downstream, port)) != NULL) {
+	while ((hub = dev_bus_each_child(xhci->downstream, hub)) != nullptr) {
+		while ((port = dev_bus_each_child(hub->downstream, port)) != nullptr) {
 			enable = true;
 			config = config_of(port);
 			if (config->type == UPC_TYPE_INTERNAL) {

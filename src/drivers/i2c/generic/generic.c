@@ -39,7 +39,7 @@ void i2c_generic_fill_ssdt(const struct device *dev,
 		.speed = config->speed ? : I2C_SPEED_FAST,
 		.resource = scope,
 	};
-	struct acpi_dp *dsd = NULL;
+	struct acpi_dp *dsd = nullptr;
 	int curr_index = 0;
 	int reset_gpio_index = -1, enable_gpio_index = -1, irq_gpio_index = -1;
 	const char *path = acpi_device_path(dev);
@@ -178,7 +178,7 @@ void i2c_generic_fill_ssdt(const struct device *dev,
 
 static void i2c_generic_fill_ssdt_generator(const struct device *dev)
 {
-	i2c_generic_fill_ssdt(dev, NULL, dev->chip_info);
+	i2c_generic_fill_ssdt(dev, nullptr, dev->chip_info);
 }
 
 /* Use name specified in config or build one from I2C address */

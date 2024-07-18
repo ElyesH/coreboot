@@ -328,7 +328,7 @@ static void pciexp_enable_ltr(struct device *dev)
 	 * If we have get_ltr_max_latencies(), treat `dev` as the root.
 	 * If not, let _pciexp_enable_ltr() query the parent's state.
 	 */
-	struct device *parent = NULL;
+	struct device *parent = nullptr;
 	unsigned int parent_cap = 0;
 	if (!dev->ops->ops_pci || !dev->ops->ops_pci->get_ltr_max_latencies) {
 		parent = dev->upstream->dev;

@@ -44,7 +44,7 @@ void spiconsole_tx_byte(unsigned char c) {
 			msg.header.msg_length == spi_crop_chunk(&slave, 0,
 			MAX_MSG_LENGTH))) {
 		spi_xfer(&slave, &msg, sizeof(struct em100_msg_header) +
-				msg.header.msg_length, NULL, 0);
+				msg.header.msg_length, nullptr, 0);
 
 		msg.header.msg_length = 0;
 	}

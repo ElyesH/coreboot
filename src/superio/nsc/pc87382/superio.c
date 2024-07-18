@@ -28,11 +28,11 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, PC87382_IR,   PNP_IO0 | PNP_IRQ0 | PNP_DRQ0 | PNP_DRQ1,
+	{ nullptr, PC87382_IR,   PNP_IO0 | PNP_IRQ0 | PNP_DRQ0 | PNP_DRQ1,
 		0x07f8 },
-	{ NULL, PC87382_SP1,  PNP_IO0 | PNP_IRQ0, 0x07f8 },
-	{ NULL, PC87382_GPIO, PNP_IO0 | PNP_IRQ0, 0xfff0 },
-	{ NULL, PC87382_DOCK, PNP_IO0 | PNP_IRQ0, 0xfffe },
+	{ nullptr, PC87382_SP1,  PNP_IO0 | PNP_IRQ0, 0x07f8 },
+	{ nullptr, PC87382_GPIO, PNP_IO0 | PNP_IRQ0, 0xfff0 },
+	{ nullptr, PC87382_DOCK, PNP_IO0 | PNP_IRQ0, 0xfffe },
 };
 
 static void enable_dev(struct device *dev)

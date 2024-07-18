@@ -10,7 +10,7 @@ static int get_emmc_dll_info(uint16_t signature, size_t num_of_entry,
 {
 	uint8_t entry;
 
-	if ((signature == 0) || (num_of_entry == 0) || (*config == NULL))
+	if ((signature == 0) || (num_of_entry == 0) || (*config == nullptr))
 		return 1;
 
 	for (entry = 0; entry < num_of_entry; entry++) {

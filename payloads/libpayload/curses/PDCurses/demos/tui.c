@@ -614,7 +614,7 @@ static void repainteditbox(WINDOW *win, int x, char *buf)
     Enter, Up or Down Arrow) and ERR on error.
 
   Errors:
-    It is an error to call this function with a NULL window pointer.
+    It is an error to call this function with a nullptr window pointer.
     The length of the initial 'str' must not exceed 'field' - 1.
 
 */
@@ -627,7 +627,7 @@ int weditstr(WINDOW *win, char *buf, int field)
     WINDOW *wedit;
     int c = 0;
 
-    if ((field >= MAXSTRLEN) || (buf == NULL) ||
+    if ((field >= MAXSTRLEN) || (buf == nullptr) ||
         ((int)strlen(buf) > field - 1))
         return ERR;
 

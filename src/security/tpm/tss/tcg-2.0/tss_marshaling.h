@@ -35,7 +35,7 @@ int tpm_marshal_command(TPM_CC command, const void *tpm_command_body,
  * @command: code of the TPM2 command for which a response is unmarshaled
  * @ib: input buffer containing the serialized response.
  *
- * Returns a pointer to the deserialized response or NULL in case of
+ * Returns a pointer to the deserialized response or nullptr in case of
  * unmarshaling problems.
  */
 struct tpm2_response *tpm_unmarshal_response(TPM_CC command, struct ibuf *ib);

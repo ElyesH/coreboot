@@ -22,7 +22,7 @@ RCSID("$Id: inch.c,v 1.33 2008/07/13 16:08:18 wmcbrine Exp $")
   Description:
         The inch() functions retrieve the character and attribute from
         the current or specified window position, in the form of a
-        chtype. If a NULL window is specified, (chtype)ERR is returned.
+        chtype. If a nullptr window is specified, (chtype)ERR is returned.
 
         The in_wch() functions are the wide-character versions; instead
         of returning a chtype, they store a cchar_t at the address

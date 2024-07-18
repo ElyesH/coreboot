@@ -122,14 +122,14 @@ static void sch555x_enable_dev(struct device *dev)
 	};
 
 	static struct pnp_info pnp_dev_info[] = {
-		{ NULL, SCH555x_LDN_EMI, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1, 0x0ff0 },
-		{ NULL, SCH555x_LDN_8042, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1, 0x0fff },
-		{ NULL, SCH555x_LDN_UART1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8 },
-		{ NULL, SCH555x_LDN_UART2, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8 },
-		{ NULL, SCH555x_LDN_LPCI, PNP_IO0, 0x0ffe },
-		{ NULL, SCH555x_LDN_RUNTIME, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1, 0x0fc0 },
-		{ NULL, SCH555x_LDN_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x0ff8, },
-		{ NULL, SCH555x_LDN_PP, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x0ff8 },
+		{ nullptr, SCH555x_LDN_EMI, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1, 0x0ff0 },
+		{ nullptr, SCH555x_LDN_8042, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1, 0x0fff },
+		{ nullptr, SCH555x_LDN_UART1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8 },
+		{ nullptr, SCH555x_LDN_UART2, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8 },
+		{ nullptr, SCH555x_LDN_LPCI, PNP_IO0, 0x0ffe },
+		{ nullptr, SCH555x_LDN_RUNTIME, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1, 0x0fc0 },
+		{ nullptr, SCH555x_LDN_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x0ff8, },
+		{ nullptr, SCH555x_LDN_PP, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x0ff8 },
 	};
 
 	pnp_enable_devices(dev, &ops, ARRAY_SIZE(pnp_dev_info), pnp_dev_info);

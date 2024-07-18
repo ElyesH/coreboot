@@ -198,7 +198,7 @@ static void prepare_dmi_16_17(void *unused)
 	dmi_table = fsp_find_extension_hob_by_guid(
 		(const uint8_t *)&amd_fsp_dmi_hob_guid, &amd_fsp_dmi_hob_size);
 
-	if (dmi_table == NULL || amd_fsp_dmi_hob_size == 0) {
+	if (dmi_table == nullptr || amd_fsp_dmi_hob_size == 0) {
 		printk(BIOS_ERR,
 		       "AMD_FSP_DMI_HOB not found, DMI table 17 will be incomplete\n");
 		return;
@@ -260,4 +260,4 @@ static void prepare_dmi_16_17(void *unused)
 }
 
 /* AMD_FSP_DMI_HOB is initialized very late, so check it just in time for writing tables. */
-BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_ENTRY, prepare_dmi_16_17, NULL);
+BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_ENTRY, prepare_dmi_16_17, nullptr);

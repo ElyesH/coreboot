@@ -100,7 +100,7 @@ void iio_domain_set_acpi_name(struct device *dev, const char *prefix)
 
 	assert(dn.socket < CONFIG_MAX_SOCKET);
 	assert(dn.stack < 16);
-	assert(prefix != NULL && strlen(prefix) == 2);
+	assert(prefix != nullptr && strlen(prefix) == 2);
 
 	if (dn.socket >= CONFIG_MAX_SOCKET || dn.stack >= 16 ||
 	    !prefix || strlen(prefix) != 2)
@@ -118,7 +118,7 @@ const char *soc_acpi_name(const struct device *dev)
 
 	/* FIXME: Add SoC specific device names here */
 
-	return NULL;
+	return nullptr;
 }
 
 void acpigen_write_OSC_pci_domain_fixed_caps(const struct device *domain,

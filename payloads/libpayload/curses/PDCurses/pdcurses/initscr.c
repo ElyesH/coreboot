@@ -35,16 +35,16 @@ RCSID("$Id: initscr.c,v 1.114 2008/07/13 16:08:18 wmcbrine Exp $")
         escape, call refresh() or doupdate().
 
         isendwin() returns TRUE if endwin() has been called without a
-        subsequent refresh, unless SP is NULL.
+        subsequent refresh, unless SP is nullptr.
 
         In some implementations of curses, newterm() allows the use of
         multiple terminals. Here, it's just an alternative interface for
-        initscr(). It always returns SP, or NULL.
+        initscr(). It always returns SP, or nullptr.
 
         delscreen() frees the memory allocated by newterm() or
         initscr(), since it's not freed by endwin(). This function is
         usually not needed. In PDCurses, the parameter must be the
-        value of SP, and delscreen() sets SP to NULL.
+        value of SP, and delscreen() sets SP to nullptr.
 
         set_term() does nothing meaningful in PDCurses, but is included
         for compatibility with other curses implementations.
@@ -72,7 +72,7 @@ RCSID("$Id: initscr.c,v 1.114 2008/07/13 16:08:18 wmcbrine Exp $")
         PDCurses.
 
   Return Value:
-        All functions return NULL on error, except endwin(), which
+        All functions return nullptr on error, except endwin(), which
         returns ERR on error.
 
   Portability                                X/Open    BSD    SYS V
@@ -94,10 +94,10 @@ char ttytype[128];
 
 const char *_curses_notice = "PDCurses 3.4 - Public Domain 2008";
 
-SCREEN *SP = (SCREEN*)NULL;           /* curses variables */
-WINDOW *curscr = (WINDOW *)NULL;      /* the current screen image */
-WINDOW *stdscr = (WINDOW *)NULL;      /* the default screen window */
-WINDOW *pdc_lastscr = (WINDOW *)NULL; /* the last screen image */
+SCREEN *SP = (SCREEN*)nullptr;           /* curses variables */
+WINDOW *curscr = (WINDOW *)nullptr;      /* the current screen image */
+WINDOW *stdscr = (WINDOW *)nullptr;      /* the default screen window */
+WINDOW *pdc_lastscr = (WINDOW *)nullptr; /* the last screen image */
 
 int LINES = 0;                        /* current terminal height */
 int COLS = 0;                         /* current terminal width */
@@ -118,7 +118,7 @@ WINDOW *Xinitscr(int argc, char *argv[])
     PDC_LOG(("Xinitscr() - called\n"));
 
     if (SP && SP->alive)
-        return NULL;
+        return nullptr;
 
     if (PDC_scr_open(argc, argv) == ERR)
     {
@@ -154,13 +154,13 @@ WINDOW *Xinitscr(int argc, char *argv[])
         exit(4);
     }
 
-    if ((curscr = newwin(LINES, COLS, 0, 0)) == (WINDOW *)NULL)
+    if ((curscr = newwin(LINES, COLS, 0, 0)) == (WINDOW *)nullptr)
     {
         fprintf(stderr, "initscr(): Unable to create curscr.\n");
         exit(2);
     }
 
-    if ((pdc_lastscr = newwin(LINES, COLS, 0, 0)) == (WINDOW *)NULL)
+    if ((pdc_lastscr = newwin(LINES, COLS, 0, 0)) == (WINDOW *)nullptr)
     {
         fprintf(stderr, "initscr(): Unable to create pdc_lastscr.\n");
         exit(2);
@@ -230,7 +230,7 @@ WINDOW *initscr(void)
 {
     PDC_LOG(("initscr() - called\n"));
 
-    return Xinitscr(0, NULL);
+    return Xinitscr(0, nullptr);
 }
 
 int endwin(void)
@@ -258,7 +258,7 @@ SCREEN *newterm(const char *type, FILE *outfd, FILE *infd)
 {
     PDC_LOG(("newterm() - called\n"));
 
-    return Xinitscr(0, NULL) ? SP : NULL;
+    return Xinitscr(0, nullptr) ? SP : nullptr;
 }
 
 SCREEN *set_term(SCREEN *new)
@@ -267,7 +267,7 @@ SCREEN *set_term(SCREEN *new)
 
     /* We only support one screen */
 
-    return (new == SP) ? SP : NULL;
+    return (new == SP) ? SP : nullptr;
 }
 
 void delscreen(SCREEN *sp)
@@ -282,15 +282,15 @@ void delscreen(SCREEN *sp)
     delwin(stdscr);
     delwin(curscr);
     delwin(pdc_lastscr);
-    stdscr = (WINDOW *)NULL;
-    curscr = (WINDOW *)NULL;
-    pdc_lastscr = (WINDOW *)NULL;
+    stdscr = (WINDOW *)nullptr;
+    curscr = (WINDOW *)nullptr;
+    pdc_lastscr = (WINDOW *)nullptr;
 
     SP->alive = FALSE;
 
     PDC_scr_free();     /* free SP and pdc_atrtab */
 
-    SP = (SCREEN *)NULL;
+    SP = (SCREEN *)nullptr;
 }
 
 int resize_term(int nlines, int ncols)

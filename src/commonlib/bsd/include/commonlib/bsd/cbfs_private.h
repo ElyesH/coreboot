@@ -57,8 +57,8 @@ enum cbfs_walk_flags {
 
 /*
  * Traverse a CBFS and call a |walker| callback function for every file. Can additionally
- * calculate a hash over the metadata of all files in the CBFS. If |metadata_hash| is NULL,
- * hashing is disabled. If |walker| is NULL, will just traverse and hash the CBFS without
+ * calculate a hash over the metadata of all files in the CBFS. If |metadata_hash| is nullptr,
+ * hashing is disabled. If |walker| is nullptr, will just traverse and hash the CBFS without
  * invoking any callbacks (and always return CB_CBFS_NOT_FOUND unless there was another error).
  *
  * |arg| and |dev| will be passed through to |walker| unmodified. |offset| is the absolute
@@ -104,7 +104,7 @@ enum cb_err cbfs_lookup(cbfs_dev_t dev, const char *name, union cbfs_mdata *mdat
 #define CBFS_MCACHE_ALIGNMENT	sizeof(uint32_t)	/* Largest data type used in CBFS */
 
 /* Build an in-memory CBFS metadata cache out of the CBFS on |dev| into a |mcache_size| bytes
- * memory area at |mcache|. Also verify |metadata_hash| unless it is NULL. If this returns
+ * memory area at |mcache|. Also verify |metadata_hash| unless it is nullptr. If this returns
  * CB_CBFS_CACHE_FULL, the mcache is still valid and can be used, but lookups may return
  * CB_CBFS_CACHE_FULL for files that didn't fit to indicate that the caller needs to fall back
  * to cbfs_lookup(). */

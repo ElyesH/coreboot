@@ -223,7 +223,7 @@ static void lb_boot_media_params(struct lb_header *header)
 		return;
 
 	boot_dev = boot_device_ro();
-	if (boot_dev == NULL)
+	if (boot_dev == nullptr)
 		return;
 
 	bmp = (struct lb_boot_media_params *)lb_new_record(header);
@@ -475,7 +475,7 @@ static uintptr_t write_coreboot_table(uintptr_t rom_table_end)
 #if CONFIG(USE_OPTION_TABLE)
 	{
 		struct cmos_option_table *option_table =
-			cbfs_map("cmos_layout.bin", NULL);
+			cbfs_map("cmos_layout.bin", nullptr);
 		if (option_table) {
 			struct lb_record *rec_dest = lb_new_record(head);
 			/* Copy the option config table, it's already a
@@ -574,7 +574,7 @@ void *write_tables(void)
 
 	if (!cbtable_start) {
 		printk(BIOS_ERR, "Could not add CBMEM for coreboot table.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* Add architecture specific tables. */

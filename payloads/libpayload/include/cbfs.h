@@ -52,18 +52,18 @@ void *_cbfs_unverified_area_load(const char *area, const char *name, void *buf,
 
 static inline void *cbfs_map(const char *name, size_t *size_out)
 {
-	return _cbfs_load(name, NULL, size_out, false);
+	return _cbfs_load(name, nullptr, size_out, false);
 }
 
 static inline void *cbfs_ro_map(const char *name, size_t *size_out)
 {
-	return _cbfs_load(name, NULL, size_out, true);
+	return _cbfs_load(name, nullptr, size_out, true);
 }
 
 static inline void *cbfs_unverified_area_map(const char *area, const char *name,
 					     size_t *size_out)
 {
-	return _cbfs_unverified_area_load(area, name, NULL, size_out);
+	return _cbfs_unverified_area_load(area, name, nullptr, size_out);
 }
 
 static inline size_t cbfs_load(const char *name, void *buf, size_t size)

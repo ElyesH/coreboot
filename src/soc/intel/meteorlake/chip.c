@@ -63,11 +63,11 @@ const char *soc_acpi_name(const struct device *dev)
 			break;
 		}
 		printk(BIOS_DEBUG, "dev->path.type=%x\n", dev->path.usb.port_type);
-		return NULL;
+		return nullptr;
 	}
 	if (dev->path.type != DEVICE_PATH_PCI) {
 		printk(BIOS_DEBUG, "dev->path.type=%x\n", dev->path.type);
-		return NULL;
+		return nullptr;
 	}
 
 	switch (dev->path.pci.devfn) {
@@ -119,7 +119,7 @@ const char *soc_acpi_name(const struct device *dev)
 	}
 	printk(BIOS_DEBUG, "Missing ACPI Name for PCI: 00:%02x.%01x\n",
 			PCI_SLOT(dev->path.pci.devfn), PCI_FUNC(dev->path.pci.devfn));
-	return NULL;
+	return nullptr;
 }
 #endif
 

@@ -38,9 +38,9 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, LPC47N217_PP,   PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
-	{ NULL, LPC47N217_SP1,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, LPC47N217_SP2,  PNP_IO0 | PNP_IRQ0, 0x07f8, }
+	{ nullptr, LPC47N217_PP,   PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
+	{ nullptr, LPC47N217_SP1,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, LPC47N217_SP2,  PNP_IO0 | PNP_IRQ0, 0x07f8, }
 };
 
 /**

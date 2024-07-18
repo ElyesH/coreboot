@@ -48,7 +48,7 @@ static void read_bytes(u16 port, unsigned int length, u8 *dest, u8 *csum)
 static inline u8 read_byte(u16 port)
 {
 	u8 byte;
-	read_bytes(port, 1, &byte, NULL);
+	read_bytes(port, 1, &byte, nullptr);
 	return byte;
 }
 
@@ -87,7 +87,7 @@ static void write_bytes(u16 port, unsigned int length, u8 *msg, u8 *csum)
 static inline u8 write_byte(u8 val, u16 port)
 {
 	u8 byte = val;
-	write_bytes(port, 1, &byte, NULL);
+	write_bytes(port, 1, &byte, nullptr);
 	return byte;
 }
 
@@ -225,7 +225,7 @@ static int google_chromeec_command_v3(struct chromeec_command *cec_command)
 	rq.checksum = -csum;
 
 	/* Copy header */
-	write_bytes(EC_LPC_ADDR_HOST_PACKET, sizeof(rq), (u8*)&rq, NULL);
+	write_bytes(EC_LPC_ADDR_HOST_PACKET, sizeof(rq), (u8*)&rq, nullptr);
 
 	/* Start the command */
 	write_byte(EC_COMMAND_PROTOCOL_3, EC_LPC_ADDR_HOST_CMD);
@@ -302,7 +302,7 @@ static int google_chromeec_command_v1(struct chromeec_command *cec_command)
 
 	/* Finalize checksum and write args */
 	args.checksum = csum;
-	write_bytes(EC_LPC_ADDR_HOST_ARGS, sizeof(args), (u8*)&args, NULL);
+	write_bytes(EC_LPC_ADDR_HOST_ARGS, sizeof(args), (u8*)&args, nullptr);
 
 	/* Issue the command */
 	write_byte(cmd_code, EC_LPC_ADDR_HOST_CMD);
@@ -319,7 +319,7 @@ static int google_chromeec_command_v1(struct chromeec_command *cec_command)
 		return 1;
 
 	/* Read back args */
-	read_bytes(EC_LPC_ADDR_HOST_ARGS, sizeof(args), (u8*)&args, NULL);
+	read_bytes(EC_LPC_ADDR_HOST_ARGS, sizeof(args), (u8*)&args, nullptr);
 
 	/*
 	 * If EC didn't modify args flags, then somehow we sent a new-style
@@ -442,7 +442,7 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, 0, 0, 0, }
+	{ nullptr, 0, 0, 0, }
 };
 
 static void enable_dev(struct device *dev)

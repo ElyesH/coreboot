@@ -195,7 +195,7 @@ static void *get_tcpa_log(u32 *size)
 	lasa = cbmem_add(CBMEM_ID_TCPA_TCG_LOG, tcpa_default_log_len);
 	if (!lasa) {
 		printk(BIOS_ERR, "TCPA log creation failed\n");
-		return NULL;
+		return nullptr;
 	}
 
 	printk(BIOS_DEBUG, "TCPA log created at %p\n", lasa);
@@ -241,7 +241,7 @@ static void *get_tpm2_log(u32 *size)
 	lasa = cbmem_add(CBMEM_ID_TPM2_TCG_LOG, tpm2_default_log_len);
 	if (!lasa) {
 		printk(BIOS_ERR, "TPM2 log creation failed\n");
-		return NULL;
+		return nullptr;
 	}
 
 	printk(BIOS_DEBUG, "TPM2 log created at %p\n", lasa);
@@ -820,7 +820,7 @@ static void acpi_create_dbg2(acpi_dbg2_header_t *dbg2,
 
 	/* Namespace string comes last, use '.' if not provided */
 	path = device_path ? : ".";
-	/* Namespace string length includes NULL terminator */
+	/* Namespace string length includes nullptr terminator */
 	path_len = strlen(path) + 1;
 	namespace = (char *)current;
 	device->namespace_string_length = path_len;
@@ -980,7 +980,7 @@ static void acpi_write_rsdp(acpi_rsdp_t *rsdp, acpi_rsdt_t *rsdt,
 	 * If we don't have an ACPI XSDT, force ACPI 1.0 (and thus RSD PTR
 	 * revision 0).
 	 */
-	if (xsdt == NULL) {
+	if (xsdt == nullptr) {
 		rsdp->revision = 0;
 	} else {
 		rsdp->xsdt_address = (u64)(uintptr_t)xsdt;
@@ -1420,7 +1420,7 @@ static void acpixtract_compatible_hexdump(const void *memory, size_t length)
 
 static void acpidump_print(void *table_ptr)
 {
-	if (table_ptr == NULL)
+	if (table_ptr == nullptr)
 		return;
 	const acpi_header_t *header = (acpi_header_t *)table_ptr;
 	const size_t table_size = header->length;
@@ -1433,11 +1433,11 @@ unsigned long write_acpi_tables(const unsigned long start)
 {
 	unsigned long current;
 	acpi_rsdp_t *rsdp;
-	acpi_rsdt_t *rsdt = NULL;
-	acpi_xsdt_t *xsdt = NULL;
-	acpi_facs_t *facs = NULL;
+	acpi_rsdt_t *rsdt = nullptr;
+	acpi_xsdt_t *xsdt = nullptr;
+	acpi_facs_t *facs = nullptr;
 	acpi_header_t *slic_file;
-	acpi_header_t *ssdt = NULL;
+	acpi_header_t *ssdt = nullptr;
 	acpi_header_t *dsdt_file;
 	struct device *dev;
 	unsigned long fw;
@@ -1452,18 +1452,18 @@ unsigned long write_acpi_tables(const unsigned long start)
 		{ acpi_create_dsdt, &dsdt_file, sizeof(acpi_header_t) },
 		{ acpi_create_fadt, &facs, sizeof(acpi_fadt_t) },
 		{ acpi_create_slic, &slic_file, sizeof(acpi_header_t) },
-		{ acpi_create_ssdt_generator, NULL, sizeof(acpi_header_t) },
-		{ acpi_create_mcfg, NULL, sizeof(acpi_mcfg_t) },
-		{ acpi_create_tcpa, NULL, sizeof(acpi_tcpa_t) },
-		{ acpi_create_tpm2, NULL, sizeof(acpi_tpm2_t) },
-		{ acpi_create_lpit, NULL, sizeof(acpi_lpit_t) },
-		{ acpi_create_madt, NULL, sizeof(acpi_header_t) },
-		{ acpi_create_bert, NULL, sizeof(acpi_bert_t) },
-		{ acpi_create_spcr, NULL, sizeof(acpi_spcr_t) },
-		{ acpi_create_gtdt, NULL, sizeof(acpi_gtdt_t) },
-		{ acpi_create_pptt, NULL, sizeof(acpi_pptt_t) },
-		{ acpi_create_iort, NULL, sizeof(acpi_iort_t) },
-		{ acpi_create_wdat, NULL, sizeof(acpi_wdat_t) },
+		{ acpi_create_ssdt_generator, nullptr, sizeof(acpi_header_t) },
+		{ acpi_create_mcfg, nullptr, sizeof(acpi_mcfg_t) },
+		{ acpi_create_tcpa, nullptr, sizeof(acpi_tcpa_t) },
+		{ acpi_create_tpm2, nullptr, sizeof(acpi_tpm2_t) },
+		{ acpi_create_lpit, nullptr, sizeof(acpi_lpit_t) },
+		{ acpi_create_madt, nullptr, sizeof(acpi_header_t) },
+		{ acpi_create_bert, nullptr, sizeof(acpi_bert_t) },
+		{ acpi_create_spcr, nullptr, sizeof(acpi_spcr_t) },
+		{ acpi_create_gtdt, nullptr, sizeof(acpi_gtdt_t) },
+		{ acpi_create_pptt, nullptr, sizeof(acpi_pptt_t) },
+		{ acpi_create_iort, nullptr, sizeof(acpi_iort_t) },
+		{ acpi_create_wdat, nullptr, sizeof(acpi_wdat_t) },
 	};
 
 	current = start;
@@ -1474,7 +1474,7 @@ unsigned long write_acpi_tables(const unsigned long start)
 	/* Special case for qemu */
 	fw = fw_cfg_acpi_tables(current);
 	if (fw) {
-		rsdp = NULL;
+		rsdp = nullptr;
 		/* Find RSDP. */
 		for (void *p = (void *)current; p < (void *)fw; p += 16) {
 			if (valid_rsdp((acpi_rsdp_t *)p)) {
@@ -1542,7 +1542,7 @@ unsigned long write_acpi_tables(const unsigned long start)
 		ssdt->length = current - (unsigned long)ssdt;
 		ssdt->checksum = acpi_checksum((void *)ssdt, ssdt->length);
 
-		acpi_create_ssdt_generator(ssdt, NULL);
+		acpi_create_ssdt_generator(ssdt, nullptr);
 
 		acpi_add_table(rsdp, ssdt);
 
@@ -1672,17 +1672,17 @@ unsigned long write_acpi_tables(const unsigned long start)
 static acpi_rsdp_t *valid_rsdp(acpi_rsdp_t *rsdp)
 {
 	if (strncmp((char *)rsdp, RSDP_SIG, sizeof(RSDP_SIG) - 1) != 0)
-		return NULL;
+		return nullptr;
 
 	printk(BIOS_DEBUG, "Looking on %p for valid checksum\n", rsdp);
 
 	if (acpi_checksum((void *)rsdp, 20) != 0)
-		return NULL;
+		return nullptr;
 	printk(BIOS_DEBUG, "Checksum 1 passed\n");
 
 	if ((rsdp->revision > 1) && (acpi_checksum((void *)rsdp,
 						rsdp->length) != 0))
-		return NULL;
+		return nullptr;
 	printk(BIOS_DEBUG, "Checksum 2 passed all OK\n");
 
 	return rsdp;
@@ -1693,13 +1693,13 @@ void *acpi_find_wakeup_vector(void)
 	char *p, *end;
 	acpi_xsdt_t *xsdt;
 	acpi_facs_t *facs;
-	acpi_fadt_t *fadt = NULL;
-	acpi_rsdp_t *rsdp = NULL;
+	acpi_fadt_t *fadt = nullptr;
+	acpi_rsdp_t *rsdp = nullptr;
 	void *wake_vec;
 	int i;
 
 	if (!acpi_is_wakeup_s3())
-		return NULL;
+		return nullptr;
 
 	printk(BIOS_DEBUG, "Trying to find the wakeup vector...\n");
 
@@ -1710,10 +1710,10 @@ void *acpi_find_wakeup_vector(void)
 			break;
 	}
 
-	if (rsdp == NULL) {
+	if (rsdp == nullptr) {
 		printk(BIOS_ALERT,
 		       "No RSDP found, wake up from S3 not possible.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	printk(BIOS_DEBUG, "RSDP found at %p\n", rsdp);
@@ -1726,23 +1726,23 @@ void *acpi_find_wakeup_vector(void)
 		fadt = (acpi_fadt_t *)(uintptr_t)xsdt->entry[i];
 		if (strncmp((char *)fadt, "FACP", 4) == 0)
 			break;
-		fadt = NULL;
+		fadt = nullptr;
 	}
 
-	if (fadt == NULL) {
+	if (fadt == nullptr) {
 		printk(BIOS_ALERT,
 		       "No FADT found, wake up from S3 not possible.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	printk(BIOS_DEBUG, "FADT found at %p\n", fadt);
 	facs = (acpi_facs_t *)(uintptr_t)((uint64_t)fadt->x_firmware_ctl_l
 			       | (uint64_t)fadt->x_firmware_ctl_h << 32);
 
-	if (facs == NULL) {
+	if (facs == nullptr) {
 		printk(BIOS_ALERT,
 		       "No FACS found, wake up from S3 not possible.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	printk(BIOS_DEBUG, "FACS found at %p\n", facs);

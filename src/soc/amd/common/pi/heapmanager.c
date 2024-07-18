@@ -165,7 +165,7 @@ AGESA_STATUS agesa_AllocateBuffer(uint32_t Func, uintptr_t Data,
 	AGESA_STATUS        Status;
 
 	AllocParams = ((AGESA_BUFFER_PARAMS *)ConfigPtr);
-	AllocParams->BufferPointer = NULL;
+	AllocParams->BufferPointer = nullptr;
 	MinimumSize = AllocParams->BufferLength + sizeof(BIOS_BUFFER_NODE);
 
 	AvailableHeapSize = BIOS_HEAP_SIZE - sizeof(BIOS_HEAP_MANAGER);

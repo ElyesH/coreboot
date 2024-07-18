@@ -57,7 +57,7 @@ static const struct superio_dev *superio_guess_function(const struct device *dev
 			}
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 /* Return true if there are resources to report */

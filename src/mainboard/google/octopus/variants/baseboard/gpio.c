@@ -284,13 +284,13 @@ const struct pad_config *baseboard_gpio_table(size_t *num)
 const struct pad_config *__weak variant_override_gpio_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 const struct pad_config *__weak variant_early_override_gpio_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 static const struct pad_config early_bootblock_gpio_table[] = {
@@ -381,7 +381,7 @@ const struct pad_config *__weak
 variant_romstage_gpio_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 static const struct cros_gpio cros_gpios[] = {

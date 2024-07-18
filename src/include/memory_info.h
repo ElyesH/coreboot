@@ -126,8 +126,8 @@ struct memory_info {
 
 /*
  * mainboard_get_dram_part_num returns a DRAM part number override string
- *  return NULL = no part number override provided by mainboard
- *  return non-NULL = pointer to a string terminating in '\0'
+ *  return nullptr = no part number override provided by mainboard
+ *  return non-nullptr = pointer to a string terminating in '\0'
  */
 const char *mainboard_get_dram_part_num(void);
 #endif

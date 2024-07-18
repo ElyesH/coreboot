@@ -86,7 +86,7 @@ set_menu_win(MENU * menu, WINDOW *win)
 |
 |   Description   :  Returns pointer to the window of the menu
 |
-|   Return Values :  NULL on error, otherwise pointer to window
+|   Return Values :  nullptr on error, otherwise pointer to window
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(WINDOW *)
 menu_win(const MENU * menu)

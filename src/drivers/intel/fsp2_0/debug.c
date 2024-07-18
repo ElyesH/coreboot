@@ -94,7 +94,7 @@ void fsp_debug_after_memory_init(efi_return_status_t status)
 		return;
 
 	/* Verify that the HOB list pointer was set */
-	if (fsp_get_hob_list() == NULL)
+	if (fsp_get_hob_list() == nullptr)
 		die("ERROR - HOB list pointer was not returned!\n");
 
 	/* Display and verify the HOBs */

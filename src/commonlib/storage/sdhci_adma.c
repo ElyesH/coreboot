@@ -23,7 +23,7 @@ static void sdhci_alloc_adma_descs(struct sdhci_ctrlr *sdhci_ctrlr,
 			/* Previously allocated array is too small */
 			free(sdhci_ctrlr->adma_descs);
 			sdhci_ctrlr->adma_desc_count = 0;
-			sdhci_ctrlr->adma_descs = NULL;
+			sdhci_ctrlr->adma_descs = nullptr;
 		}
 	}
 
@@ -31,7 +31,7 @@ static void sdhci_alloc_adma_descs(struct sdhci_ctrlr *sdhci_ctrlr,
 	if (!sdhci_ctrlr->adma_descs) {
 		sdhci_ctrlr->adma_descs = malloc(need_descriptors
 			* sizeof(*sdhci_ctrlr->adma_descs));
-		if (sdhci_ctrlr->adma_descs == NULL)
+		if (sdhci_ctrlr->adma_descs == nullptr)
 			die("fail to malloc adma_descs\n");
 		sdhci_ctrlr->adma_desc_count = need_descriptors;
 	}
@@ -48,7 +48,7 @@ static void sdhci_alloc_adma64_descs(struct sdhci_ctrlr *sdhci_ctrlr,
 			/* Previously allocated array is too small */
 			free(sdhci_ctrlr->adma64_descs);
 			sdhci_ctrlr->adma_desc_count = 0;
-			sdhci_ctrlr->adma64_descs = NULL;
+			sdhci_ctrlr->adma64_descs = nullptr;
 		}
 	}
 
@@ -56,7 +56,7 @@ static void sdhci_alloc_adma64_descs(struct sdhci_ctrlr *sdhci_ctrlr,
 	if (!sdhci_ctrlr->adma64_descs) {
 		sdhci_ctrlr->adma64_descs = malloc(need_descriptors
 			* sizeof(*sdhci_ctrlr->adma64_descs));
-		if (sdhci_ctrlr->adma64_descs == NULL)
+		if (sdhci_ctrlr->adma64_descs == nullptr)
 			die("fail to malloc adma64_descs\n");
 
 		sdhci_ctrlr->adma_desc_count = need_descriptors;

@@ -52,8 +52,8 @@ MODULE_ID("$Id: fld_arg.c,v 1.12 2010/01/23 21:14:35 tom Exp $")
 |                       free_arg : Release the memory allocated by make_arg
 |                                  or copy_arg
 |
-|                    At least make_arg must be non-NULL.
-|                    You may pass NULL for copy_arg and free_arg if your
+|                    At least make_arg must be non-nullptr.
+|                    You may pass nullptr for copy_arg and free_arg if your
 |                    make_arg function doesn't allocate memory and your
 |                    arg fits into the storage for a (void*).
 |
@@ -86,7 +86,7 @@ set_fieldtype_arg(FIELDTYPE *typ,
 |
 |   Description   :  Retrieve pointer to the fields argument structure.
 |
-|   Return Values :  Pointer to structure or NULL if none is defined.
+|   Return Values :  Pointer to structure or nullptr if none is defined.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(void *)
 field_arg(const FIELD *field)

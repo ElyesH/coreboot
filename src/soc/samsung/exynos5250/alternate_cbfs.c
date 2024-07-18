@@ -108,7 +108,7 @@ const struct region_device *boot_device_ro(void)
 	default:
 		printk(BIOS_EMERG, "Exynos OM_STAT value 0x%x not supported!\n",
 			exynos_power->om_stat);
-		return NULL;
+		return nullptr;
 	}
 }
 

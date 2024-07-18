@@ -24,10 +24,10 @@ static bool boot_error_src_present(cl_node_t *head)
 
 static enum cb_err record_crashlog_into_bert(void **region, size_t *length)
 {
-	acpi_generic_error_status_t *status = NULL;
+	acpi_generic_error_status_t *status = nullptr;
 	size_t gesb_header_size;
-	void *cl_acpi_data = NULL;
-	cl_node_t cl_list_head = {.size = 0, .data = NULL, .next = NULL};
+	void *cl_acpi_data = nullptr;
+	cl_node_t cl_list_head = {.size = 0, .data = nullptr, .next = nullptr};
 
 	if (!boot_error_src_present(&cl_list_head)) {
 		return CB_ERR;

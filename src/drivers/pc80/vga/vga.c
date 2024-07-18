@@ -292,7 +292,7 @@ vga_write_text(enum VGA_TEXT_ALIGNMENT alignment, unsigned int line,
 
 	char *token = strtok(str, "\n");
 
-	while (token != NULL) {
+	while (token != nullptr) {
 		size_t offset = VGA_COLUMNS - strnlen(token, VGA_COLUMNS);
 		switch (alignment) {
 		case VGA_TEXT_CENTER:
@@ -306,7 +306,7 @@ vga_write_text(enum VGA_TEXT_ALIGNMENT alignment, unsigned int line,
 			vga_write_at_offset(line++, 0, token);
 			break;
 		}
-		token = strtok(NULL, "\n");
+		token = strtok(nullptr, "\n");
 	}
 }
 

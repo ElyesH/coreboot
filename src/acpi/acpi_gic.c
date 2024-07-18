@@ -37,7 +37,7 @@ static unsigned long acpi_create_madt_giccs_v3(unsigned long current)
 {
 	// Loop over CPUs GIC
 	uint32_t acpi_id = 0;
-	for (struct device *dev = dev_find_path(NULL, DEVICE_PATH_GICC_V3); dev;
+	for (struct device *dev = dev_find_path(nullptr, DEVICE_PATH_GICC_V3); dev;
 	     dev = dev_find_path(dev, DEVICE_PATH_GICC_V3)) {
 		acpi_madt_gicc_t *gicc = (acpi_madt_gicc_t *)current;
 		current += acpi_create_madt_one_gicc_v3(gicc, acpi_id++,

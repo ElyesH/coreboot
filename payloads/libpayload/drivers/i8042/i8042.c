@@ -45,7 +45,7 @@ struct fifo {
 /** Initialize a new fifo queue.
  * Initialize a new fifo with length @len.
  * @len: Length of new fifo
- * Returns NULL on error.
+ * Returns nullptr on error.
  */
 static struct fifo *fifo_init(size_t len)
 {
@@ -53,14 +53,14 @@ static struct fifo *fifo_init(size_t len)
 
 	ret = malloc(sizeof(*ret));
 	if (!ret)
-		return NULL;
+		return nullptr;
 
 	memset(ret, 0, sizeof(*ret));
 
 	ret->buf = malloc(len);
 	if (!ret->buf) {
 		free(ret);
-		return NULL;
+		return nullptr;
 	}
 
 	ret->len = len;
@@ -149,8 +149,8 @@ static inline void write_data(u8 data) { outb(data, 0x60); }
 /* Keyboard controller methods */
 static int initialized = 0;
 static int kbc_init = 0;
-static struct fifo *aux_fifo = NULL;
-static struct fifo *ps2_fifo = NULL;
+static struct fifo *aux_fifo = nullptr;
+static struct fifo *ps2_fifo = nullptr;
 
 static int i8042_cmd_with_response(u8 cmd);
 
@@ -205,8 +205,8 @@ u8 i8042_probe(void)
 	if (initialized)
 		return 1;
 
-	aux_fifo = NULL;
-	ps2_fifo = NULL;
+	aux_fifo = nullptr;
+	ps2_fifo = nullptr;
 
 	/* If 0x64 returns 0xff, then we have no keyboard
 	 * controller */
@@ -275,8 +275,8 @@ void i8042_close(void)
 	fifo_destroy(ps2_fifo);
 
 	initialized = 0;
-	aux_fifo = NULL;
-	ps2_fifo = NULL;
+	aux_fifo = nullptr;
+	ps2_fifo = nullptr;
 }
 
 /** Send command to keyboard controller.

@@ -98,7 +98,7 @@ bool fw_config_probe_dev(const struct device *dev, const struct fw_config **matc
 	const struct fw_config *probe;
 
 	if (matching_probe)
-		*matching_probe = NULL;
+		*matching_probe = nullptr;
 
 	/* If the device does not have a probe list, then probing is not required. */
 	if (!dev->probe_list)
@@ -139,7 +139,7 @@ const struct fw_config *fw_config_get_found(uint64_t field_mask)
 	if (config && config->mask == field_mask)
 		return config;
 
-	return NULL;
+	return nullptr;
 }
 
 void fw_config_for_each_found(void (*cb)(const struct fw_config *config, void *arg), void *arg)
@@ -168,5 +168,5 @@ static void fw_config_init(void *unused)
 			cached_configs[probe_index(probe->mask)] = probe;
 	}
 }
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT_CHIPS, BS_ON_ENTRY, fw_config_init, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT_CHIPS, BS_ON_ENTRY, fw_config_init, nullptr);
 #endif

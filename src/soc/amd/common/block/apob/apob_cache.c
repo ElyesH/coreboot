@@ -85,7 +85,7 @@ static void *get_apob_dram_address(void)
 	void *apob_src_ram = (void *)(uintptr_t)CONFIG_PSP_APOB_DRAM_ADDRESS;
 
 	if (apob_header_valid(apob_src_ram, "RAM") == false)
-		return NULL;
+		return nullptr;
 
 	return apob_src_ram;
 }
@@ -162,12 +162,12 @@ static void *get_apob_from_nv_rdev(struct region_device *read_rdev)
 
 	if (rdev_readat(read_rdev, &apob_header, 0, sizeof(apob_header)) < 0) {
 		printk(BIOS_ERR, "Couldn't read APOB header!\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (apob_header_valid(&apob_header, "ROM") == false) {
 		printk(BIOS_ERR, "No APOB NV data!\n");
-		return NULL;
+		return nullptr;
 	}
 
 	assert(CONFIG(BOOT_DEVICE_MEMORY_MAPPED));
@@ -196,7 +196,7 @@ static void update_apob_nv_hash(uint64_t hash, struct region_device *write_rdev)
 /* Save APOB buffer to flash */
 static void soc_update_apob_cache(void *unused)
 {
-	struct apob_base_header *apob_rom = NULL;
+	struct apob_base_header *apob_rom = nullptr;
 	struct region_device read_rdev, write_rdev;
 	bool update_needed = false;
 	const struct apob_base_header *apob_src_ram;
@@ -207,7 +207,7 @@ static void soc_update_apob_cache(void *unused)
 		return;
 
 	apob_src_ram = get_apob_dram_address();
-	if (apob_src_ram == NULL)
+	if (apob_src_ram == nullptr)
 		return;
 
 	if (get_nv_rdev(&read_rdev) != CB_SUCCESS)
@@ -234,7 +234,7 @@ static void soc_update_apob_cache(void *unused)
 	else if (!update_needed)
 		apob_rom = get_apob_from_nv_rdev(&read_rdev);
 
-	if (apob_rom == NULL) {
+	if (apob_rom == nullptr) {
 		update_needed = true;
 	} else if (memcmp(apob_src_ram, apob_rom, apob_src_ram->size)) {
 		printk(BIOS_INFO, "APOB RAM copy differs from flash\n");
@@ -282,7 +282,7 @@ static void *get_apob_nv_address(void)
 	struct region_device rdev;
 
 	if (get_nv_rdev(&rdev) != CB_SUCCESS)
-		return NULL;
+		return nullptr;
 
 	return get_apob_from_nv_rdev(&rdev);
 }
@@ -305,4 +305,4 @@ void *soc_fill_apob_cache(void)
  * BS_POST_DEVICE was chosen because this gives start_apob_cache_read plenty of time to read
  * the APOB from SPI.
  */
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, soc_update_apob_cache, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, soc_update_apob_cache, nullptr);

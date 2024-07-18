@@ -352,7 +352,7 @@ static void prepare_for_hwm_ec_sequence(uint8_t write_only, uint8_t *value)
 		val = *value;
 		reg = 0x02fc;
 	} else {
-		if (value != NULL)
+		if (value != nullptr)
 			ec_read_write_reg(EC_HWM_LDN, 0x02fc, value, READ_OP);
 		val = 0xa0;
 		ec_read_write_reg(EC_HWM_LDN, 0x2fc, &val, WRITE_OP);

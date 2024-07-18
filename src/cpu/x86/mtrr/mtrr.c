@@ -167,7 +167,7 @@ static struct memranges *get_physical_address_space(void)
 	/* In order to handle some chipsets not being able to pre-determine
 	 *  uncacheable ranges, such as graphics memory, at resource insertion
 	 * time remove uncacheable regions from the cacheable ones. */
-	if (addr_space == NULL) {
+	if (addr_space == nullptr) {
 		unsigned long mask;
 		unsigned long match;
 
@@ -197,7 +197,7 @@ static struct memranges *get_physical_address_space(void)
 					   RANGE_TO_PHYS_ADDR(RANGE_4GB),
 					   MTRR_TYPE_UNCACHEABLE);
 
-		print_physical_address_space(addr_space, NULL);
+		print_physical_address_space(addr_space, nullptr);
 	}
 
 	return addr_space;
@@ -623,7 +623,7 @@ static void calc_var_mtrrs_with_hole(struct var_mtrr_state *var_state,
 		 *    the ranges.
 		 */
 		next = memranges_next_entry(var_state->addr_space, r);
-		if (next == NULL) {
+		if (next == nullptr) {
 			b2_limit = ALIGN_UP((uint64_t)b1, 1 << fms(b1));
 			/* If it's the last range above 4GiB, we won't carve
 			   the hole out. If an OS wanted to move MMIO there,
@@ -786,12 +786,12 @@ static int commit_var_mtrrs(const struct var_mtrr_solution *sol)
 
 void x86_setup_var_mtrrs(unsigned int address_bits, unsigned int above4gb)
 {
-	static struct var_mtrr_solution *sol = NULL;
+	static struct var_mtrr_solution *sol = nullptr;
 	struct memranges *addr_space;
 
 	addr_space = get_physical_address_space();
 
-	if (sol == NULL) {
+	if (sol == nullptr) {
 		sol = &mtrr_global_solution;
 		sol->mtrr_default_type =
 			calc_var_mtrrs(addr_space, !!above4gb, address_bits);
@@ -896,7 +896,7 @@ void mtrr_use_temp_range(uintptr_t begin, size_t size, int type)
 
 	/* Make a copy of the original address space and tweak it with the
 	 * provided range. */
-	memranges_init_empty(&addr_space, NULL, 0);
+	memranges_init_empty(&addr_space, nullptr, 0);
 	orig = get_physical_address_space();
 	memranges_each_entry(r, orig) {
 		unsigned long tag = range_entry_tag(r);
@@ -943,5 +943,5 @@ static void remove_temp_solution(void *unused)
 		commit_var_mtrrs(&mtrr_global_solution);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, remove_temp_solution, NULL);
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, remove_temp_solution, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, remove_temp_solution, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, remove_temp_solution, nullptr);

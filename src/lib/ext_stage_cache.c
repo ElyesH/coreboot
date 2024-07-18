@@ -47,7 +47,7 @@ void stage_cache_add(int stage_id, const struct prog *stage)
 	imd = &imd_stage_cache;
 	e = imd_entry_add(imd, CBMEM_ID_STAGEx_META + stage_id, sizeof(*meta));
 
-	if (e == NULL) {
+	if (e == nullptr) {
 		printk(BIOS_DEBUG, "Error: Can't add %x metadata to imd\n",
 				CBMEM_ID_STAGEx_META + stage_id);
 		return;
@@ -69,7 +69,7 @@ void stage_cache_add(int stage_id, const struct prog *stage)
 
 	e = imd_entry_add(imd, CBMEM_ID_STAGEx_CACHE + stage_id, p_size);
 
-	if (e == NULL) {
+	if (e == nullptr) {
 		printk(BIOS_DEBUG, "Error: Can't add stage_cache %x to imd\n",
 				CBMEM_ID_STAGEx_CACHE + stage_id);
 		return;
@@ -88,14 +88,14 @@ void stage_cache_add_raw(int stage_id, const void *base, const size_t size)
 
 	imd = &imd_stage_cache;
 	e = imd_entry_add(imd, CBMEM_ID_STAGEx_RAW + stage_id, size);
-	if (e == NULL) {
+	if (e == nullptr) {
 		printk(BIOS_DEBUG, "Error: Can't add %x raw data to imd\n",
 				CBMEM_ID_STAGEx_RAW + stage_id);
 		return;
 	}
 
 	c = imd_entry_at(imd, e);
-	if (c == NULL) {
+	if (c == nullptr) {
 		printk(BIOS_DEBUG, "Error: Can't get %x raw entry in imd\n",
 				CBMEM_ID_STAGEx_RAW + stage_id);
 		return;
@@ -111,7 +111,7 @@ void stage_cache_get_raw(int stage_id, void **base, size_t *size)
 
 	imd = &imd_stage_cache;
 	e = imd_entry_find(imd, CBMEM_ID_STAGEx_RAW + stage_id);
-	if (e == NULL) {
+	if (e == nullptr) {
 		printk(BIOS_DEBUG, "Error: Can't find %x raw data to imd\n",
 				CBMEM_ID_STAGEx_RAW + stage_id);
 		return;
@@ -131,7 +131,7 @@ void stage_cache_load_stage(int stage_id, struct prog *stage)
 
 	imd = &imd_stage_cache;
 	e = imd_entry_find(imd, CBMEM_ID_STAGEx_META + stage_id);
-	if (e == NULL) {
+	if (e == nullptr) {
 		printk(BIOS_DEBUG, "Error: Can't find %x metadata in imd\n",
 				CBMEM_ID_STAGEx_META + stage_id);
 		return;
@@ -141,7 +141,7 @@ void stage_cache_load_stage(int stage_id, struct prog *stage)
 
 	e = imd_entry_find(imd, CBMEM_ID_STAGEx_CACHE + stage_id);
 
-	if (e == NULL) {
+	if (e == nullptr) {
 		printk(BIOS_DEBUG, "Error: Can't find stage_cache %x in imd\n",
 				CBMEM_ID_STAGEx_CACHE + stage_id);
 		return;

@@ -34,15 +34,15 @@ struct mem_pool {
 		.buf = (buf_),			\
 		.size = (size_),		\
 		.alignment = (alignment_),	\
-		.last_alloc = NULL,		\
-		.second_to_last_alloc = NULL,	\
+		.last_alloc = nullptr,		\
+		.second_to_last_alloc = nullptr,	\
 		.free_offset = 0,		\
 	}
 
 static inline void mem_pool_reset(struct mem_pool *mp)
 {
-	mp->last_alloc = NULL;
-	mp->second_to_last_alloc = NULL;
+	mp->last_alloc = nullptr;
+	mp->second_to_last_alloc = nullptr;
 	mp->free_offset = 0;
 }
 
@@ -59,7 +59,7 @@ static inline void mem_pool_init(struct mem_pool *mp, void *buf, size_t sz,
 	mem_pool_reset(mp);
 }
 
-/* Allocate requested size from the memory pool. NULL returned on error. */
+/* Allocate requested size from the memory pool. nullptr returned on error. */
 void *mem_pool_alloc(struct mem_pool *mp, size_t sz);
 
 /* Free allocation from memory pool. */

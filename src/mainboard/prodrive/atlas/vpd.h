@@ -43,7 +43,7 @@ struct __packed emi_eeprom_vpd {
 	uint16_t profile;
 };
 
-/* Always returns a non-NULL pointer to valid data */
+/* Always returns a non-nullptr pointer to valid data */
 const struct emi_eeprom_vpd *get_emi_eeprom_vpd(void);
 
 #endif /* ATLAS_VPD_H */

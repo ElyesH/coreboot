@@ -13,7 +13,7 @@
 
 static struct region_device flash_rdev_rw;
 static struct region_device flash_rdev_ro;
-static char *flash_buffer = NULL;
+static char *flash_buffer = nullptr;
 static size_t flash_buffer_size = 0;
 
 static void prepare_flash_buffer(void)
@@ -45,11 +45,11 @@ static int setup_fmap(void **state)
 
 static int teardown_fmap(void **state)
 {
-	rdev_chain_mem_rw(&flash_rdev_rw, NULL, 0);
-	rdev_chain_mem(&flash_rdev_ro, NULL, 0);
+	rdev_chain_mem_rw(&flash_rdev_rw, nullptr, 0);
+	rdev_chain_mem(&flash_rdev_ro, nullptr, 0);
 
 	free(flash_buffer);
-	flash_buffer = NULL;
+	flash_buffer = nullptr;
 	flash_buffer_size = 0;
 
 	return 0;
@@ -95,9 +95,9 @@ static void test_fmap_locate_area_as_rdev(void **state)
 	/* Expect error when looking for incorrect area */
 	assert_int_equal(-1, fmap_locate_area_as_rdev("NONEXISTENT_AREA", &rdev));
 	assert_int_equal(-1, fmap_locate_area_as_rdev("", &rdev));
-	assert_int_equal(-1, fmap_locate_area_as_rdev(NULL, &rdev));
+	assert_int_equal(-1, fmap_locate_area_as_rdev(nullptr, &rdev));
 
-	/* Function fmap_locate_area_as_rdev is not tested with NULL
+	/* Function fmap_locate_area_as_rdev is not tested with nullptr
 	   as region_device pointer as it is not allowed. */
 }
 
@@ -132,9 +132,9 @@ static void test_fmap_locate_area_as_rdev_rw(void **state)
 	assert_int_equal(-1, fmap_locate_area_as_rdev_rw("", &rdev));
 
 	/* Expect error when passing invalid references */
-	assert_int_equal(-1, fmap_locate_area_as_rdev_rw(NULL, &rdev));
+	assert_int_equal(-1, fmap_locate_area_as_rdev_rw(nullptr, &rdev));
 
-	/* Function fmap_locate_area_as_rdev_rw is not tested with NULL
+	/* Function fmap_locate_area_as_rdev_rw is not tested with nullptr
 	   as region_device pointer as it is not allowed. */
 
 	/* Test if returned section region device is writable */
@@ -177,10 +177,10 @@ static void test_fmap_locate_area(void **state)
 	/* Expect error when looking for incorrect area */
 	assert_int_equal(-1, fmap_locate_area("NONEXISTENT_AREA", &ar));
 	assert_int_equal(-1, fmap_locate_area("", &ar));
-	assert_int_equal(-1, fmap_locate_area(NULL, &ar));
+	assert_int_equal(-1, fmap_locate_area(nullptr, &ar));
 
 	/* Expect error when passing invalid region pointer */
-	assert_int_equal(-1, fmap_locate_area("SHARED_DATA", NULL));
+	assert_int_equal(-1, fmap_locate_area("SHARED_DATA", nullptr));
 }
 
 static void test_fmap_find_region_name(void **state)
@@ -198,10 +198,10 @@ static void test_fmap_find_region_name(void **state)
 	assert_string_equal(area_name, found_area_name);
 
 	/* Expect error when passing invalid buffer */
-	assert_int_equal(-1, fmap_find_region_name(&ar, NULL));
+	assert_int_equal(-1, fmap_find_region_name(&ar, nullptr));
 
 	/* Expect error when passing invalid region pointer */
-	assert_int_equal(-1, fmap_find_region_name(NULL, found_area_name));
+	assert_int_equal(-1, fmap_find_region_name(nullptr, found_area_name));
 
 	/* Try to find area outside of flash region */
 	ar.offset = FMAP_SECTION_FLASH_START + FMAP_SECTION_FLASH_SIZE + 0x100;
@@ -237,9 +237,9 @@ static void test_fmap_read_area(void **state)
 	/* Expect error when reading incorrect area */
 	assert_int_equal(-1, fmap_read_area("NONEXISTENT_SECTION", buffer, section_size));
 	assert_int_equal(-1, fmap_read_area("", buffer, section_size));
-	assert_int_equal(-1, fmap_read_area(NULL, buffer, section_size));
+	assert_int_equal(-1, fmap_read_area(nullptr, buffer, section_size));
 
-	/* Function fmap_read_area is not tested with NULL
+	/* Function fmap_read_area is not tested with nullptr
 	   as output buffer pointer as it is not allowed. */
 
 	free(buffer);
@@ -274,9 +274,9 @@ static void test_fmap_overwrite_area(void **state)
 	/* Expect error when overwriting incorrect section */
 	assert_int_equal(
 		-1, fmap_overwrite_area("NONEXISTENT_SECTION", new_data, section_size / 2));
-	assert_int_equal(-1, fmap_overwrite_area(NULL, new_data, section_size / 2));
+	assert_int_equal(-1, fmap_overwrite_area(nullptr, new_data, section_size / 2));
 
-	/* Function fmap_overwrite_area is not tested with NULL
+	/* Function fmap_overwrite_area is not tested with nullptr
 	   as input buffer pointer as it is not allowed. */
 
 	free(buffer1);
@@ -301,5 +301,5 @@ int main(void)
 						teardown_fmap),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

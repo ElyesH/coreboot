@@ -12,7 +12,7 @@
 
 /* COLOR_PAIR to attribute encoding table. */
 
-unsigned char *pdc_atrtab = (unsigned char *)NULL;
+unsigned char *pdc_atrtab = (unsigned char *)nullptr;
 
 short curstoreal[16], realtocurs[16] =
 {
@@ -46,7 +46,7 @@ void PDC_scr_free(void)
     if (pdc_atrtab)
         free(pdc_atrtab);
 
-    pdc_atrtab = (unsigned char *)NULL;
+    pdc_atrtab = (unsigned char *)nullptr;
 }
 
 /* open the physical screen -- allocate SP, miscellaneous intialization,

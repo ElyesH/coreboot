@@ -95,7 +95,7 @@ static struct sdram_params params;
 const struct sdram_params *get_sdram_config(void)
 {
 	uint32_t ramcode = ram_code();
-	const char *name = NULL;
+	const char *name = nullptr;
 
 	if (ramcode < ARRAY_SIZE(sdram_configs))
 		name = sdram_configs[ramcode];

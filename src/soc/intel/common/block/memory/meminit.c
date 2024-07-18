@@ -168,7 +168,7 @@ static bool read_spd_dimm(FSPM_UPD *memupd, const struct soc_mem_cfg *soc_mem_cf
 
 		for (dimm = 0; dimm < CONFIG_DIMMS_PER_CHANNEL; dimm++) {
 			uint8_t *spd_data = blk.spd_array[CH_DIMM_OFFSET(ch, dimm)];
-			if (spd_data == NULL)
+			if (spd_data == nullptr)
 				continue;
 
 			print_spd_info(spd_data);

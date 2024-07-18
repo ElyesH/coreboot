@@ -166,7 +166,7 @@ static void sdram_initialize(struct pei_data *pei_data)
 		pei_data->tx_byte_ptr = (uintptr_t)do_putchar;
 
 	/* Locate and call UEFI System Agent binary. */
-	entry = cbfs_map("mrc.bin", NULL);
+	entry = cbfs_map("mrc.bin", nullptr);
 	if (entry) {
 		int rv;
 		rv = protected_mode_call_2arg(mrc_wrapper, (uintptr_t)entry, (uintptr_t)pei_data);

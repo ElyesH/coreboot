@@ -146,7 +146,7 @@ static const struct cache_region *lookup_region_type(int type)
 			return cache_regions[i];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static const struct cache_region *lookup_region(struct region *r, int type)
@@ -155,15 +155,15 @@ static const struct cache_region *lookup_region(struct region *r, int type)
 
 	cr = lookup_region_type(type);
 
-	if (cr == NULL) {
+	if (cr == nullptr) {
 		/* There will be no recovery MRC cache region if (!HAS_RECOVERY_MRC_CACHE &&
 		   !VBOOT_STARTS_IN_ROMSTAGE). */
 		printk(BIOS_DEBUG, "MRC: failed to locate region type %d\n", type);
-		return NULL;
+		return nullptr;
 	}
 
 	if (lookup_region_by_name(cr->name, r) < 0)
-		return NULL;
+		return nullptr;
 
 	return cr;
 }
@@ -225,7 +225,7 @@ static int mrc_data_valid(int type, const struct mrc_metadata *md,
 	const struct cache_region *cr = lookup_region_type(type);
 	uint32_t hash_idx;
 
-	if (cr == NULL)
+	if (cr == nullptr)
 		return -1;
 
 	if (md->data_size != data_size)
@@ -301,7 +301,7 @@ static int mrc_cache_find_current(int type, uint32_t version,
 
 	cr = lookup_region(&region, type);
 
-	if (cr == NULL)
+	if (cr == nullptr)
 		return -1;
 
 	if (boot_device_ro_subregion(&region, &read_rdev) < 0)
@@ -358,20 +358,20 @@ void *mrc_cache_current_mmap_leak(int type, uint32_t version,
 	struct mrc_metadata md;
 
 	if (mrc_cache_find_current(type, version, &rdev, &md) < 0)
-		return NULL;
+		return nullptr;
 
 	region_device_size = region_device_sz(&rdev);
 	if (data_size)
 		*data_size = region_device_size;
 	data = rdev_mmap_full(&rdev);
 
-	if (data == NULL) {
+	if (data == nullptr) {
 		printk(BIOS_INFO, "MRC: mmap failure.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (mrc_data_valid(type, &md, data, region_device_size) < 0)
-		return NULL;
+		return nullptr;
 
 	return data;
 }
@@ -388,7 +388,7 @@ static bool mrc_cache_needs_update(const struct region_device *rdev,
 		return true;
 
 	mapping = rdev_mmap_full(rdev);
-	if (mapping == NULL) {
+	if (mapping == nullptr) {
 		printk(BIOS_ERR, "MRC: cannot mmap existing cache.\n");
 		return true;
 	}
@@ -451,7 +451,7 @@ static void update_mrc_cache_by_type(int type,
 
 	cr = lookup_region(&region, type);
 
-	if (cr == NULL)
+	if (cr == nullptr)
 		return;
 
 	printk(BIOS_DEBUG, "MRC: Checking cached data update for '%s'.\n",
@@ -466,7 +466,7 @@ static void update_mrc_cache_by_type(int type,
 	backing_rdev = incoherent_rdev_init(&backing_irdev, &region, &read_rdev,
 						&write_rdev);
 
-	if (backing_rdev == NULL)
+	if (backing_rdev == nullptr)
 		return;
 
 	/* Note that mrc_cache_get_latest_slot_info doesn't check the
@@ -652,14 +652,14 @@ static void update_mrc_cache_from_cbmem(int type)
 
 	cr = lookup_region(&region, type);
 
-	if (cr == NULL) {
+	if (cr == nullptr) {
 		printk(BIOS_INFO, "MRC: could not find cache_region type %d\n", type);
 		return;
 	}
 
 	to_be_updated = cbmem_entry_find(cr->cbmem_id);
 
-	if (to_be_updated == NULL) {
+	if (to_be_updated == nullptr) {
 		printk(BIOS_INFO, "MRC: No data in cbmem for '%s'.\n",
 		       cr->name);
 		return;
@@ -710,7 +710,7 @@ int mrc_cache_stash_data(int type, uint32_t version, const void *data,
 		cbmem_size = sizeof(*cbmem_md) + size;
 
 		cr = lookup_region_type(type);
-		if (cr == NULL) {
+		if (cr == nullptr) {
 			printk(BIOS_INFO, "MRC: No region type found. Skip adding to cbmem for type %d.\n",
 				type);
 			return 0;
@@ -718,7 +718,7 @@ int mrc_cache_stash_data(int type, uint32_t version, const void *data,
 
 		cbmem_md = cbmem_add(cr->cbmem_id, cbmem_size);
 
-		if (cbmem_md == NULL) {
+		if (cbmem_md == nullptr) {
 			printk(BIOS_ERR, "MRC: failed to add '%s' to cbmem.\n",
 			       cr->name);
 			return -1;
@@ -739,7 +739,7 @@ int mrc_cache_stash_data(int type, uint32_t version, const void *data,
  * Some implementations may require this to be later than others.
  */
 #if CONFIG(MRC_WRITE_NV_LATE)
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME_CHECK, BS_ON_ENTRY, finalize_mrc_cache, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME_CHECK, BS_ON_ENTRY, finalize_mrc_cache, nullptr);
 #else
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENUMERATE, BS_ON_EXIT, finalize_mrc_cache, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENUMERATE, BS_ON_EXIT, finalize_mrc_cache, nullptr);
 #endif

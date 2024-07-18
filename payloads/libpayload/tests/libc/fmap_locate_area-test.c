@@ -12,7 +12,7 @@ unsigned long virtual_offset = 0;
 
 static void reset_fmap_cache(void)
 {
-	_fmap_cache = NULL;
+	_fmap_cache = nullptr;
 }
 
 static int setup_fmap_test(void **state)
@@ -108,5 +108,5 @@ int main(void)
 		FMAP_LOCATE_AREA_TEST(test_fmap_locate_area_success),
 	};
 
-	return lp_run_group_tests(tests, NULL, NULL);
+	return lp_run_group_tests(tests, nullptr, nullptr);
 }

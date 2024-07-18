@@ -58,4 +58,4 @@ static void fw_config_handle(void *unused)
 	if (!fw_config_probe(FW_CONFIG(DB_PORTS, DB_PORTS_1A_HDMI_LTE)))
 		gpio_configure_pads(lte_disable_pads, ARRAY_SIZE(lte_disable_pads));
 }
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, nullptr);

@@ -124,15 +124,15 @@ uhci_rh_reset_port(usbdev_t *const dev, const int port)
 }
 
 static const generic_hub_ops_t uhci_rh_ops = {
-	.hub_status_changed	= NULL,
+	.hub_status_changed	= nullptr,
 	.port_status_changed	= uhci_rh_port_status_changed,
 	.port_connected		= uhci_rh_port_connected,
-	.port_in_reset		= NULL,
+	.port_in_reset		= nullptr,
 	.port_enabled		= uhci_rh_port_enabled,
 	.port_speed		= uhci_rh_port_speed,
 	.enable_port		= uhci_rh_enable_port,
 	.disable_port		= uhci_rh_disable_port,
-	.start_port_reset	= NULL,
+	.start_port_reset	= nullptr,
 	.reset_port		= uhci_rh_reset_port,
 };
 

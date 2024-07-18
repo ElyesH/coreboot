@@ -104,7 +104,7 @@ Is_Printable_String(const char *s)
 |                    a pointer to this new item.
 |                    N.B.: an item must(!) have a name.
 |
-|   Return Values :  The item pointer or NULL if creation failed.
+|   Return Values :  The item pointer or nullptr if creation failed.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(ITEM *)
 new_item(const char *name, const char *description)
@@ -182,7 +182,7 @@ free_item(ITEM * item)
 |   Description   :  Set the mark string used to indicate the current
 |                    item (single-valued menu) or the selected items
 |                    (multi-valued menu).
-|                    The mark argument may be NULL, in which case no
+|                    The mark argument may be nullptr, in which case no
 |                    marker is used.
 |                    This might be a little bit tricky, because this may
 |                    affect the geometry of the menu, which we don't allow
@@ -263,7 +263,7 @@ set_menu_mark(MENU * menu, const char *mark)
 |
 |   Description   :  Return a pointer to the marker string
 |
-|   Return Values :  The marker string pointer or NULL if no marker defined
+|   Return Values :  The marker string pointer or nullptr if no marker defined
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(const char *)
 menu_mark(const MENU * menu)

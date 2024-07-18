@@ -51,7 +51,7 @@ static const char *QLM_BGX_MODE_MAP[BDK_QLM_MODE_LAST] = {
 static void dt_platform_fixup_phy(struct device_tree_node *node, char *path,
 				  int64_t phy_address, bdk_qlm_modes_t qlm_mode)
 {
-	const char *data = NULL;
+	const char *data = nullptr;
 	size_t size = 0;
 	dt_find_bin_prop(node, "qlm-mode", (const void **)&data, &size);
 
@@ -114,7 +114,7 @@ static void dt_iterate_phy(struct device_tree_node *parent,
 static void dt_platform_fixup_mac(struct device_tree_node *node)
 {
 	const char *name = "local-mac-address";
-	const u64 *localmac = NULL;
+	const u64 *localmac = nullptr;
 	size_t size = 0;
 
 	dt_find_bin_prop(node, name, (const void **)&localmac, &size);
@@ -173,7 +173,7 @@ static int dt_platform_fixup(struct device_tree_fixup *fixup,
 	size_t i;
 
 	/* Set the sclk clock rate. */
-	dt_node = dt_find_node_by_path(tree, "/soc@0/sclk", NULL, NULL, 0);
+	dt_node = dt_find_node_by_path(tree, "/soc@0/sclk", nullptr, nullptr, 0);
 	if (dt_node) {
 		const u32 freq = thunderx_get_io_clock();
 		printk(BIOS_INFO, "%s: Set SCLK to %u Hz\n", __func__, freq);
@@ -183,8 +183,8 @@ static int dt_platform_fixup(struct device_tree_fixup *fixup,
 		       __func__);
 
 	/* Set refclkuaa clock rate. */
-	dt_node = dt_find_node_by_path(tree, "/soc@0/refclkuaa", NULL,
-				       NULL, 0);
+	dt_node = dt_find_node_by_path(tree, "/soc@0/refclkuaa", nullptr,
+				       nullptr, 0);
 	if (dt_node) {
 		const u32 freq = uart_platform_refclk();
 		printk(BIOS_INFO, "%s: Set REFCLKUAA to %u Hz\n", __func__,
@@ -200,7 +200,7 @@ static int dt_platform_fixup(struct device_tree_fixup *fixup,
 		const uint64_t addr = UAAx_PF_BAR0(i);
 		/* Remove the node */
 		snprintf(path, sizeof(path), "/soc@0/serial@%llx", addr);
-		dt_node = dt_find_node_by_path(tree, path, NULL, NULL, 0);
+		dt_node = dt_find_node_by_path(tree, path, nullptr, nullptr, 0);
 		if (!dt_node || uart_is_enabled(i)) {
 			printk(BIOS_INFO, "%s: ignoring %s\n", __func__, path);
 			continue;
@@ -216,7 +216,7 @@ static int dt_platform_fixup(struct device_tree_fixup *fixup,
 		const uint64_t addr = PEM_PEMX_PF_BAR0(i);
 		/* Remove the node */
 		snprintf(path, sizeof(path), "/soc@0/pci@%llx", addr);
-		dt_node = dt_find_node_by_path(tree, path, NULL, NULL, 0);
+		dt_node = dt_find_node_by_path(tree, path, nullptr, nullptr, 0);
 		if (!dt_node || bdk_pcie_is_running(0, i)) {
 			printk(BIOS_INFO, "%s: ignoring %s\n", __func__, path);
 			continue;
@@ -228,13 +228,13 @@ static int dt_platform_fixup(struct device_tree_fixup *fixup,
 
 		/* Remove phandle to non existing nodes */
 		snprintf(path, sizeof(path), "/soc@0/smmu0@%llx", SMMU_PF_BAR0);
-		dt_node = dt_find_node_by_path(tree, path, NULL, NULL, 0);
+		dt_node = dt_find_node_by_path(tree, path, nullptr, nullptr, 0);
 		if (!dt_node) {
 			printk(BIOS_ERR, "%s: SMMU entry not found\n",
 			       __func__);
 			continue;
 		}
-		const u32 *data = NULL;
+		const u32 *data = nullptr;
 		size_t size = 0;
 		dt_find_bin_prop(dt_node, "mmu-masters", (const void **)&data,
 				 &size);

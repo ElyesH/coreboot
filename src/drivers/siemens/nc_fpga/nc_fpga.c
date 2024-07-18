@@ -85,7 +85,7 @@ static void init_fan_ctrl(void *base_adr)
  */
 static void nc_fpga_init(struct device *dev)
 {
-	void *bar0_ptr = NULL;
+	void *bar0_ptr = nullptr;
 	uint8_t cmd_reg;
 	uint32_t cap = 0;
 
@@ -138,7 +138,7 @@ static void set_fw_done(void *unused)
 	}
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, set_fw_done, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, set_fw_done, nullptr);
 #endif
 
 static void nc_fpga_set_resources(struct device *dev)

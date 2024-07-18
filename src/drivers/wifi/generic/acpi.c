@@ -260,7 +260,7 @@ static void wifi_dsm_ddrrfim_func3_cb(void *ptr)
 }
 
 static void (*wifi_dsm_callbacks[])(void *) = {
-	NULL,					/* Function 0 */
+	nullptr,					/* Function 0 */
 	wifi_dsm_srd_active_channels,		/* Function 1 */
 	wifi_dsm_indonasia_5Ghz_band_enable,	/* Function 2 */
 	wifi_dsm_supported_ultra_high_band,	/* Function 3 */
@@ -268,8 +268,8 @@ static void (*wifi_dsm_callbacks[])(void *) = {
 	wifi_dsm_uart_configurations,		/* Function 5 */
 	wifi_dsm_ukrane_russia_11ax_enable,	/* Function 6 */
 	wifi_dsm_unii4_control_enable,		/* Function 7 */
-	NULL,					/* Function 8 */
-	NULL,					/* Function 9 */
+	nullptr,					/* Function 8 */
+	nullptr,					/* Function 9 */
 	wifi_dsm_energy_detection_threshold,	/* Function 10 */
 	wifi_dsm_rfi_mitigation,		/* Function 11 */
 	wifi_dsm_11be_country_enablement,	/* Function 12 */
@@ -277,12 +277,12 @@ static void (*wifi_dsm_callbacks[])(void *) = {
 
 /*
  * The current DSM2 table is only exporting one function (function 3), some more
- * functions are reserved so marking them NULL.
+ * functions are reserved so marking them nullptr.
 */
 static void (*wifi_dsm2_callbacks[])(void *) = {
-	NULL,				/* Function 0 */
-	NULL,				/* Function 1 */
-	NULL,				/* Function 2 */
+	nullptr,				/* Function 0 */
+	nullptr,				/* Function 1 */
+	nullptr,				/* Function 2 */
 	wifi_dsm_ddrrfim_func3_cb,	/* Function 3 */
 };
 
@@ -313,7 +313,7 @@ static void sar_emit_wrds(const struct sar_profile *sar)
 	size_t package_size, table_size;
 	const uint8_t *set;
 
-	if (sar == NULL)
+	if (sar == nullptr)
 		return;
 
 	/*
@@ -356,7 +356,7 @@ static void sar_emit_ewrd(const struct sar_profile *sar)
 	size_t package_size, set_num, table_size;
 	const uint8_t *set;
 
-	if (sar == NULL)
+	if (sar == nullptr)
 		return;
 
 	/*
@@ -417,7 +417,7 @@ static void sar_emit_wgds(struct geo_profile *wgds)
 	size_t package_size, set_num;
 	const uint8_t *set;
 
-	if (wgds == NULL)
+	if (wgds == nullptr)
 		return;
 
 	/*
@@ -487,7 +487,7 @@ static void sar_emit_ppag(struct gain_profile *ppag)
 	size_t package_size, set_num;
 	const uint8_t *set;
 
-	if (ppag == NULL)
+	if (ppag == nullptr)
 		return;
 
 	/*
@@ -530,7 +530,7 @@ static void sar_emit_wtas(struct avg_profile *wtas)
 	int i;
 	size_t package_size;
 
-	if (wtas == NULL)
+	if (wtas == nullptr)
 		return;
 
 	/*
@@ -628,7 +628,7 @@ static void sar_emit_brds(const struct bsar_profile *bsar)
 
 static void sar_emit_wbem(const struct wbem_profile *wbem)
 {
-	if (wbem == NULL)
+	if (wbem == nullptr)
 		return;
 
 	/*
@@ -689,11 +689,11 @@ static void emit_sar_acpi_structures(const struct device *dev, struct dsm_profil
 	sar_emit_wbem(sar_limits.wbem);
 
 	/* copy the dsm data to be later used for creating _DSM function */
-	if (sar_limits.dsm != NULL)
+	if (sar_limits.dsm != nullptr)
 		memcpy(dsm, sar_limits.dsm, sizeof(struct dsm_profile));
 
 	/* copy the bsar data to be later used for creating Bluetooth BRDS method */
-	if (sar_limits.bsar != NULL) {
+	if (sar_limits.bsar != nullptr) {
 		memcpy(bsar, sar_limits.bsar, sizeof(struct bsar_profile));
 		*bsar_loaded = true;
 	}
@@ -731,7 +731,7 @@ static void wifi_ssdt_write_properties(const struct device *dev, const char *sco
 
 		/* Add _DSD for DmaProperty property. */
 		if (config->add_acpi_dma_property)
-			acpi_device_add_dma_property(NULL);
+			acpi_device_add_dma_property(nullptr);
 	}
 
 	/* Fill regulatory domain structure */
@@ -770,7 +770,7 @@ static void wifi_ssdt_write_properties(const struct device *dev, const char *sco
 		if (dsm.supported_functions != 0) {
 			for (int i = 1; i < ARRAY_SIZE(wifi_dsm_callbacks); i++)
 				if (!(dsm.supported_functions & (1 << i)))
-					wifi_dsm_callbacks[i] = NULL;
+					wifi_dsm_callbacks[i] = nullptr;
 
 			dsm_ids[dsm_count].uuid = ACPI_DSM_OEM_WIFI_UUID;
 			dsm_ids[dsm_count].callbacks = &wifi_dsm_callbacks[0];

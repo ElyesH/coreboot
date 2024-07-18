@@ -23,14 +23,14 @@ struct sd_mmc_ctrlr *new_mem_sdhci_controller(void *ioaddr,
 
 	if (sdhci_init_done == true) {
 		sdhc_error("Error: SDHCI is already initialized.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	sdhci_ctrlr.attach = pre_init_func;
 
 	if (sdhci_controller_init(&sdhci_ctrlr, ioaddr)) {
 		sdhc_error("Error: SDHCI initialization failed.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	sdhci_init_done = true;
@@ -45,9 +45,9 @@ struct sd_mmc_ctrlr *new_pci_sdhci_controller(pci_devfn_t dev)
 	addr = pci_s_read_config32(dev, PCI_BASE_ADDRESS_0);
 	if (addr == ((uint32_t)~0)) {
 		sdhc_error("Error: PCI SDHCI not found\n");
-		return NULL;
+		return nullptr;
 	}
 
 	addr &= ~0xf;
-	return new_mem_sdhci_controller((void *)addr, NULL);
+	return new_mem_sdhci_controller((void *)addr, nullptr);
 }

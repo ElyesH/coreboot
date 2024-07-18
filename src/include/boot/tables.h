@@ -8,7 +8,7 @@
 /*
  * Write architecture specific tables as well as the common
  * coreboot table.
- * Returns a pointer to the table or NULL on error.
+ * Returns a pointer to the table or nullptr on error.
  */
 void *write_tables(void);
 

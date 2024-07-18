@@ -62,13 +62,13 @@ struct cfg_assert_dur {
 
 struct chipset_power_state *pmc_get_power_state(void)
 {
-	struct chipset_power_state *ptr = NULL;
+	struct chipset_power_state *ptr = nullptr;
 
 	if (ENV_HAS_CBMEM)
 		ptr = acpi_get_pm_state();
 
 	/* cbmem is online but ptr is not populated yet */
-	if (ptr == NULL && !(ENV_RAMSTAGE || ENV_POSTCAR))
+	if (ptr == nullptr && !(ENV_RAMSTAGE || ENV_POSTCAR))
 		return &power_state;
 
 	return ptr;
@@ -80,7 +80,7 @@ static void migrate_power_state(int is_recovery)
 
 	ps_cbmem = cbmem_add(CBMEM_ID_POWER_STATE, sizeof(*ps_cbmem));
 
-	if (ps_cbmem == NULL) {
+	if (ps_cbmem == nullptr) {
 		printk(BIOS_DEBUG, "Not adding power state to cbmem!\n");
 		return;
 	}
@@ -475,7 +475,7 @@ int pmc_fill_power_state(struct chipset_power_state *ps)
 	ps->prev_sleep_state = pmc_prev_sleep_state(ps);
 
 	if (ps->prev_sleep_state < ARRAY_SIZE(acpi_sleep_states) &&
-		acpi_sleep_states[ps->prev_sleep_state] != NULL)
+		acpi_sleep_states[ps->prev_sleep_state] != nullptr)
 		printk(BIOS_DEBUG, "prev_sleep_state %d (%s)\n", ps->prev_sleep_state,
 			acpi_sleep_states[ps->prev_sleep_state]);
 	else

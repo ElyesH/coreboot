@@ -64,7 +64,7 @@ struct funit_cfg {
 #define FUNIT_CFG_USB(_funit)						\
 	{								\
 		.funit_index = FUNIT_INDEX(_funit),			\
-		.pad_cfg = NULL,					\
+		.pad_cfg = nullptr,					\
 		.pad_cfg_size = 0,					\
 	}
 

@@ -27,8 +27,8 @@
  *
  * SpdDataPtr options:
  *
- *     Non-NULL: Pointing to SPD data structure.
- *     NULL: Physical memory slot, no SPD data used.
+ *     Non-nullptr: Pointing to SPD data structure.
+ *     nullptr: Physical memory slot, no SPD data used.
  *
  * DIMM Mapping of SlotState & SpdDataPtr:
  *
@@ -44,7 +44,7 @@
  *		.SpdDataLen = MAX_SPD_BYTES,
  *		.SpdDataPtr = {
  *			{(void *)CONFIG_SPD_LOC, (void *)CONFIG_SPD_LOC},
- *			{(void *)NULL, (void *)NULL}
+ *			{(void *)nullptr, (void *)nullptr}
  *		}
  *	}
  */
@@ -56,8 +56,8 @@ const MEMORY_DOWN_CONFIG mMemoryDownConfig = {
 	},
 	.SpdDataLen = MAX_SPD_BYTES,
 	.SpdDataPtr = {
-		{(void *)NULL, (void *)NULL},
-		{(void *)NULL, (void *)NULL}
+		{(void *)nullptr, (void *)nullptr},
+		{(void *)nullptr, (void *)nullptr}
 	}
 };
 
@@ -82,7 +82,7 @@ void mainboard_config_gpios(void)
 		num = ARRAY_SIZE(harcuvar_gpio_table);
 		break;
 	default:
-		table = NULL;
+		table = nullptr;
 		num = 0;
 		break;
 	}
@@ -102,12 +102,12 @@ void mainboard_memory_init_params(FSPM_UPD *mupd)
 	if (!CONFIG(ENABLE_FSP_MEMORY_DOWN))
 		return;
 
-	uint8_t *spd_data_ptr = NULL;
+	uint8_t *spd_data_ptr = nullptr;
 
 	/* Get SPD data pointer */
 	spd_data_ptr = mainboard_find_spd_data();
 
-	if (spd_data_ptr != NULL) {
+	if (spd_data_ptr != nullptr) {
 		printk(BIOS_DEBUG, "Memory Down function is enabled!\n");
 
 		/* Enable Memory Down function, set Memory

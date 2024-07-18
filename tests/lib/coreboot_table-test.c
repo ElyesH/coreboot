@@ -229,7 +229,7 @@ enum cb_err fill_lb_serial(struct lb_serial *serial)
 }
 
 struct cbfs_boot_device cbfs_boot_dev = {
-	.rdev = REGION_DEV_INIT(NULL, 0, 0x1000),
+	.rdev = REGION_DEV_INIT(nullptr, 0, 0x1000),
 	.mcache = (void *)0x1000,
 	.mcache_size = 0x1000,
 };
@@ -262,7 +262,7 @@ static int setup_write_tables_test(void **state)
 {
 	/* Allocate more data to have space for alignment */
 	void *top_ptr = malloc(CBMEM_SIZE + DYN_CBMEM_ALIGN_SIZE);
-	int32_t *mmc_status = NULL;
+	int32_t *mmc_status = nullptr;
 
 	if (!top_ptr)
 		return -1;
@@ -275,7 +275,7 @@ static int setup_write_tables_test(void **state)
 
 	mmc_status = cbmem_add(CBMEM_ID_MMC_STATUS, sizeof(int32_t));
 
-	if (mmc_status == NULL) {
+	if (mmc_status == nullptr) {
 		teardown_write_tables_test(state);
 		return -1;
 	}
@@ -482,5 +482,5 @@ int main(void)
 						teardown_write_tables_test),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

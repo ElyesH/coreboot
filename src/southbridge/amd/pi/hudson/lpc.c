@@ -317,12 +317,12 @@ static void hudson_lpc_enable_resources(struct device *dev)
 static const char *lpc_acpi_name(const struct device *dev)
 {
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	if (dev->path.pci.devfn == LPC_DEVFN)
 		return "LIBR";
 
-	return NULL;
+	return nullptr;
 }
 
 static void lpc_final(struct device *dev)

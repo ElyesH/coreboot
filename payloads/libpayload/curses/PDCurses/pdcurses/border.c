@@ -334,8 +334,8 @@ int box_set(WINDOW *win, const cchar_t *verch, const cchar_t *horch)
     PDC_LOG(("box_set() - called\n"));
 
     return wborder_set(win, verch, verch, horch, horch,
-                       (const cchar_t *)NULL, (const cchar_t *)NULL,
-                       (const cchar_t *)NULL, (const cchar_t *)NULL);
+                       (const cchar_t *)nullptr, (const cchar_t *)nullptr,
+                       (const cchar_t *)nullptr, (const cchar_t *)nullptr);
 }
 
 int whline_set(WINDOW *win, const cchar_t *wch, int n)

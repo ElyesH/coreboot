@@ -284,14 +284,14 @@ void save_dimm_info(void)
 	uint32_t vdd_voltage;
 
 	hob = get_system_memory_map();
-	assert(hob != NULL);
+	assert(hob != nullptr);
 
 	/*
 	 * Allocate CBMEM area for DIMM information used to populate SMBIOS
 	 * table 17
 	 */
 	mem_info = cbmem_add(CBMEM_ID_MEMINFO, sizeof(*mem_info));
-	if (mem_info == NULL) {
+	if (mem_info == nullptr) {
 		printk(BIOS_ERR, "CBMEM entry for DIMM info missing\n");
 		return;
 	}

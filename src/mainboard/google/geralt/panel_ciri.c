@@ -52,7 +52,7 @@ struct panel_description *get_panel_description(uint32_t panel_id)
 	uint32_t id = panel_id & 0xFF;
 
 	if (id >= ARRAY_SIZE(ciri_panels))
-		return NULL;
+		return nullptr;
 
 	return &ciri_panels[id];
 }

@@ -143,5 +143,5 @@ int main(void)
 		cmocka_unit_test(test_speaker_tone),
 	};
 
-	return lp_run_group_tests(tests, NULL, NULL);
+	return lp_run_group_tests(tests, nullptr, nullptr);
 }

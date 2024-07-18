@@ -28,7 +28,7 @@ static void cardbus_record_bridge_resource(struct device *dev, resource_t moving
 	resource_t step;
 
 	/* Initialize the constraints on the current bus. */
-	resource = NULL;
+	resource = nullptr;
 	if (!moving)
 		return;
 

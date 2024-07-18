@@ -16,7 +16,7 @@ static uint32_t active_map_count;
 static void *boot_dev_mmap(const struct region_device *rd, size_t offset, size_t size)
 {
 	const struct mem_region_device *mdev;
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	uint32_t ret;
 
 	mdev = container_of(rd, __typeof__(*mdev), rdev);

@@ -167,7 +167,7 @@ static void simple_spi_test(void)
 	boot_device_init();
 	boot_dev = boot_device_ro();
 	amt = sizeof(data);
-	if (boot_dev == NULL) {
+	if (boot_dev == nullptr) {
 		printk(BIOS_SPEW, "Failed to initialize default media.\n");
 		return;
 	}

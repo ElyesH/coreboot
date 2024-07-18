@@ -27,10 +27,10 @@ static void timestamp_cache_init(struct timestamp_table *ts_cache,
 
 static struct timestamp_table *timestamp_cache_get(void)
 {
-	struct timestamp_table *ts_cache = NULL;
+	struct timestamp_table *ts_cache = nullptr;
 
 	if (!ENV_ROMSTAGE_OR_BEFORE)
-		return NULL;
+		return nullptr;
 
 	if (REGION_SIZE(timestamp) < sizeof(*ts_cache)) {
 		BUG();
@@ -50,7 +50,7 @@ static struct timestamp_table *timestamp_alloc_cbmem_table(void)
 			MAX_TIMESTAMPS * sizeof(struct timestamp_entry));
 
 	if (!tst)
-		return NULL;
+		return nullptr;
 
 	tst->base_time = 0;
 	tst->max_entries = MAX_TIMESTAMPS;
@@ -222,9 +222,9 @@ static void timestamp_reinit(int is_recovery)
 		ts_cbmem_table = cbmem_find(CBMEM_ID_TIMESTAMP);
 	}
 
-	if (ts_cbmem_table == NULL) {
+	if (ts_cbmem_table == nullptr) {
 		printk(BIOS_ERR, "No timestamp table allocated\n");
-		timestamp_table_set(NULL);
+		timestamp_table_set(nullptr);
 		return;
 	}
 
@@ -252,7 +252,7 @@ void timestamp_rescale_table(uint16_t N, uint16_t M)
 	ts_table = timestamp_table_get();
 
 	/* No timestamp table found */
-	if (ts_table == NULL) {
+	if (ts_table == nullptr) {
 		printk(BIOS_ERR, "No timestamp table found\n");
 		return;
 	}
@@ -274,7 +274,7 @@ uint32_t get_us_since_boot(void)
 {
 	struct timestamp_table *ts = timestamp_table_get();
 
-	if (ts == NULL || ts->tick_freq_mhz == 0)
+	if (ts == nullptr || ts->tick_freq_mhz == 0)
 		return 0;
 	return (timestamp_get() - ts->base_time) / ts->tick_freq_mhz;
 }

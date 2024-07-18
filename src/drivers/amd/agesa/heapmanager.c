@@ -98,7 +98,7 @@ static AGESA_STATUS agesa_AllocateBuffer(BIOS_HEAP_MANAGER *BiosHeapBasePtr,
 	BIOS_BUFFER_NODE   *BestFitPrevNodePtr;
 	BIOS_BUFFER_NODE   *NextFreePtr;
 
-	AllocParams->BufferPointer = NULL;
+	AllocParams->BufferPointer = nullptr;
 	AvailableHeapSize = BIOS_HEAP_SIZE - sizeof(BIOS_HEAP_MANAGER);
 
 	if (BiosHeapBasePtr->StartOfAllocatedNodes == 0) {
@@ -336,7 +336,7 @@ static AGESA_STATUS agesa_LocateBuffer(BIOS_HEAP_MANAGER *BiosHeapBasePtr,
 
 	while (AllocParams->BufferHandle != AllocNodePtr->BufferHandle) {
 		if (AllocNodePtr->NextNodeOffset == 0) {
-			AllocParams->BufferPointer = NULL;
+			AllocParams->BufferPointer = nullptr;
 			AllocParams->BufferLength = 0;
 			return AGESA_BOUNDS_CHK;
 		} else {

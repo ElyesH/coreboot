@@ -153,7 +153,7 @@ void raminit(struct mrc_params *mp, int prev_sleep_state)
 	}
 
 	/* Determine if mrc.bin is in the cbfs. */
-	if (cbfs_map("mrc.bin", NULL) == NULL) {
+	if (cbfs_map("mrc.bin", nullptr) == nullptr) {
 		printk(BIOS_DEBUG, "Couldn't find mrc.bin\n");
 		return;
 	}
@@ -195,7 +195,7 @@ void raminit(struct mrc_params *mp, int prev_sleep_state)
 	printk(BIOS_DEBUG, "MRC data at %p %d bytes\n", mp->data_to_save,
 	       mp->data_to_save_size);
 
-	if (mp->data_to_save != NULL && mp->data_to_save_size > 0)
+	if (mp->data_to_save != nullptr && mp->data_to_save_size > 0)
 		mrc_cache_stash_data(MRC_TRAINING_DATA, 0, mp->data_to_save,
 					mp->data_to_save_size);
 }

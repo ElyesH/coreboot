@@ -305,7 +305,7 @@ _free_xhci:
 	detach_controller(controller);
 	free(controller);
 _exit_xhci:
-	return NULL;
+	return nullptr;
 }
 
 #if CONFIG(LP_USB_PCI)
@@ -566,7 +566,7 @@ static void
 xhci_enqueue_td(transfer_ring_t *const tr, const int ep, const size_t mps,
 		const int dalen, void *const data, const int dir)
 {
-	trb_t *trb = NULL;				/* cur TRB */
+	trb_t *trb = nullptr;				/* cur TRB */
 	u8 *cur_start = data;				/* cur data pointer */
 	size_t length = dalen;				/* remaining bytes */
 	size_t packets = (length + mps - 1) / mps;	/* remaining packets */
@@ -655,7 +655,7 @@ xhci_control(usbdev_t *const dev, const direction_t dir,
 	/* Reset endpoint if it's not running */
 	const unsigned ep_state = EC_GET(STATE, epctx);
 	if (ep_state > 1) {
-		if (xhci_reset_endpoint(dev, NULL))
+		if (xhci_reset_endpoint(dev, nullptr))
 			return -1;
 	}
 
@@ -827,15 +827,15 @@ xhci_create_intr_queue(endpoint_t *const ep,
 	if (reqcount > (TRANSFER_RING_SIZE - 2)) {
 		xhci_debug("reqcount is too high, at most %d supported\n",
 			   TRANSFER_RING_SIZE - 2);
-		return NULL;
+		return nullptr;
 	}
 	if (reqsize > 0x10000) {
 		xhci_debug("reqsize is too large, at most 64KiB supported\n");
-		return NULL;
+		return nullptr;
 	}
 	if (xhci->dev[slot_id].interrupt_queues[ep_id]) {
 		xhci_debug("Only one interrupt queue per endpoint supported\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* Allocate intrq structure and reqdata chunks */
@@ -843,7 +843,7 @@ xhci_create_intr_queue(endpoint_t *const ep,
 	intrq_t *const intrq = malloc(sizeof(*intrq));
 	if (!intrq) {
 		xhci_debug("Out of memory\n");
-		return NULL;
+		return nullptr;
 	}
 
 	int i;
@@ -873,7 +873,7 @@ xhci_create_intr_queue(endpoint_t *const ep,
 	intrq->size	= reqsize;
 	intrq->count	= reqcount;
 	intrq->next	= tr->cur;
-	intrq->ready	= NULL;
+	intrq->ready	= nullptr;
 	intrq->ep	= ep;
 	xhci->dev[slot_id].interrupt_queues[ep_id] = intrq;
 
@@ -889,10 +889,10 @@ _free_return:
 	cur = tr->cur;
 	for (--i; i >= 0; --i) {
 		free(phys_to_virt(cur->ptr_low));
-		cur = xhci_next_trb(cur, NULL);
+		cur = xhci_next_trb(cur, nullptr);
 	}
 	free(intrq);
-	return NULL;
+	return nullptr;
 }
 
 /* remove queue from device schedule, dropping all data that came in */
@@ -920,9 +920,9 @@ xhci_destroy_intr_queue(endpoint_t *const ep, void *const q)
 	int i;
 	for (i = 0; i < intrq->count; ++i) {
 		free(phys_to_virt(intrq->next->ptr_low));
-		intrq->next = xhci_next_trb(intrq->next, NULL);
+		intrq->next = xhci_next_trb(intrq->next, nullptr);
 	}
-	xhci->dev[slot_id].interrupt_queues[ep_id] = NULL;
+	xhci->dev[slot_id].interrupt_queues[ep_id] = nullptr;
 	free((void *)intrq);
 
 	/* Reset the controller's dequeue pointer and reinitialize the ring */
@@ -931,14 +931,14 @@ xhci_destroy_intr_queue(endpoint_t *const ep, void *const q)
 }
 
 /* read one intr-packet from queue, if available. extend the queue for new input.
-   return NULL if nothing new available.
+   return nullptr if nothing new available.
    Recommended use: while (data=poll_intr_queue(q)) process(data);
  */
 static u8 *
 xhci_poll_intr_queue(void *const q)
 {
 	if (!q)
-		return NULL;
+		return nullptr;
 
 	intrq_t *const intrq = (intrq_t *)q;
 	endpoint_t *const ep = intrq->ep;
@@ -948,7 +948,7 @@ xhci_poll_intr_queue(void *const q)
 
 	xhci_handle_events(xhci);
 
-	u8 *reqdata = NULL;
+	u8 *reqdata = nullptr;
 	while (!reqdata && intrq->ready) {
 		const int ep_id = xhci_ep_id(ep);
 		transfer_ring_t *const tr =
@@ -973,7 +973,7 @@ xhci_poll_intr_queue(void *const q)
 		/* Check if anything was transferred */
 		const size_t read = TRB_GET(TL, intrq->next);
 		if (!read)
-			reqdata = NULL;
+			reqdata = nullptr;
 		else if (read < intrq->size)
 			/* At least zero it, poll interface is rather limited */
 			memset(reqdata + read, 0x00, intrq->size - read);
@@ -981,8 +981,8 @@ xhci_poll_intr_queue(void *const q)
 		/* Advance the interrupt queue */
 		if (intrq->ready == intrq->next)
 			/* This was last TRB being ready */
-			intrq->ready = NULL;
-		intrq->next = xhci_next_trb(intrq->next, NULL);
+			intrq->ready = nullptr;
+		intrq->next = xhci_next_trb(intrq->next, nullptr);
 	}
 
 	return reqdata;

@@ -25,7 +25,7 @@ void variant_devtree_update(void)
 	if (board_version > 9)
 		return;
 
-	if (lte_usb2 == NULL)
+	if (lte_usb2 == nullptr)
 		return;
 
 	config = config_of(lte_usb2);

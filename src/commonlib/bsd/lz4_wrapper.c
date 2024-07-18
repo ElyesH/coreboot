@@ -164,7 +164,7 @@ size_t ulz4fn(const void *src, size_t srcn, void *dst, size_t dstn)
 			/* constant folding essential, do not touch params! */
 			int ret = LZ4_decompress_generic(in, out, (b.raw & BH_SIZE),
 					dst + dstn - out, endOnInputSize,
-					full, 0, noDict, out, NULL, 0);
+					full, 0, noDict, out, nullptr, 0);
 			if (ret < 0)
 				break;		/* decompression error */
 			out += ret;

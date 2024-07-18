@@ -85,34 +85,34 @@ static void wilco_ec_post_complete(void *unused)
 	wilco_ec_send(KB_BIOS_PROGRESS, BIOS_PROGRESS_POST_COMPLETE);
 }
 BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT,
-		      wilco_ec_post_complete, NULL);
+		      wilco_ec_post_complete, nullptr);
 
 static void wilco_ec_post_memory_init(void *unused)
 {
 	wilco_ec_send(KB_BIOS_PROGRESS, BIOS_PROGRESS_MEMORY_INIT);
 }
 BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT,
-		      wilco_ec_post_memory_init, NULL);
+		      wilco_ec_post_memory_init, nullptr);
 
 static void wilco_ec_post_video_init(void *unused)
 {
 	wilco_ec_send(KB_BIOS_PROGRESS, BIOS_PROGRESS_VIDEO_INIT);
 }
 BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT,
-		      wilco_ec_post_video_init, NULL);
+		      wilco_ec_post_video_init, nullptr);
 
 static void wilco_ec_post_logo_displayed(void *unused)
 {
 	wilco_ec_send(KB_BIOS_PROGRESS, BIOS_PROGRESS_LOGO_DISPLAYED);
 }
 BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT,
-		      wilco_ec_post_logo_displayed, NULL);
+		      wilco_ec_post_logo_displayed, nullptr);
 
 static void wilco_ec_resume(void *unused)
 {
 	wilco_ec_send_noargs(KB_RESTORE);
 }
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, wilco_ec_resume, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, wilco_ec_resume, nullptr);
 
 static int wilco_set_cpu_id(void)
 {
@@ -221,7 +221,7 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info info[] = {
-	{ NULL, 0, 0, 0, }
+	{ nullptr, 0, 0, 0, }
 };
 
 static void wilco_ec_enable_dev(struct device *dev)

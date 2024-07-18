@@ -48,11 +48,11 @@ const char *soc_acpi_name(const struct device *dev)
 			}
 			break;
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pci.devfn) {
 	case SA_DEVFN_ROOT:
@@ -103,7 +103,7 @@ const char *soc_acpi_name(const struct device *dev)
 		return "LAN1";
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static struct device_operations pci_domain_ops = {
@@ -174,7 +174,7 @@ void platform_fsp_silicon_init_params_cb(FSPS_UPD *silupd)
 
 	microcode_file = cbfs_map("cpu_microcode_blob.bin", &microcode_len);
 
-	if ((microcode_file != NULL) && (microcode_len != 0)) {
+	if ((microcode_file != nullptr) && (microcode_len != 0)) {
 		/* Update CPU Microcode patch base address/size */
 		silupd->FspsConfig.PcdCpuMicrocodePatchBase =
 		       (uint32_t)microcode_file;
@@ -208,4 +208,4 @@ static void spi_flash_init_cb(void *unused)
 	fast_spi_init();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, spi_flash_init_cb, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, spi_flash_init_cb, nullptr);

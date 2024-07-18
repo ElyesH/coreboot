@@ -90,11 +90,11 @@ AGESA_STATUS agesa_ReadSpd(uint32_t Func, uintptr_t Data, void *ConfigPtr)
 		return AGESA_UNSUPPORTED;
 
 	dev = pcidev_path_on_root(DCT_DEVFN);
-	if (dev == NULL)
+	if (dev == nullptr)
 		return AGESA_ERROR;
 
 	conf = dev->chip_info;
-	if (conf == NULL)
+	if (conf == nullptr)
 		return AGESA_ERROR;
 
 	if (info->SocketId >= ARRAY_SIZE(conf->spd_addr_lookup))

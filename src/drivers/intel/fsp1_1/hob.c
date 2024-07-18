@@ -17,7 +17,7 @@ void *get_hob_list(void)
 	void *hob_list;
 
 	hob_list = fsp_get_hob_list();
-	if (hob_list == NULL)
+	if (hob_list == nullptr)
 		die("Call fsp_set_runtime() before this call!\n");
 	return hob_list;
 }
@@ -28,7 +28,7 @@ static void *get_next_hob(uint16_t type, const void *hob_start)
 	EFI_PEI_HOB_POINTERS hob;
 
 	if (!hob_start)
-		return NULL;
+		return nullptr;
 
 	hob.Raw = (UINT8 *)hob_start;
 
@@ -40,7 +40,7 @@ static void *get_next_hob(uint16_t type, const void *hob_start)
 			break;
 		hob.Raw = GET_NEXT_HOB(hob.Raw);
 	}
-	return NULL;
+	return nullptr;
 }
 
 /* Returns the next instance of the matched GUID HOB from the starting HOB. */
@@ -50,7 +50,7 @@ void *get_guid_hob(const EFI_GUID *guid, const void *hob_start)
 
 	hob.Raw = (uint8_t *)hob_start;
 	while ((hob.Raw = get_next_hob(EFI_HOB_TYPE_GUID_EXTENSION, hob.Raw))
-					!= NULL) {
+					!= nullptr) {
 		if (compare_guid(guid, &hob.Guid->Name))
 			break;
 		hob.Raw = GET_NEXT_HOB(hob.Raw);
@@ -67,7 +67,7 @@ void *get_resource_hob(const EFI_GUID *guid, const void *hob_start)
 
 	hob.Raw = (UINT8 *)hob_start;
 	while ((hob.Raw = get_next_hob(EFI_HOB_TYPE_RESOURCE_DESCRIPTOR,
-					    hob.Raw)) != NULL) {
+					    hob.Raw)) != nullptr) {
 		if (compare_guid(guid, &hob.ResourceDescriptor->Owner))
 			break;
 		hob.Raw = GET_NEXT_HOB(hob.Raw);
@@ -121,7 +121,7 @@ static void print_hob_resource_attributes(void *hob_ptr)
 	u32 hob_res_attr   = hob_resource_ptr->ResourceAttribute;
 	u64 hob_res_addr   = hob_resource_ptr->PhysicalStart;
 	u64 hob_res_length = hob_resource_ptr->ResourceLength;
-	const char *hob_res_type_str = NULL;
+	const char *hob_res_type_str = nullptr;
 
 	/* HOB Resource Types */
 	switch (hob_res_type) {

@@ -213,7 +213,7 @@ static void print_no_modules_selected(void)
 		if (categories[i].count > 0)
 			return;
 
-	color_set(2, NULL); // White on black
+	color_set(2, nullptr); // White on black
 	center(height / 2, "No modules selected");
 }
 

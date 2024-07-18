@@ -53,4 +53,4 @@ static void fw_config_handle(void *unused)
 		gpio_configure_pads(i2s_enable_pads, ARRAY_SIZE(i2s_enable_pads));
 	}
 }
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, nullptr);

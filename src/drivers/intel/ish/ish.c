@@ -54,7 +54,7 @@ static void intel_ish_get_version(void)
 		return;
 
 	struct cse_specific_info *info = cbmem_find(CBMEM_ID_CSE_INFO);
-	if (info == NULL)
+	if (info == nullptr)
 		return;
 
 	printk(BIOS_DEBUG, "ISH version: %d.%d.%d.%d\n",

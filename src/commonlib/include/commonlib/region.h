@@ -21,7 +21,7 @@
 struct region_device;
 
 /*
- * Returns NULL on error otherwise a buffer is returned with the contents of
+ * Returns nullptr on error otherwise a buffer is returned with the contents of
  * the requested data at offset of size.
  */
 void *rdev_mmap(const struct region_device *rd, size_t offset, size_t size);
@@ -86,7 +86,7 @@ struct region_device {
 
 #define REGION_DEV_INIT(ops_, offset_, size_)		\
 	{						\
-		.root = NULL,				\
+		.root = nullptr,				\
 		.ops = (ops_),				\
 		.region = {				\
 			.offset = (offset_),		\
@@ -296,7 +296,7 @@ struct incoherent_rdev {
 
 /* Initialize an incoherent_rdev based on the region as well as the read and
  * write rdevs. The read and write rdevs should match in size to the passed
- * in region. If not the initialization will fail returning NULL. Otherwise
+ * in region. If not the initialization will fail returning nullptr. Otherwise
  * the function will return a pointer to the containing region_device to
  * be used for region operations. Therefore, the lifetime of the returned
  * pointer matches the lifetime of the incoherent_rdev object. Likewise,

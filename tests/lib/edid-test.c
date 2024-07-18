@@ -29,7 +29,7 @@ static void edid_raw_calc_checksum(struct edid_raw *raw)
 
 static void test_decode_edid_no_edid(void **state)
 {
-	assert_int_equal(EDID_ABSENT, decode_edid(NULL, 0, NULL));
+	assert_int_equal(EDID_ABSENT, decode_edid(nullptr, 0, nullptr));
 }
 
 static void test_decode_edid_invalid_header(void **state)
@@ -37,7 +37,7 @@ static void test_decode_edid_invalid_header(void **state)
 	struct edid_raw raw = {.header = EDID_HEADER_INVALID_RAW};
 	raw.checksum = get_raw_edid_checksum((const unsigned char *)&raw);
 
-	assert_int_equal(EDID_ABSENT, decode_edid((unsigned char *)&raw, sizeof(raw), NULL));
+	assert_int_equal(EDID_ABSENT, decode_edid((unsigned char *)&raw, sizeof(raw), nullptr));
 }
 
 /* Frame is modified example of an LCD Desktop IT display
@@ -1255,7 +1255,7 @@ static int teardown_edid_test(void **state)
 {
 	struct test_state *ts;
 
-	if (*state == NULL)
+	if (*state == nullptr)
 		return 0;
 
 	ts = (struct test_state *)*state;
@@ -1314,6 +1314,6 @@ int main(void)
 						teardown_edid_test),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }
 

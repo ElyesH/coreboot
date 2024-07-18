@@ -150,13 +150,13 @@ static struct ext_sig_table *ucode_get_ext_sig_table(const struct microcode *uco
 	ssize_t ext_tbl_len = ucode->total_size - size;
 
 	if (ext_tbl_len < (ssize_t)sizeof(struct ext_sig_table))
-		return NULL;
+		return nullptr;
 
 	ext_tbl = (struct ext_sig_table *)((uintptr_t)ucode + size);
 
 	if (ext_tbl_len < (sizeof(struct ext_sig_table) +
 				ext_tbl->ext_sig_cnt * sizeof(struct ext_sig_entry)))
-		return NULL;
+		return nullptr;
 
 	return ext_tbl;
 }
@@ -192,8 +192,8 @@ static const void *find_cbfs_microcode(void)
 	} else {
 		ucode_updates = cbfs_map(MICROCODE_CBFS_FILE, &microcode_len);
 	}
-	if (ucode_updates == NULL)
-		return NULL;
+	if (ucode_updates == nullptr)
+		return nullptr;
 
 	while (microcode_len >= sizeof(*ucode_updates)) {
 		/* Newer microcode updates include a size field, whereas older
@@ -218,7 +218,7 @@ static const void *find_cbfs_microcode(void)
 		/* Check if there is extended signature table */
 		ext_tbl = ucode_get_ext_sig_table(ucode_updates);
 
-		if (ext_tbl != NULL) {
+		if (ext_tbl != nullptr) {
 			int i;
 			struct ext_sig_entry *entry = (struct ext_sig_entry *)(ext_tbl + 1);
 
@@ -233,7 +233,7 @@ static const void *find_cbfs_microcode(void)
 		microcode_len -= update_size;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 const void *intel_microcode_find(void)
@@ -244,14 +244,14 @@ const void *intel_microcode_find(void)
 	if (ENV_CACHE_AS_RAM) {
 		printk(BIOS_ERR, "Microcode Error: Early microcode patching is not supported due"
 				"to NEM limitation\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (microcode_checked)
 		return ucode_update;
 
 	/*
-	 * Since this function caches the found microcode (NULL or a valid
+	 * Since this function caches the found microcode (nullptr or a valid
 	 * microcode pointer), it is expected to be run from BSP before starting
 	 * any other APs. This sequence is not multithread safe otherwise.
 	 */

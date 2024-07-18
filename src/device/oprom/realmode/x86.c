@@ -75,7 +75,7 @@ static void setup_rombios(void)
 	write8((void *)0xffffe, 0xfc);
 }
 
-static int (*intXX_handler[256])(void) = { NULL };
+static int (*intXX_handler[256])(void) = { nullptr };
 
 static int intXX_exception_handler(void)
 {
@@ -179,8 +179,8 @@ static void setup_realmode_idt(void)
 	struct realmode_idt *idts = (struct realmode_idt *) 0;
 	int i;
 
-	/* It's expected that we write to the NULL page in the first two iterations of the
-	   following loop, so temporarily disable the NULL breakpoint. */
+	/* It's expected that we write to the nullptr page in the first two iterations of the
+	   following loop, so temporarily disable the nullptr breakpoint. */
 	null_breakpoint_disable();
 
 	/* Copy IDT stub code for each interrupt. This might seem wasteful
@@ -225,7 +225,7 @@ static int mode_info_valid;
 const vbe_mode_info_t *vbe_mode_info(void)
 {
 	if (!mode_info_valid || !mode_info.vesa.phys_base_ptr)
-		return NULL;
+		return nullptr;
 	return &mode_info;
 }
 

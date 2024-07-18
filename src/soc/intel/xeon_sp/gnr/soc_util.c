@@ -27,7 +27,7 @@ const char *pciroot_res_to_domain_type(const UDS_STACK_RES *sr, const UDS_PCIROO
 	}
 
 	if (index == sr->PciRootBridgeNum)
-		return NULL;
+		return nullptr;
 
 	switch (pr->UidType) {
 	case PC_UID:
@@ -41,7 +41,7 @@ const char *pciroot_res_to_domain_type(const UDS_STACK_RES *sr, const UDS_PCIROO
 	case UB_UID:
 		return (instance == 0) ? DOMAIN_TYPE_UBX0 : DOMAIN_TYPE_UBX1;
 	default:
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -87,9 +87,9 @@ const struct SystemMemoryMapHob *get_system_memory_map(void)
 	memmap_addr = (const struct SystemMemoryMapHob **)
 		fsp_find_extension_hob_by_guid((uint8_t *)&mem_hob_guid, &hob_size);
 	/* hob_size is the size of the 8-byte address not the hob data */
-	assert(memmap_addr != NULL && hob_size != 0);
-	/* assert the pointer to the hob is not NULL */
-	assert(*memmap_addr != NULL);
+	assert(memmap_addr != nullptr && hob_size != 0);
+	/* assert the pointer to the hob is not nullptr */
+	assert(*memmap_addr != nullptr);
 
 	return *memmap_addr;
 }
@@ -98,7 +98,7 @@ const struct SystemMemoryMapElement *get_system_memory_map_elment(uint8_t *num)
 {
 	const struct SystemMemoryMapHob *hob = get_system_memory_map();
 	if (!hob)
-		return NULL;
+		return nullptr;
 
 	*num = hob->numberEntries;
 	return hob->Element;
@@ -110,13 +110,13 @@ const CXL_NODE_SOCKET *get_cxl_node(void)
 	static const CXL_NODE_SOCKET *hob;
 	const EFI_GUID fsp_hob_cxl_node_socket_guid = CXL_NODE_HOB_GUID;
 
-	if (hob != NULL)
+	if (hob != nullptr)
 		return hob;
 
 	hob = fsp_find_extension_hob_by_guid((uint8_t *)&fsp_hob_cxl_node_socket_guid, &hob_size);
-	if (hob == NULL || hob_size == 0) {
+	if (hob == nullptr || hob_size == 0) {
 		printk(BIOS_DEBUG, "CXL_NODE_HOB_GUID not found: CXL may not be installed\n");
-		return NULL;
+		return nullptr;
 	}
 	return hob;
 }
@@ -126,7 +126,7 @@ uint8_t get_cxl_node_count(void)
 	const CXL_NODE_SOCKET *hob = get_cxl_node();
 	uint8_t count = 0;
 
-	if (hob == NULL)
+	if (hob == nullptr)
 		return 0;
 	for (unsigned int skt_id = 0 ; skt_id < MAX_SOCKET; skt_id++)
 		count += hob[skt_id].CxlNodeCount;

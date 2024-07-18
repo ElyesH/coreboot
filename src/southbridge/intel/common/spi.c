@@ -351,7 +351,7 @@ static void spi_init_cb(void *unused)
 	spi_init();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, spi_init_cb, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_ENTRY, spi_init_cb, nullptr);
 
 typedef struct spi_transaction {
 	const uint8_t *out;

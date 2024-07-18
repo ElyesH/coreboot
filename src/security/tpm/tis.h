@@ -58,7 +58,7 @@ typedef tpm_result_t (*tis_sendrecv_fn)(const u8 *sendbuf, size_t send_size, u8 
  *
  * @family - pointer which is set to TPM family of the device
  *
- * Returns pointer to send-receive function on success or NULL on failure.
+ * Returns pointer to send-receive function on success or nullptr on failure.
  *
  * Do not call this explicitly, it's meant to be used exclusively by TSS
  * implementation (tlcl_lib_init() function to be specific).

@@ -123,7 +123,7 @@ void gpio_set_i2c_eh_rsel(void)
 void gpio_set_spi_driving(unsigned int bus, enum spi_pad_mask pad_select,
 			  unsigned int milliamps)
 {
-	void *reg = NULL;
+	void *reg = nullptr;
 	unsigned int reg_val = milliamps / 2 - 1, offset = 0;
 
 	assert(bus < SPI_BUS_NUMBER);

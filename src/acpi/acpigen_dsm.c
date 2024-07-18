@@ -57,11 +57,11 @@ static void usb_dsm_func5_cb(void *arg)
 }
 
 static void (*usb_dsm_callbacks[6])(void *) = {
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
 	usb_dsm_func5_cb,
 };
 

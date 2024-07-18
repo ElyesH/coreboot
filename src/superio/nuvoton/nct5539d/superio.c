@@ -30,7 +30,7 @@ static const char *nct5539d_acpi_hid(const struct device *dev)
 	if ((dev->path.type != DEVICE_PATH_PNP) ||
 		(dev->path.pnp.port == 0) ||
 		((dev->path.pnp.device & 0xff) > NCT5539D_DS))
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pnp.device & 0xff) {
 	case NCT5539D_SP1:
@@ -58,35 +58,35 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, NCT5539D_SP1, PNP_IO0 | PNP_IRQ0,
+	{ nullptr, NCT5539D_SP1, PNP_IO0 | PNP_IRQ0,
 		0x0ff8, },
-	{ NULL, NCT5539D_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
+	{ nullptr, NCT5539D_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
 		0x0fff, 0x0fff, },
-	{ NULL, NCT5539D_CIR, PNP_IO0 | PNP_IRQ0,
+	{ nullptr, NCT5539D_CIR, PNP_IO0 | PNP_IRQ0,
 		0x0ff8, },
-	{ NULL, NCT5539D_ACPI},
-	{ NULL, NCT5539D_HWM_FPLED, PNP_IO0 | PNP_IRQ0,
+	{ nullptr, NCT5539D_ACPI},
+	{ nullptr, NCT5539D_HWM_FPLED, PNP_IO0 | PNP_IRQ0,
 		0x0ffe, 0x0ffe, },
-	{ NULL, NCT5539D_WDT2},
-	{ NULL, NCT5539D_CIRWUP, PNP_IO0 | PNP_IRQ0,
+	{ nullptr, NCT5539D_WDT2},
+	{ nullptr, NCT5539D_CIRWUP, PNP_IO0 | PNP_IRQ0,
 		0x0ff8, },
-	{ NULL, NCT5539D_GPIO_PP_OD},
-	{ NULL, NCT5539D_WDT1},
-	{ NULL, NCT5539D_WDT3},
-	{ NULL, NCT5539D_GPIOBASE, PNP_IO0,
+	{ nullptr, NCT5539D_GPIO_PP_OD},
+	{ nullptr, NCT5539D_WDT1},
+	{ nullptr, NCT5539D_WDT3},
+	{ nullptr, NCT5539D_GPIOBASE, PNP_IO0,
 		0x0ff8, },
-	{ NULL, NCT5539D_GPIO0},
-	{ NULL, NCT5539D_GPIO2},
-	{ NULL, NCT5539D_GPIO3},
-	{ NULL, NCT5539D_GPIO4},
-	{ NULL, NCT5539D_GPIO5},
-	{ NULL, NCT5539D_GPIO7},
-	{ NULL, NCT5539D_GPIO8},
-	{ NULL, NCT5539D_GPIO_PSO},
-	{ NULL, NCT5539D_SWEC},
-	{ NULL, NCT5539D_FLED},
-	{ NULL, NCT5539D_DS5},
-	{ NULL, NCT5539D_DS3},
+	{ nullptr, NCT5539D_GPIO0},
+	{ nullptr, NCT5539D_GPIO2},
+	{ nullptr, NCT5539D_GPIO3},
+	{ nullptr, NCT5539D_GPIO4},
+	{ nullptr, NCT5539D_GPIO5},
+	{ nullptr, NCT5539D_GPIO7},
+	{ nullptr, NCT5539D_GPIO8},
+	{ nullptr, NCT5539D_GPIO_PSO},
+	{ nullptr, NCT5539D_SWEC},
+	{ nullptr, NCT5539D_FLED},
+	{ nullptr, NCT5539D_DS5},
+	{ nullptr, NCT5539D_DS3},
 };
 
 static void enable_dev(struct device *dev)

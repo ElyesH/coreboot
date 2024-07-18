@@ -12,7 +12,7 @@ static struct panel_description krane_panels[] = {
 struct panel_description *get_panel_description(int panel_id)
 {
 	if (panel_id < 0 || panel_id >= ARRAY_SIZE(krane_panels))
-		return NULL;
+		return nullptr;
 
 	return get_panel_from_cbfs(&krane_panels[panel_id]);
 }

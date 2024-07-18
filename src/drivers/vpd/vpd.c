@@ -220,7 +220,7 @@ const void *vpd_find(const char *key, int *size, enum vpd_region region)
 		vpd_find_in(&rw_vpd, &arg);
 
 	if (!arg.matched)
-		return NULL;
+		return nullptr;
 
 	*size = arg.value_len;
 	return arg.value;
@@ -234,7 +234,7 @@ char *vpd_gets(const char *key, char *buffer, int size, enum vpd_region region)
 	string_address = vpd_find(key, &string_size, region);
 
 	if (!string_address)
-		return NULL;
+		return nullptr;
 
 	assert(size > 0);
 	int copy_size = MIN(size - 1, string_size);

@@ -153,7 +153,7 @@ static const char *graphics_acpi_name(const struct device *dev)
  */
 void *vbt_get(void)
 {
-	return NULL;
+	return nullptr;
 }
 
 static void graphics_set_resources(struct device *const dev)
@@ -173,7 +173,7 @@ static void graphics_set_resources(struct device *const dev)
 		return;
 	}
 	rom = pci_rom_probe(dev);
-	if (rom == NULL) {
+	if (rom == nullptr) {
 		printk(BIOS_ERR, "%s: Unable to find ROM for %s\n",
 		       __func__, dev_path(dev));
 		timestamp_add_now(TS_OPROM_COPY_END);
@@ -181,7 +181,7 @@ static void graphics_set_resources(struct device *const dev)
 	}
 
 	ram = pci_rom_load(dev, rom);
-	if (ram == NULL) {
+	if (ram == nullptr) {
 		printk(BIOS_ERR, "%s: Unable to load ROM for %s\n",
 		       __func__, dev_path(dev));
 	}
@@ -288,8 +288,8 @@ bool vbios_cache_is_valid(void)
 	return sig_valid && vbios_cache_verify_hash(vbios_data, VBIOS_CACHE_FMAP_SIZE) == CB_SUCCESS;
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, read_vbios_cache_from_fmap, NULL);
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME_CHECK, BS_ON_ENTRY, write_vbios_cache_to_fmap, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_EXIT, read_vbios_cache_from_fmap, nullptr);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME_CHECK, BS_ON_ENTRY, write_vbios_cache_to_fmap, nullptr);
 
 const struct device_operations amd_graphics_ops = {
 	.read_resources		= pci_dev_read_resources,

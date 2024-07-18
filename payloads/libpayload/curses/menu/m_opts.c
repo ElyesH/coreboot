@@ -117,7 +117,7 @@ menu_opts_off(MENU * menu, Menu_Options opts)
 {
   MENU *cmenu = menu;		/* use a copy because set_menu_opts must detect
 
-				   NULL menu itself to adjust its behavior */
+				   nullptr menu itself to adjust its behavior */
 
   T((T_CALLED("menu_opts_off(%p,%d)"), (void *)menu, opts));
 
@@ -150,7 +150,7 @@ menu_opts_on(MENU * menu, Menu_Options opts)
 {
   MENU *cmenu = menu;		/* use a copy because set_menu_opts must detect
 
-				   NULL menu itself to adjust its behavior */
+				   nullptr menu itself to adjust its behavior */
 
   T((T_CALLED("menu_opts_on(%p,%d)"), (void *)menu, opts));
 

@@ -1394,7 +1394,7 @@ static void vc1_program_timings(const fsb_clock_t fsb)
 static unsigned int get_mmio_size(void)
 {
 	const struct device *dev;
-	const struct northbridge_intel_gm45_config *cfg = NULL;
+	const struct northbridge_intel_gm45_config *cfg = nullptr;
 
 	dev = pcidev_path_on_root(HOST_BRIDGE);
 	if (dev)

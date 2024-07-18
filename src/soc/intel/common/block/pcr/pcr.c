@@ -252,7 +252,7 @@ int pcr_execute_sideband_msg(pci_devfn_t dev, struct pcr_sbi_msg *msg, uint32_t 
 	uint16_t sbi_rid;
 
 	if (!msg || !data || !response) {
-		printk(BIOS_ERR, "Pointer checked for NULL Fail! "
+		printk(BIOS_ERR, "Pointer checked for nullptr Fail! "
 		       "msg = %p \t data = %p \t response = %p\n",
 		       msg, data, response);
 		return -1;

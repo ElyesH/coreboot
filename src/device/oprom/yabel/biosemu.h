@@ -63,7 +63,7 @@
  * a YABEL caller can add functions to this array before calling YABEL
  * if a interrupt occurs, YABEL checks whether a function is set in
  * this array and only runs the generic interrupt handler code, if
- * the function pointer is NULL */
+ * the function pointer is nullptr */
 typedef int (* yabel_handleIntFunc)(void);
 extern yabel_handleIntFunc yabel_intFuncArray[256];
 void mainboard_interrupt_handlers(int, yabel_handleIntFunc);

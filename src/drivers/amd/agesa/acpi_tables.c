@@ -32,7 +32,7 @@ void completion_InitLate(struct sysinfo *cb, AMD_LATE_PARAMS *Late)
 
 void *agesawrapper_getlateinitptr(int pick)
 {
-	ASSERT(AmdLateParams != NULL);
+	ASSERT(AmdLateParams != nullptr);
 
 	switch (pick) {
 	case PICK_DMI:
@@ -60,7 +60,7 @@ void *agesawrapper_getlateinitptr(int pick)
 	case PICK_CDIT:
 		return AmdLateParams->AcpiCdit;
 	default:
-		return NULL;
+		return nullptr;
 	}
-	return NULL;
+	return nullptr;
 }

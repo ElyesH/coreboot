@@ -48,7 +48,7 @@ static void *get_spd_pointer(int *dual)
 	spd_index = get_variant_spd_index(ram_id, dual);
 	if (spd_index >= total_spds) {
 		printk(BIOS_ERR, "SPD index > total SPDs\n");
-		return NULL;
+		return nullptr;
 	}
 	/* Return the serial product data for the RAM */
 	return &spd_file[SPD_PAGE_LEN * spd_index];
@@ -65,7 +65,7 @@ void spd_memory_init_params(MEMORY_INIT_UPD *memory_params)
 	 * DIMMs so use the same SPD data for each DIMM.
 	 */
 	spd_content = get_spd_pointer(&dual_channel);
-	if (CONFIG(DISPLAY_SPD_DATA) && spd_content != NULL) {
+	if (CONFIG(DISPLAY_SPD_DATA) && spd_content != nullptr) {
 		printk(BIOS_DEBUG, "SPD Data:\n");
 		hexdump(spd_content, SPD_PAGE_LEN);
 		printk(BIOS_DEBUG, "\n");
@@ -77,7 +77,7 @@ void spd_memory_init_params(MEMORY_INIT_UPD *memory_params)
 	 *              1=SolderDownMemory,
 	 *              2=DimmDisabled
 	 */
-	if (spd_content != NULL) {
+	if (spd_content != nullptr) {
 		memory_params->PcdMemChannel0Config = 1;
 		printk(BIOS_DEBUG, "Channel 0 DIMM soldered down\n");
 		if (dual_channel) {
@@ -118,7 +118,7 @@ static void set_dimm_info(const uint8_t *spd, struct dimm_info *dimm)
 	/* Locate the memory info HOB, presence validated by raminit */
 	hob_list_ptr = fsp_get_hob_list();
 	hob_ptr = get_guid_hob(&memory_info_hob_guid, hob_list_ptr);
-	if (hob_ptr != NULL) {
+	if (hob_ptr != nullptr) {
 		memory_info_hob = (FSP_SMBIOS_MEMORY_INFO *)(hob_ptr + 1);
 		dimm->ddr_frequency = memory_info_hob->MemoryFrequencyInMHz;
 	} else {
@@ -167,7 +167,7 @@ void mainboard_save_dimm_info(struct romstage_params *params)
 	struct memory_info *mem_info;
 
 	spd_content = get_spd_pointer(&dual_channel);
-	if (spd_content == NULL)
+	if (spd_content == nullptr)
 		return;
 
 	/*
@@ -176,7 +176,7 @@ void mainboard_save_dimm_info(struct romstage_params *params)
 	 */
 	mem_info = cbmem_add(CBMEM_ID_MEMINFO, sizeof(*mem_info));
 	printk(BIOS_DEBUG, "CBMEM entry for DIMM info: %p\n", mem_info);
-	if (mem_info == NULL)
+	if (mem_info == nullptr)
 		return;
 	memset(mem_info, 0, sizeof(*mem_info));
 

@@ -47,7 +47,7 @@ static void sync_psp_addr_msr(void *unused)
 static void post_mp_init(struct device *unused)
 {
 	if (CONFIG(SOC_AMD_COMMON_BLOCK_CPU_SYNC_PSP_ADDR_MSR))
-		mp_run_on_all_cpus(sync_psp_addr_msr, NULL);
+		mp_run_on_all_cpus(sync_psp_addr_msr, nullptr);
 }
 
 struct device_operations amd_cpu_bus_ops = {

@@ -342,7 +342,7 @@ handleInt1a(void)
 {
 	// function number in AX
 	u8 bus, devfn, offs;
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 
 	switch (M.x86.R_AX) {
 	case 0xb101:
@@ -374,7 +374,7 @@ handleInt1a(void)
 			M.x86.R_BL = bios_device.devfn;
 		} else if (CONFIG(YABEL_PCI_ACCESS_OTHER_DEVICES)) {
 			dev = dev_find_device(M.x86.R_DX, M.x86.R_CX, 0);
-			if (dev != NULL) {
+			if (dev != nullptr) {
 				M.x86.R_BH = dev->upstream->secondary;
 				M.x86.R_BL = dev->path.pci.devfn;
 				DEBUG_PRINTF_INTR
@@ -382,7 +382,7 @@ handleInt1a(void)
 				     __func__, M.x86.R_AX, M.x86.R_BX);
 			}
 		}
-		if (dev == NULL) {
+		if (dev == nullptr) {
 			DEBUG_PRINTF_INTR
 			    ("%s(): function %x: invalid device/vendor/device index! (%04x/%04x/%02x expected: %04x/%04x/00)\n",
 			     __func__, M.x86.R_AX, M.x86.R_CX, M.x86.R_DX,
@@ -413,7 +413,7 @@ handleInt1a(void)
 				  __func__, M.x86.R_AX, dev_path(dev));
 		}
 
-		if (dev == NULL) {
+		if (dev == nullptr) {
 			printf
 			    ("%s(): Config read access invalid device! bus: %02x (%02x), devfn: %02x (%02x), offs: %02x\n",
 			     __func__, bus, bios_device.bus, devfn,
@@ -482,7 +482,7 @@ handleInt1a(void)
 			dev = bios_device.dev;
 		}
 
-		if (dev == NULL) {
+		if (dev == nullptr) {
 			printf
 			    ("%s(): Config read access invalid! bus: %x (%x), devfn: %x (%x), offs: %x\n",
 			     __func__, bus, bios_device.bus, devfn,

@@ -104,7 +104,7 @@ static void pcie_rtd3_device_acpi_fill_ssdt(const struct device *dev)
 
 	/* Storage devices won't enter D3 without this property */
 	if ((dev->class >> 16) == PCI_BASE_CLASS_STORAGE) {
-		acpi_device_add_storage_d3_enable(NULL);
+		acpi_device_add_storage_d3_enable(nullptr);
 
 		printk(BIOS_INFO, "%s.%s: Added StorageD3Enable property\n", scope, name);
 	}
@@ -136,7 +136,7 @@ static struct device_operations pcie_rtd3_device_ops = {
 
 static void pcie_rtd3_device_enable(struct device *dev)
 {
-	struct drivers_pcie_rtd3_device_config *config = dev ? dev->chip_info : NULL;
+	struct drivers_pcie_rtd3_device_config *config = dev ? dev->chip_info : nullptr;
 
 	if (!config)
 		return;

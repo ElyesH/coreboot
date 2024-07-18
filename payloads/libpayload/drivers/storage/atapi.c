@@ -126,7 +126,7 @@ static storage_poll_t atapi_poll(storage_dev_t *const _dev)
 		return POLL_MEDIUM_PRESENT;
 
 	cdb[0] = ATAPI_TEST_UNIT_READY;
-	const int ret = atapi_packet_read_cmd(dev, cdb, sizeof(cdb), NULL, 0);
+	const int ret = atapi_packet_read_cmd(dev, cdb, sizeof(cdb), nullptr, 0);
 	if (!ret) {
 		printf("atapi: Found medium.\n");
 		dev->medium_present = 1;
@@ -137,16 +137,16 @@ static storage_poll_t atapi_poll(storage_dev_t *const _dev)
 	if (dev->medium_present) {
 		cdb[0] = ATAPI_START_STOP_UNIT;
 		cdb[4] = 0x01; /* Start Disc, read TOC. */
-		if (atapi_packet_read_cmd(dev, cdb, sizeof(cdb), NULL, 0))
+		if (atapi_packet_read_cmd(dev, cdb, sizeof(cdb), nullptr, 0))
 			goto _error_ret;
 		cdb[4] = 0x00;
 	}
 
 	cdb[0] = ATAPI_PREVENT_ALLOW_MEDIUM_REMOVAL;
 	cdb[2] = 0x02; /* Clear persistent prevent removal bit. */
-	atapi_packet_read_cmd(dev, cdb, sizeof(cdb), NULL, 0);
+	atapi_packet_read_cmd(dev, cdb, sizeof(cdb), nullptr, 0);
 	cdb[2] = 0x00; /* Clear prevent removal bit. */
-	atapi_packet_read_cmd(dev, cdb, sizeof(cdb), NULL, 0);
+	atapi_packet_read_cmd(dev, cdb, sizeof(cdb), nullptr, 0);
 
 	/* If we don't have a medium, we're done. */
 	if (!dev->medium_present)

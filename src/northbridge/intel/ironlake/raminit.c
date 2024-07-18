@@ -1496,7 +1496,7 @@ static const struct ram_training *get_cached_training(void)
 {
 	return mrc_cache_current_mmap_leak(MRC_TRAINING_DATA,
 					   MRC_CACHE_VERSION,
-					   NULL);
+					   nullptr);
 }
 
 static int have_match_ranks(struct raminfo *info, int channel, int ranks)

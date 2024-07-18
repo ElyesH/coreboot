@@ -210,7 +210,7 @@ static void mainboard_init(void *chip_info)
 
 static void mainboard_final(void *chip_info)
 {
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 
 	/* Do board specific things */
 	variant_mainboard_final();
@@ -279,4 +279,4 @@ static void wait_for_legacy_dev(void *unused)
 	printk(BIOS_NOTICE, "done!\n");
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENUMERATE, BS_ON_ENTRY, wait_for_legacy_dev, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENUMERATE, BS_ON_ENTRY, wait_for_legacy_dev, nullptr);

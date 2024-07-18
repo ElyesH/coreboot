@@ -98,7 +98,7 @@ item_opts_off(ITEM * item, Item_Options opts)
 {
   ITEM *citem = item;		/* use a copy because set_item_opts must detect
 
-				   NULL item itself to adjust its behavior */
+				   nullptr item itself to adjust its behavior */
 
   T((T_CALLED("item_opts_off(%p,%d)"), (void *)item, opts));
 
@@ -126,7 +126,7 @@ item_opts_on(ITEM * item, Item_Options opts)
 {
   ITEM *citem = item;		/* use a copy because set_item_opts must detect
 
-				   NULL item itself to adjust its behavior */
+				   nullptr item itself to adjust its behavior */
 
   T((T_CALLED("item_opts_on(%p,%d)"), (void *)item, opts));
 

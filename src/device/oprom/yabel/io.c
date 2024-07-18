@@ -411,7 +411,7 @@ pci_cfg_read(X86EMU_pioAddr addr, u8 size)
 {
 	u32 port_cf8_val = 0;
 	u32 rval = 0xFFFFFFFF;
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 	u8 bus, devfn, offs;
 
 	// PCI Configuration Mechanism 1 step 1
@@ -439,7 +439,7 @@ pci_cfg_read(X86EMU_pioAddr addr, u8 size)
 			__func__, dev_path(dev));
 	}
 
-	if (dev == NULL) {
+	if (dev == nullptr) {
 		printf
 		    ("%s(): Config read access invalid device! bus: %02x (%02x), devfn: %02x (%02x), offs: %02x\n",
 		     __func__, bus, bios_device.bus, devfn,
@@ -475,7 +475,7 @@ pci_cfg_read(X86EMU_pioAddr addr, u8 size)
 void
 pci_cfg_write(X86EMU_pioAddr addr, u32 val, u8 size)
 {
-	struct device *dev = NULL;
+	struct device *dev = nullptr;
 	u32 port_cf8_val = 0;
 	u8 bus, devfn, offs;
 

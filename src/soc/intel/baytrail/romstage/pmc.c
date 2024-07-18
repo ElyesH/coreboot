@@ -18,7 +18,7 @@ void punit_init(void)
 {
 	uint32_t reg;
 	uint8_t rid;
-	const struct soc_intel_baytrail_config *cfg = NULL;
+	const struct soc_intel_baytrail_config *cfg = nullptr;
 
 	rid = pci_read_config8(IOSF_PCI_DEV, REVID);
 
@@ -28,7 +28,7 @@ void punit_init(void)
 	/* Write bits 17:16 of SB_BIOS_CONFIG in the PUNIT. */
 	reg |= SB_BIOS_CONFIG_PERF_MODE | SB_BIOS_CONFIG_PDM_MODE;
 	/* Configure VR low power mode for C0 and above. */
-	if (rid >= RID_C_STEPPING_START && cfg != NULL &&
+	if (rid >= RID_C_STEPPING_START && cfg != nullptr &&
 	    (cfg->vnn_ps2_enable || cfg->vcc_ps2_enable)) {
 		printk(BIOS_DEBUG, "Enabling VR PS2 mode:");
 		if (cfg->vnn_ps2_enable) {

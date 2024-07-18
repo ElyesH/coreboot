@@ -70,7 +70,7 @@ void bootblock_main_with_timestamp(uint64_t base_timestamp,
 
 void bootblock_main_with_basetime(uint64_t base_timestamp)
 {
-	bootblock_main_with_timestamp(base_timestamp, NULL, 0);
+	bootblock_main_with_timestamp(base_timestamp, nullptr, 0);
 }
 
 void main(void)
@@ -82,7 +82,7 @@ void main(void)
 	if (CONFIG(COLLECT_TIMESTAMPS))
 		base_timestamp = timestamp_get();
 
-	bootblock_main_with_timestamp(base_timestamp, NULL, 0);
+	bootblock_main_with_timestamp(base_timestamp, nullptr, 0);
 }
 
 #if CONFIG(COMPRESS_BOOTBLOCK)

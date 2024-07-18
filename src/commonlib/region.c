@@ -27,7 +27,7 @@ static int normalize_and_ok(const struct region *outer, struct region *inner)
 
 static const struct region_device *rdev_root(const struct region_device *rdev)
 {
-	if (rdev->root == NULL)
+	if (rdev->root == nullptr)
 		return rdev;
 	return rdev->root;
 }
@@ -53,12 +53,12 @@ void *rdev_mmap(const struct region_device *rd, size_t offset, size_t size)
 	};
 
 	if (!normalize_and_ok(&rd->region, &req))
-		return NULL;
+		return nullptr;
 
 	rdev = rdev_root(rd);
 
-	if (rdev->ops->mmap == NULL)
-		return NULL;
+	if (rdev->ops->mmap == nullptr)
+		return nullptr;
 
 	return rdev->ops->mmap(rdev, req.offset, req.size);
 }
@@ -69,7 +69,7 @@ int rdev_munmap(const struct region_device *rd, void *mapping)
 
 	rdev = rdev_root(rd);
 
-	if (rdev->ops->munmap == NULL)
+	if (rdev->ops->munmap == nullptr)
 		return -1;
 
 	return rdev->ops->munmap(rdev, mapping);
@@ -106,7 +106,7 @@ ssize_t rdev_writeat(const struct region_device *rd, const void *b,
 
 	rdev = rdev_root(rd);
 
-	if (rdev->ops->writeat == NULL)
+	if (rdev->ops->writeat == nullptr)
 		return -1;
 
 	return rdev->ops->writeat(rdev, b, req.offset, req.size);
@@ -126,9 +126,9 @@ ssize_t rdev_eraseat(const struct region_device *rd, size_t offset,
 
 	rdev = rdev_root(rd);
 
-	/* If the eraseat ptr is NULL we assume that the erase
+	/* If the eraseat ptr is nullptr we assume that the erase
 	 * function was completed successfully. */
-	if (rdev->ops->eraseat == NULL)
+	if (rdev->ops->eraseat == nullptr)
 		return size;
 
 	return rdev->ops->eraseat(rdev, req.offset, req.size);
@@ -148,7 +148,7 @@ int rdev_chain(struct region_device *child, const struct region_device *parent,
 	/* Keep track of root region device. Note the offsets are relative
 	 * to the root device. */
 	child->root = rdev_root(parent);
-	child->ops = NULL;
+	child->ops = nullptr;
 	child->region.offset = req.offset;
 	child->region.size = req.size;
 
@@ -181,7 +181,7 @@ void region_device_init(struct region_device *rdev,
 			size_t size)
 {
 	memset(rdev, 0, sizeof(*rdev));
-	rdev->root = NULL;
+	rdev->root = nullptr;
 	rdev->ops = ops;
 	rdev->region.offset = offset;
 	rdev->region.size = size;
@@ -311,12 +311,12 @@ void *mmap_helper_rdev_mmap(const struct region_device *rd, size_t offset,
 
 	mapping = mem_pool_alloc(mdev->pool, size);
 
-	if (mapping == NULL)
-		return NULL;
+	if (mapping == nullptr)
+		return nullptr;
 
 	if (rd->ops->readat(rd, mapping, offset, size) != size) {
 		mem_pool_free(mdev->pool, mapping);
-		return NULL;
+		return nullptr;
 	}
 
 	return mapping;
@@ -345,7 +345,7 @@ static const struct xlate_window *xlate_find_window(const struct xlate_region_de
 			return xlwindow;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static void *xlate_mmap(const struct region_device *rd, size_t offset,
@@ -362,7 +362,7 @@ static void *xlate_mmap(const struct region_device *rd, size_t offset,
 
 	xlwindow = xlate_find_window(xldev, &req);
 	if (!xlwindow)
-		return NULL;
+		return nullptr;
 
 	offset -= region_offset(&xlwindow->sub_region);
 
@@ -524,7 +524,7 @@ const struct region_device *incoherent_rdev_init(struct incoherent_rdev *irdev,
 	const size_t size = region_sz(r);
 
 	if (size != region_device_sz(read) || size != region_device_sz(write))
-		return NULL;
+		return nullptr;
 
 	/* The region is represented as offset 0 to size. That way, the generic
 	 * rdev operations can be called on the read or write implementation

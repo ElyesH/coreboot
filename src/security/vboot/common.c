@@ -13,7 +13,7 @@ static struct vb2_context *vboot_ctx;
 
 static void *vboot_get_workbuf(void)
 {
-	void *wb = NULL;
+	void *wb = nullptr;
 
 	if (ENV_HAS_CBMEM)
 		wb = cbmem_find(CBMEM_ID_VBOOT_WORKBUF);

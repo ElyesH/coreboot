@@ -143,8 +143,8 @@ static const generic_hub_ops_t xhci_rh_ops = {
 	.port_enabled		= xhci_rh_port_enabled,
 	.port_speed		= xhci_rh_port_speed,
 	.enable_port		= xhci_rh_enable_port,
-	.disable_port		= NULL,
-	.start_port_reset	= NULL,
+	.disable_port		= nullptr,
+	.start_port_reset	= nullptr,
 	.reset_port		= xhci_rh_reset_port,
 };
 

@@ -13,13 +13,13 @@
 
 AGESA_STATUS OemInitResume(AMD_S3_PARAMS *dataBlock)
 {
-	void *nv_storage = NULL;
+	void *nv_storage = nullptr;
 	size_t nv_storage_size = 0;
 
 	nv_storage = mrc_cache_current_mmap_leak(MRC_TRAINING_DATA, DEFAULT_MRC_VERSION,
 						 &nv_storage_size);
 
-	if (nv_storage == NULL || nv_storage_size == 0) {
+	if (nv_storage == nullptr || nv_storage_size == 0) {
 		printk(BIOS_ERR, "%s: No valid MRC cache!\n", __func__);
 		return AGESA_CRITICAL;
 	}
@@ -33,7 +33,7 @@ AGESA_STATUS OemInitResume(AMD_S3_PARAMS *dataBlock)
 AGESA_STATUS OemS3LateRestore(AMD_S3_PARAMS *dataBlock)
 {
 	char *heap = cbmem_find(CBMEM_ID_RESUME_SCRATCH);
-	if (heap == NULL)
+	if (heap == nullptr)
 		return AGESA_FATAL;
 
 	printk(BIOS_DEBUG, "Using resume HEAP at %08x\n",

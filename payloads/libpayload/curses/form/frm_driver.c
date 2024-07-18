@@ -3797,7 +3797,7 @@ FN_Down_Field(FORM *form)
 |
 |   Description   :  Make the given page number the current page and make
 |                    the given field the current field on the page. If
-|                    for the field NULL is given, make the first field on
+|                    for the field nullptr is given, make the first field on
 |                    the page the current field. The routine acts only
 |                    if the requested page is not the current page.
 |
@@ -4237,13 +4237,13 @@ form_driver(FORM *form, int c)
       {
 	Page_Navigation,	/* overloaded to call field&form hooks */
 	Inter_Field_Navigation,	/* overloaded to call field hooks      */
-	NULL,			/* Intra-Field is generic              */
+	nullptr,			/* Intra-Field is generic              */
 	Vertical_Scrolling,	/* Overloaded to check multi-line      */
 	Horizontal_Scrolling,	/* Overloaded to check single-line     */
 	Field_Editing,		/* Overloaded to mark modification     */
-	NULL,			/* Edit Mode is generic                */
-	NULL,			/* Field Validation is generic         */
-	NULL			/* Choice Request is generic           */
+	nullptr,			/* Edit Mode is generic                */
+	nullptr,			/* Field Validation is generic         */
+	nullptr			/* Choice Request is generic           */
       };
       size_t nMethods = (sizeof(Generic_Methods) / sizeof(Generic_Methods[0]));
       size_t method = (BI->keycode >> ID_Shft) & 0xffff;	/* see ID_Mask */
@@ -4499,7 +4499,7 @@ set_field_buffer(FIELD *field, int buffer, const char *value)
 |
 |   Description   :  Return the address of the buffer for the field.
 |
-|   Return Values :  Pointer to buffer or NULL if arguments were invalid.
+|   Return Values :  Pointer to buffer or nullptr if arguments were invalid.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(char *)
 field_buffer(const FIELD *field, int buffer)

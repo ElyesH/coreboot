@@ -72,7 +72,7 @@ static u8 *ahci_prdbuf_init(ahci_dev_t *const dev,
 			free(dev->buf - *(dev->buf - 1));
 		dev->buf = malloc(len + 2);
 		if (!dev->buf)
-			return NULL;
+			return nullptr;
 		dev->user_buf = user_buf;
 		dev->write_back = !out;
 		dev->buflen = len;
@@ -99,8 +99,8 @@ static void ahci_prdbuf_finalize(ahci_dev_t *const dev)
 			memcpy(dev->user_buf, dev->buf, dev->buflen);
 		free(dev->buf - *(dev->buf - 1));
 	}
-	dev->buf = NULL;
-	dev->user_buf = NULL;
+	dev->buf = nullptr;
+	dev->user_buf = nullptr;
 	dev->write_back = 0;
 	dev->buflen = 0;
 }

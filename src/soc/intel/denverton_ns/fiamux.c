@@ -16,7 +16,7 @@ int get_fiamux_hsio_info(uint16_t num_of_lanes, size_t num_of_entry,
 {
 	uint8_t entry;
 
-	if ((num_of_lanes == 0) || (num_of_entry == 0) || (*config == NULL))
+	if ((num_of_lanes == 0) || (num_of_entry == 0) || (*config == nullptr))
 		return 1;
 
 	for (entry = 0; entry < num_of_entry; entry++) {
@@ -102,8 +102,8 @@ void print_fiamux_config_hob(BL_FIA_MUX_CONFIG_HOB *fiamux_hob_data)
 */
 BL_FIA_MUX_CONFIG_HOB *get_fiamux_hob_data(void)
 {
-	u32 const *fiamux_hob = NULL;
-	BL_FIA_MUX_CONFIG_HOB *fiamux_hob_data = NULL;
+	u32 const *fiamux_hob = nullptr;
+	BL_FIA_MUX_CONFIG_HOB *fiamux_hob_data = nullptr;
 	const EFI_GUID fiamux_guid = FSP_FIAMUX_HOB_GUID;
 	size_t size;
 
@@ -111,7 +111,7 @@ BL_FIA_MUX_CONFIG_HOB *get_fiamux_hob_data(void)
 	fiamux_hob = fsp_find_extension_hob_by_guid(
 		(uint8_t const *)&fiamux_guid, &size);
 
-	if (fiamux_hob == NULL) {
+	if (fiamux_hob == nullptr) {
 		/* FIA MUX configuration HOB not exist */
 		die("FIA MUX Configuration Data Hob does not present!\n");
 	} else {
@@ -127,6 +127,6 @@ BL_FIA_MUX_CONFIG_HOB *get_fiamux_hob_data(void)
 
 __weak size_t mainboard_get_hsio_config(BL_HSIO_INFORMATION **p_hsio_config)
 {
-	*p_hsio_config = NULL;
+	*p_hsio_config = nullptr;
 	return 0;
 }

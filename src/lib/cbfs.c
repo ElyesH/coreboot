@@ -21,7 +21,7 @@
 #include <timestamp.h>
 
 #if ENV_X86 && (ENV_POSTCAR || ENV_SMM)
-struct mem_pool cbfs_cache = MEM_POOL_INIT(NULL, 0, 0);
+struct mem_pool cbfs_cache = MEM_POOL_INIT(nullptr, 0, 0);
 #elif CONFIG(POSTRAM_CBFS_CACHE_IN_BSS) && ENV_RAMSTAGE
 static u8 cache_buffer[CONFIG_RAMSTAGE_CBFS_CACHE_SIZE];
 struct mem_pool cbfs_cache =
@@ -52,7 +52,7 @@ enum cb_err _cbfs_boot_lookup(const char *name, bool force_ro,
 		err = cbfs_mcache_lookup(cbd->mcache, cbd->mcache_size,
 					 name, mdata, &data_offset);
 	if (err == CB_CBFS_CACHE_FULL) {
-		struct vb2_hash *metadata_hash = NULL;
+		struct vb2_hash *metadata_hash = nullptr;
 		if (CONFIG(TOCTOU_SAFETY)) {
 			if (ENV_SMM)  /* Cannot provide TOCTOU safety for SMM */
 				dead_code();
@@ -165,7 +165,7 @@ static bool cbfs_file_hash_mismatch(const void *buffer, size_t size,
 	if (!CONFIG(CBFS_VERIFICATION) && !CONFIG(TPM_MEASURED_BOOT))
 		return false;
 
-	const struct vb2_hash *hash = NULL;
+	const struct vb2_hash *hash = nullptr;
 
 	if (CONFIG(CBFS_VERIFICATION) && !skip_verification) {
 		hash = cbfs_file_hash(mdata);
@@ -192,7 +192,7 @@ static bool cbfs_file_hash_mismatch(const void *buffer, size_t size,
 		if (!hash || hash->algo != TPM_MEASURE_ALGO) {
 			if (vb2_hash_calculate(vboot_hwcrypto_allowed(), buffer, size,
 					       TPM_MEASURE_ALGO, &calculated_hash))
-				hash = NULL;
+				hash = nullptr;
 			else
 				hash = &calculated_hash;
 		}
@@ -241,7 +241,7 @@ static size_t cbfs_load_and_decompress(const struct region_device *rdev, void *b
 		/* cbfs_prog_stage_load() takes care of in-place LZ4 decompression by
 		   setting up the rdev to be in memory. */
 		map = rdev_mmap_full(rdev);
-		if (map == NULL)
+		if (map == nullptr)
 			return 0;
 
 		if (!cbfs_file_hash_mismatch(map, in_size, mdata, skip_verification)) {
@@ -258,7 +258,7 @@ static size_t cbfs_load_and_decompress(const struct region_device *rdev, void *b
 		if (!cbfs_lzma_enabled())
 			return 0;
 		map = rdev_mmap_full(rdev);
-		if (map == NULL)
+		if (map == nullptr)
 			return 0;
 
 		if (!cbfs_file_hash_mismatch(map, in_size, mdata, skip_verification)) {
@@ -295,7 +295,7 @@ static struct cbfs_preload_context *alloc_cbfs_preload_context(size_t additional
 	context = mem_pool_alloc(&cbfs_cache, size);
 
 	if (!context)
-		return NULL;
+		return nullptr;
 
 	memset(context, 0, size);
 
@@ -355,7 +355,7 @@ void cbfs_preload(const char *name)
 	}
 
 	context->buffer = mem_pool_alloc(&cbfs_cache, size);
-	if (context->buffer == NULL) {
+	if (context->buffer == nullptr) {
 		ERROR("%s(name='%s') failed to allocate %zu bytes for preload buffer\n",
 		      __func__, name, size);
 		goto out;
@@ -385,7 +385,7 @@ static struct cbfs_preload_context *find_cbfs_preload_context(const char *name)
 			return context;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static enum cb_err get_preload_rdev(struct region_device *rdev, const char *name)
@@ -429,7 +429,7 @@ static void *do_alloc(union cbfs_mdata *mdata, struct region_device *rdev,
 		      bool skip_verification)
 {
 	size_t size = region_device_sz(rdev);
-	void *loc = NULL;
+	void *loc = nullptr;
 
 	uint32_t compression = CBFS_COMPRESS_NONE;
 	const struct cbfs_file_attr_compression *cattr = cbfs_find_attr(mdata,
@@ -442,35 +442,35 @@ static void *do_alloc(union cbfs_mdata *mdata, struct region_device *rdev,
 	if (size_out)
 		*size_out = size;
 
-	/* allocator == NULL means do a cbfs_map() */
+	/* allocator == nullptr means do a cbfs_map() */
 	if (allocator) {
 		loc = allocator(arg, size, mdata);
 	} else if (compression == CBFS_COMPRESS_NONE) {
 		void *mapping = rdev_mmap_full(rdev);
 		if (!mapping)
-			return NULL;
+			return nullptr;
 		if (cbfs_file_hash_mismatch(mapping, size, mdata, skip_verification)) {
 			rdev_munmap(rdev, mapping);
-			return NULL;
+			return nullptr;
 		}
 		return mapping;
 	} else if (!cbfs_cache.size) {
 		/* In order to use the cbfs_cache you need to add a CBFS_CACHE to your
 		 * memlayout. */
 		ERROR("Cannot map compressed file %s without cbfs_cache\n", mdata->h.filename);
-		return NULL;
+		return nullptr;
 	} else {
 		loc = mem_pool_alloc(&cbfs_cache, size);
 	}
 
 	if (!loc) {
 		ERROR("'%s' allocation failure\n", mdata->h.filename);
-		return NULL;
+		return nullptr;
 	}
 
 	size = cbfs_load_and_decompress(rdev, loc, size, compression, mdata, skip_verification);
 	if (!size)
-		return NULL;
+		return nullptr;
 
 	return loc;
 }
@@ -486,7 +486,7 @@ void *_cbfs_alloc(const char *name, cbfs_allocator_t allocator, void *arg,
 	      arg, force_ro ? "true" : "false", type ? *type : -1);
 
 	if (_cbfs_boot_lookup(name, force_ro, &mdata, &rdev))
-		return NULL;
+		return nullptr;
 
 	if (type) {
 		const enum cbfs_type real_type = be32toh(mdata.h.type);
@@ -495,7 +495,7 @@ void *_cbfs_alloc(const char *name, cbfs_allocator_t allocator, void *arg,
 		else if (*type != real_type) {
 			ERROR("'%s' type mismatch (is %u, expected %u)\n",
 			      mdata.h.filename, real_type, *type);
-			return NULL;
+			return nullptr;
 		}
 	}
 
@@ -523,15 +523,15 @@ void *_cbfs_unverified_area_alloc(const char *area, const char *name,
 	DEBUG("%s(area='%s', name='%s', alloc=%p(%p))\n", __func__, area, name, allocator, arg);
 
 	if (fmap_locate_area_as_rdev(area, &area_rdev))
-		return NULL;
+		return nullptr;
 
-	if (cbfs_lookup(&area_rdev, name, &mdata, &data_offset, NULL)) {
+	if (cbfs_lookup(&area_rdev, name, &mdata, &data_offset, nullptr)) {
 		ERROR("'%s' not found in '%s'\n", name, area);
-		return NULL;
+		return nullptr;
 	}
 
 	if (rdev_chain(&file_rdev, &area_rdev, data_offset, be32toh(mdata.h.len)))
-		return NULL;
+		return nullptr;
 
 	return do_alloc(&mdata, &file_rdev, allocator, arg, size_out, true);
 }
@@ -540,7 +540,7 @@ void *_cbfs_default_allocator(void *arg, size_t size, const union cbfs_mdata *un
 {
 	struct _cbfs_default_allocator_arg *darg = arg;
 	if (size > darg->buf_size)
-		return NULL;
+		return nullptr;
 	return darg->buf;
 }
 
@@ -576,7 +576,7 @@ enum cb_err cbfs_prog_stage_load(struct prog *pstage)
 	prog_set_area(pstage, (void *)(uintptr_t)be64toh(sattr->loadaddr),
 		      be32toh(sattr->memlen));
 	prog_set_entry(pstage, prog_start(pstage) +
-			       be32toh(sattr->entry_offset), NULL);
+			       be32toh(sattr->entry_offset), nullptr);
 
 	/* Hacky way to not load programs over read only media. The stages
 	 * that would hit this path initialize themselves. */
@@ -654,7 +654,7 @@ enum cb_err cbfs_init_boot_device(const struct cbfs_boot_device *cbd,
 
 	/* Verification only: use cbfs_walk() without a walker() function to just run through
 	   the CBFS once, will return NOT_FOUND by default. */
-	enum cb_err err = cbfs_walk(&cbd->rdev, NULL, NULL, mdata_hash, 0);
+	enum cb_err err = cbfs_walk(&cbd->rdev, nullptr, nullptr, mdata_hash, 0);
 	if (err == CB_CBFS_NOT_FOUND)
 		err = CB_SUCCESS;
 	return err;
@@ -671,7 +671,7 @@ const struct cbfs_boot_device *cbfs_get_boot_device(bool force_ro)
 
 	if (!force_ro) {
 		const struct cbfs_boot_device *rw = vboot_get_cbfs_boot_device();
-		/* This will return NULL if vboot isn't enabled, didn't run yet or decided to
+		/* This will return nullptr if vboot isn't enabled, didn't run yet or decided to
 		   boot into recovery mode. */
 		if (rw)
 			return rw;

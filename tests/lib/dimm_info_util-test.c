@@ -195,5 +195,5 @@ int main(void)
 		cmocka_unit_test(test_smbios_form_factor_to_spd_mod_type),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

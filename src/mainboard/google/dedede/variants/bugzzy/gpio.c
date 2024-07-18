@@ -75,4 +75,4 @@ static void fw_config_handle(void *unused)
 		gpio_configure_pads(lte_disable_pads, ARRAY_SIZE(lte_disable_pads));
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, nullptr);

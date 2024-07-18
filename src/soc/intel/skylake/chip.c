@@ -87,11 +87,11 @@ const char *soc_acpi_name(const struct device *dev)
 			}
 			break;
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	/* Match functions 0 and 1 for possible GPUs on a secondary bus */
 	if (dev->upstream && dev->upstream->secondary > 0) {
@@ -99,7 +99,7 @@ const char *soc_acpi_name(const struct device *dev)
 		case 0: return "DEV0";
 		case 1: return "DEV1";
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	switch (dev->path.pci.devfn) {
@@ -156,7 +156,7 @@ const char *soc_acpi_name(const struct device *dev)
 	case PCH_DEVFN_TRACEHUB:return "THUB";
 	}
 
-	return NULL;
+	return nullptr;
 }
 #endif
 

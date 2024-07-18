@@ -45,4 +45,4 @@ static void fw_config_handle(void *unused)
 		config->add_acpi_dma_property = true;
 	}
 }
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, nullptr);

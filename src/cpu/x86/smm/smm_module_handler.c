@@ -108,7 +108,7 @@ struct global_nvs *gnvs;
 void *smm_get_save_state(int cpu)
 {
 	if (cpu > smm_runtime.num_cpus)
-		return NULL;
+		return nullptr;
 
 	return (void *)(smm_runtime.save_state_top[cpu] -
 			(smm_runtime.save_state_size - STM_PSD_SIZE));

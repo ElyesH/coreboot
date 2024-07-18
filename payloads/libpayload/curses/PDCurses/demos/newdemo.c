@@ -48,7 +48,7 @@ char *messages[] =
     "The dusty red roads lead one to loneliness",
     "Blue sky in the morning and",
     "Freezing nights and twinkling stars",
-    NULL
+    nullptr
 };
 
 int WaitForUser(void)
@@ -79,11 +79,11 @@ int SubWinTest(WINDOW *win)
     sw = w / 3;
     sh = h / 3;
 
-    if ((swin1 = derwin(win, sh, sw, 3, 5)) == NULL)
+    if ((swin1 = derwin(win, sh, sw, 3, 5)) == nullptr)
         return 1;
-    if ((swin2 = subwin(win, sh, sw, by + 4, bx + 8)) == NULL)
+    if ((swin2 = subwin(win, sh, sw, by + 4, bx + 8)) == nullptr)
         return 1;
-    if ((swin3 = subwin(win, sh, sw, by + 5, bx + 11)) == NULL)
+    if ((swin3 = subwin(win, sh, sw, by + 5, bx + 11)) == nullptr)
         return 1;
 
     init_pair(8, COLOR_RED, COLOR_BLUE);
@@ -250,7 +250,7 @@ int main(int argc, char **argv)
 
     win = newwin(height, width, (LINES - height) / 2, (COLS - width) / 2);
 
-    if (win == NULL)
+    if (win == nullptr)
     {
         endwin();
 
@@ -341,7 +341,7 @@ int main(int argc, char **argv)
 
         /* jbuhler's re-hacked scrolling messages */
 
-        for (j = 0; messages[j] != NULL; j++)
+        for (j = 0; messages[j] != nullptr; j++)
         {
             char *message = messages[j];
             int msg_len = strlen(message);

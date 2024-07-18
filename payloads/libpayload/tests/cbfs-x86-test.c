@@ -29,6 +29,6 @@ int main(int argc, char** argv)
 
 	if (setup_cbfs_from_ram(data, size) != 0) fail("could not setup CBFS in RAM\n");
 	struct cbfs_file *file = cbfs_find("foo");
-	if (file == NULL) fail("could not find file in CBFS\n");
+	if (file == nullptr) fail("could not find file in CBFS\n");
 	exit(0);
 }

@@ -470,7 +470,7 @@ tpm_result_t tpm_vendor_probe(unsigned int bus, uint32_t addr, enum tpm_family *
 	 * check is written in a way to give TPM 1 preference even if support
 	 * for both versions is compiled in.
 	 */
-	if (family != NULL)
+	if (family != nullptr)
 		*family = CONFIG(TPM1) ? TPM_1 : TPM_2;
 
 	tpm_dev.chip_type = UNKNOWN;

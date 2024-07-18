@@ -104,14 +104,14 @@ void log_resource(const char *type, const struct device *dev, const struct resou
  * Pick largest resource on the bus using the given mask and type.
  * Params:
  * bus = Bus from which the resource needs to picked from.
- * result_res = If NULL, there was no previous resource picked on this bus, else it points to
+ * result_res = If nullptr, there was no previous resource picked on this bus, else it points to
  *              the last picked resource.
  * type_mask = Mask to be applied when searching for resource
  * type = Expected type for the resource
  *
  * Returns:
  * If resource is found, returns the device and sets result_rest to point to the resource. Else
- * returns NULL.
+ * returns nullptr.
  */
 const struct device *largest_resource(struct bus *bus, struct resource **result_res,
 				      unsigned long type_mask, unsigned long type);

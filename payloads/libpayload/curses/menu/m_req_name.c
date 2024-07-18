@@ -69,7 +69,7 @@ static const char *request_names[MAX_MENU_COMMAND - MIN_MENU_COMMAND + 1] =
 |   Description   :  Get the external name of a menu request.
 |
 |   Return Values :  Pointer to name      - on success
-|                    NULL                 - on invalid request code
+|                    nullptr                 - on invalid request code
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(const char *)
 menu_request_name(int request)

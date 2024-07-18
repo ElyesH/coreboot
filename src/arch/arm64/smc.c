@@ -43,7 +43,7 @@ enum cb_err smccc_arch_soc_id(uint32_t *jep106code, uint32_t *soc_revision)
 {
 	uint64_t smc_ret;
 
-	if (jep106code == NULL || soc_revision == NULL)
+	if (jep106code == nullptr || soc_revision == nullptr)
 		return CB_ERR_ARG;
 
 	smc_ret = smc_call1(SMCCC_ARCH_SOC_ID, SMCCC_GET_SOC_VERSION);

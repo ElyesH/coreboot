@@ -48,7 +48,7 @@ AGESA_STATUS OemInitResume(S3_DATA_BLOCK *dataBlock)
 
 AGESA_STATUS OemS3LateRestore(S3_DATA_BLOCK *dataBlock)
 {
-	void *base = NULL;
+	void *base = nullptr;
 	size_t size = 0;
 
 	stage_cache_get_raw(STAGE_S3_DATA, &base, &size);

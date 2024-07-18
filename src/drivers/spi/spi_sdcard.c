@@ -113,7 +113,7 @@ static void spi_sdcard_disable_cs(const struct spi_sdcard *card)
 static void spi_sdcard_sendbyte(const struct spi_sdcard *card, uint8_t b)
 {
 	dprintk("sdcard -> %#x\n", b);
-	spi_xfer(&card->slave, &b, 1, NULL, 0);
+	spi_xfer(&card->slave, &b, 1, nullptr, 0);
 }
 
 static uint8_t spi_sdcard_recvbyte(const struct spi_sdcard *card)
@@ -235,7 +235,7 @@ static int response_resolve(int response_type, uint8_t *response,
 		r2 = response[1];
 
 	if (((response_type == RSP_R3) || (response_type == RSP_R7))
-			&& (out_register != NULL)) {
+			&& (out_register != nullptr)) {
 		*out_register = 0;
 		*out_register = (*out_register << 8) | response[1];
 		*out_register = (*out_register << 8) | response[2];
@@ -349,7 +349,7 @@ static int spi_sdcard_do_app_command(const struct spi_sdcard *card,
 		uint32_t *out_register)
 {
 	/* CMD55 */
-	if (spi_sdcard_do_command(card, APP_CMD, 0, NULL))
+	if (spi_sdcard_do_command(card, APP_CMD, 0, nullptr))
 		return -1;
 
 	return spi_sdcard_do_command_help(card, 1, cmd, argument, out_register);
@@ -362,7 +362,7 @@ size_t spi_sdcard_size(const struct spi_sdcard *card)
 	uint16_t c = 0;
 
 	/* CMD9, send csd (128bits register) */
-	if (spi_sdcard_do_command(card, SEND_CSD, 0, NULL))
+	if (spi_sdcard_do_command(card, SEND_CSD, 0, nullptr))
 		return -1;
 
 	/* enable CS */
@@ -430,25 +430,25 @@ int spi_sdcard_init(struct spi_sdcard *card,
 
 	/* CMD0, reset sdcard */
 	wait = 0xffff;
-	while ((spi_sdcard_do_command(card, GO_IDLE_STATE, 0, NULL)
+	while ((spi_sdcard_do_command(card, GO_IDLE_STATE, 0, nullptr)
 			!= RSP_ERR_IN_IDLE) && --wait)
 		;
 	if (!wait)
 		return -1; /* timeout */
 
 	/* CMD8 */
-	resolve = spi_sdcard_do_command(card, SEND_IF_COND, 0x1aa, NULL);
+	resolve = spi_sdcard_do_command(card, SEND_IF_COND, 0x1aa, nullptr);
 	if (resolve & RSP_ERR_ILLEGAL_COMMAND) {
 		/* ACMD41, initialize card */
 		wait = 0xffff;
 		while ((resolve = spi_sdcard_do_app_command(card,
-			SD_SEND_OP_COND, 0, NULL)) && --wait)
+			SD_SEND_OP_COND, 0, nullptr)) && --wait)
 			;
 		if ((resolve & RSP_ERR_ILLEGAL_COMMAND) || !wait) {
 			wait = 0xffff;
 			/* CMD1, initialize card for 2.1mm SD Memory Card */
 			while (spi_sdcard_do_app_command(card, SEND_OP_COND,
-				0, NULL) && --wait)
+				0, nullptr) && --wait)
 				;
 			if (!wait)
 				return -1; /* unknown card */
@@ -457,7 +457,7 @@ int spi_sdcard_init(struct spi_sdcard *card,
 		/* ACMD41, initialize card */
 		wait = 0xffff;
 		while (spi_sdcard_do_app_command(card, SD_SEND_OP_COND,
-				0x40000000, NULL) && --wait)
+				0x40000000, nullptr) && --wait)
 			;
 		if (!wait)
 			return -1;
@@ -468,7 +468,7 @@ int spi_sdcard_init(struct spi_sdcard *card,
 		return -1;
 
 	/* CMD16, set block length to 512 bytes */
-	if (spi_sdcard_do_command(card, SET_BLOCKLEN, 512, NULL))
+	if (spi_sdcard_do_command(card, SET_BLOCKLEN, 512, nullptr))
 		return -1;
 
 	/* CCS is bit30 of ocr register
@@ -499,7 +499,7 @@ int spi_sdcard_single_read(const struct spi_sdcard *card,
 		block_address = block_address * 512;
 
 	/* CMD17, start single block read */
-	if (spi_sdcard_do_command(card, READ_SINGLE_BLOCK, block_address, NULL))
+	if (spi_sdcard_do_command(card, READ_SINGLE_BLOCK, block_address, nullptr))
 		return -1;
 
 	/* enable cs */
@@ -549,7 +549,7 @@ int spi_sdcard_multiple_read(const struct spi_sdcard *card,
 	}
 	/* CMD18, start multiple block read */
 	if (spi_sdcard_do_command(card,
-			READ_MULTIPLEBLOCK, start_block_address, NULL))
+			READ_MULTIPLEBLOCK, start_block_address, nullptr))
 		return -1;
 
 	/* enable cs */
@@ -588,8 +588,8 @@ int spi_sdcard_multiple_read(const struct spi_sdcard *card,
 	/* disable cs */
 	spi_sdcard_disable_cs(card);
 
-	if (spi_sdcard_do_command(card, STOP_TRANSMISSION, 0, NULL))
-		if (spi_sdcard_do_command(card, SEND_STATUS, 0, NULL))
+	if (spi_sdcard_do_command(card, STOP_TRANSMISSION, 0, nullptr))
+		if (spi_sdcard_do_command(card, SEND_STATUS, 0, nullptr))
 			return -1;
 
 	return 0;
@@ -659,7 +659,7 @@ int spi_sdcard_single_write(const struct spi_sdcard *card,
 	if (card->type == SDCARD_TYPE_SDSC)
 		block_address = block_address * 512;
 
-	if (spi_sdcard_do_command(card, WRITE_BLOCK, block_address, NULL))
+	if (spi_sdcard_do_command(card, WRITE_BLOCK, block_address, nullptr))
 		return -1;
 
 	/* enable cs */
@@ -712,7 +712,7 @@ int spi_sdcard_multiple_write(const struct spi_sdcard *card,
 	}
 
 	if (spi_sdcard_do_command(card, WRITE_MULTIPLEBLOCK,
-		start_block_address, NULL))
+		start_block_address, nullptr))
 		return -1;
 
 	/* enable cs */
@@ -757,8 +757,8 @@ int spi_sdcard_multiple_write(const struct spi_sdcard *card,
 	/* disable cs */
 	spi_sdcard_disable_cs(card);
 
-	if (spi_sdcard_do_command(card, STOP_TRANSMISSION, 0, NULL))
-		if (spi_sdcard_do_command(card, SEND_STATUS, 0, NULL))
+	if (spi_sdcard_do_command(card, STOP_TRANSMISSION, 0, nullptr))
+		if (spi_sdcard_do_command(card, SEND_STATUS, 0, nullptr))
 			return -1;
 
 	return ret;
@@ -775,16 +775,16 @@ int spi_sdcard_erase(const struct spi_sdcard *card,
 
 	/* CMD32, set erase start address */
 	if (spi_sdcard_do_command(card, ERASE_WR_BLK_START_ADDR,
-			start_block_address, NULL))
+			start_block_address, nullptr))
 		return -1;
 
 	/* CMD33, set erase end address */
 	if (spi_sdcard_do_command(card, ERASE_WR_BLK_END_ADDR,
-			end_block_address, NULL))
+			end_block_address, nullptr))
 		return -1;
 
 	/* CMD38, erase */
-	if (spi_sdcard_do_command(card, ERASE, 0, NULL))
+	if (spi_sdcard_do_command(card, ERASE, 0, nullptr))
 		return -1;
 
 	return 0;

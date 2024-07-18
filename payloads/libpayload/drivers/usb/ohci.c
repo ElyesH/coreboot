@@ -83,7 +83,7 @@ dump_td(td_t *cur)
 static void
 dump_ed(ed_t *cur)
 {
-	td_t *tmp_td = NULL;
+	td_t *tmp_td = nullptr;
 	usb_debug("+===================================================+\n");
 	usb_debug("| ############# OHCI ED at [0x%08lx] ########### |\n", virt_to_phys(cur));
 	usb_debug("+---------------------------------------------------+\n");
@@ -122,7 +122,7 @@ dump_ed(ed_t *cur)
 static void
 ohci_reset(hci_t *controller)
 {
-	if (controller == NULL)
+	if (controller == nullptr)
 		return;
 
 	OHCI_INST(controller)->opreg->HcCommandStatus = HostControllerReset;
@@ -183,8 +183,8 @@ ohci_init(unsigned long physical_bar)
 	controller->bulk = ohci_bulk;
 	controller->control = ohci_control;
 	controller->set_address = generic_set_address;
-	controller->finish_device_config = NULL;
-	controller->destroy_device = NULL;
+	controller->finish_device_config = nullptr;
+	controller->destroy_device = nullptr;
 	controller->create_intr_queue = ohci_create_intr_queue;
 	controller->destroy_intr_queue = ohci_destroy_intr_queue;
 	controller->poll_intr_queue = ohci_poll_intr_queue;
@@ -676,17 +676,17 @@ ohci_create_intr_queue(endpoint_t *const ep, const int reqsize,
 		       const int reqcount, const int reqtiming)
 {
 	int i;
-	intrq_td_t *first_td = NULL, *last_td = NULL;
+	intrq_td_t *first_td = nullptr, *last_td = nullptr;
 
 	if (reqsize > 4096)
-		return NULL;
+		return nullptr;
 
 	intr_queue_t *const intrq =
 		(intr_queue_t *)dma_memalign(sizeof(intrq->ed), sizeof(*intrq));
 	if (!intrq) {
 		usb_debug("Not enough DMA memory for intr queue.\n");
 		free(intrq);
-		return NULL;
+		return nullptr;
 	}
 	memset(intrq, 0, sizeof(*intrq));
 	intrq->data = (u8 *)dma_malloc(reqcount * reqsize);
@@ -746,7 +746,7 @@ ohci_create_intr_queue(endpoint_t *const ep, const int reqsize,
 		usb_debug("Error: Failed to place ohci interrupt endpoint "
 			"descriptor into periodic table: no space left\n");
 		ohci_destroy_intr_queue(ep, intrq);
-		return NULL;
+		return nullptr;
 	}
 
 	return intrq;
@@ -802,7 +802,7 @@ ohci_destroy_intr_queue(endpoint_t *const ep, void *const q_)
 }
 
 /* read one intr-packet from queue, if available. extend the queue for new input.
-   return NULL if nothing new available.
+   return nullptr if nothing new available.
    Recommended use: while (data=poll_intr_queue(q)) process(data);
  */
 static u8 *
@@ -810,7 +810,7 @@ ohci_poll_intr_queue(void *const q_)
 {
 	intr_queue_t *const intrq = (intr_queue_t *)q_;
 
-	u8 *data = NULL;
+	u8 *data = nullptr;
 
 	/* Process done queue first, then check if we have work to do. */
 	ohci_process_done_queue(OHCI_INST(intrq->endp->dev->controller), 0);
@@ -846,7 +846,7 @@ ohci_process_done_queue(ohci_t *const ohci, const int spew_debug)
 	int i, j;
 
 	/* Temporary queue of interrupt queue TDs (to reverse order). */
-	intrq_td_t *temp_tdq = NULL;
+	intrq_td_t *temp_tdq = nullptr;
 
 	/* Check if done head has been written. */
 	if (!(ohci->opreg->HcInterruptStatus & WritebackDoneHead))
@@ -923,7 +923,7 @@ ohci_process_done_queue(ohci_t *const ohci, const int spew_debug)
 			intrq->tail = cur_td;
 		}
 		/* It's always the last element. */
-		cur_td->next = NULL;
+		cur_td->next = nullptr;
 		++j;
 	}
 	if (spew_debug)

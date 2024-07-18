@@ -288,7 +288,7 @@ static void tcss_configure_dp_mode(const struct tcss_port_map *port_map, size_t 
 		return;
 
 	ops = usbc_get_ops();
-	if (ops == NULL)
+	if (ops == nullptr)
 		return;
 
 	port_bitmask = ops->dp_ops.wait_for_connection(WAIT_FOR_DISPLAYPORT_TIMEOUT_MS);
@@ -347,7 +347,7 @@ static void tcss_configure_usb_mode(const struct tcss_port_map *port_map, size_t
 	const struct tcss_port_map *port_info;
 
 	ops = usbc_get_ops();
-	if (ops == NULL)
+	if (ops == nullptr)
 		return;
 
 	for (i = 0; i < num_ports; i++) {
@@ -440,7 +440,7 @@ void tcss_configure(const struct typec_aux_bias_pads aux_bias_pads[MAX_TYPE_C_PO
 	size_t i;
 
 	port_map = tcss_get_port_info(&num_ports);
-	if ((port_map == NULL) || platform_is_resuming())
+	if ((port_map == nullptr) || platform_is_resuming())
 		return;
 
 	if (CONFIG(TCSS_HAS_USBC_OPS))

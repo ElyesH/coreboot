@@ -8,7 +8,7 @@
 
 void smbios_system_set_uuid(u8 *uuid)
 {
-	/* Add 3 more bytes: 2 for possible CRLF and third for NULL char */
+	/* Add 3 more bytes: 2 for possible CRLF and third for nullptr char */
 	char uuid_str[UUID_STRLEN + 3] = {0};
 	uint8_t system_uuid[UUID_LEN];
 

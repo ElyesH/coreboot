@@ -105,7 +105,7 @@ int PDC_setclipboard(const char *contents, long length)
     PTIB ptib;
     PPIB ppib;
     ULONG ulRC;
-    PSZ szTextOut = NULL;
+    PSZ szTextOut = nullptr;
     int rc;
 #endif
     PDC_LOG(("PDC_setclipboard() - called\n"));
@@ -123,7 +123,7 @@ int PDC_setclipboard(const char *contents, long length)
 
     rc = PDC_CLIP_MEMORY_ERROR;
 
-    ulRC = DosAllocSharedMem((PVOID)&szTextOut, NULL, length + 1,
+    ulRC = DosAllocSharedMem((PVOID)&szTextOut, nullptr, length + 1,
                              PAG_WRITE | PAG_COMMIT | OBJ_GIVEABLE);
 
     if (ulRC == 0)

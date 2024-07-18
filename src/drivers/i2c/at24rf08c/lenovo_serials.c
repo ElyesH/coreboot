@@ -59,7 +59,7 @@ static void at24rf08c_read_string(u8 bank, u8 start, u8 len, char *result)
 	struct device *dev;
 
 	dev = at24rf08c_find_bank(bank);
-	if (dev == NULL) {
+	if (dev == nullptr) {
 		printk(BIOS_WARNING, "EEPROM not found\n");
 		memcpy(result, ERROR_STRING, sizeof(ERROR_STRING));
 		return;
@@ -122,7 +122,7 @@ void smbios_system_set_uuid(u8 *uuid)
 	memset(result, 0, sizeof(result));
 
 	dev = dev_find_slot_on_smbus(1, 0x56);
-	if (dev == NULL) {
+	if (dev == nullptr) {
 		printk(BIOS_WARNING, "EEPROM not found\n");
 		already_read = 1;
 		memset(uuid, 0, 16);
@@ -165,7 +165,7 @@ const char *smbios_mainboard_version(void)
 	memset(result, 0, sizeof(result));
 
 	dev = at24rf08c_find_bank(2);
-	if (dev == NULL) {
+	if (dev == nullptr) {
 		memcpy(result, ERROR_STRING, sizeof(ERROR_STRING));
 		return result;
 	}

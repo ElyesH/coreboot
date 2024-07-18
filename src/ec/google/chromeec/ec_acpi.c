@@ -41,10 +41,10 @@ static void get_usb_port_references(int port_number, struct device **usb2_port,
 				    struct device **usb3_port, struct device **usb4_port)
 {
 	struct drivers_usb_acpi_config *config;
-	struct device *port = NULL;
+	struct device *port = nullptr;
 
 	/* Search through the devicetree for matching USB Type-C ports */
-	while ((port = dev_find_path(port, DEVICE_PATH_USB)) != NULL) {
+	while ((port = dev_find_path(port, DEVICE_PATH_USB)) != nullptr) {
 		if (!port->enabled || port->path.type != DEVICE_PATH_USB)
 			continue;
 
@@ -128,7 +128,7 @@ static void get_pld_from_usb_ports(struct acpi_pld *pld,
 	struct device *usb2_port, struct device *usb3_port,
 	struct device *usb4_port)
 {
-	struct drivers_usb_acpi_config *config = NULL;
+	struct drivers_usb_acpi_config *config = nullptr;
 
 	if (usb4_port)
 		config = usb4_port->chip_info;
@@ -182,9 +182,9 @@ static void fill_ssdt_typec_device(const struct device *dev)
 		if (rv)
 			continue;
 
-		usb2_port = NULL;
-		usb3_port = NULL;
-		usb4_port = NULL;
+		usb2_port = nullptr;
+		usb3_port = nullptr;
+		usb4_port = nullptr;
 		get_usb_port_references(i, &usb2_port, &usb3_port, &usb4_port);
 
 		get_pld_from_usb_ports(&pld, usb2_port, usb3_port, usb4_port);

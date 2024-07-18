@@ -129,7 +129,7 @@ ssize_t edp_aux_transfer(unsigned int address, u8 request, void *buffer, size_t 
 	bool read = (request == DP_AUX_I2C_READ) || (request == DP_AUX_NATIVE_READ);
 
 	/* Ignore address only message */
-	if ((size == 0) || (buffer == NULL)) {
+	if ((size == 0) || (buffer == nullptr)) {
 		printk(BIOS_ERR, "%s: invalid size or buffer\n", __func__);
 		return size;
 	}

@@ -11,7 +11,7 @@ void start_apob_cache_read(void);
 void *soc_fill_apob_cache(void);
 #else /* CONFIG(SOC_AMD_COMMON_BLOCK_APOB) && !CONFIG(SOC_AMD_COMMON_BLOCK_APOB_NV_DISABLE) */
 static inline void start_apob_cache_read(void) {}
-static inline void *soc_fill_apob_cache(void) { return NULL; }
+static inline void *soc_fill_apob_cache(void) { return nullptr; }
 #endif /* CONFIG(SOC_AMD_COMMON_BLOCK_APOB) && !CONFIG(SOC_AMD_COMMON_BLOCK_APOB_NV_DISABLE) */
 
 #endif /* AMD_BLOCK_APOB_CACHE_H */

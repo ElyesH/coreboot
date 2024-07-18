@@ -246,7 +246,7 @@ void *gpio_find_reg_addr(gpio_t gpio)
 		reg_addr = (void *)IOCFG_RT_BASE;
 		break;
 	default:
-		reg_addr = NULL;
+		reg_addr = nullptr;
 		break;
 	}
 
@@ -259,11 +259,11 @@ const struct gpio_drv_info *get_gpio_driving_info(uint32_t raw_id)
 		uint32_t id = raw_id - SPI_AP_GPIO_BASE;
 
 		if (id >= ARRAY_SIZE(bootblock_gpio_driving_info))
-			return NULL;
+			return nullptr;
 		return &bootblock_gpio_driving_info[id];
 	} else {
 		if (raw_id >= ARRAY_SIZE(gpio_driving_info))
-			return NULL;
+			return nullptr;
 		return &gpio_driving_info[raw_id];
 	}
 }
@@ -271,10 +271,10 @@ const struct gpio_drv_info *get_gpio_driving_info(uint32_t raw_id)
 const struct gpio_drv_info *get_gpio_driving_adv_info(uint32_t raw_id)
 {
 	if (ENV_BOOTBLOCK) {
-		return NULL;
+		return nullptr;
 	} else {
 		if (raw_id >= ARRAY_SIZE(gpio_driving_adv_info))
-			return NULL;
+			return nullptr;
 		return &gpio_driving_adv_info[raw_id];
 	}
 }

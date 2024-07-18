@@ -35,7 +35,7 @@ static int mmc_send_op_cond_iter(struct storage_media *media,
 			cmd->cmdarg |= OCR_HCS;
 	}
 	cmd->flags = 0;
-	int err = ctrlr->send_cmd(ctrlr, cmd, NULL);
+	int err = ctrlr->send_cmd(ctrlr, cmd, nullptr);
 	if (err)
 		return err;
 
@@ -139,7 +139,7 @@ static int mmc_switch(struct storage_media *media, uint8_t index, uint8_t value)
 			   (index << 16) | (value << 8));
 	cmd.flags = 0;
 
-	int ret = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	int ret = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 
 	/* Waiting for the ready status */
 	sd_mmc_send_status(media, SD_MMC_IO_RETRIES);

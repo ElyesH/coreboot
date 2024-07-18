@@ -74,7 +74,7 @@ __weak void *soc_get_bl31_plat_params(void)
 void run_bl31(u64 payload_entry, u64 payload_arg0, u64 payload_spsr)
 {
 	struct prog bl31 = PROG_INIT(PROG_BL31, CONFIG_CBFS_PREFIX"/bl31");
-	void (*bl31_entry)(bl_params_t *params, void *plat_params) = NULL;
+	void (*bl31_entry)(bl_params_t *params, void *plat_params) = nullptr;
 
 	if (!selfload_check(&bl31, BM_MEM_BL31))
 		die("BL31 load failed");

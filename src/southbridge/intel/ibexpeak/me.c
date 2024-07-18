@@ -115,13 +115,13 @@ static inline void read_me_csr(struct mei_csr *csr)
 static inline void write_cb(u32 dword)
 {
 	write32(mei_base_address + (MEI_H_CB_WW / sizeof(u32)), dword);
-	mei_dump(NULL, dword, MEI_H_CB_WW, "WRITE");
+	mei_dump(nullptr, dword, MEI_H_CB_WW, "WRITE");
 }
 
 static inline u32 read_cb(void)
 {
 	u32 dword = read32(mei_base_address + (MEI_ME_CB_RW / sizeof(u32)));
-	mei_dump(NULL, dword, MEI_ME_CB_RW, "READ");
+	mei_dump(nullptr, dword, MEI_ME_CB_RW, "READ");
 	return dword;
 }
 

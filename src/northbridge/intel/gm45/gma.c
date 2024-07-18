@@ -17,7 +17,7 @@
 #include "chip.h"
 #include "gm45.h"
 
-static struct resource *gtt_res = NULL;
+static struct resource *gtt_res = nullptr;
 
 u32 gtt_read(u32 reg)
 {
@@ -40,7 +40,7 @@ static const char *gm45_get_lvds_edid_str(void)
 		return edid_str;
 	if (!gtt_res) {
 		printk(BIOS_ERR, "Never call %s() outside dev.init() context.\n", __func__);
-		return NULL;
+		return nullptr;
 	}
 	mmio = res2mmio(gtt_res, 0, 0);
 
@@ -51,7 +51,7 @@ static const char *gm45_get_lvds_edid_str(void)
 
 	if (decode_edid(edid_data_lvds, sizeof(edid_data_lvds), &edid_lvds)
 	    != EDID_CONFORMANT)
-		return NULL;
+		return nullptr;
 	memcpy(edid_str, edid_lvds.ascii_string, sizeof(edid_str));
 	return edid_str;
 }

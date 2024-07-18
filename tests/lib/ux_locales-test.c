@@ -57,7 +57,7 @@ void *_cbfs_alloc(const char *name, cbfs_allocator_t allocator, void *arg,
 		return data.raw;
 	}
 	*size_out = 0;
-	return NULL;
+	return nullptr;
 }
 
 uint32_t vb2api_get_locale_id(struct vb2_context *ctx)
@@ -174,14 +174,14 @@ static void test_ux_locales_null_terminated(void **state)
 	data.raw[data.size - 2] = 'X';
 	ux_locales_unmap();
 
-	/* The last few characters are now changed so that the data is not NULL terminated.
+	/* The last few characters are now changed so that the data is not nullptr terminated.
 	   This will prevent us from accessing the last text. */
 	assert_null(ux_locales_get_text("name_20"));
 }
 
 /*
  * This macro helps test ux_locales_get_text with `_name` and `_lang_id`.
- * If `_expect` is NULL, then the function should not find anything.
+ * If `_expect` is nullptr, then the function should not find anything.
  * Otherwise, the function should find the corresponding expect value.
  */
 #define UX_LOCALES_GET_TEXT_TEST(_name, _lang_id, _expect)                                     \
@@ -207,14 +207,14 @@ int main(void)
 		UX_LOCALES_GET_TEXT_TEST("name_15", 25, "translation_15_25"),
 		/* Ensure we check the whole string of 'name'.
 		   ('name_2' is the prefix of 'name_20') */
-		UX_LOCALES_GET_TEXT_TEST("name_2", 3, NULL),
+		UX_LOCALES_GET_TEXT_TEST("name_2", 3, nullptr),
 		/* Ensure we check the whole string of 'lang_id'.
 		   (id:'2' is the prefix of id:'25' in 'name_15') */
-		UX_LOCALES_GET_TEXT_TEST("name_15", 2, NULL),
+		UX_LOCALES_GET_TEXT_TEST("name_15", 2, nullptr),
 		/* Ensure we will fallback to 0. */
 		UX_LOCALES_GET_TEXT_TEST("name_1", 7, "translation_1_0"),
 		/* Do not search for locale id with unmatched name. */
-		UX_LOCALES_GET_TEXT_TEST("name_15", 8, NULL),
+		UX_LOCALES_GET_TEXT_TEST("name_15", 8, nullptr),
 		/* Validity check of lang_id > 100. We will fallback to 0. */
 		UX_LOCALES_GET_TEXT_TEST("name_1", 100, "translation_1_0"),
 		/* cbfs not found. */
@@ -226,10 +226,10 @@ int main(void)
 		/* Read multiple times. */
 		cmocka_unit_test_setup_teardown(test_ux_locales_two_calls, setup_default,
 						teardown_unmap),
-		/* Validity check of NULL terminated. */
+		/* Validity check of nullptr terminated. */
 		cmocka_unit_test_setup_teardown(test_ux_locales_null_terminated,
 						setup_default, teardown_unmap),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

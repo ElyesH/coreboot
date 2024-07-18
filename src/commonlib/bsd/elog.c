@@ -10,7 +10,7 @@
  */
 enum cb_err elog_verify_header(const struct elog_header *header)
 {
-	if (header == NULL)
+	if (header == nullptr)
 		return CB_ERR;
 
 	if (header->magic != ELOG_SIGNATURE)
@@ -27,12 +27,12 @@ enum cb_err elog_verify_header(const struct elog_header *header)
 
 /*
  * return the next elog event.
- * return NULL if event is invalid.
+ * return nullptr if event is invalid.
  */
 const struct event_header *elog_get_next_event(const struct event_header *event)
 {
 	if (!event)
-		return NULL;
+		return nullptr;
 
 	/* Point to next event */
 	return (const struct event_header *)((const void *)(event) + event->length);

@@ -606,13 +606,13 @@ struct tpm2_response *tpm_unmarshal_response(TPM_CC command, struct ibuf *ib)
 	rc |= unmarshal_TPM_CC(ib, &tpm2_static_resp.hdr.tpm_code);
 
 	if (rc != 0)
-		return NULL;
+		return nullptr;
 
 	if (ibuf_capacity(ib) != tpm2_static_resp.hdr.tpm_size) {
 		printk(BIOS_ERR,
 		       "%s: size mismatch in response to command %#x\n",
 		       __func__, command);
-		return NULL;
+		return nullptr;
 	}
 
 	/* On errors, we're not sure what the TPM is returning. None of the
@@ -673,7 +673,7 @@ struct tpm2_response *tpm_unmarshal_response(TPM_CC command, struct ibuf *ib)
 			}
 		}
 		printk(BIOS_INFO, "\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (ibuf_remaining(ib)) {
@@ -682,7 +682,7 @@ struct tpm2_response *tpm_unmarshal_response(TPM_CC command, struct ibuf *ib)
 		       " failed to parse (%zd)\n",
 		       __func__, __LINE__, tpm2_static_resp.hdr.tpm_size,
 		       command, ibuf_remaining(ib));
-		return NULL;
+		return nullptr;
 	}
 	if (rc)
 		printk(BIOS_WARNING, "%s had one or more failures.\n",

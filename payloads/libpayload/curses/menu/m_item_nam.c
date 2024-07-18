@@ -45,7 +45,7 @@ MODULE_ID("$Id: m_item_nam.c,v 1.15 2010/01/23 21:20:10 tom Exp $")
 |
 |   Description   :  Return name of menu item
 |
-|   Return Values :  See above; returns NULL if item is invalid
+|   Return Values :  See above; returns nullptr if item is invalid
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(const char *)
 item_name(const ITEM * item)
@@ -60,7 +60,7 @@ item_name(const ITEM * item)
 |
 |   Description   :  Returns description of item
 |
-|   Return Values :  See above; Returns NULL if item is invalid
+|   Return Values :  See above; Returns nullptr if item is invalid
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(const char *)
 item_description(const ITEM * item)

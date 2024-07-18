@@ -11,7 +11,7 @@
  */
 void boot_device_security_lockdown(void)
 {
-	const struct region_device *rdev = NULL;
+	const struct region_device *rdev = nullptr;
 	struct region_device dev;
 	enum bootdev_prot_type lock_type;
 
@@ -65,7 +65,7 @@ static void lock(void *unused)
  */
 
 #if CONFIG(MRC_WRITE_NV_LATE)
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME_CHECK, BS_ON_EXIT, lock, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME_CHECK, BS_ON_EXIT, lock, nullptr);
 #else
-BOOT_STATE_INIT_ENTRY(BS_DEV_RESOURCES, BS_ON_ENTRY, lock, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_RESOURCES, BS_ON_ENTRY, lock, nullptr);
 #endif

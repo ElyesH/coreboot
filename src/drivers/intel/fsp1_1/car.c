@@ -24,7 +24,7 @@ void mainboard_romstage_entry(void)
 {
 	/* Need to locate the current FSP_INFO_HEADER. The cache-as-ram
 	 * is still enabled. We can directly access work buffer here. */
-	void *fsp = cbfs_map("fsp.bin", NULL);
+	void *fsp = cbfs_map("fsp.bin", nullptr);
 
 	if (!fsp)
 		die_with_post_code(POSTCODE_INVALID_CBFS, "Unable to locate fsp.bin");

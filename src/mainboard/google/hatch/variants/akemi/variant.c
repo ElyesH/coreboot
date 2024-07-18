@@ -17,7 +17,7 @@ void variant_devtree_update(void)
 	/* SKU ID 2 and 4 do not have eMMC, hence disable it. */
 	sku_id = google_chromeec_get_board_sku();
 	if ((sku_id == 2) || (sku_id == 4)) {
-		if (emmc_host == NULL)
+		if (emmc_host == nullptr)
 			return;
 		emmc_host->enabled = 0;
 		cfg->ScsEmmcHs400Enabled = 0;
@@ -25,7 +25,7 @@ void variant_devtree_update(void)
 
 	/* SKU ID 1 and 3 do not have SSD, hence disable it. */
 	if ((sku_id == 1) || (sku_id == 3)) {
-		if (ssd_host == NULL)
+		if (ssd_host == nullptr)
 			return;
 		ssd_host->enabled = 0;
 		cfg->SataSalpSupport = 0;

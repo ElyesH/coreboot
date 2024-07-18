@@ -229,8 +229,8 @@ static void ddr5_fill_dimm_module_info(FSP_M_CONFIG *mem_cfg, const struct mb_cf
 				spd_info->smbus[ch].addr_dimm[dimm] << 1;
 		}
 	}
-	mem_init_dq_upds(mem_cfg, NULL, mb_cfg, true);
-	mem_init_dqs_upds(mem_cfg, NULL, mb_cfg, true);
+	mem_init_dq_upds(mem_cfg, nullptr, mb_cfg, true);
+	mem_init_dqs_upds(mem_cfg, nullptr, mb_cfg, true);
 }
 
 void memcfg_init(FSPM_UPD *memupd, const struct mb_cfg *mb_cfg,

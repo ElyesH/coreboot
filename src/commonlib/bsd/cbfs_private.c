@@ -168,7 +168,7 @@ const void *cbfs_find_attr(const union cbfs_mdata *mdata, uint32_t attr_tag, siz
 	uint32_t end = be32toh(mdata->h.offset);
 
 	if (!offset)
-		return NULL;
+		return nullptr;
 
 	while (offset + sizeof(struct cbfs_file_attribute) <= end) {
 		const struct cbfs_file_attribute *attr = (const void *)mdata->raw + offset;
@@ -178,20 +178,20 @@ const void *cbfs_find_attr(const union cbfs_mdata *mdata, uint32_t attr_tag, siz
 		if (len < sizeof(struct cbfs_file_attribute) || len > end - offset) {
 			ERROR("Attribute %s[%x] invalid length: %u\n",
 			      mdata->h.filename, tag, len);
-			return NULL;
+			return nullptr;
 		}
 		if (tag == attr_tag) {
 			if (size_check && len != size_check) {
 				ERROR("Attribute %s[%x] size mismatch: %u != %zu\n",
 				      mdata->h.filename, tag, len, size_check);
-				return NULL;
+				return nullptr;
 			}
 			return attr;
 		}
 		offset += len;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 const struct vb2_hash *cbfs_file_hash(const union cbfs_mdata *mdata)
@@ -200,19 +200,19 @@ const struct vb2_hash *cbfs_file_hash(const union cbfs_mdata *mdata)
 	const struct cbfs_file_attr_hash *attr =
 		cbfs_find_attr(mdata, CBFS_FILE_ATTR_TAG_HASH, 0);
 	if (!attr)
-		return NULL;	/* no hash */
+		return nullptr;	/* no hash */
 	const size_t asize = be32toh(attr->len);
 
 	const struct vb2_hash *hash = &attr->hash;
 	const size_t hsize = vb2_digest_size(hash->algo);
 	if (!hsize) {
 		ERROR("Hash algo %u for '%s' unsupported.\n", hash->algo, mdata->h.filename);
-		return NULL;
+		return nullptr;
 	}
 	if (hsize != asize - offsetof(struct cbfs_file_attr_hash, hash.raw)) {
 		ERROR("Hash attribute size for '%s' (%zu) incorrect for algo %u.\n",
 		      mdata->h.filename, asize, hash->algo);
-		return NULL;
+		return nullptr;
 	}
 	return hash;
 }

@@ -48,7 +48,7 @@ static void *find_save_state(int cmd)
 		if (reg_al == cmd)
 			return state;
 	}
-	return NULL;
+	return nullptr;
 }
 
 void handle_smi_gsmi(void)

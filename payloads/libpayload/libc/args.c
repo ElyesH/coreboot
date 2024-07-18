@@ -49,7 +49,7 @@ int string_argc;
  *   string_argc pointer to number of arguments
  *   string_argv pointer to argument list.
  *
- * @param caller to be used as argv[0] (may be NULL to ignore)
+ * @param caller to be used as argv[0] (may be nullptr to ignore)
  * @param string to process
  * @return 0 if no error occurred.
  */

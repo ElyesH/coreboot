@@ -166,7 +166,7 @@ struct chromeec_command {
  *
  * Request the buffer provided the size. If 'req' is non-zero then the
  * buffer requested is for EC requests. Otherwise it's for responses. Return
- * non-NULL on success, NULL on error.
+ * non-nullptr on success, nullptr on error.
  */
 void *crosec_get_buffer(size_t size, int req);
 

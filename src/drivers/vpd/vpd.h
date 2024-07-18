@@ -21,7 +21,7 @@ enum vpd_region {
  * into buffer. A terminating null byte ('\0') is stored after the last
  * character in the buffer.
  *
- * Returns NULL if key is not found, otherwise buffer.
+ * Returns nullptr if key is not found, otherwise buffer.
  */
 char *vpd_gets(const char *key, char *buffer, int size, enum vpd_region region);
 
@@ -36,7 +36,7 @@ char *vpd_gets(const char *key, char *buffer, int size, enum vpd_region region);
  * user is not supposed to modify the data, and does not have to free the
  * memory.
  *
- * Returns NULL if key is not found.
+ * Returns nullptr if key is not found.
  */
 
 const void *vpd_find(const char *key, int *size, enum vpd_region region);

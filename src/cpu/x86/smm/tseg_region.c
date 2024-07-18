@@ -67,7 +67,7 @@ void stage_cache_external_region(void **base, size_t *size)
 {
 	if (smm_subregion(SMM_SUBREGION_CACHE, (uintptr_t *)base, size)) {
 		printk(BIOS_ERR, "No cache SMM subregion.\n");
-		*base = NULL;
+		*base = nullptr;
 		*size = 0;
 	}
 }

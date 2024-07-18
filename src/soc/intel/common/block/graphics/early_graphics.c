@@ -24,7 +24,7 @@ static void device_init(void)
 __weak const struct pad_config *variant_early_graphics_gpio_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 bool early_graphics_init(void)

@@ -55,7 +55,7 @@ struct panel_description *get_panel_description(int panel_id)
 	struct edid *edid = &ps8640_data.edid;
 	if (ps8640_get_edid(i2c_bus, i2c_addr, edid)) {
 		printk(BIOS_ERR, "Can't get panel's edid\n");
-		return NULL;
+		return nullptr;
 	}
 	return &ps8640_panel;
 }

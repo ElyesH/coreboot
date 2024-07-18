@@ -161,7 +161,7 @@ static em64t100_smm_state_save_area_t *smi_apmc_find_state_save(uint8_t cmd)
 		return state;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static void finalize(void)
@@ -269,38 +269,38 @@ static void southbridge_smi_periodic(void)
 typedef void (*smi_handler_t)(void);
 
 static const smi_handler_t southbridge_smi[32] = {
-	NULL,			  //  [0] reserved
-	NULL,			  //  [1] reserved
-	NULL,			  //  [2] BIOS_STS
-	NULL,			  //  [3] LEGACY_USB_STS
+	nullptr,			  //  [0] reserved
+	nullptr,			  //  [1] reserved
+	nullptr,			  //  [2] BIOS_STS
+	nullptr,			  //  [3] LEGACY_USB_STS
 	southbridge_smi_sleep,    //  [4] SLP_SMI_STS
 	southbridge_smi_apmc,     //  [5] APM_STS
-	NULL,			  //  [6] SWSMI_TMR_STS
-	NULL,			  //  [7] reserved
+	nullptr,			  //  [6] SWSMI_TMR_STS
+	nullptr,			  //  [7] reserved
 	southbridge_smi_pm1,      //  [8] PM1_STS
 	southbridge_smi_gpe0,     //  [9] GPE0_STS
-	NULL,			  // [10] reserved
-	NULL,			  // [11] reserved
-	NULL,			  // [12] reserved
+	nullptr,			  // [10] reserved
+	nullptr,			  // [11] reserved
+	nullptr,			  // [12] reserved
 	southbridge_smi_tco,      // [13] TCO_STS
 	southbridge_smi_periodic, // [14] PERIODIC_STS
-	NULL,			  // [15] SERIRQ_SMI_STS
-	NULL,			  // [16] SMBUS_SMI_STS
-	NULL,			  // [17] LEGACY_USB2_STS
-	NULL,			  // [18] INTEL_USB2_STS
-	NULL,			  // [19] reserved
-	NULL,			  // [20] PCI_EXP_SMI_STS
-	NULL,			  // [21] reserved
-	NULL,			  // [22] reserved
-	NULL,			  // [23] reserved
-	NULL,			  // [24] reserved
-	NULL,			  // [25] reserved
-	NULL,			  // [26] SPI_STS
-	NULL,			  // [27] reserved
-	NULL,			  // [28] PUNIT
-	NULL,			  // [29] GUNIT
-	NULL,			  // [30] reserved
-	NULL			  // [31] reserved
+	nullptr,			  // [15] SERIRQ_SMI_STS
+	nullptr,			  // [16] SMBUS_SMI_STS
+	nullptr,			  // [17] LEGACY_USB2_STS
+	nullptr,			  // [18] INTEL_USB2_STS
+	nullptr,			  // [19] reserved
+	nullptr,			  // [20] PCI_EXP_SMI_STS
+	nullptr,			  // [21] reserved
+	nullptr,			  // [22] reserved
+	nullptr,			  // [23] reserved
+	nullptr,			  // [24] reserved
+	nullptr,			  // [25] reserved
+	nullptr,			  // [26] SPI_STS
+	nullptr,			  // [27] reserved
+	nullptr,			  // [28] PUNIT
+	nullptr,			  // [29] GUNIT
+	nullptr,			  // [30] reserved
+	nullptr			  // [31] reserved
 };
 
 void southbridge_smi_handler(void)
@@ -318,7 +318,7 @@ void southbridge_smi_handler(void)
 		if (!(smi_sts & (1 << i)))
 			continue;
 
-		if (southbridge_smi[i] != NULL) {
+		if (southbridge_smi[i] != nullptr) {
 			southbridge_smi[i]();
 		} else {
 			printk(BIOS_DEBUG, "SMI_STS[%d] occurred, but no "

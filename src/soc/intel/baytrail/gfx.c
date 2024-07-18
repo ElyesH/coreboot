@@ -281,7 +281,7 @@ static void set_backlight_pwm(struct device *dev, uint32_t bklt_reg, int req_hz)
 
 	res = probe_resource(dev, PCI_BASE_ADDRESS_0);
 
-	if (res == NULL)
+	if (res == nullptr)
 		return;
 
 	/* Default to 200 Hz if nothing is set. */

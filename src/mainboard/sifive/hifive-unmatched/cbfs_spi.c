@@ -166,7 +166,7 @@ void boot_device_init(void)
 const struct region_device *boot_device_ro(void)
 {
 	if (spi_flash_init_done != true)
-		return NULL;
+		return nullptr;
 
 	uint32_t m = read32((uint32_t *)FU740_MSEL);
 
@@ -180,7 +180,7 @@ const struct region_device *boot_device_ro(void)
 //	boot_device_init();
 //
 //	if (spi_flash_init_done != true)
-//		return NULL;
+//		return nullptr;
 //
 //	return &spi_flash;
 //}

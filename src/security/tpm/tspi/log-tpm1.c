@@ -31,7 +31,7 @@ void *tpm1_log_cbmem_init(void)
 		tpm_log_len = sizeof(*tclt) + MAX_TPM_LOG_ENTRIES * sizeof(tclt->entries[0]);
 		tclt = cbmem_add(CBMEM_ID_TCPA_TCG_LOG, tpm_log_len);
 		if (!tclt)
-			return NULL;
+			return nullptr;
 
 		memset(tclt, 0, sizeof(*tclt));
 		hdr = &tclt->spec_id;

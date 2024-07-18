@@ -506,7 +506,7 @@ static int mkhi_end_of_post(void)
 
 	/* Send request and wait for response */
 	printk(BIOS_NOTICE, "ME: %s\n", __func__);
-	if (mei_sendrecv_mkhi(&mkhi, NULL, 0, &eop_ack, sizeof(eop_ack)) < 0) {
+	if (mei_sendrecv_mkhi(&mkhi, nullptr, 0, &eop_ack, sizeof(eop_ack)) < 0) {
 		printk(BIOS_ERR, "ME: END OF POST message failed\n");
 		return -1;
 	}
@@ -567,7 +567,7 @@ static int me_icc_set_clock_enables(u32 mask)
 	};
 
 	/* Send request and wait for response */
-	if (mei_sendrecv_icc(&icc, &clk, sizeof(clk), NULL, 0) < 0) {
+	if (mei_sendrecv_icc(&icc, &clk, sizeof(clk), nullptr, 0) < 0) {
 		printk(BIOS_ERR, "ME: ICC SET CLOCK ENABLES message failed\n");
 		return -1;
 	}

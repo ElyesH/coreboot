@@ -35,7 +35,7 @@ vb2_error_t vb2ex_hwcrypto_digest_init(enum vb2_hash_algorithm hash_alg, uint32_
 
 	sha_op.Digest = sha_hash;
 
-	sha_op.IntermediateDigest = NULL;
+	sha_op.IntermediateDigest = nullptr;
 
 	sha_op.IntermediateMsgLen = 0;
 

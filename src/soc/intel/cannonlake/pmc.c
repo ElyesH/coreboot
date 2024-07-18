@@ -26,7 +26,7 @@ static void pm1_enable_pwrbtn_smi(void *unused)
 	pmc_update_pm1_enable(PWRBTN_EN);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, pm1_enable_pwrbtn_smi, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, pm1_enable_pwrbtn_smi, nullptr);
 
 static void config_deep_sX(uint32_t offset, uint32_t mask, int sx, int enable)
 {

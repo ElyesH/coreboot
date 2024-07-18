@@ -122,7 +122,7 @@ void *get_smi_source_handler(int source)
 		if (smi_sources[i].type == source)
 			return smi_sources[i].handler;
 
-	return NULL;
+	return nullptr;
 }
 
 void smm_soc_early_init(void)

@@ -121,9 +121,9 @@ AGESA_STATUS agesa_RunFuncOnAp(UINT32 Func, UINTN Data, VOID *ConfigPtr)
 AGESA_STATUS agesa_GfxGetVbiosImage(UINT32 Func, UINTN FchData, VOID *ConfigPrt)
 {
 	GFX_VBIOS_IMAGE_INFO  *pVbiosImageInfo = (GFX_VBIOS_IMAGE_INFO *)ConfigPrt;
-	pVbiosImageInfo->ImagePtr = cbfs_map("pci"CONFIG_VGA_BIOS_ID".rom", NULL);
+	pVbiosImageInfo->ImagePtr = cbfs_map("pci"CONFIG_VGA_BIOS_ID".rom", nullptr);
 	/* printk(BIOS_DEBUG, "IMGptr=%x\n", pVbiosImageInfo->ImagePtr); */
-	return pVbiosImageInfo->ImagePtr == NULL ? AGESA_WARNING : AGESA_SUCCESS;
+	return pVbiosImageInfo->ImagePtr == nullptr ? AGESA_WARNING : AGESA_SUCCESS;
 }
 #endif
 
@@ -159,7 +159,7 @@ AGESA_STATUS agesa_ReadSpd_from_cbfs(UINT32 Func, UINTN Data, VOID *ConfigPtr)
 #if HAS_AGESA_FCH_OEM_CALLOUT
 void agesa_fch_oem_config(uintptr_t Data, AMD_CONFIG_PARAMS *StdHeader)
 {
-	struct sysinfo *cb_NA = NULL;
+	struct sysinfo *cb_NA = nullptr;
 
 	if (StdHeader->Func == AMD_INIT_RESET) {
 		printk(BIOS_DEBUG, "Fch OEM config in INIT RESET\n");

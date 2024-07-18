@@ -67,7 +67,7 @@ char *getfname(char *desc, char *fname, int field)
     fieldname[1] = 0;
     fieldbuf[0] = fname;
 
-    return (getstrings(fieldname, fieldbuf, field) == KEY_ESC) ? NULL : fname;
+    return (getstrings(fieldname, fieldbuf, field) == KEY_ESC) ? nullptr : fname;
 }
 
 /**************************** a very simple file browser ******************/
@@ -81,7 +81,7 @@ void showfile(char *fname)
 
     statusmsg("FileBrowser: Hit key to continue, Q to quit");
 
-    if ((fp = fopen(fname, "r")) != NULL)   /* file available? */
+    if ((fp = fopen(fname, "r")) != nullptr)   /* file available? */
     {
         while (!ateof)
         {

@@ -97,7 +97,7 @@ void boot_device_init(void)
 const struct region_device *boot_device_ro(void)
 {
 	if (spi_flash_init_done != true)
-		return NULL;
+		return nullptr;
 
 	return &mdev.rdev;
 }
@@ -113,7 +113,7 @@ const struct spi_flash *boot_device_spi_flash(void)
 	boot_device_init();
 
 	if (spi_flash_init_done != true)
-		return NULL;
+		return nullptr;
 
 	return &spi_flash_info;
 }

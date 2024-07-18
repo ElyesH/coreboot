@@ -106,7 +106,7 @@ static void save_hob_list(int is_recovery)
 	uint32_t *cbmem_loc;
 	const void *hob_list;
 	cbmem_loc = cbmem_add(CBMEM_ID_FSP_RUNTIME, sizeof(*cbmem_loc));
-	if (cbmem_loc == NULL)
+	if (cbmem_loc == nullptr)
 		die("Error: Could not add cbmem area for HOB list.\n");
 	hob_list = fsp_get_hob_list();
 	if (!hob_list)
@@ -123,7 +123,7 @@ const void *fsp_get_hob_list(void)
 	if (ENV_RAMINIT)
 		return fsp_hob_list_ptr;
 	list_loc = cbmem_find(CBMEM_ID_FSP_RUNTIME);
-	return (list_loc) ? (void *)(uintptr_t)(*list_loc) : NULL;
+	return (list_loc) ? (void *)(uintptr_t)(*list_loc) : nullptr;
 }
 
 void *fsp_get_hob_list_ptr(void)
@@ -242,12 +242,12 @@ const void *fsp_find_extension_hob_by_guid(const uint8_t *guid, size_t *size)
 	const void *hob_guid;
 
 	if (fsp_hob_iterator_init(&hob_iterator) != CB_SUCCESS)
-		return NULL;
+		return nullptr;
 
 	if (fsp_hob_iterator_get_next_guid_extension(&hob_iterator, guid, &hob_guid, size) == CB_SUCCESS)
 		return hob_guid;
 
-	return NULL;
+	return nullptr;
 }
 
 const void *fsp_find_resource_hob_by_guid(const uint8_t *guid)
@@ -256,12 +256,12 @@ const void *fsp_find_resource_hob_by_guid(const uint8_t *guid)
 	const struct hob_resource *res_hob;
 
 	if (fsp_hob_iterator_init(&hob_iterator) != CB_SUCCESS)
-		return NULL;
+		return nullptr;
 
 	if (fsp_hob_iterator_get_next_guid_resource(&hob_iterator, guid, &res_hob) == CB_SUCCESS)
 		return res_hob;
 
-	return NULL;
+	return nullptr;
 }
 
 static void display_fsp_version_info_hob(const void *hob)
@@ -362,7 +362,7 @@ const void *fsp_find_nv_storage_data(size_t *size)
 
 		hob = (const struct fsp_nvs_hob2_data_region_header *)
 		      fsp_find_extension_hob_by_guid(fsp_nv_storage_guid_2, size);
-		if (hob != NULL) {
+		if (hob != nullptr) {
 			*size = hob->nvs_data_length;
 			return (void *)(uintptr_t)hob->nvs_data_ptr;
 		}
@@ -386,7 +386,7 @@ bool fsp_display_error_info(void)
 
 	hob = (const struct hob_header *)fsp_find_extension_hob_by_guid(
 		fsp_error_info_guid, &size);
-	if (hob != NULL) {
+	if (hob != nullptr) {
 		display_fsp_error_info_hob(hob);
 		return true;
 	}

@@ -35,7 +35,7 @@ static inline void *tpm_log_cbmem_init(void)
 		return tpm1_log_cbmem_init();
 	if (CONFIG(TPM_LOG_TPM2))
 		return tpm2_log_cbmem_init();
-	return NULL;
+	return nullptr;
 }
 
 /**

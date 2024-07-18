@@ -60,8 +60,8 @@ void console_stored_tx_byte(unsigned char byte, void *data_unused)
 
 void console_tx_byte(unsigned char byte)
 {
-	console_interactive_tx_byte(byte, NULL);
-	console_stored_tx_byte(byte, NULL);
+	console_interactive_tx_byte(byte, nullptr);
+	console_stored_tx_byte(byte, nullptr);
 }
 
 void console_tx_flush(void)

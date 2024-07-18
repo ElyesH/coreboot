@@ -12,7 +12,7 @@ RCSID("$Id: pdcscrn.c,v 1.92 2008/07/20 20:12:04 wmcbrine Exp $")
 
 /* COLOR_PAIR to attribute encoding table. */
 
-unsigned char *pdc_atrtab = (unsigned char *)NULL;
+unsigned char *pdc_atrtab = (unsigned char *)nullptr;
 
 HANDLE pdc_con_out = INVALID_HANDLE_VALUE;
 HANDLE pdc_con_in = INVALID_HANDLE_VALUE;
@@ -68,7 +68,7 @@ static struct
 
 static CONSOLE_SCREEN_BUFFER_INFO orig_scr;
 
-static CHAR_INFO *ci_save = NULL;
+static CHAR_INFO *ci_save = nullptr;
 static DWORD old_console_mode = 0;
 
 static bool is_nt;
@@ -85,7 +85,7 @@ static HWND _find_console_handle(void)
 
     Sleep(40);
 
-    wnd = FindWindow(NULL, temptitle);
+    wnd = FindWindow(nullptr, temptitle);
 
     SetConsoleTitle(orgtitle);
 
@@ -197,21 +197,21 @@ static void _init_console_info(void)
         char tname[13];
 
         sprintf(tname, "ColorTable%02d", i);
-        RegQueryValueExA(reghnd, tname, NULL, NULL,
+        RegQueryValueExA(reghnd, tname, nullptr, nullptr,
                          (LPBYTE)(&(console_info.ColorTable[i])), &len);
     }
 
     /* Font info */
 
-    RegQueryValueEx(reghnd, TEXT("FontSize"), NULL, NULL,
+    RegQueryValueEx(reghnd, TEXT("FontSize"), nullptr, nullptr,
                     (LPBYTE)(&console_info.FontSize), &len);
-    RegQueryValueEx(reghnd, TEXT("FontFamily"), NULL, NULL,
+    RegQueryValueEx(reghnd, TEXT("FontFamily"), nullptr, nullptr,
                     (LPBYTE)(&console_info.FontFamily), &len);
-    RegQueryValueEx(reghnd, TEXT("FontWeight"), NULL, NULL,
+    RegQueryValueEx(reghnd, TEXT("FontWeight"), nullptr, nullptr,
                     (LPBYTE)(&console_info.FontWeight), &len);
 
     len = sizeof(WCHAR) * 32;
-    RegQueryValueExW(reghnd, L"FaceName", NULL, NULL,
+    RegQueryValueExW(reghnd, L"FaceName", nullptr, nullptr,
                      (LPBYTE)(console_info.FaceName), &len);
 
     RegCloseKey(reghnd);
@@ -267,7 +267,7 @@ void PDC_scr_free(void)
     if (pdc_atrtab)
         free(pdc_atrtab);
 
-    pdc_atrtab = (unsigned char *)NULL;
+    pdc_atrtab = (unsigned char *)nullptr;
 }
 
 /* open the physical screen -- allocate SP, miscellaneous intialization,
@@ -371,7 +371,7 @@ int PDC_scr_open(int argc, char **argv)
                the displayed window */
 
             free(ci_save);
-            ci_save = NULL;
+            ci_save = nullptr;
 
             bufsize.X = orig_scr.srWindow.Right - orig_scr.srWindow.Left + 1;
             bufsize.Y = orig_scr.srWindow.Bottom - orig_scr.srWindow.Top + 1;
@@ -398,14 +398,14 @@ int PDC_scr_open(int argc, char **argv)
 #ifdef PDCDEBUG
                 CHAR LastError[256];
 
-                FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL,
+                FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, nullptr,
                               GetLastError(), MAKELANGID(LANG_NEUTRAL,
-                              SUBLANG_DEFAULT), LastError, 256, NULL);
+                              SUBLANG_DEFAULT), LastError, 256, nullptr);
 
                 PDC_LOG(("PDC_scr_open() - %s\n", LastError));
 #endif
                 free(ci_save);
-                ci_save = NULL;
+                ci_save = nullptr;
 
                 return ERR;
             }
@@ -416,7 +416,7 @@ int PDC_scr_open(int argc, char **argv)
             SP->_restore = PDC_RESTORE_BUFFER;
     }
 
-    SP->_preserve = (getenv("PDC_PRESERVE_SCREEN") != NULL);
+    SP->_preserve = (getenv("PDC_PRESERVE_SCREEN") != nullptr);
 
     PDC_reset_prog_mode();
 

@@ -126,7 +126,7 @@ void lock_pam0123(void)
 	if (get_lockdown_config() != CHIPSET_LOCKDOWN_COREBOOT)
 		return;
 
-	dev = NULL;
+	dev = nullptr;
 	/* Look for SAD_ALL devices on all sockets */
 	while ((dev = dev_find_device(PCI_VID_INTEL, SAD_ALL_DEVID, dev)))
 		pci_write_config32(dev, SAD_ALL_PAM0123_CSR, pam0123_lock);

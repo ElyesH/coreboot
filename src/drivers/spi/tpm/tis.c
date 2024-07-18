@@ -48,16 +48,16 @@ tis_sendrecv_fn spi_tis_probe(enum tpm_family *family)
 	if (spi_setup_slave(CONFIG_DRIVER_TPM_SPI_BUS,
 			    CONFIG_DRIVER_TPM_SPI_CHIP, &spi)) {
 		printk(BIOS_ERR, "Failed to setup TPM SPI slave\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (tpm2_init(&spi)) {
 		printk(BIOS_ERR, "Failed to initialize TPM SPI interface\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* tpm2_process_command() is used unconditionally in tpm_sendrecv() */
-	if (family != NULL)
+	if (family != nullptr)
 		*family = TPM_2;
 
 	tpm2_get_info(&info);

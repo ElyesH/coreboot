@@ -442,7 +442,7 @@ static int clock_calc_best_scalar(unsigned int main_scaler_bits,
 	printk(BIOS_DEBUG, "Input Rate is %u, Target is %u, Cap is %u\n", input_rate,
 			target_rate, cap);
 
-	ASSERT(best_fine_scalar != NULL);
+	ASSERT(best_fine_scalar != nullptr);
 	ASSERT(main_scaler_bits <= fine_scalar_bits);
 
 	*best_fine_scalar = 1;

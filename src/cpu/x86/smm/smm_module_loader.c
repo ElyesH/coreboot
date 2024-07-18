@@ -307,7 +307,7 @@ int smm_setup_relocation_handler(struct smm_loader_params *params)
 		return -1;
 
 	/* A handler has to be defined to call for relocation. */
-	if (params->handler == NULL)
+	if (params->handler == nullptr)
 		return -1;
 
 	/* Since the relocation handler always uses stack, adjust the number

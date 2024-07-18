@@ -149,4 +149,4 @@ static void platform_lockdown_config(void *unused)
 }
 
 BOOT_STATE_INIT_ENTRY(BS_DEV_RESOURCES, BS_ON_EXIT, platform_lockdown_config,
-				NULL);
+				nullptr);

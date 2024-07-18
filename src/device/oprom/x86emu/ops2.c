@@ -370,7 +370,7 @@ static void x86emuOp2_set_byte(u8 op2)
     int mod, rl, rh;
     uint destoffset;
     u8  *destreg;
-    const char *X86EMU_DEBUG_ONLY(name) = NULL;
+    const char *X86EMU_DEBUG_ONLY(name) = nullptr;
     int cond = 0;
 
     START_OF_INSTR();

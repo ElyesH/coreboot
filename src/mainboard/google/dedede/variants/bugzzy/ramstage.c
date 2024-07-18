@@ -56,4 +56,4 @@ static void wa_init_display_signal(void *unused)
 	panel_reset_deassert(igd_bar);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY, wa_init_display_signal, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY, wa_init_display_signal, nullptr);

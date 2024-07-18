@@ -9,7 +9,7 @@
 static const char *usb4_xhci_acpi_name(const struct device *dev)
 {
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	return "TXHC";
 }

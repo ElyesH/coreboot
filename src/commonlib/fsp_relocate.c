@@ -101,7 +101,7 @@ static uint32_t *fspp_reloc(void *fsp, size_t fsp_size, uint32_t e)
 
 	/* Determine if offset falls within fsp_size for a 32 bit relocation. */
 	if (offset > fsp_size - sizeof(uint32_t))
-		return NULL;
+		return nullptr;
 
 	return relative_offset(fsp, offset);
 }
@@ -128,7 +128,7 @@ static FSP_INFO_HEADER *fsp_get_info_hdr(void *fsp, size_t fih_offset)
 
 	if (fih_offset == 0) {
 		printk(BIOS_ERR, "FSP_INFO_HEADER offset is 0.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* FSP_INFO_HEADER is located at first file in FV within first RAW section. */
@@ -140,19 +140,19 @@ static FSP_INFO_HEADER *fsp_get_info_hdr(void *fsp, size_t fih_offset)
 
 	if (guid_compare(&ffsfh->Name, &fih_guid)) {
 		printk(BIOS_ERR, "Bad FIH GUID.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (read_le8(&csh->Type) != EFI_SECTION_RAW) {
 		printk(BIOS_ERR, "FIH file should have raw section: %x\n",
 			read_le8(&csh->Type));
-		return NULL;
+		return nullptr;
 	}
 
 	if (read_le32(&fih->Signature) != FSP_SIG) {
 		printk(BIOS_ERR, "Unexpected FIH signature: %08x\n",
 			read_le32(&fih->Signature));
-		return NULL;
+		return nullptr;
 	}
 
 	return fih;
@@ -189,16 +189,16 @@ static int pe_relocate(uintptr_t new_addr, void *pe, void *fsp, size_t fih_off)
 	ophdr64 = &peih->Pe32Plus.OptionalHeader;
 
 	if (read_le16(&ophdr->Magic) == EFI_IMAGE_NT_OPTIONAL_HDR32_MAGIC) {
-		ophdr64 = NULL;
+		ophdr64 = nullptr;
 	} else if (read_le16(&ophdr64->Magic) == EFI_IMAGE_NT_OPTIONAL_HDR64_MAGIC) {
-		ophdr = NULL;
+		ophdr = nullptr;
 	} else {
 		printk(BIOS_ERR, "No support for non-PE32/PE32+ images\n");
 		return -1;
 	}
 
 	fih = fsp_get_info_hdr(fsp, fih_off);
-	if (fih == NULL) {
+	if (fih == nullptr) {
 		printk(BIOS_ERR, "No Image base found for FSP PE32\n");
 		return -1;
 	}
@@ -440,7 +440,7 @@ static int relocate_patch_table(void *fsp, size_t size, size_t offset,
 		reloc = fspp_reloc(fsp, size,
 				read_le32(&table->patch_entries[num]));
 
-		if (reloc == NULL) {
+		if (reloc == nullptr) {
 			printk(BIOS_ERR, "Ignoring FSPP entry: %x\n",
 				read_le32(&table->patch_entries[num]));
 			continue;

@@ -21,7 +21,7 @@ static enum cb_err get_ccx_cppc_data_hob(const struct fsp_ccx_cppc_data **cppc_d
 
 	hob = fsp_find_extension_hob_by_guid(AMD_FSP_CCX_CPPC_DATA_HOB_GUID.b, &hob_size);
 
-	if (hob == NULL || hob_size < sizeof(struct fsp_ccx_cppc_data)) {
+	if (hob == nullptr || hob_size < sizeof(struct fsp_ccx_cppc_data)) {
 		printk(BIOS_ERR, "Couldn't find CCX CPPC data HOB.\n");
 		return CB_ERR;
 	}
@@ -38,7 +38,7 @@ static enum cb_err get_ccx_cppc_data_hob(const struct fsp_ccx_cppc_data **cppc_d
 
 enum cb_err get_ccx_cppc_min_frequency(uint32_t *freq)
 {
-	const struct fsp_ccx_cppc_data *cppc_data = NULL;
+	const struct fsp_ccx_cppc_data *cppc_data = nullptr;
 
 	if (get_ccx_cppc_data_hob(&cppc_data) != CB_SUCCESS)
 		return CB_ERR;
@@ -51,7 +51,7 @@ enum cb_err get_ccx_cppc_min_frequency(uint32_t *freq)
 
 enum cb_err get_ccx_cppc_nom_frequency(uint32_t *freq)
 {
-	const struct fsp_ccx_cppc_data *cppc_data = NULL;
+	const struct fsp_ccx_cppc_data *cppc_data = nullptr;
 
 	if (get_ccx_cppc_data_hob(&cppc_data) != CB_SUCCESS)
 		return CB_ERR;

@@ -146,8 +146,8 @@ void *cbmem_add(u32 id, u64 size)
 
 	e = imd_entry_find_or_add(&imd, id, size);
 
-	if (e == NULL)
-		return NULL;
+	if (e == nullptr)
+		return nullptr;
 
 	return imd_entry_at(&imd, e);
 }
@@ -168,8 +168,8 @@ void *cbmem_find(u32 id)
 
 	e = imd_entry_find(&imd, id);
 
-	if (e == NULL)
-		return NULL;
+	if (e == nullptr)
+		return nullptr;
 
 	return imd_entry_at(&imd, e);
 }
@@ -193,7 +193,7 @@ void *cbmem_entry_start(const struct cbmem_entry *entry)
 
 void cbmem_add_bootmem(void)
 {
-	void *baseptr = NULL;
+	void *baseptr = nullptr;
 	size_t size = 0;
 
 	cbmem_get_region(&baseptr, &size);
@@ -233,7 +233,7 @@ void cbmem_add_records_to_cbtable(struct lb_header *header)
 
 		e = imd_cursor_next(&cursor);
 
-		if (e == NULL)
+		if (e == nullptr)
 			break;
 
 		id = imd_entry_id(e);

@@ -11,7 +11,7 @@ enum cb_err ipmi_set_post_start(const int port)
 	struct ipmi_rsp rsp;
 
 	ret = ipmi_message(port, IPMI_NETFN_OEM, 0x0,
-			   IPMI_BMC_SET_POST_START, NULL, 0, (u8 *)&rsp,
+			   IPMI_BMC_SET_POST_START, nullptr, 0, (u8 *)&rsp,
 			   sizeof(rsp));
 
 	if (ret < sizeof(struct ipmi_rsp) || rsp.completion_code) {
@@ -44,7 +44,7 @@ enum cb_err ipmi_set_cmos_clear(void)
 	   the CMOS clear bit are both set from the response BootMode byte. */
 	ret = ipmi_message(CONFIG_BMC_KCS_BASE, IPMI_NETFN_OEM, 0x0,
 			   IPMI_OEM_GET_BIOS_BOOT_ORDER,
-			   NULL, 0,
+			   nullptr, 0,
 			   (unsigned char *)&rsp, sizeof(rsp));
 
 	if (ret < sizeof(struct ipmi_rsp) || rsp.resp.completion_code) {

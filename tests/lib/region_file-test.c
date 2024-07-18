@@ -18,7 +18,7 @@ static int setup_region_file_test_group(void **state)
 	void *mem_buffer = malloc(REGION_FILE_BUFFER_SIZE);
 	struct region_device *dev = malloc(sizeof(struct region_device));
 
-	if (mem_buffer == NULL || dev == NULL) {
+	if (mem_buffer == nullptr || dev == nullptr) {
 		free(mem_buffer);
 		free(dev);
 		return -1;
@@ -61,7 +61,7 @@ static void test_region_file_init_empty(void **state)
 	struct region_file regf;
 
 	/* Test general approach using valid mem_region_device with buffer filled with 0xff.
-	   Parameters cannot be NULL. */
+	   Parameters cannot be nullptr. */
 	assert_int_equal(0, region_file_init(&regf, rdev));
 	assert_int_equal(RF_EMPTY, regf.slot);
 }
@@ -147,7 +147,7 @@ static void test_region_file_init_invalid_region_device(void **state)
 	struct region_device bad_dev;
 	struct region_file regf;
 
-	rdev_chain_mem_rw(&bad_dev, NULL, 0);
+	rdev_chain_mem_rw(&bad_dev, nullptr, 0);
 
 	/* Expect fail when passing invalid region_device. */
 	assert_int_equal(-1, region_file_init(&regf, &bad_dev));

@@ -9,10 +9,10 @@
 #include "amd_pci_int_defs.h"
 #include "amd_pci_int_types.h"
 
-const struct pirq_struct * pirq_data_ptr = NULL;
+const struct pirq_struct * pirq_data_ptr = nullptr;
 u32 pirq_data_size = 0;
-const u8 *intr_data_ptr = NULL;
-const u8 *picr_data_ptr = NULL;
+const u8 *intr_data_ptr = nullptr;
+const u8 *picr_data_ptr = nullptr;
 
 /*
  * Read the FCH PCI_INTR registers 0xC00/0xC01 at a
@@ -43,9 +43,9 @@ void write_pci_int_table(void)
 {
 	u8 byte;
 
-	if (picr_data_ptr == NULL || intr_data_ptr == NULL) {
+	if (picr_data_ptr == nullptr || intr_data_ptr == nullptr) {
 		printk(BIOS_ERR, "Warning: Can't write PCI_INTR 0xC00/0xC01 registers because\n"
-				"'mainboard_picr_data' or 'mainboard_intr_data' tables are NULL\n");
+				"'mainboard_picr_data' or 'mainboard_intr_data' tables are nullptr\n");
 		return;
 	}
 
@@ -79,8 +79,8 @@ void write_pci_int_table(void)
  */
 void write_pci_cfg_irqs(void)
 {
-	struct device *dev = NULL;		/* Our current device to route IRQs to */
-	struct device *target_dev = NULL;	/* The bridge that a device may be connected to */
+	struct device *dev = nullptr;		/* Our current device to route IRQs to */
+	struct device *target_dev = nullptr;	/* The bridge that a device may be connected to */
 	u16 int_pin = 0;	/* Value of the INT_PIN register 0x3D */
 	u16 target_pin = 0;	/* Pin we will search our tables for */
 	u16 int_line = 0;	/* IRQ number read from PCI_INTR table and programmed to INT_LINE reg 0x3C */
@@ -88,7 +88,7 @@ void write_pci_cfg_irqs(void)
 	u16 devfn = 0;		/* A PCI Device and Function number */
 	u32 i = 0;
 
-	if (pirq_data_ptr == NULL) {
+	if (pirq_data_ptr == nullptr) {
 		printk(BIOS_WARNING, "Can't write PCI IRQ assignments because"
 				" 'mainboard_pirq_data' structure does not exist\n");
 		return;
@@ -102,9 +102,9 @@ void write_pci_cfg_irqs(void)
 		 * Step 1: Get the INT_PIN and device structure to look for in the
 		 * PCI_INTR table pirq_data
 		 */
-		target_dev = NULL;
+		target_dev = nullptr;
 		target_pin = get_pci_irq_pins(dev, &target_dev);
-		if (target_dev == NULL)
+		if (target_dev == nullptr)
 			continue;
 
 		if (target_pin < 1)

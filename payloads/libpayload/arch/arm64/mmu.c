@@ -289,7 +289,7 @@ uint64_t mmu_init(struct mmu_ranges *mmu_ranges)
 	 * fine tuned (e.g. mapping DRAM areas as write-back) later in the
 	 * boot process.
 	 */
-	mmu_config_range(NULL, 0x100000000, TYPE_DEV_MEM);
+	mmu_config_range(nullptr, 0x100000000, TYPE_DEV_MEM);
 
 	for (; i < mmu_ranges->used; i++)
 		mmu_config_range((void *)mmu_ranges->entries[i].base,
@@ -356,7 +356,7 @@ static struct mmu_memrange *mmu_add_memrange(struct mmu_ranges *r,
 					     uint64_t base, uint64_t size,
 					     uint64_t type)
 {
-	struct mmu_memrange *curr = NULL;
+	struct mmu_memrange *curr = nullptr;
 	int i = r->used;
 
 	if (i < ARRAY_SIZE(r->entries)) {
@@ -386,7 +386,7 @@ struct mmu_new_range_prop {
 	uint64_t align;
 	/*
 	 * Function to test whether selected range is fine.
-	 * NULL=any range is fine
+	 * nullptr=any range is fine
 	 * Return value 1=valid range, 0=otherwise
 	 */
 	int (*is_valid_range)(uint64_t, uint64_t);
@@ -445,7 +445,7 @@ static struct mmu_memrange *mmu_get_new_range(struct mmu_ranges *mmu_ranges,
 
 	if (new->size == 0) {
 		printf("MMU Error: Invalid range size\n");
-		return NULL;
+		return nullptr;
 	}
 
 	for (; i < mmu_ranges->used; i++) {
@@ -481,7 +481,7 @@ static struct mmu_memrange *mmu_get_new_range(struct mmu_ranges *mmu_ranges,
 			 * user, move ahead with it
 			 */
 			if (mmu_is_range_free(base_addr, end_addr) &&
-			    ((new->is_valid_range == NULL) ||
+			    ((new->is_valid_range == nullptr) ||
 			     new->is_valid_range(base_addr, end_addr)))
 				break;
 
@@ -500,7 +500,7 @@ static struct mmu_memrange *mmu_get_new_range(struct mmu_ranges *mmu_ranges,
 			r[i].size -= (range_end_addr - end_addr);
 			if (mmu_add_memrange(mmu_ranges, end_addr,
 					     range_end_addr - end_addr,
-					     r[i].type) == NULL)
+					     r[i].type) == nullptr)
 				mmu_error();
 		}
 
@@ -514,7 +514,7 @@ static struct mmu_memrange *mmu_get_new_range(struct mmu_ranges *mmu_ranges,
 		r = mmu_add_memrange(mmu_ranges, base_addr, new->size,
 				     new->type);
 
-		if (r == NULL)
+		if (r == nullptr)
 			mmu_error();
 
 		return r;
@@ -522,7 +522,7 @@ static struct mmu_memrange *mmu_get_new_range(struct mmu_ranges *mmu_ranges,
 
 	/* Should never reach here if everything went fine */
 	printf("ARM64 ERROR: No region allocated\n");
-	return NULL;
+	return nullptr;
 }
 
 /*
@@ -535,8 +535,8 @@ static struct mmu_memrange *mmu_alloc_range(struct mmu_ranges *mmu_ranges,
 {
 	struct mmu_memrange *r = mmu_get_new_range(mmu_ranges, p);
 
-	if (r == NULL)
-		return NULL;
+	if (r == nullptr)
+		return nullptr;
 
 	/*
 	 * Mark this memrange as used memory. Important since function
@@ -544,7 +544,7 @@ static struct mmu_memrange *mmu_alloc_range(struct mmu_ranges *mmu_ranges,
 	 * range already allocated.
 	 */
 	if (mmu_add_memrange(&usedmem_ranges, r->base, r->size, r->type)
-	    == NULL)
+	    == nullptr)
 		mmu_error();
 
 	return r;
@@ -567,7 +567,7 @@ static struct mmu_memrange *mmu_add_dma_range(struct mmu_ranges *mmu_ranges)
 	prop.size = DMA_DEFAULT_SIZE;
 	prop.lim_excl = (uint64_t)CONFIG_LP_DMA_LIM_EXCL * MiB;
 	prop.align = GRANULE_SIZE;
-	prop.is_valid_range = NULL;
+	prop.is_valid_range = nullptr;
 	prop.src_type = TYPE_NORMAL_MEM;
 
 	return mmu_alloc_range(mmu_ranges, &prop);
@@ -584,7 +584,7 @@ static struct mmu_memrange *_mmu_add_fb_range(
 	prop.size = size;
 	prop.lim_excl = MIN_64_BIT_ADDR;
 	prop.align = MB_SIZE;
-	prop.is_valid_range = NULL;
+	prop.is_valid_range = nullptr;
 	prop.src_type = TYPE_NORMAL_MEM;
 
 	return mmu_alloc_range(mmu_ranges, &prop);
@@ -602,7 +602,7 @@ static void mmu_extract_ranges(struct memrange *cb_ranges,
 			       struct mmu_ranges *mmu_ranges)
 {
 	int i = 0;
-	struct mmu_memrange *prev_range = NULL;
+	struct mmu_memrange *prev_range = nullptr;
 
 	/* Extract memory ranges to be mapped */
 	for (; i < ncb; i++) {
@@ -617,7 +617,7 @@ static void mmu_extract_ranges(struct memrange *cb_ranges,
 							      cb_ranges[i].base,
 							      cb_ranges[i].size,
 							      TYPE_NORMAL_MEM);
-				if (prev_range == NULL)
+				if (prev_range == nullptr)
 					mmu_error();
 			}
 			break;
@@ -646,14 +646,14 @@ static void mmu_add_fb_range(struct mmu_ranges *mmu_ranges)
 		if (mmu_add_memrange(mmu_ranges,
 		    framebuffer->physical_address,
 		    fb_size,
-		    TYPE_DMA_MEM) == NULL)
+		    TYPE_DMA_MEM) == nullptr)
 			mmu_error();
 		return;
 	}
 
 	/* Allocate framebuffer */
 	fb_range = _mmu_add_fb_range(fb_size, mmu_ranges);
-	if (fb_range == NULL)
+	if (fb_range == nullptr)
 		mmu_error();
 
 	framebuffer->physical_address = fb_range->base;
@@ -682,7 +682,7 @@ struct mmu_memrange *mmu_init_ranges_from_sysinfo(struct memrange *cb_ranges,
 	/* Get a range for framebuffer */
 	mmu_add_fb_range(mmu_ranges);
 
-	if (dma_range == NULL)
+	if (dma_range == nullptr)
 		mmu_error();
 
 	return dma_range;

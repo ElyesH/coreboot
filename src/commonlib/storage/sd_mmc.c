@@ -79,7 +79,7 @@ int sd_mmc_go_idle(struct storage_media *media)
 	cmd.resp_type = CARD_RSP_NONE;
 	cmd.flags = 0;
 
-	int err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	int err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 	if (err)
 		return err;
 
@@ -102,7 +102,7 @@ int sd_mmc_send_status(struct storage_media *media, ssize_t tries)
 	cmd.flags = 0;
 
 	while (tries--) {
-		int err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+		int err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 		if (err)
 			return err;
 		else if (cmd.response[0] & MMC_STATUS_RDY_FOR_DATA)
@@ -133,7 +133,7 @@ int sd_mmc_set_blocklen(struct sd_mmc_ctrlr *ctrlr, int len)
 	cmd.cmdarg = len;
 	cmd.flags = 0;
 
-	return ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	return ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 }
 
 int sd_mmc_enter_standby(struct storage_media *media)
@@ -181,7 +181,7 @@ int sd_mmc_enter_standby(struct storage_media *media)
 	cmd.resp_type = CARD_RSP_R2;
 	cmd.cmdarg = 0;
 	cmd.flags = 0;
-	err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 	if (err)
 		return err;
 	memcpy(media->cid, cmd.response, sizeof(media->cid));
@@ -195,7 +195,7 @@ int sd_mmc_enter_standby(struct storage_media *media)
 	cmd.cmdarg = media->rca << 16;
 	cmd.resp_type = CARD_RSP_R6;
 	cmd.flags = 0;
-	err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 	if (err)
 		return err;
 	if (IS_SD(media))
@@ -206,7 +206,7 @@ int sd_mmc_enter_standby(struct storage_media *media)
 	cmd.resp_type = CARD_RSP_R2;
 	cmd.cmdarg = media->rca << 16;
 	cmd.flags = 0;
-	err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 
 	/* Waiting for the ready status */
 	sd_mmc_send_status(media, SD_MMC_IO_RETRIES);

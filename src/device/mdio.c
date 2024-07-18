@@ -10,7 +10,7 @@ const struct mdio_bus_operations *dev_get_mdio_ops(struct device *dev)
 {
 	if (!dev || !dev->ops || !dev->ops->ops_mdio) {
 		printk(BIOS_ERR, "Could not get MDIO operations.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	return dev->ops->ops_mdio;

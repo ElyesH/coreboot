@@ -34,7 +34,7 @@ static void save_mrc_data(struct pei_data *pei_data)
 	printk(BIOS_DEBUG, "MRC data at %p %d bytes\n", pei_data->data_to_save,
 	       pei_data->data_to_save_size);
 
-	if (pei_data->data_to_save != NULL && pei_data->data_to_save_size > 0)
+	if (pei_data->data_to_save != nullptr && pei_data->data_to_save_size > 0)
 		mrc_cache_stash_data(MRC_TRAINING_DATA, 0,
 					pei_data->data_to_save,
 					pei_data->data_to_save_size);
@@ -131,13 +131,13 @@ static void sdram_initialize(struct pei_data *pei_data)
 	 */
 	if (pei_data->disable_saved_data) {
 		printk(BIOS_DEBUG, "Disabling PEI saved data by request\n");
-		pei_data->saved_data = NULL;
+		pei_data->saved_data = nullptr;
 		pei_data->saved_data_size = 0;
 	}
 
 	/* We don't care about leaking the mapping */
-	entry = cbfs_ro_map("mrc.bin", NULL);
-	if (entry == NULL)
+	entry = cbfs_ro_map("mrc.bin", nullptr);
+	if (entry == nullptr)
 		die("mrc.bin not found!");
 
 	printk(BIOS_DEBUG, "Starting Memory Reference Code\n");

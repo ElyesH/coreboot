@@ -109,12 +109,12 @@ static unsigned long acpi_fill_hest(acpi_hest_t *hest)
 	current = (void *)(hest + 1);
 
 	addr = agesawrapper_getlateinitptr(PICK_WHEA_MCE);
-	if (addr != NULL)
+	if (addr != nullptr)
 		current += acpi_create_hest_error_source(hest, current, 0,
 				(void *)((u32)addr + 2), *(uint16_t *)addr - 2);
 
 	addr = agesawrapper_getlateinitptr(PICK_WHEA_CMC);
-	if (addr != NULL)
+	if (addr != nullptr)
 		current += acpi_create_hest_error_source(hest, current, 1,
 				(void *)((u32)addr + 2), *(uint16_t *)addr - 2);
 
@@ -140,52 +140,52 @@ unsigned long soc_acpi_write_tables(const struct device *device, unsigned long c
 	current = acpi_align_current(current);
 	printk(BIOS_DEBUG, "ACPI:    * IVRS at %lx\n", current);
 	ivrs = agesawrapper_getlateinitptr(PICK_IVRS);
-	if (ivrs != NULL) {
+	if (ivrs != nullptr) {
 		memcpy((void *)current, ivrs, ivrs->length);
 		ivrs = (acpi_header_t *)current;
 		current += ivrs->length;
 		acpi_add_table(rsdp, ivrs);
 	} else {
-		printk(BIOS_DEBUG, "  AGESA IVRS table NULL. Skipping.\n");
+		printk(BIOS_DEBUG, "  AGESA IVRS table nullptr. Skipping.\n");
 	}
 
 	/* SRAT */
 	current = acpi_align_current(current);
 	printk(BIOS_DEBUG, "ACPI:    * SRAT at %lx\n", current);
 	srat = (acpi_srat_t *)agesawrapper_getlateinitptr(PICK_SRAT);
-	if (srat != NULL) {
+	if (srat != nullptr) {
 		memcpy((void *)current, srat, srat->header.length);
 		srat = (acpi_srat_t *)current;
 		current += srat->header.length;
 		acpi_add_table(rsdp, srat);
 	} else {
-		printk(BIOS_DEBUG, "  AGESA SRAT table NULL. Skipping.\n");
+		printk(BIOS_DEBUG, "  AGESA SRAT table nullptr. Skipping.\n");
 	}
 
 	/* SLIT */
 	current = acpi_align_current(current);
 	printk(BIOS_DEBUG, "ACPI:   * SLIT at %lx\n", current);
 	slit = (acpi_slit_t *)agesawrapper_getlateinitptr(PICK_SLIT);
-	if (slit != NULL) {
+	if (slit != nullptr) {
 		memcpy((void *)current, slit, slit->header.length);
 		slit = (acpi_slit_t *)current;
 		current += slit->header.length;
 		acpi_add_table(rsdp, slit);
 	} else {
-		printk(BIOS_DEBUG, "  AGESA SLIT table NULL. Skipping.\n");
+		printk(BIOS_DEBUG, "  AGESA SLIT table nullptr. Skipping.\n");
 	}
 
 	/* ALIB */
 	current = acpi_align_current(current);
 	printk(BIOS_DEBUG, "ACPI:  * AGESA ALIB SSDT at %lx\n", current);
 	alib = (acpi_header_t *)agesawrapper_getlateinitptr(PICK_ALIB);
-	if (alib != NULL) {
+	if (alib != nullptr) {
 		memcpy((void *)current, alib, alib->length);
 		alib = (acpi_header_t *)current;
 		current += alib->length;
 		acpi_add_table(rsdp, (void *)alib);
 	} else {
-		printk(BIOS_DEBUG, "	AGESA ALIB SSDT table NULL."
+		printk(BIOS_DEBUG, "	AGESA ALIB SSDT table nullptr."
 							" Skipping.\n");
 	}
 

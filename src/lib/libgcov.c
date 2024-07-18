@@ -60,7 +60,7 @@ typedef s32 pid_t;
 #if defined(inhibit_libc)
 #define IN_LIBGCOV (-1)
 #else
-#undef NULL /* Avoid errors if stdio.h and our stddef.h mismatch.  */
+#undef nullptr /* Avoid errors if stdio.h and our stddef.h mismatch.  */
 #include <stdio.h>
 #define IN_LIBGCOV 1
 #if defined(L_gcov)
@@ -274,7 +274,7 @@ crc32_unsigned(gcov_unsigned_t crc32, gcov_unsigned_t value)
 
 /* Check if VERSION of the info block PTR matches libgcov one.
    Return 1 on success, or zero in case of versions mismatch.
-   If FILENAME is not NULL, its value used for reporting purposes
+   If FILENAME is not nullptr, its value used for reporting purposes
    instead of value from the info block.  */
 
 static int
@@ -410,7 +410,7 @@ gcov_exit(void)
 		gcov_position_t summary_pos = 0;
 		gcov_position_t eof_pos = 0;
 		const char *fname, *s;
-		struct gcov_fn_buffer *fn_buffer = NULL;
+		struct gcov_fn_buffer *fn_buffer = nullptr;
 		struct gcov_fn_buffer **fn_tail = &fn_buffer;
 
 		fname = gi_ptr->filename;

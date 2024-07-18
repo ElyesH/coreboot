@@ -93,11 +93,11 @@ extern NCURSES_EXPORT_VAR(FIELDTYPE *) _nc_Default_FieldType;
    navigation requests */
 #define O_SELECTABLE (O_ACTIVE | O_VISIBLE)
 
-/* If form is NULL replace form argument by default-form */
+/* If form is nullptr replace form argument by default-form */
 #define Normalize_Form(form) \
   ((form) = (form != 0) ? (form) : _nc_Default_Form)
 
-/* If field is NULL replace field argument by default-field */
+/* If field is nullptr replace field argument by default-field */
 #define Normalize_Field(field) \
   ((field) = (field != 0) ? (field) : _nc_Default_Field)
 
@@ -110,9 +110,9 @@ extern NCURSES_EXPORT_VAR(FIELDTYPE *) _nc_Default_FieldType;
 
 /* Retrieve forms window */
 #define Get_Form_Window(form) \
-  ((form)->sub != NULL \
+  ((form)->sub != nullptr \
    ? (form)->sub \
-   : ((form)->win != NULL \
+   : ((form)->win != nullptr \
       ? (form)->win \
       : StdScreen(Get_Form_Screen(form))))
 
@@ -270,7 +270,7 @@ extern NCURSES_EXPORT(Form_Hook)    _nc_retrace_form_hook (Form_Hook);
 		  blank = TRUE; \
 		  result = (n + 1 >= width); \
 		} \
-	      else if (!ccheck(list[n], NULL)) \
+	      else if (!ccheck(list[n], nullptr)) \
 		{ \
 		  result = FALSE; \
 		  break; \
@@ -287,7 +287,7 @@ extern NCURSES_EXPORT(Form_Hook)    _nc_retrace_form_hook (Form_Hook);
     { \
       unsigned char *s = buffer; \
       int l = -1; \
-      while (*buffer && ccheck(*buffer, NULL)) \
+      while (*buffer && ccheck(*buffer, nullptr)) \
 	buffer++; \
       l = (int)(buffer - s); \
       while (*buffer && *buffer == ' ') \

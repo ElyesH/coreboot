@@ -106,7 +106,7 @@ static struct cmd_desc *allocate_descriptor(void)
 	uint8_t index;
 
 	current = (curr_desc_idx == -1) ?
-		NULL : &dma->descriptors[curr_desc_idx];
+		nullptr : &dma->descriptors[curr_desc_idx];
 
 	index = ++curr_desc_idx;
 	next = &dma->descriptors[index];

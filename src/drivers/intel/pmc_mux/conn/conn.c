@@ -37,7 +37,7 @@ static struct type_c_info *conn_get_cbmem_buffer(void)
 	info = cbmem_add(CBMEM_ID_TYPE_C_INFO, size);
 
 	if (!info)
-		return NULL;
+		return nullptr;
 
 	memset(info, 0, size);
 	return info;
@@ -100,7 +100,7 @@ static const char *orientation_to_str(enum type_c_orientation ori)
 static void get_pld_from_usb_ports(struct acpi_pld *pld,
 	struct device *usb2_port, struct device *usb3_port)
 {
-	struct drivers_usb_acpi_config *config = NULL;
+	struct drivers_usb_acpi_config *config = nullptr;
 
 	if (usb3_port)
 		config = usb3_port->chip_info;

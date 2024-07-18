@@ -211,7 +211,7 @@ static int _pdc_vsscanf(const char *buf, const char *fmt, va_list arg_ptr)
         {
             assign = TRUE;
             width = INT_MAX;
-            char_ptr = NULL;
+            char_ptr = nullptr;
             ++fmt;
             if (*fmt == '*')
             {

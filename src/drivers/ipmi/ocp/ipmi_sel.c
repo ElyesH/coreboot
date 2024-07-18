@@ -8,7 +8,7 @@
 static int ipmi_add_sel_entry(int port, unsigned char *data, int size)
 {
 	return ipmi_message(port, IPMI_NETFN_STORAGE, 0, IPMI_ADD_SEL_ENTRY, data, size,
-				    NULL, 0);
+				    nullptr, 0);
 }
 
 void ipmi_send_to_bmc(unsigned char *data, size_t size)
@@ -89,7 +89,7 @@ enum cb_err ipmi_get_board_config(const int port, struct ipmi_config_rsp *config
 
 	struct ipmi_oem_rsp rsp;
 
-	ret = ipmi_message(port, IPMI_NETFN_OEM, 0x0, IPMI_OEM_GET_BOARD_ID, NULL, 0,
+	ret = ipmi_message(port, IPMI_NETFN_OEM, 0x0, IPMI_OEM_GET_BOARD_ID, nullptr, 0,
 			   (unsigned char *)&rsp, sizeof(rsp));
 	if (ret < sizeof(struct ipmi_rsp) || rsp.resp.completion_code) {
 		printk(BIOS_ERR, "IPMI: %s command failed (ret=%d resp=0x%x)\n",

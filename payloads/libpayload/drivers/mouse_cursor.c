@@ -94,7 +94,7 @@ void mouse_cursor_poll(void)
 
 	mouse_buttons = 0;
 	/* Iterate over all connected drivers */
-	for (in = cursor_in; in != NULL; in = in->next)
+	for (in = cursor_in; in != nullptr; in = in->next)
 		if (in->get_state) {
 			in->get_state(&rel_x, &rel_y, &rel_z, &buttons);
 

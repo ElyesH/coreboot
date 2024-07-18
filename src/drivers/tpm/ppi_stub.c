@@ -121,10 +121,10 @@ void tpm_ppi_acpi_fill_ssdt(const struct device *dev)
 		 * do it manually in payload.
 		 */
 		DSM_UUID(TPM_PPI_UUID, tpm_ppi_callbacks,
-			ARRAY_SIZE(tpm_ppi_callbacks), NULL),
+			ARRAY_SIZE(tpm_ppi_callbacks), nullptr),
 		/* Memory clearing on boot: just a dummy. */
 		DSM_UUID(TPM_MCI_UUID, tpm_mci_callbacks,
-			ARRAY_SIZE(tpm_mci_callbacks), NULL),
+			ARRAY_SIZE(tpm_mci_callbacks), nullptr),
 	};
 
 	acpigen_write_dsm_uuid_arr(ids, ARRAY_SIZE(ids));

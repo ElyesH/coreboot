@@ -361,4 +361,4 @@ ret:
  * This can't be put in intel_me_status because by the time control
  * reaches there, ME doesn't respond to GET_FW_VERSION command.
  */
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_EXIT, print_me_fw_version, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_EXIT, print_me_fw_version, nullptr);

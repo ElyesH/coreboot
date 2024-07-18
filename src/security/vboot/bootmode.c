@@ -50,7 +50,7 @@ static void do_clear_recovery_mode_switch(void *unused)
  * add an event to elog.  See the function in chromeec/switches.c.
  */
 BOOT_STATE_INIT_ENTRY(BS_WRITE_TABLES, BS_ON_ENTRY,
-		      do_clear_recovery_mode_switch, NULL);
+		      do_clear_recovery_mode_switch, nullptr);
 
 #if CONFIG(VBOOT_CLEAR_RECOVERY_IN_RAMSTAGE)
 static void vboot_clear_recovery_request(void *unused)
@@ -64,7 +64,7 @@ static void vboot_clear_recovery_request(void *unused)
 
 /* This has to be called before back_up_vbnv_cmos, so BS_ON_ENTRY is used here. */
 BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_ENTRY,
-		      vboot_clear_recovery_request, NULL);
+		      vboot_clear_recovery_request, nullptr);
 #endif
 
 int __weak get_recovery_mode_retrain_switch(void)

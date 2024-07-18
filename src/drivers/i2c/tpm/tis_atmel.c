@@ -120,7 +120,7 @@ tis_sendrecv_fn i2c_tis_probe(enum tpm_family *family)
 	 * in a way to give TPM 1 preference even if support for both versions
 	 * is compiled in.
 	 */
-	if (family != NULL)
+	if (family != nullptr)
 		*family = CONFIG(TPM1) ? TPM_1 : TPM_2;
 
 	return &i2c_tis_sendrecv;

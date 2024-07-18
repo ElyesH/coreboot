@@ -8,7 +8,7 @@
 #define TAB_WIDTH 2
 
 /* Globals that are used for tracking screen state */
-static char *g_buf = NULL;
+static char *g_buf = nullptr;
 static s32 g_line = 0;
 static s32 g_lines_count = 0;
 static s32 g_max_cursor_line = 0;
@@ -96,7 +96,7 @@ static int bootlog_module_init(void)
 	}
 
 	struct cbmem_console *console = phys_to_virt(lib_sysinfo.cbmem_cons);
-	if (console == NULL) {
+	if (console == nullptr) {
 		return -1;
 	}
 	/* Extract console information */
@@ -148,7 +148,7 @@ static int bootlog_module_init(void)
 
 err_free:
 	free(g_buf);
-	g_buf = NULL;
+	g_buf = nullptr;
 	return -4;
 }
 

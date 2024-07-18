@@ -105,7 +105,7 @@ static void fsp_fill_mrc_cache(FSPM_ARCHx_UPD *arch_upd, uint32_t version)
 
 	data = mrc_cache_current_mmap_leak(MRC_TRAINING_DATA, version,
 					   &mrc_size);
-	if (data == NULL)
+	if (data == nullptr)
 		return;
 
 	/* MRC cache found */
@@ -202,7 +202,7 @@ static enum cb_err fsp_fill_common_arch_params(FSPM_ARCHx_UPD *arch_upd,
 	}
 
 	if (arch_upd->BootMode < ARRAY_SIZE(fsp_bootmode_strings) &&
-		fsp_bootmode_strings[arch_upd->BootMode] != NULL)
+		fsp_bootmode_strings[arch_upd->BootMode] != nullptr)
 		printk(BIOS_SPEW, "bootmode is set to: %d (%s)\n", arch_upd->BootMode,
 			fsp_bootmode_strings[arch_upd->BootMode]);
 	else
@@ -321,7 +321,7 @@ static void fspm_multi_phase_init(const struct fsp_header *hdr)
 
 		multi_phase_params.multi_phase_action = EXECUTE_PHASE;
 		multi_phase_params.phase_index = i;
-		multi_phase_params.multi_phase_param_ptr = NULL;
+		multi_phase_params.multi_phase_param_ptr = nullptr;
 		status = fsp_multi_phase_init(&multi_phase_params);
 		fspm_return_value_handler("FspMultiPhaseMemInit Execute", status, false);
 	}
@@ -452,7 +452,7 @@ static void *fspm_allocator(void *arg, size_t size, const union cbfs_mdata *unus
 	uintptr_t fspm_end = fspm_begin + size;
 
 	if (check_region_overlap(memmap, "FSPM", fspm_begin, fspm_end) != CB_SUCCESS)
-		return NULL;
+		return nullptr;
 
 	return (void *)fspm_begin;
 }
@@ -479,7 +479,7 @@ void fsp_memory_init(bool s3wake)
 	struct fsp_header *hdr = &context.header;
 	struct memranges *memmap = &context.memmap;
 
-	/* For FSP-M XIP we leave alloc NULL to get a direct mapping to flash. */
+	/* For FSP-M XIP we leave alloc nullptr to get a direct mapping to flash. */
 	if (!CONFIG(FSP_M_XIP))
 		fspld.alloc = fspm_allocator;
 

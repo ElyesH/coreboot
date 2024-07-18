@@ -79,7 +79,7 @@ static int chipidea_hw_init(struct usbdev_ctrl *this, void *_opreg,
 	p->qhlist = dma_memalign(4096, sizeof(struct qh) * CI_QHELEMENTS);
 	memcpy(&this->device_descriptor, dd, sizeof(*dd));
 
-	if (p->qhlist == NULL)
+	if (p->qhlist == nullptr)
 		die("failed to allocate memory for USB device mode");
 
 	memset(p->qhlist, 0, sizeof(struct qh) * CI_QHELEMENTS);
@@ -483,12 +483,12 @@ static void chipidea_free(void *ptr)
 struct usbdev_ctrl *chipidea_init(device_descriptor_t *dd)
 {
 	struct usbdev_ctrl *ctrl = calloc(1, sizeof(*ctrl));
-	if (ctrl == NULL)
-		return NULL;
+	if (ctrl == nullptr)
+		return nullptr;
 	ctrl->pdata = calloc(1, sizeof(struct chipidea_pdata));
-	if (ctrl->pdata == NULL) {
+	if (ctrl->pdata == nullptr) {
 		free(ctrl);
-		return NULL;
+		return nullptr;
 	}
 
 	ctrl->poll = chipidea_poll;
@@ -516,7 +516,7 @@ struct usbdev_ctrl *chipidea_init(device_descriptor_t *dd)
 	if (!chipidea_hw_init(ctrl, (void *)0x7d000000, dd)) {
 		free(ctrl->pdata);
 		free(ctrl);
-		return NULL;
+		return nullptr;
 	}
 	return ctrl;
 }

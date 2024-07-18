@@ -118,7 +118,7 @@ struct eeprom_bmc_settings *get_bmc_settings(void)
 	if (valid == 0) {
 		if (eeprom_read_buffer(&bmc_cfg, bmc_settings_offset, sizeof(bmc_cfg))) {
 			printk(BIOS_ERR, "CFG EEPROM: Failed to read BMC settings\n");
-			return NULL;
+			return nullptr;
 		}
 		valid = 1;
 	}

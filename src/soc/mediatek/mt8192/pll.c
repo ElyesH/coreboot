@@ -86,7 +86,7 @@ enum mux_id {
 		.clr_reg = &mtk_topckgen->_reg##_clr,	\
 		.mux_shift = _mux_shift,		\
 		.mux_width = _mux_width,		\
-		.upd_reg = NULL,			\
+		.upd_reg = nullptr,			\
 		.upd_shift = 0,				\
 	}
 

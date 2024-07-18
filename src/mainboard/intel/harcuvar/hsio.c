@@ -15,7 +15,7 @@ size_t mainboard_get_hsio_config(BL_HSIO_INFORMATION **p_hsio_config)
         break;
     default:
         num = 0;
-        (*p_hsio_config) = NULL;
+        (*p_hsio_config) = nullptr;
         break;
     }
     return num;

@@ -53,7 +53,7 @@ const struct region_device *boot_device_ro(void)
 	if (MSEL_SPI2SD(m))
 		return &sd_mdev.rdev;
 	die("Wrong configuration of MSEL\n");
-	return NULL;
+	return nullptr;
 }
 
 static const struct fu540_spi_mmap_config spi_mmap_config = {

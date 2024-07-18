@@ -67,7 +67,7 @@ void pci_domain_fill_ssdt(const struct device *domain)
 	}
 
 	struct resource *res;
-	for (res = domain->resource_list; res != NULL; res = res->next) {
+	for (res = domain->resource_list; res != nullptr; res = res->next) {
 		if (!(res->flags & IORESOURCE_ASSIGNED))
 			continue;
 		/* Don't add MMIO producer ranges for reserved MMIO regions from non-PCI

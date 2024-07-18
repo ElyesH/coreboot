@@ -14,8 +14,8 @@ const char *get_wifi_sar_cbfs_filename(void)
 		return "wifi_sar_1.hex";
 	}
 
-	printk(BIOS_INFO, "Intel Wi-Fi SAR not used, return NULL!\n");
-	return NULL;
+	printk(BIOS_INFO, "Intel Wi-Fi SAR not used, return nullptr!\n");
+	return nullptr;
 }
 
 void variant_generate_s0ix_hook(enum s0ix_entry entry)

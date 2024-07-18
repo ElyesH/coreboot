@@ -547,7 +547,7 @@ usb_msc_test_unit_ready(usbdev_t *dev)
 
 	/* Initially mark the device ready. */
 	MSC_INST(dev)->ready = USB_MSC_READY;
-	gettimeofday(&tv, NULL);
+	gettimeofday(&tv, nullptr);
 	start_time_secs = tv.tv_sec;
 
 	while (tv.tv_sec - start_time_secs < timeout_secs) {
@@ -557,7 +557,7 @@ usb_msc_test_unit_ready(usbdev_t *dev)
 		case MSC_COMMAND_FAIL:
 			mdelay(100);
 			usb_debug(".");
-			gettimeofday(&tv, NULL);
+			gettimeofday(&tv, nullptr);
 			continue;
 		default:
 			/* Device detached, return immediately */
@@ -638,7 +638,7 @@ void usb_msc_force_init(usbdev_t *dev, u32 quirks)
 	int i;
 
 	/* init .data before setting .destroy */
-	dev->data = NULL;
+	dev->data = nullptr;
 
 	dev->destroy = usb_msc_destroy;
 	dev->poll = usb_msc_poll;

@@ -34,7 +34,7 @@
  *	is not compressed and the platform supports direct memory-mapping for the boot medium,
  *	a pointer to the platform mapping is returned directly. In all other cases, memory will
  *	be allocated from the cbfs_cache and file data will be loaded into there. Returns a
- *	pointer to the mapping on success, or NULL on error. If an optional size_out parameter
+ *	pointer to the mapping on success, or nullptr on error. If an optional size_out parameter
  *	is passed in, it will be filled out with the size of the mapped data. Caller should call
  *	cbfs_unmap() after it is done using the mapping to free up the cbfs_cache if possible.
  *
@@ -42,7 +42,7 @@
  *	file data into memory provided by a custom allocator function that the caller passes in.
  *	The caller may pass an argument that is passed through verbatim to the allocator.
  *	Returns the pointer returned by the allocator (where the file data was loaded to) on
- *	success, or NULL on error. If an optional size_out parameter is passed in, it will be
+ *	success, or nullptr on error. If an optional size_out parameter is passed in, it will be
  *	filled out with the size of the loaded data.
  *
  * void *cbfs_cbmem_alloc(char *name, uint32_t cbmem_id, size_t *size_out): Wrapper around
@@ -71,7 +71,7 @@
  * passed to cbfs_alloc(), the size of the file to be loaded, and a pointer to the already
  * loaded and verified file metadata (for rare cases where the allocator needs to check custom
  * attributes). Must return a pointer to space of the requested size where the file data should
- * be loaded, or NULL to make the operation fail.
+ * be loaded, or nullptr to make the operation fail.
  */
 typedef void *(*cbfs_allocator_t)(void *arg, size_t size, const union cbfs_mdata *mdata);
 
@@ -175,12 +175,12 @@ void cbfs_boot_device_find_mcache(struct cbfs_boot_device *cbd, uint32_t id);
 /*
  * Retrieves the currently active CBFS boot device. If |force_ro| is set, will always return the
  * read-only CBFS instead (this only makes a difference when CONFIG(VBOOT) is enabled). May
- * perform certain CBFS initialization tasks. Returns NULL on error (e.g. boot device IO error).
+ * perform certain CBFS initialization tasks. Returns nullptr on error (e.g. boot device IO error).
  */
 const struct cbfs_boot_device *cbfs_get_boot_device(bool force_ro);
 
 /*
- * Builds the mcache (if |cbd->mcache| is set) and verifies |metadata_hash| (if it is not NULL).
+ * Builds the mcache (if |cbd->mcache| is set) and verifies |metadata_hash| (if it is not nullptr).
  * If CB_CBFS_CACHE_FULL is returned, the mcache is incomplete but still valid and the metadata
  * hash was still verified. Should be called once per *boot* (not once per stage) before the
  * first CBFS access.
@@ -215,13 +215,13 @@ void *_cbfs_cbmem_allocator(void *arg, size_t size, const union cbfs_mdata *unus
 static inline void *cbfs_alloc(const char *name, cbfs_allocator_t allocator, void *arg,
 			       size_t *size_out)
 {
-	return cbfs_type_alloc(name, allocator, arg, size_out, NULL);
+	return cbfs_type_alloc(name, allocator, arg, size_out, nullptr);
 }
 
 static inline void *cbfs_ro_alloc(const char *name, cbfs_allocator_t allocator, void *arg,
 				  size_t *size_out)
 {
-	return cbfs_ro_type_alloc(name, allocator, arg, size_out, NULL);
+	return cbfs_ro_type_alloc(name, allocator, arg, size_out, nullptr);
 }
 
 static inline void *cbfs_type_alloc(const char *name, cbfs_allocator_t allocator, void *arg,
@@ -245,28 +245,28 @@ static inline void *cbfs_unverified_area_alloc(const char *area, const char *nam
 
 static inline void *cbfs_map(const char *name, size_t *size_out)
 {
-	return cbfs_type_map(name, size_out, NULL);
+	return cbfs_type_map(name, size_out, nullptr);
 }
 
 static inline void *cbfs_ro_map(const char *name, size_t *size_out)
 {
-	return cbfs_ro_type_map(name, size_out, NULL);
+	return cbfs_ro_type_map(name, size_out, nullptr);
 }
 
 static inline void *cbfs_type_map(const char *name, size_t *size_out, enum cbfs_type *type)
 {
-	return cbfs_type_alloc(name, NULL, NULL, size_out, type);
+	return cbfs_type_alloc(name, nullptr, nullptr, size_out, type);
 }
 
 static inline void *cbfs_ro_type_map(const char *name, size_t *size_out, enum cbfs_type *type)
 {
-	return cbfs_ro_type_alloc(name, NULL, NULL, size_out, type);
+	return cbfs_ro_type_alloc(name, nullptr, nullptr, size_out, type);
 }
 
 static inline void *cbfs_unverified_area_map(const char *area, const char *name,
 					     size_t *size_out)
 {
-	return _cbfs_unverified_area_alloc(area, name, NULL, NULL, size_out);
+	return _cbfs_unverified_area_alloc(area, name, nullptr, nullptr, size_out);
 }
 
 static inline size_t _cbfs_load(const char *name, void *buf, size_t size, bool force_ro,
@@ -281,7 +281,7 @@ static inline size_t _cbfs_load(const char *name, void *buf, size_t size, bool f
 
 static inline size_t cbfs_load(const char *name, void *buf, size_t size)
 {
-	return cbfs_type_load(name, buf, size, NULL);
+	return cbfs_type_load(name, buf, size, nullptr);
 }
 
 static inline size_t cbfs_type_load(const char *name, void *buf, size_t size,
@@ -292,7 +292,7 @@ static inline size_t cbfs_type_load(const char *name, void *buf, size_t size,
 
 static inline size_t cbfs_ro_load(const char *name, void *buf, size_t size)
 {
-	return cbfs_ro_type_load(name, buf, size, NULL);
+	return cbfs_ro_type_load(name, buf, size, nullptr);
 }
 
 static inline size_t cbfs_ro_type_load(const char *name, void *buf, size_t size,
@@ -313,12 +313,12 @@ static inline size_t cbfs_unverified_area_load(const char *area, const char *nam
 
 static inline void *cbfs_cbmem_alloc(const char *name, uint32_t cbmem_id, size_t *size_out)
 {
-	return cbfs_type_cbmem_alloc(name, cbmem_id, size_out, NULL);
+	return cbfs_type_cbmem_alloc(name, cbmem_id, size_out, nullptr);
 }
 
 static inline void *cbfs_ro_cbmem_alloc(const char *name, uint32_t cbmem_id, size_t *size_out)
 {
-	return cbfs_ro_type_cbmem_alloc(name, cbmem_id, size_out, NULL);
+	return cbfs_ro_type_cbmem_alloc(name, cbmem_id, size_out, nullptr);
 }
 
 static inline void *cbfs_type_cbmem_alloc(const char *name, uint32_t cbmem_id, size_t *size_out,

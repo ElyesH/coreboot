@@ -30,7 +30,7 @@ struct FSPM_ARCH_UPD {
 	uint8_t                       Reserved[3];
 	///
 	/// Pointer to the non-volatile storage (NVS) data buffer.
-	/// If it is NULL it indicates the NVS data is not available.
+	/// If it is nullptr it indicates the NVS data is not available.
 	///
 	uint32_t                      NvsBufferPtr;
 	///

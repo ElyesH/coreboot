@@ -283,7 +283,7 @@ static void pch_enable_lpc_decode(void)
 		| KBC_LPC_EN | FDD_LPC_EN | LPT_LPC_EN | COMB_LPC_EN | COMA_LPC_EN);
 
 	const struct device *dev = pcidev_on_root(0x1f, 0);
-	const struct southbridge_intel_bd82x6x_config *config = NULL;
+	const struct southbridge_intel_bd82x6x_config *config = nullptr;
 
 	/* Set up generic decode ranges */
 	if (!dev)

@@ -7,10 +7,10 @@
 
 /* These are weakly linked such that platforms can link only the save state
    ops they actually require. */
-const struct smm_save_state_ops *legacy_ops __weak = NULL;
-const struct smm_save_state_ops *em64t100_ops __weak = NULL;
-const struct smm_save_state_ops *em64t101_ops __weak = NULL;
-const struct smm_save_state_ops *amd64_ops __weak = NULL;
+const struct smm_save_state_ops *legacy_ops __weak = nullptr;
+const struct smm_save_state_ops *em64t100_ops __weak = nullptr;
+const struct smm_save_state_ops *em64t101_ops __weak = nullptr;
+const struct smm_save_state_ops *amd64_ops __weak = nullptr;
 
 static const struct smm_save_state_ops *save_state;
 
@@ -34,7 +34,7 @@ static int init_save_state(void)
 		const struct smm_save_state_ops *ops = save_state_ops[i];
 		const uint32_t *rev;
 
-		if (ops == NULL)
+		if (ops == nullptr)
 			continue;
 
 		for (rev = ops->revision_table; *rev != SMM_REV_INVALID; rev++)

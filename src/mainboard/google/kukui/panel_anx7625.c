@@ -64,12 +64,12 @@ struct panel_description *get_panel_description(int panel_id)
 
 	if (anx7625_init(ANX7625_I2C_BUS)) {
 		printk(BIOS_ERR, "Can't init ANX7625 bridge.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (anx7625_dp_get_edid(ANX7625_I2C_BUS, &anx7625_data.edid)) {
 		printk(BIOS_ERR, "Can't get panel's edid.\n");
-		return NULL;
+		return nullptr;
 	}
 	return &anx7625_panel;
 }

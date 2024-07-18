@@ -32,7 +32,7 @@
 #include <storage/nvme.h>
 #include <storage/storage.h>
 
-static storage_dev_t **devices = NULL;
+static storage_dev_t **devices = nullptr;
 static size_t devices_length = 0;
 static size_t dev_count = 0;
 

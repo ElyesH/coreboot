@@ -164,8 +164,8 @@ uhci_pci_init(pcidev_t addr)
 	controller->bulk = uhci_bulk;
 	controller->control = uhci_control;
 	controller->set_address = generic_set_address;
-	controller->finish_device_config = NULL;
-	controller->destroy_device = NULL;
+	controller->finish_device_config = nullptr;
+	controller->destroy_device = nullptr;
 	controller->create_intr_queue = uhci_create_intr_queue;
 	controller->destroy_intr_queue = uhci_destroy_intr_queue;
 	controller->poll_intr_queue = uhci_poll_intr_queue;
@@ -543,7 +543,7 @@ uhci_create_intr_queue(endpoint_t *ep, int reqsize, int reqcount, int reqtiming)
 		usb_debug("Error: Failed to place UHCI interrupt queue "
 			      "head into framelist: no space left\n");
 		uhci_destroy_intr_queue(ep, q);
-		return NULL;
+		return nullptr;
 	}
 
 	return q;
@@ -572,7 +572,7 @@ uhci_destroy_intr_queue(endpoint_t *ep, void *q_)
 }
 
 /* read one intr-packet from queue, if available. extend the queue for new input.
-   return NULL if nothing new available.
+   return nullptr if nothing new available.
    Recommended use: while (data=poll_intr_queue(q)) process(data);
  */
 static u8*
@@ -603,7 +603,7 @@ uhci_poll_intr_queue(void *q_)
 		usb_debug("resetting underrun uhci interrupt queue.\n");
 		q->qh->elementlinkptr = virt_to_phys(q->tds + q->lastread);
 	}
-	return NULL;
+	return nullptr;
 }
 
 void

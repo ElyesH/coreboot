@@ -45,7 +45,7 @@ MODULE_ID("$Id: m_pattern.c,v 1.16 2010/01/23 21:20:10 tom Exp $")
 |
 |   Description   :  Return the value of the pattern buffer.
 |
-|   Return Values :  NULL          - if there is no pattern buffer allocated
+|   Return Values :  nullptr          - if there is no pattern buffer allocated
 |                    EmptyString   - if there is a pattern buffer but no
 |                                    pattern is stored
 |                    PatternString - as expected

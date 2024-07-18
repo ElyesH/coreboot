@@ -56,7 +56,7 @@ static struct {
 	{ "[21~", KEY_F(10) },
 	{ "[23~", KEY_F(11) },
 	{ "[24~", KEY_F(12) },
-	{ NULL },
+	{ nullptr },
 };
 
 static int handle_escape(void)
@@ -68,7 +68,7 @@ static int handle_escape(void)
 	if (len == 0)
 		return 27;
 
-	for(i = 0; escape_codes[i].seq != NULL; i++) {
+	for(i = 0; escape_codes[i].seq != nullptr; i++) {
 		const char *p = escape_codes[i].seq;
 
 		for(t = 0; t < len; t++) {

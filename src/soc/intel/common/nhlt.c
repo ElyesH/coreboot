@@ -6,7 +6,7 @@
 
 uintptr_t nhlt_soc_serialize(struct nhlt *nhlt, uintptr_t acpi_addr)
 {
-	return nhlt_soc_serialize_oem_overrides(nhlt, acpi_addr, NULL, NULL, 0);
+	return nhlt_soc_serialize_oem_overrides(nhlt, acpi_addr, nullptr, nullptr, 0);
 }
 
 uintptr_t nhlt_soc_serialize_oem_overrides(struct nhlt *nhlt,
@@ -17,7 +17,7 @@ uintptr_t nhlt_soc_serialize_oem_overrides(struct nhlt *nhlt,
 
 	gnvs = acpi_get_gnvs();
 
-	if (gnvs == NULL)
+	if (gnvs == nullptr)
 		return acpi_addr;
 
 	/* Update NHLT GNVS Data */

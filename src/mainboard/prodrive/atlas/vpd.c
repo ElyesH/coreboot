@@ -59,7 +59,7 @@ const struct emi_eeprom_vpd *get_emi_eeprom_vpd(void)
 		vpd.layout.profile = ATLAS_PROF_UNPROGRAMMED;
 		__fallthrough;
 	default:
-		/* Ensure serial numbers are NULL-terminated, update revision last */
+		/* Ensure serial numbers are nullptr-terminated, update revision last */
 		vpd.layout.serial_number[ATLAS_SN_PN_LENGTH - 1] = '\0';
 		vpd.layout.part_number[ATLAS_SN_PN_LENGTH - 1] = '\0';
 		vpd.layout.header.revision = VPD_LATEST_REVISION;

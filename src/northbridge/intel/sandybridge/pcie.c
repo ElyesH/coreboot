@@ -11,7 +11,7 @@ static const char *pcie_acpi_name(const struct device *dev)
 	assert(dev);
 
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	assert(dev->upstream);
 	if (dev->upstream->secondary == 0)
@@ -38,7 +38,7 @@ static const char *pcie_acpi_name(const struct device *dev)
 	     port->path.pci.devfn == PCI_DEVFN(6, 0)))
 		return "DEV0";
 
-	return NULL;
+	return nullptr;
 }
 
 static struct device_operations device_ops = {

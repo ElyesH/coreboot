@@ -180,7 +180,7 @@ enum cb_err set_cpu_info(unsigned int index, struct device *cpu);
 
 static inline struct cpu_info *cpu_info(void)
 {
-	struct cpu_info *ci = NULL;
+	struct cpu_info *ci = nullptr;
 
 	__asm__ __volatile__("mov %%gs:%c[offset], %[ci]"
 		: [ci] "=r" (ci)

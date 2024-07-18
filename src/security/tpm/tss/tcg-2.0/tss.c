@@ -26,16 +26,16 @@ void *tlcl2_process_command(TPM_CC command, void *command_body)
 	/* Command/response buffer. */
 	static uint8_t cr_buffer[TPM_BUFFER_SIZE];
 
-	if (tlcl_tis_sendrecv == NULL) {
+	if (tlcl_tis_sendrecv == nullptr) {
 		printk(BIOS_ERR, "Attempted use of uninitialized TSS 2.0 stack\n");
-		return NULL;
+		return nullptr;
 	}
 
 	obuf_init(&ob, cr_buffer, sizeof(cr_buffer));
 
 	if (tpm_marshal_command(command, command_body, &ob) < 0) {
 		printk(BIOS_ERR, "command %#x\n", command);
-		return NULL;
+		return nullptr;
 	}
 
 	sendb = obuf_contents(&ob, &out_size);
@@ -43,7 +43,7 @@ void *tlcl2_process_command(TPM_CC command, void *command_body)
 	in_size = sizeof(cr_buffer);
 	if (tlcl_tis_sendrecv(sendb, out_size, cr_buffer, &in_size)) {
 		printk(BIOS_ERR, "tpm transaction failed\n");
-		return NULL;
+		return nullptr;
 	}
 
 	ibuf_init(&ib, cr_buffer, in_size);
@@ -183,7 +183,7 @@ tpm_result_t tlcl2_force_clear(void)
 {
 	struct tpm2_response *response;
 
-	response = tlcl2_process_command(TPM2_Clear, NULL);
+	response = tlcl2_process_command(TPM2_Clear, nullptr);
 	printk(BIOS_INFO, "%s: response is %#x\n",
 	       __func__, response ? response->hdr.tpm_code : -1);
 

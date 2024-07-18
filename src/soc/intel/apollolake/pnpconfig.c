@@ -53,4 +53,4 @@ static void pnp_settings(void *unused)
 			  pnpconfigarr[index].value);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, pnp_settings, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, pnp_settings, nullptr);

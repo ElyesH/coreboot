@@ -80,10 +80,10 @@ void write_pci_int_table(void)
 	init_fch_irq_map_tables();
 
 	idx_name = sb_get_apic_reg_association(&limit);
-	if (idx_name == NULL) {
+	if (idx_name == nullptr) {
 		printk(BIOS_ERR, "Warning: Can't write PCI_INTR 0xC00/0xC01"
 				" registers because\n"
-				" 'irq_association'\ntables is NULL\n");
+				" 'irq_association'\ntables is nullptr\n");
 		return;
 	}
 
@@ -116,8 +116,8 @@ void write_pci_int_table(void)
  */
 void write_pci_cfg_irqs(void)
 {
-	struct device *dev = NULL;  /* Our current device to route IRQs */
-	struct device *target_dev = NULL; /* the bridge a device may be
+	struct device *dev = nullptr;  /* Our current device to route IRQs */
+	struct device *target_dev = nullptr; /* the bridge a device may be
 					   * connected to */
 	u16 int_pin = 0;
 	u16 target_pin = 0;
@@ -129,7 +129,7 @@ void write_pci_cfg_irqs(void)
 	const struct irq_idx_name *idx_name;
 
 	idx_name = sb_get_apic_reg_association(&limit);
-	if (pirq_data_ptr == NULL) {
+	if (pirq_data_ptr == nullptr) {
 		printk(BIOS_WARNING, "Can't write PCI IRQ assignments"
 				" because 'mainboard_pirq_data' structure does"
 				" not exist\n");
@@ -145,9 +145,9 @@ void write_pci_cfg_irqs(void)
 		 * Step 1: Get INT_PIN and device structure to look for in the
 		 * PCI_INTR table pirq_data
 		 */
-		target_dev = NULL;
+		target_dev = nullptr;
 		target_pin = get_pci_irq_pins(dev, &target_dev);
-		if (target_dev == NULL)
+		if (target_dev == nullptr)
 			continue;
 
 		if (target_pin < 1)

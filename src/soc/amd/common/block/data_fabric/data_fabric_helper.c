@@ -81,7 +81,7 @@ static const char *data_fabric_acpi_name(const struct device *dev)
 		return df_acpi_names[PCI_FUNC(dev->path.pci.devfn)];
 
 	printk(BIOS_ERR, "%s: Unhandled device id 0x%x\n", __func__, dev->device);
-	return NULL;
+	return nullptr;
 }
 #endif
 

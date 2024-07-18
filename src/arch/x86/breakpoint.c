@@ -101,7 +101,7 @@ static enum breakpoint_result allocate_breakpoint(struct breakpoint_handle *out_
 			continue;
 
 		breakpoints[i].allocated = true;
-		breakpoints[i].handler = NULL;
+		breakpoints[i].handler = nullptr;
 		breakpoints[i].type = type;
 		out_handle->bp = i;
 		return BREAKPOINT_RES_OK;

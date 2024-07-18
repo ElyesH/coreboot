@@ -49,7 +49,7 @@ static pci_devfn_t uart_console_get_pci_bdf(void)
 	/*
 	 * This function will get called even if INTEL_LPSS_UART_FOR_CONSOLE
 	 * config option is not selected.
-	 * By default return NULL in this case to avoid compilation errors.
+	 * By default return nullptr in this case to avoid compilation errors.
 	 */
 	if (!CONFIG(INTEL_LPSS_UART_FOR_CONSOLE))
 		return PCI_DEV_INVALID;
@@ -68,7 +68,7 @@ const struct device *uart_get_device(void)
 {
 	pci_devfn_t dev = uart_console_get_pci_bdf();
 	if (dev == PCI_DEV_INVALID)
-		return NULL;
+		return nullptr;
 
 	return pcidev_path_on_root(PCI_DEV2DEVFN(dev));
 }
@@ -301,7 +301,7 @@ static const char *uart_acpi_hid(const struct device *dev)
 	case PCI_DID_INTEL_CNP_H_UART2:
 		return "INT34BA";
 	default:
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -339,7 +339,7 @@ static const char *uart_acpi_name(const struct device *dev)
 	case PCI_DID_INTEL_GLK_UART3:
 		return "UAR3";
 	default:
-		return NULL;
+		return nullptr;
 	}
 }
 

@@ -27,7 +27,7 @@ uint32_t _gpio_base3_value(const gpio_t gpio[], int num_gpio, int binary_first);
  * a mapping from a GPIO pin to controller by returning the ACPI
  * path for the controller that owns this GPIO.
  *
- * If not implemented the default handler will return NULL.
+ * If not implemented the default handler will return nullptr.
  */
 const char *gpio_acpi_path(gpio_t gpio);
 

@@ -215,7 +215,7 @@ static void pch_log_state(void *unused)
 		pch_log_wake_source(ps);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, pch_log_state, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, pch_log_state, nullptr);
 
 void elog_gsmi_cb_platform_log_wake_source(void)
 {

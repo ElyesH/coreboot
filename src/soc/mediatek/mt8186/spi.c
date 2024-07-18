@@ -140,7 +140,7 @@ static const struct pad_func nor_pinmux[SPI_NOR_GPIO_SET_NUM][4] = {
 
 void mtk_snfc_init(int gpio_set)
 {
-	const struct pad_func *ptr = NULL;
+	const struct pad_func *ptr = nullptr;
 
 	assert(gpio_set < SPI_NOR_GPIO_SET_NUM);
 

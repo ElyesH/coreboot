@@ -16,7 +16,7 @@ const size_t region_alignment = MIN_UNSAFE(DYN_CBMEM_ALIGN_SIZE, 4096);
 
 static inline int rmodule_is_loaded(const struct rmodule *module)
 {
-	return module->location != NULL;
+	return module->location != nullptr;
 }
 
 /* Calculate a loaded program address based on the blob address. */
@@ -36,7 +36,7 @@ int rmodule_parse(void *ptr, struct rmodule *module)
 	base = ptr;
 	rhdr = ptr;
 
-	if (rhdr == NULL)
+	if (rhdr == nullptr)
 		return -1;
 
 	/* Sanity check the raw data. */
@@ -46,7 +46,7 @@ int rmodule_parse(void *ptr, struct rmodule *module)
 		return -1;
 
 	/* Indicate the module hasn't been loaded yet. */
-	module->location = NULL;
+	module->location = nullptr;
 
 	/* The rmodule only needs a reference to the reloc_header. */
 	module->header = rhdr;
@@ -68,11 +68,11 @@ int rmodule_memory_size(const struct rmodule *module)
 void *rmodule_parameters(const struct rmodule *module)
 {
 	if (!rmodule_is_loaded(module))
-		return NULL;
+		return nullptr;
 
 	/* Indicate if there are no parameters. */
 	if (module->header->parameters_begin == module->header->parameters_end)
-		return NULL;
+		return nullptr;
 
 	return rmodule_load_addr(module, module->header->parameters_begin);
 }
@@ -86,7 +86,7 @@ int rmodule_entry_offset(const struct rmodule *module)
 void *rmodule_entry(const struct rmodule *module)
 {
 	if (!rmodule_is_loaded(module))
-		return NULL;
+		return nullptr;
 
 	return rmodule_load_addr(module, module->header->module_entry_point);
 }
@@ -145,7 +145,7 @@ static int rmodule_relocate(const struct rmodule *module)
 	while (num_relocations > 0) {
 		uintptr_t *adjust_loc;
 
-		/* If the adjustment location is non-NULL adjust it. */
+		/* If the adjustment location is non-nullptr adjust it. */
 		adjust_loc = rmodule_load_addr(module, *reloc);
 		printk(PK_ADJ_LEVEL, "Adjusting %p: 0x%08lx -> 0x%08lx\n",
 		       adjust_loc, (unsigned long) *adjust_loc,
@@ -207,7 +207,7 @@ static void *rmodule_cbfs_allocator(void *rsl_arg, size_t unused,
 	if (!sattr) {
 		printk(BIOS_ERR, "rmodule '%s' has no stage header!\n",
 		       rsl->prog->name);
-		return NULL;
+		return nullptr;
 	}
 
 	const size_t memlen = be32toh(sattr->memlen);
@@ -240,8 +240,8 @@ static void *rmodule_cbfs_allocator(void *rsl_arg, size_t unused,
 	 */
 
 	uint8_t *stage_region = cbmem_add(rsl->cbmem_id, region_size);
-	if (stage_region == NULL)
-		return NULL;
+	if (stage_region == nullptr)
+		return nullptr;
 
 	return stage_region + region_alignment - sizeof(struct rmodule_header);
 }
@@ -250,14 +250,14 @@ int rmodule_stage_load(struct rmod_stage_load *rsl)
 {
 	struct rmodule rmod_stage;
 
-	if (rsl->prog == NULL || prog_name(rsl->prog) == NULL)
+	if (rsl->prog == nullptr || prog_name(rsl->prog) == nullptr)
 		return -1;
 
 	if (prog_locate_hook(rsl->prog))
 		return -1;
 
 	void *rmod_loc = cbfs_alloc(prog_name(rsl->prog),
-				    rmodule_cbfs_allocator, rsl, NULL);
+				    rmodule_cbfs_allocator, rsl, nullptr);
 	if (!rmod_loc)
 		return -1;
 

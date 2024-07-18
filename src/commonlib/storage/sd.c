@@ -22,7 +22,7 @@ int sd_send_if_cond(struct storage_media *media)
 	cmd.cmdarg = ((ctrlr->voltages & 0xff8000) != 0) << 8 | 0xaa;
 	cmd.resp_type = CARD_RSP_R7;
 	cmd.flags = 0;
-	int err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	int err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 	if (err)
 		return err;
 
@@ -45,7 +45,7 @@ int sd_send_op_cond(struct storage_media *media)
 		cmd.cmdarg = 0;
 		cmd.flags = 0;
 
-		err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+		err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 		if (err)
 			return err;
 
@@ -64,7 +64,7 @@ int sd_send_op_cond(struct storage_media *media)
 		if (media->version == SD_VERSION_2)
 			cmd.cmdarg |= OCR_HCS;
 
-		err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+		err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 		if (err)
 			return err;
 
@@ -135,7 +135,7 @@ int sd_change_freq(struct storage_media *media)
 	cmd.cmdarg = media->rca << 16;
 	cmd.flags = 0;
 
-	err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 	if (err)
 		return err;
 
@@ -248,7 +248,7 @@ int sd_set_bus_width(struct storage_media *media)
 		cmd.cmdarg = media->rca << 16;
 		cmd.flags = 0;
 
-		err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+		err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 		if (err)
 			return err;
 
@@ -256,7 +256,7 @@ int sd_set_bus_width(struct storage_media *media)
 		cmd.resp_type = CARD_RSP_R1;
 		cmd.cmdarg = 2;
 		cmd.flags = 0;
-		err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+		err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 		if (err)
 			return err;
 

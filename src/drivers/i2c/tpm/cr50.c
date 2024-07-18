@@ -428,7 +428,7 @@ static void cr50_vendor_init(struct tpm_chip *chip)
 tpm_result_t tpm_vendor_probe(unsigned int bus, uint32_t addr, enum tpm_family *family)
 {
 	/* cr50 is TPM2 */
-	if (family != NULL)
+	if (family != nullptr)
 		*family = TPM_2;
 	return TPM_SUCCESS;
 }
@@ -505,7 +505,7 @@ tpm_result_t tpm_vendor_init(struct tpm_chip *chip, unsigned int bus, uint32_t d
 
 	if (tpm_first_access_this_boot()) {
 		/* This is called for the side-effect of printing the version string. */
-		cr50_get_firmware_version(NULL);
+		cr50_get_firmware_version(nullptr);
                 cr50_set_board_cfg();
 	}
 

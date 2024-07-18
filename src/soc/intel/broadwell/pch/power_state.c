@@ -23,7 +23,7 @@ static void migrate_power_state(int is_recovery)
 	ps_car = &power_state;
 	ps_cbmem = cbmem_add(CBMEM_ID_POWER_STATE, sizeof(*ps_cbmem));
 
-	if (ps_cbmem == NULL) {
+	if (ps_cbmem == nullptr) {
 		printk(BIOS_DEBUG, "Not adding power state to cbmem!\n");
 		return;
 	}

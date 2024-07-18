@@ -138,7 +138,7 @@ AGESA_STATUS agesa_GfxGetVbiosImage(uint32_t Func, uintptr_t FchData,
 
 	pVbiosImageInfo = (GFX_VBIOS_IMAGE_INFO *)ConfigPrt;
 	pVbiosImageInfo->ImagePtr = cbfs_map(
-			"pci"CONFIG_VGA_BIOS_ID".rom", NULL);
+			"pci"CONFIG_VGA_BIOS_ID".rom", nullptr);
 	printk(BIOS_DEBUG, "%s: IMGptr=%p\n", __func__,
 			pVbiosImageInfo->ImagePtr);
 	return pVbiosImageInfo->ImagePtr ? AGESA_SUCCESS : AGESA_WARNING;
@@ -206,7 +206,7 @@ AGESA_STATUS agesa_RunFuncOnAp(uint32_t Func, uintptr_t Data, void *ConfigPtr)
 	agesadata.Func = Func;
 	agesadata.Data = Data;
 	agesadata.ConfigPtr = ConfigPtr;
-	if (mp_run_on_aps(callout_ap_entry, NULL, MP_RUN_ON_ALL_CPUS, 100 * USECS_PER_MSEC) !=
+	if (mp_run_on_aps(callout_ap_entry, nullptr, MP_RUN_ON_ALL_CPUS, 100 * USECS_PER_MSEC) !=
 			CB_SUCCESS)
 		return AGESA_ERROR;
 
@@ -221,7 +221,7 @@ AGESA_STATUS agesa_RunFcnOnAllAps(uint32_t Func, uintptr_t Data,
 	agesadata.Func = Func;
 	agesadata.Data = Data;
 	agesadata.ConfigPtr = ConfigPtr;
-	if (mp_run_on_aps(callout_ap_entry, NULL, MP_RUN_ON_ALL_CPUS, 100 * USECS_PER_MSEC) !=
+	if (mp_run_on_aps(callout_ap_entry, nullptr, MP_RUN_ON_ALL_CPUS, 100 * USECS_PER_MSEC) !=
 			CB_SUCCESS)
 		return AGESA_ERROR;
 

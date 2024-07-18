@@ -171,7 +171,7 @@ extern uint8_t *m_stm_resources_ptr;
 
 void add_resources_cmd(void)
 {
-	m_stm_resources_ptr = NULL;
+	m_stm_resources_ptr = nullptr;
 
 	add_simple_resources();
 

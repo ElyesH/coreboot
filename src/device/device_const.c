@@ -54,9 +54,9 @@ DEVTREE_CONST struct device *dev_find_path(
 		DEVTREE_CONST struct device *prev_match,
 		enum device_path_type path_type)
 {
-	DEVTREE_CONST struct device *dev, *result = NULL;
+	DEVTREE_CONST struct device *dev, *result = nullptr;
 
-	if (prev_match == NULL)
+	if (prev_match == nullptr)
 		prev_match = all_devices;
 	else
 		prev_match = prev_match->next;
@@ -165,7 +165,7 @@ static int path_eq(const struct device_path *path1,
  * @param parent The bus to find the device on.
  * @param path The relative path from the bus to the appropriate device.
  * @return Pointer to a device structure for the device on bus at path
- *         or 0/NULL if no device is found.
+ *         or 0/nullptr if no device is found.
  */
 DEVTREE_CONST struct device *find_dev_path(
 	const struct bus *parent, const struct device_path *path)
@@ -174,8 +174,8 @@ DEVTREE_CONST struct device *find_dev_path(
 
 	if (!parent) {
 		BUG();
-		/* Return NULL in case asserts are considered non-fatal. */
-		return NULL;
+		/* Return nullptr in case asserts are considered non-fatal. */
+		return nullptr;
 	}
 
 	for (child = parent->children; child; child = child->sibling) {
@@ -192,7 +192,7 @@ DEVTREE_CONST struct device *find_dev_path(
  * @param nested_path An array of relative paths from the parent bus to the target device.
  * @param nested_path_length Number of path elements in nested_path array.
  * @return Pointer to a device structure for the device at nested path
- *         or 0/NULL if no device is found.
+ *         or 0/nullptr if no device is found.
  */
 DEVTREE_CONST struct device *find_dev_nested_path(
 	const struct bus *parent, const struct device_path nested_path[],
@@ -201,7 +201,7 @@ DEVTREE_CONST struct device *find_dev_nested_path(
 	DEVTREE_CONST struct device *child;
 
 	if (!parent || !nested_path || !nested_path_length)
-		return NULL;
+		return nullptr;
 
 	child = find_dev_path(parent, nested_path);
 
@@ -237,7 +237,7 @@ DEVTREE_CONST struct device *pcidev_path_on_bus(unsigned int bus, pci_devfn_t de
 			return pcidev_path_behind(dev->upstream, devfn);
 		dev = dev->next;
 	}
-	return NULL;
+	return nullptr;
 }
 
 DEVTREE_CONST struct bus *pci_root_bus(void)
@@ -248,9 +248,9 @@ DEVTREE_CONST struct bus *pci_root_bus(void)
 	if (pci_root)
 		return pci_root;
 
-	pci_domain = dev_find_path(NULL, DEVICE_PATH_DOMAIN);
+	pci_domain = dev_find_path(nullptr, DEVICE_PATH_DOMAIN);
 	if (!pci_domain)
-		return NULL;
+		return nullptr;
 
 	pci_root = pci_domain->downstream;
 	return pci_root;
@@ -272,8 +272,8 @@ DEVTREE_CONST struct device *pcidev_path_behind_pci2pci_bridge(
 {
 	if (!bridge || (bridge->path.type != DEVICE_PATH_PCI)) {
 		BUG();
-		/* Return NULL in case asserts are non-fatal. */
-		return NULL;
+		/* Return nullptr in case asserts are non-fatal. */
+		return nullptr;
 	}
 
 	return pcidev_path_behind(bridge->downstream, devfn);
@@ -298,7 +298,7 @@ void devtree_bug(const char *func, pci_devfn_t devfn)
 
 void __noreturn devtree_die(void)
 {
-	die("DEVTREE: dev or chip_info is NULL\n");
+	die("DEVTREE: dev or chip_info is nullptr\n");
 }
 
 /**
@@ -350,19 +350,19 @@ DEVTREE_CONST struct device *dev_find_slot_pnp(u16 port, u16 device)
  * Given a device and previous match iterate through all the children.
  *
  * @param bus parent device's bus holding all the children
- * @param prev_child previous child already traversed, if NULL start at
+ * @param prev_child previous child already traversed, if nullptr start at
  *        children of parent bus.
- * @return pointer to child or NULL when no more children
+ * @return pointer to child or nullptr when no more children
  */
 DEVTREE_CONST struct device *dev_bus_each_child(const struct bus *parent,
 					DEVTREE_CONST struct device *prev_child)
 {
 	DEVTREE_CONST struct device *dev;
 
-	if (parent == NULL)
-		return NULL;
+	if (parent == nullptr)
+		return nullptr;
 
-	if (prev_child == NULL)
+	if (prev_child == nullptr)
 		dev = parent->children;
 	else
 		dev = prev_child->sibling;
@@ -378,7 +378,7 @@ bool is_dev_enabled(const struct device *dev)
 	/* For stages with immutable device tree, first check if device is disabled because of
 	   fw_config probing. In these stages, dev->enabled does not reflect the true state of a
 	   device that uses fw_config probing. */
-	if (DEVTREE_EARLY && !fw_config_probe_dev(dev, NULL))
+	if (DEVTREE_EARLY && !fw_config_probe_dev(dev, nullptr))
 		return false;
 	return dev->enabled;
 }

@@ -20,11 +20,11 @@ static const char *soc_acpi_name(const struct device *dev)
 		return "PCI0";
 
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	printk(BIOS_WARNING, "Unknown PCI device: dev: %d, fn: %d\n",
 	       PCI_SLOT(dev->path.pci.devfn), PCI_FUNC(dev->path.pci.devfn));
-	return NULL;
+	return nullptr;
 };
 
 struct device_operations mendocino_pci_domain_ops = {

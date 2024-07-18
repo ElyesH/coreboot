@@ -291,7 +291,7 @@ static int sdhci_send_command(struct sd_mmc_ctrlr *ctrlr,
 	void *buf;
 	unsigned int bbflags;
 	size_t len;
-	struct bounce_buffer *bbstate = NULL;
+	struct bounce_buffer *bbstate = nullptr;
 	struct bounce_buffer bbstate_val;
 	int ret;
 

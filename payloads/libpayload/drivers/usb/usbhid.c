@@ -77,10 +77,10 @@ usb_hid_destroy(usbdev_t *dev)
 		}
 		dev->controller->destroy_intr_queue(
 				&dev->endpoints[i], HID_INST(dev)->queue);
-		HID_INST(dev)->queue = NULL;
+		HID_INST(dev)->queue = nullptr;
 	}
 	free(HID_INST(dev)->descriptor);
-	HID_INST(dev)->descriptor = NULL;
+	HID_INST(dev)->descriptor = nullptr;
 
 	free(dev->data);
 }

@@ -60,4 +60,4 @@ static void acpi_save_wake_source(void *unused)
 	       gnvs->pm1i, gnvs->gpei);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, acpi_save_wake_source, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PRE_DEVICE, BS_ON_ENTRY, acpi_save_wake_source, nullptr);

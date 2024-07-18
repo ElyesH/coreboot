@@ -33,7 +33,7 @@ u32 map_oprom_vendev(u32 vendev)
 	return new_vendev;
 }
 
-static struct resource *gtt_res = NULL;
+static struct resource *gtt_res = nullptr;
 
 u32 gtt_read(u32 reg)
 {

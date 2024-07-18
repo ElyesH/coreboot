@@ -59,7 +59,7 @@ int dma_busy(struct apb_dma_channel * const channel)
 struct apb_dma_channel * const dma_claim(void)
 {
 	int i;
-	struct apb_dma_channel_regs *regs = NULL;
+	struct apb_dma_channel_regs *regs = nullptr;
 
 	/*
 	 * Set global enable bit, otherwise register access to channel
@@ -82,7 +82,7 @@ struct apb_dma_channel * const dma_claim(void)
 	}
 
 	if (i == ARRAY_SIZE(apb_dma_channels))
-		return NULL;
+		return nullptr;
 
 	apb_dma_channels[i].in_use = 1;
 	return &apb_dma_channels[i];

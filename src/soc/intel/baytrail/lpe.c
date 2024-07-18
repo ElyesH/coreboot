@@ -113,7 +113,7 @@ static void lpe_stash_firmware_info(struct device *dev)
 	const struct pattrs *pattrs = pattrs_get();
 
 	res = probe_resource(dev, FIRMWARE_PCI_REG_BASE);
-	if (res == NULL) {
+	if (res == nullptr) {
 		printk(BIOS_DEBUG, "LPE Firmware memory not found.\n");
 		return;
 	}

@@ -64,10 +64,10 @@ static void soc_finalize(void *unused)
 
 	if (CONFIG_MAX_SOCKET > 1) {
 		/* This MSR is package scope but run for all cpus for code simplicity */
-		if (mp_run_on_all_cpus(&lock_msr_ppin_ctl, NULL) != CB_SUCCESS)
+		if (mp_run_on_all_cpus(&lock_msr_ppin_ctl, nullptr) != CB_SUCCESS)
 			printk(BIOS_ERR, "Lock PPIN CTL MSR failed\n");
 	} else {
-		lock_msr_ppin_ctl(NULL);
+		lock_msr_ppin_ctl(nullptr);
 	}
 
 	post_code(POSTCODE_OS_BOOT);
@@ -80,11 +80,11 @@ static void bios_done_finalize(void *unused)
 
 	printk(BIOS_DEBUG, "Setting BIOS_DONE\n");
 	/* bios_done_msr() only defined for some Xeon-SP, such as SPR-SP */
-	if (mp_run_on_all_cpus(&bios_done_msr, NULL) != CB_SUCCESS)
+	if (mp_run_on_all_cpus(&bios_done_msr, nullptr) != CB_SUCCESS)
 		printk(BIOS_ERR, "Fail to set BIOS_DONE MSR\n");
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, soc_finalize, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, soc_finalize, nullptr);
 /* FSP programs certain registers via Notify phase ReadyToBoot that can only be programmed
    before BIOS_DONE MSR is set, so coreboot sets BIOS_DONE as late as possible. */
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, bios_done_finalize, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, bios_done_finalize, nullptr);

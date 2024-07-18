@@ -18,7 +18,7 @@
 struct device *dev_find_lapic(unsigned int apic_id)
 {
 	struct device *dev;
-	struct device *result = NULL;
+	struct device *result = nullptr;
 
 	for (dev = all_devices; dev; dev = dev->next) {
 		if (dev->path.type == DEVICE_PATH_APIC &&
@@ -258,7 +258,7 @@ const struct device *dev_get_domain(const struct device *dev)
 		dev = dev->upstream->dev;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /**
@@ -273,7 +273,7 @@ static int allocate_more_resources(void)
 
 	new_res_list = malloc(64 * sizeof(*new_res_list));
 
-	if (new_res_list == NULL)
+	if (new_res_list == nullptr)
 		return 0;
 
 	memset(new_res_list, 0, 64 * sizeof(*new_res_list));
@@ -314,7 +314,7 @@ static void free_resource(struct device *dev, struct resource *res,
  */
 void compact_resources(struct device *dev)
 {
-	struct resource *res, *next, *prev = NULL;
+	struct resource *res, *next, *prev = nullptr;
 
 	/* Move all of the free resources to the end */
 	for (res = dev->resource_list; res; res = next) {
@@ -366,13 +366,13 @@ struct resource *new_resource(struct device *dev, unsigned int index)
 	/* See if there is a resource with the appropriate index. */
 	resource = probe_resource(dev, index);
 	if (!resource) {
-		if (free_resources == NULL && !allocate_more_resources())
+		if (free_resources == nullptr && !allocate_more_resources())
 			die("Couldn't allocate more resources.");
 
 		resource = free_resources;
 		free_resources = free_resources->next;
 		memset(resource, 0, sizeof(*resource));
-		resource->next = NULL;
+		resource->next = nullptr;
 		tail = dev->resource_list;
 		if (tail) {
 			while (tail->next)
@@ -683,7 +683,7 @@ void print_resource_tree(const struct device *root, int debug_level,
 {
 	/* Bail if root is null. */
 	if (!root) {
-		printk(debug_level, "%s passed NULL for root!\n", __func__);
+		printk(debug_level, "%s passed nullptr for root!\n", __func__);
 		return;
 	}
 
@@ -782,7 +782,7 @@ const struct resource *resource_range_idx(struct device *dev, unsigned long inde
 {
 	struct resource *resource;
 	if (!size)
-		return NULL;
+		return nullptr;
 
 	resource = new_resource(dev, index);
 	resource->base = base;
@@ -809,7 +809,7 @@ const struct resource *lower_ram_end(struct device *dev, unsigned long index, ui
 const struct resource *upper_ram_end(struct device *dev, unsigned long index, uint64_t end)
 {
 	if (end <= 4ull * GiB)
-		return NULL;
+		return nullptr;
 
 	printk(BIOS_INFO, "Available memory above 4GB: %lluM\n", (end - 4ull * GiB) / MiB);
 
@@ -851,7 +851,7 @@ void tolm_test(void *gp, struct device *dev, struct resource *new)
 
 u32 find_pci_tolm(struct bus *bus)
 {
-	struct resource *min = NULL;
+	struct resource *min = nullptr;
 	u32 tolm;
 	unsigned long mask_match = IORESOURCE_MEM | IORESOURCE_ASSIGNED;
 

@@ -156,7 +156,7 @@ enum spi_direction {
 struct tegra_spi_channel *tegra_spi_init(unsigned int bus)
 {
 	int i;
-	struct tegra_spi_channel *spi = NULL;
+	struct tegra_spi_channel *spi = nullptr;
 
 	for (i = 0; i < ARRAY_SIZE(tegra_spi_channels); i++) {
 		if (tegra_spi_channels[i].slave.bus == bus) {
@@ -165,7 +165,7 @@ struct tegra_spi_channel *tegra_spi_init(unsigned int bus)
 		}
 	}
 	if (!spi)
-		return NULL;
+		return nullptr;
 
 	/* software drives chip-select, set value to high */
 	setbits32(&spi->regs->command1,
@@ -272,7 +272,7 @@ static void dump_spi_regs(struct tegra_spi_channel *spi)
 
 static void dump_dma_regs(struct apb_dma_channel *dma)
 {
-	if (dma == NULL)
+	if (dma == nullptr)
 		return;
 
 	printk(BIOS_INFO, "DMA regs:\n"
@@ -564,8 +564,8 @@ static int tegra_spi_dma_finish(struct tegra_spi_channel *spi)
 
 	ret = 0;
 done:
-	spi->dma_in = NULL;
-	spi->dma_out = NULL;
+	spi->dma_in = nullptr;
+	spi->dma_out = nullptr;
 	return ret;
 }
 

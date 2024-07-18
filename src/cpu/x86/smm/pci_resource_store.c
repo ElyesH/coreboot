@@ -38,10 +38,10 @@ bool smm_pci_resource_store_fill_resources(struct smm_pci_resource_info *slots, 
 		slots[i_slot].device_id = devices[i_dev]->device;
 
 		size_t i_res = 0;
-		for (const struct resource *res = devices[i_dev]->resource_list; res != NULL;
+		for (const struct resource *res = devices[i_dev]->resource_list; res != nullptr;
 			res = res->next) {
 			slots[i_slot].resources[i_res] = *res;
-			slots[i_slot].resources[i_res].next = NULL;
+			slots[i_slot].resources[i_res].next = nullptr;
 
 			if (i_res > 0)
 				slots[i_slot].resources[i_res - 1].next = (struct resource *)&slots[i_slot].resources[i_res];

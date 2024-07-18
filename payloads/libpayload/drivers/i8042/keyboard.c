@@ -555,7 +555,7 @@ int keyboard_getchar(void)
 	while (!keyboard_havechar()) ;
 
 	ch = keyboard_get_scancode();
-	if ((media_key_mapping_callback != NULL) && (ch == MEDIA_KEY_PREFIX)) {
+	if ((media_key_mapping_callback != nullptr) && (ch == MEDIA_KEY_PREFIX)) {
 		ch = keyboard_get_scancode();
 		return media_key_mapping_callback(ch);
 	}

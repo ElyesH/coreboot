@@ -172,4 +172,4 @@ void acpigen_write_CPPC_hybrid_method(s32 core_id)
 	acpigen_pop_len();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT_CHIPS, BS_ON_EXIT, acpi_set_hybrid_cpu_apicid_order, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT_CHIPS, BS_ON_EXIT, acpi_set_hybrid_cpu_apicid_order, nullptr);

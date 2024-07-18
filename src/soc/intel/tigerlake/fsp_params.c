@@ -265,7 +265,7 @@ static const SI_PCH_DEVICE_INTERRUPT_CONFIG *pci_irq_to_fsp(size_t *out_count)
 	size_t cfg_count = 0;
 
 	if (!entry)
-		return NULL;
+		return nullptr;
 
 	/* Count PCH devices */
 	while (entry) {

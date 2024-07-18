@@ -49,7 +49,7 @@ bool vb2api_hwcrypto_allowed(struct vb2_context *ctx)
 
 struct vb2_context *vboot_get_context(void)
 {
-	return NULL;
+	return nullptr;
 }
 
 unsigned long ulzman(const unsigned char *src, unsigned long srcn, unsigned char *dst,
@@ -158,7 +158,7 @@ static int setup_test_cbfs(void **state)
 
 static void test_cbfs_map_no_hash(void **state)
 {
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size = 0;
 
 	set_cbfs((uint64_t)&file_no_hash, sizeof(file_no_hash));
@@ -166,13 +166,13 @@ static void test_cbfs_map_no_hash(void **state)
 	expect_cbfs_lookup(TEST_DATA_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&file_no_hash,
 			   be32toh(file_no_hash.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 
 	if (CONFIG(LP_CBFS_VERIFICATION)) {
 		/* File with no hash. No hash causes hash mismatch by default,
 		   so mapping will not be completed successfully. */
-		will_return(cbfs_file_hash, NULL);
-		mapping = cbfs_map(TEST_DATA_1_FILENAME, NULL);
+		will_return(cbfs_file_hash, nullptr);
+		mapping = cbfs_map(TEST_DATA_1_FILENAME, nullptr);
 		assert_null(mapping);
 	} else {
 		mapping = cbfs_map(TEST_DATA_1_FILENAME, &size);
@@ -185,7 +185,7 @@ static void test_cbfs_map_no_hash(void **state)
 
 static void test_cbfs_map_valid_hash_impl(void **state, bool lz4_compressed)
 {
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size = 0;
 	struct vb2_hash hash = {
 		.algo = VB2_HASH_SHA256,
@@ -206,7 +206,7 @@ static void test_cbfs_map_valid_hash_impl(void **state, bool lz4_compressed)
 		will_return(cbfs_find_attr, &cattr);
 		expect_function_call(ulz4fn);
 	} else {
-		will_return(cbfs_find_attr, NULL);
+		will_return(cbfs_find_attr, nullptr);
 	}
 
 	if (CONFIG(LP_CBFS_VERIFICATION)) {
@@ -240,7 +240,7 @@ static void test_cbfs_map_valid_hash_with_lz4(void **state)
 
 static void test_cbfs_map_invalid_hash(void **state)
 {
-	void *mapping = NULL;
+	void *mapping = nullptr;
 	size_t size = 0;
 	struct vb2_hash hash = {
 		.algo = VB2_HASH_SHA256,
@@ -252,14 +252,14 @@ static void test_cbfs_map_invalid_hash(void **state)
 	expect_cbfs_lookup(TEST_DATA_1_FILENAME, CB_SUCCESS,
 			   (const union cbfs_mdata *)&file_broken_hash,
 			   be32toh(file_broken_hash.header.offset));
-	will_return(cbfs_find_attr, NULL);
+	will_return(cbfs_find_attr, nullptr);
 
 	if (CONFIG(LP_CBFS_VERIFICATION)) {
 		will_return(cbfs_file_hash, &hash);
 		expect_memory(vb2_hash_verify, buf,
 			      &file_broken_hash.attrs_and_data[HASH_ATTR_SIZE], HASH_ATTR_SIZE);
 		expect_value(vb2_hash_verify, size, TEST_DATA_1_SIZE);
-		mapping = cbfs_map(TEST_DATA_1_FILENAME, NULL);
+		mapping = cbfs_map(TEST_DATA_1_FILENAME, nullptr);
 		assert_null(mapping);
 	} else {
 		mapping = cbfs_map(TEST_DATA_1_FILENAME, &size);
@@ -279,5 +279,5 @@ int main(void)
 		cmocka_unit_test_setup(test_cbfs_map_invalid_hash, setup_test_cbfs),
 	};
 
-	return lp_run_group_tests(tests, NULL, NULL);
+	return lp_run_group_tests(tests, nullptr, nullptr);
 }

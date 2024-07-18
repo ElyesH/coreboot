@@ -144,7 +144,7 @@ struct dimm_attr_ddr2_st {
 	u8 checksum;
 	/* Manufacturer ID */
 	u32 manufacturer_id;
-	/* ASCII part number - NULL terminated */
+	/* ASCII part number - nullptr terminated */
 	u8 part_number[17];
 	/* Year manufactured */
 	u16 year;

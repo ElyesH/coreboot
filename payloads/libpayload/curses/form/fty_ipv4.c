@@ -91,15 +91,15 @@ static FIELDTYPE typeIPV4 =
   1,				/* this is mutable, so we can't be const */
   (FIELDTYPE *)0,
   (FIELDTYPE *)0,
-  NULL,
-  NULL,
-  NULL,
+  nullptr,
+  nullptr,
+  nullptr,
   INIT_FT_FUNC(Check_IPV4_Field),
   INIT_FT_FUNC(Check_IPV4_Character),
-  INIT_FT_FUNC(NULL),
-  INIT_FT_FUNC(NULL),
+  INIT_FT_FUNC(nullptr),
+  INIT_FT_FUNC(nullptr),
 #if NCURSES_INTEROP_FUNCS
-  NULL
+  nullptr
 #endif
 };
 

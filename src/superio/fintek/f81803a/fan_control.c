@@ -30,7 +30,7 @@ static struct cross_ref msg_table[] = {
 	{HWM_STATUS_INVALID_RATE,		msg_err_rate},
 	{HWM_STATUS_INVALID_FREQUENCY,		msg_err_frequency},
 	{HWM_STATUS_INVALID_TEMP_SENSOR,	msg_err_temp_sensor},
-	{0, NULL},
+	{0, nullptr},
 };
 
 static const char *get_msg(int err)

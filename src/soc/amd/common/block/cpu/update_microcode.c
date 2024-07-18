@@ -43,7 +43,7 @@ void amd_apply_microcode_patch(void)
 	msr_t msr;
 
 	if (!ucode) {
-		printk(BIOS_ERR, "%s: NULL pointer to microcode\n", __func__);
+		printk(BIOS_ERR, "%s: nullptr pointer to microcode\n", __func__);
 		return;
 	}
 
@@ -80,7 +80,7 @@ static const struct microcode *find_microcode(const struct microcode *microcode,
 	printk(BIOS_WARNING, "Failed to find microcode for processor rev: %hx.\n",
 	       equivalent_processor_rev_id);
 
-	return NULL;
+	return nullptr;
 }
 
 void amd_load_microcode_from_cbfs(void)
@@ -97,16 +97,16 @@ void amd_load_microcode_from_cbfs(void)
 	equivalent_processor_rev_id = get_equivalent_processor_rev_id();
 	snprintf(name, sizeof(name), CPU_MICROCODE_BLOB_FORMAT, equivalent_processor_rev_id);
 
-	ucode = cbfs_map(name, NULL);
+	ucode = cbfs_map(name, nullptr);
 	if (!ucode) {
 		printk(BIOS_WARNING, "%s not found. Skipping updates.\n", name);
 		timestamp_add_now(TS_READ_UCODE_END);
 		return;
 	}
 
-	if (find_microcode(ucode, equivalent_processor_rev_id) == NULL) {
+	if (find_microcode(ucode, equivalent_processor_rev_id) == nullptr) {
 		cbfs_unmap((void *)ucode);
-		ucode = NULL;
+		ucode = nullptr;
 	}
 
 	timestamp_add_now(TS_READ_UCODE_END);
@@ -116,7 +116,7 @@ void amd_free_microcode(void)
 {
 	if (ucode) {
 		cbfs_unmap((void *)ucode);
-		ucode = NULL;
+		ucode = nullptr;
 	}
 }
 

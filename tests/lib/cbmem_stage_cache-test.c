@@ -20,7 +20,7 @@ static void *get_cbmem_ptr(void)
 	if (cbmem_top_ptr)
 		return cbmem_top_ptr - CBMEM_SIZE;
 	else
-		return NULL;
+		return nullptr;
 }
 
 static void clear_cbmem(void)
@@ -66,8 +66,8 @@ void test_stage_cache_add(void **state)
 {
 	const int id = 12;
 	int arg = 0xC14;
-	struct stage_cache *meta = NULL;
-	uint8_t *prog_data_buf = NULL;
+	struct stage_cache *meta = nullptr;
+	uint8_t *prog_data_buf = nullptr;
 	const size_t data_sz = 4 * KiB;
 	uint8_t *data = malloc(data_sz);
 	struct prog prog_data = {0};
@@ -101,7 +101,7 @@ void test_stage_cache_add_raw(void **state)
 	const int id = 55;
 	const size_t data_sz = 8 * KiB;
 	uint8_t *data = malloc(data_sz);
-	uint8_t *data_raw = NULL;
+	uint8_t *data_raw = nullptr;
 
 	assert_non_null(data);
 	memset(data, 0x91, data_sz);
@@ -124,7 +124,7 @@ void test_stage_cache_get_raw(void **state)
 	const size_t data_sz = 3 * KiB;
 	uint8_t *data = malloc(data_sz);
 	size_t data_out_sz = 0;
-	uint8_t *data_out = NULL;
+	uint8_t *data_out = nullptr;
 
 	assert_non_null(data);
 	memset(data, 0x3c, data_sz);
@@ -190,5 +190,5 @@ int main(void)
 						teardown_test),
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

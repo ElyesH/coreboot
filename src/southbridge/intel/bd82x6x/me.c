@@ -104,7 +104,7 @@ static int mkhi_get_fw_version(void)
 	};
 
 	/* Send request and wait for response */
-	if (mei_sendrecv(&mei, &mkhi, NULL, &version, sizeof(version)) < 0) {
+	if (mei_sendrecv(&mei, &mkhi, nullptr, &version, sizeof(version)) < 0) {
 		printk(BIOS_ERR, "ME: GET FW VERSION message failed\n");
 		return -1;
 	}

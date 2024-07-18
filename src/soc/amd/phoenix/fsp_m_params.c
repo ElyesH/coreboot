@@ -50,8 +50,8 @@ static void fill_ddi_descriptors(FSP_M_CONFIG *mcfg,
 
 static void fsp_fill_pcie_ddi_descriptors(FSP_M_CONFIG *mcfg)
 {
-	const fsp_dxio_descriptor *fsp_dxio = NULL;
-	const fsp_ddi_descriptor *fsp_ddi = NULL;
+	const fsp_dxio_descriptor *fsp_dxio = nullptr;
+	const fsp_ddi_descriptor *fsp_ddi = nullptr;
 	size_t num_dxio = 0;
 	size_t num_ddi = 0;
 

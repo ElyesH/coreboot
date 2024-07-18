@@ -64,7 +64,7 @@ static const char *uart_acpi_name(const struct device *dev)
 	if (get_uart_idx(dev->path.mmio.addr, ctrlr, num_ctrlrs, &idx) == CB_SUCCESS)
 		return ctrlr[idx].acpi_name;
 	else
-		return NULL;
+		return nullptr;
 }
 
 /* This gets called for enabled devices only. */

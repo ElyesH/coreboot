@@ -31,11 +31,11 @@ const char *smbios_mainboard_product_name(void)
 
 	fill_processor_name(processor_name);
 
-	if (strstr(processor_name, "i3-10110U") != NULL)
+	if (strstr(processor_name, "i3-10110U") != nullptr)
 		return "VP4630";
-	else if (strstr(processor_name, "i5-10210U") != NULL)
+	else if (strstr(processor_name, "i5-10210U") != nullptr)
 		return "VP4650";
-	else if (strstr(processor_name, "i7-10810U") != NULL)
+	else if (strstr(processor_name, "i7-10810U") != nullptr)
 		return "VP4670";
 	else
 		return CONFIG_MAINBOARD_SMBIOS_PRODUCT_NAME;

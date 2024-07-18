@@ -8,7 +8,7 @@
  * 0x11 needs to be enabled to turn on ACPI embedded controller functionality.
  */
 static struct pnp_info dev_infos[] = {
-	{ NULL, 0x05 }, { NULL, 0x06 }, { NULL, 0x11 }
+	{ nullptr, 0x05 }, { nullptr, 0x06 }, { nullptr, 0x11 }
 };
 
 static void ec_51nb_npce985la0dx_ops_enable(struct device *dev)

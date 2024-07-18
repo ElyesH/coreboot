@@ -99,7 +99,7 @@ static enum cb_err fetch_mac_vpd_key(u8 *macstrbuf, const char *vpd_key)
 		return CB_ERR;
 	}
 	search_address = rdev_mmap_full(&rdev);
-	if (search_address == NULL) {
+	if (search_address == nullptr) {
 		printk(BIOS_ERR, "LAN: VPD not found.\n");
 		return CB_ERR;
 	}
@@ -401,7 +401,7 @@ static void r8168_net_fill_ssdt(const struct device *dev)
 		acpigen_write_PRW(config->wake, 3);
 
 	if (config->add_acpi_dma_property)
-		acpi_device_add_dma_property(NULL);
+		acpi_device_add_dma_property(nullptr);
 
 	acpigen_pop_len(); /* Device */
 	acpigen_pop_len(); /* Scope */

@@ -121,10 +121,10 @@ static tpm_result_t i2c_tpm_sendrecv(const uint8_t *sendbuf, size_t sbuf_size,
 tis_sendrecv_fn i2c_tis_probe(enum tpm_family *family)
 {
 	if (tpm_vendor_probe(CONFIG_DRIVER_TPM_I2C_BUS, CONFIG_DRIVER_TPM_I2C_ADDR, family))
-		return NULL;
+		return nullptr;
 
 	if (tpm_vendor_init(&chip, CONFIG_DRIVER_TPM_I2C_BUS, CONFIG_DRIVER_TPM_I2C_ADDR))
-		return NULL;
+		return nullptr;
 
 	return &i2c_tpm_sendrecv;
 }

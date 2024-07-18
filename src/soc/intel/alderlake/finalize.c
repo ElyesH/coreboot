@@ -94,9 +94,9 @@ static void soc_finalize(void *unused)
 	post_code(POSTCODE_OS_BOOT);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, soc_finalize, NULL);
+BOOT_STATE_INIT_ENTRY(BS_OS_RESUME, BS_ON_ENTRY, soc_finalize, nullptr);
 /*
  * The purpose of this change is to accommodate more time to push out sending
  * CSE EOP messages at post.
  */
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, soc_finalize, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, soc_finalize, nullptr);

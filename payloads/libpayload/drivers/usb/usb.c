@@ -48,7 +48,7 @@ new_controller(void)
 void
 detach_controller(hci_t *controller)
 {
-	if (controller == NULL)
+	if (controller == nullptr)
 		return;
 
 	usb_detach_device(controller, 0);	/* tear down root hub tree */
@@ -57,7 +57,7 @@ detach_controller(hci_t *controller)
 		usb_hcs = controller->next;
 	} else {
 		hci_t *it = usb_hcs;
-		while (it != NULL) {
+		while (it != nullptr) {
 			if (it->next == controller) {
 				it->next = controller->next;
 				return;
@@ -73,7 +73,7 @@ detach_controller(hci_t *controller)
 int
 usb_exit(void)
 {
-	while (usb_hcs != NULL) {
+	while (usb_hcs != nullptr) {
 		usb_hcs->shutdown(usb_hcs);
 	}
 	return 0;
@@ -92,7 +92,7 @@ usb_poll(void)
 		usb_poll_prepare();
 
 	hci_t *controller = usb_hcs;
-	while (controller != NULL) {
+	while (controller != nullptr) {
 		int i;
 		for (i = 0; i < 128; i++) {
 			if (controller->devices[i] != 0) {
@@ -109,7 +109,7 @@ init_device_entry(hci_t *controller, int i)
 	usbdev_t *dev = calloc(1, sizeof(usbdev_t));
 	if (!dev) {
 		usb_debug("no memory to allocate device structure\n");
-		return NULL;
+		return nullptr;
 	}
 	if (controller->devices[i] != 0)
 		usb_debug("warning: device %d reassigned?\n", i);
@@ -347,7 +347,7 @@ generic_set_address(hci_t *controller, usb_speed speed,
 {
 	int adr = get_free_address(controller);	// address to set
 	if (adr < 0)
-		return NULL;
+		return nullptr;
 	dev_req_t dr;
 
 	memset(&dr, 0, sizeof(dr));
@@ -361,7 +361,7 @@ generic_set_address(hci_t *controller, usb_speed speed,
 
 	usbdev_t *dev = init_device_entry(controller, adr);
 	if (!dev)
-		return NULL;
+		return nullptr;
 
 	// dummy values for registering the address
 	dev->address = 0;
@@ -377,7 +377,7 @@ generic_set_address(hci_t *controller, usb_speed speed,
 	if (dev->controller->control(dev, OUT, sizeof(dr), &dr, 0, 0) < 0) {
 		usb_debug("set_address failed\n");
 		usb_detach_device(controller, adr);
-		return NULL;
+		return nullptr;
 	}
 	mdelay(SET_ADDRESS_MDELAY);
 
@@ -387,7 +387,7 @@ generic_set_address(hci_t *controller, usb_speed speed,
 			!= sizeof(buf)) {
 		usb_debug("first get_descriptor(DT_DEV) failed\n");
 		usb_detach_device(controller, adr);
-		return NULL;
+		return nullptr;
 	}
 	dev->endpoints[0].maxpacketsize = usb_decode_mps0(speed, buf[7]);
 
@@ -653,14 +653,14 @@ usb_detach_device(hci_t *controller, int devno)
 			controller->destroy_device(controller, devno);
 
 		free(controller->devices[devno]->descriptor);
-		controller->devices[devno]->descriptor = NULL;
+		controller->devices[devno]->descriptor = nullptr;
 		free(controller->devices[devno]->configuration);
-		controller->devices[devno]->configuration = NULL;
+		controller->devices[devno]->configuration = nullptr;
 
 		/* Tear down the device itself *after* destroy_device()
 		 * has had a chance to interrogate it. */
 		free(controller->devices[devno]);
-		controller->devices[devno] = NULL;
+		controller->devices[devno] = nullptr;
 	}
 }
 
@@ -690,13 +690,13 @@ usb_generic_destroy(usbdev_t *dev)
 void
 usb_generic_init(usbdev_t *dev)
 {
-	dev->data = NULL;
+	dev->data = nullptr;
 	dev->destroy = usb_generic_destroy;
 
 	if (usb_generic_create)
 		usb_generic_create(dev);
 
-	if (dev->data == NULL) {
+	if (dev->data == nullptr) {
 		usb_debug("Detaching device not used by payload\n");
 		usb_detach_device(dev->controller, dev->address);
 	}
@@ -723,7 +723,7 @@ int closest_usb2_hub(const usbdev_t *dev, int *const addr, int *const port)
 		if ((dev->hub >= 0) && (dev->hub < 128))
 			dev = dev->controller->devices[dev->hub];
 		else
-			dev = NULL;
+			dev = nullptr;
 	} while (dev && (dev->speed < 2));
 
 	if (dev) {

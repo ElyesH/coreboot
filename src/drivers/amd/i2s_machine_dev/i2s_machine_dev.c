@@ -49,12 +49,12 @@ static void i2s_machine_dev_fill_ssdt(const struct device *dev)
 
 	dmic_select_gpio = &cfg->dmic_select_gpio;
 
-	if (scope == NULL) {
+	if (scope == nullptr) {
 		printk(BIOS_ERR, "%s: ERROR: ACPI I2S scope not found\n", dev_path(dev));
 		return;
 	}
 
-	if (cfg->hid == NULL) {
+	if (cfg->hid == nullptr) {
 		printk(BIOS_ERR, "%s: ERROR: HID required\n", dev_path(dev));
 		return;
 	}

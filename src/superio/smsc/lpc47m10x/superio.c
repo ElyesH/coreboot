@@ -37,13 +37,13 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, LPC47M10X2_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
-	{ NULL, LPC47M10X2_PP,  PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
-	{ NULL, LPC47M10X2_SP1, PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, LPC47M10X2_SP2, PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, LPC47M10X2_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
+	{ nullptr, LPC47M10X2_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
+	{ nullptr, LPC47M10X2_PP,  PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
+	{ nullptr, LPC47M10X2_SP1, PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, LPC47M10X2_SP2, PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, LPC47M10X2_KBC, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
 		0x07ff, 0x07ff, },
-	{ NULL, LPC47M10X2_PME, PNP_IO0, 0x0f80, },
+	{ nullptr, LPC47M10X2_PME, PNP_IO0, 0x0f80, },
 };
 
 /**

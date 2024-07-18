@@ -31,7 +31,7 @@ static inline int timer_queue_full(struct timer_queue *tq)
 static inline struct timeout_callback *timer_queue_head(struct timer_queue *tq)
 {
 	if (timer_queue_empty(tq))
-		return NULL;
+		return nullptr;
 	return tq->queue[0];
 }
 
@@ -136,12 +136,12 @@ timer_queue_expired(struct timer_queue *tq, struct mono_time *current_time)
 
 	tocb = timer_queue_head(tq);
 
-	if (tocb == NULL)
-		return NULL;
+	if (tocb == nullptr)
+		return nullptr;
 
 	/* The timeout callback hasn't expired yet. */
 	if (mono_time_before(current_time, &tocb->expiration))
-		return NULL;
+		return nullptr;
 
 	timer_queue_remove_head(tq);
 
@@ -174,7 +174,7 @@ int timers_run(void)
 	timer_monotonic_get(&current_time);
 	tocb = timer_queue_expired(&global_timer_queue, &current_time);
 
-	if (tocb != NULL)
+	if (tocb != nullptr)
 		tocb->callback(tocb);
 
 	return !timer_queue_empty(&global_timer_queue);

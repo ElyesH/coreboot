@@ -5,8 +5,8 @@
 
 unsigned long acpi_fill_madt(unsigned long current)
 {
-	struct device *bdev, *dev = NULL;
-	struct resource *res = NULL;
+	struct device *bdev, *dev = nullptr;
+	struct resource *res = nullptr;
 
 	bdev = pcidev_on_root(2, 0);
 	/* P64H2 Bus B IOAPIC */

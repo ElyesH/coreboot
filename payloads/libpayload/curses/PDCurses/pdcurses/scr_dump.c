@@ -97,7 +97,7 @@ WINDOW *getwin(FILE *filep)
     PDC_LOG(("getwin() - called\n"));
 
     if ( !(win = malloc(sizeof(WINDOW))) )
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
 
     /* check for the marker, and load the WINDOW struct */
 
@@ -105,7 +105,7 @@ WINDOW *getwin(FILE *filep)
         || marker[3] != DUMPVER || !fread(win, sizeof(WINDOW), 1, filep))
     {
         free(win);
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
     }
 
     nlines = win->_maxy;
@@ -116,7 +116,7 @@ WINDOW *getwin(FILE *filep)
     if ( !(win->_y = malloc(nlines * sizeof(chtype *))) )
     {
         free(win);
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
     }
 
     /* allocate the minchng and maxchng arrays */
@@ -125,7 +125,7 @@ WINDOW *getwin(FILE *filep)
     {
         free(win->_y);
         free(win);
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
     }
 
     if ( !(win->_lastch = malloc(nlines * sizeof(int))) )
@@ -133,13 +133,13 @@ WINDOW *getwin(FILE *filep)
         free(win->_firstch);
         free(win->_y);
         free(win);
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
     }
 
     /* allocate the lines */
 
     if ( !(win = PDC_makelines(win)) )
-        return (WINDOW *)NULL;
+        return (WINDOW *)nullptr;
 
     /* read them */
 
@@ -148,7 +148,7 @@ WINDOW *getwin(FILE *filep)
         if (!fread(win->_y[i], ncols * sizeof(chtype), 1, filep))
         {
             delwin(win);
-            return (WINDOW *)NULL;
+            return (WINDOW *)nullptr;
         }
     }
 
@@ -163,7 +163,7 @@ int scr_dump(const char *filename)
 
     PDC_LOG(("scr_dump() - called: filename %s\n", filename));
 
-    if (filename && (filep = fopen(filename, "wb")) != NULL)
+    if (filename && (filep = fopen(filename, "wb")) != nullptr)
     {
         int result = putwin(curscr, filep);
         fclose(filep);
@@ -186,7 +186,7 @@ int scr_restore(const char *filename)
 
     PDC_LOG(("scr_restore() - called: filename %s\n", filename));
 
-    if (filename && (filep = fopen(filename, "rb")) != NULL)
+    if (filename && (filep = fopen(filename, "rb")) != nullptr)
     {
         WINDOW *replacement = getwin(filep);
         fclose(filep);

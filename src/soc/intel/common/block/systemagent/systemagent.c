@@ -75,7 +75,7 @@ static void sa_soc_systemagent_init(struct device *dev)
 	soc_systemagent_init(dev);
 
 	struct memory_info *m = cbmem_find(CBMEM_ID_MEMINFO);
-	if (m == NULL)
+	if (m == nullptr)
 		return;
 
 	const uint32_t capid0_a = pci_read_config32(dev, CAPID0_A);

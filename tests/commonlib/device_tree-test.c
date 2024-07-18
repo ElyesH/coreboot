@@ -21,7 +21,7 @@ static int setup_device_tree_test_group(void **state)
 	assert_int_not_equal(file_size, -1);
 
 	void *big_fat_dtb = test_malloc(file_size);
-	assert_int_not_equal(big_fat_dtb, NULL);
+	assert_int_not_equal(big_fat_dtb, nullptr);
 	assert_int_equal(test_read_file(dtb_path, big_fat_dtb, file_size), file_size);
 	*state = big_fat_dtb;
 
@@ -61,7 +61,7 @@ static void test_fdt_find_node_by_path(void **state)
 
 static void test_fdt_find_subnodes_by_prefix(void **state)
 {
-	uint32_t offset = fdt_find_node_by_path(*state, "/cpus", NULL, NULL);
+	uint32_t offset = fdt_find_node_by_path(*state, "/cpus", nullptr, nullptr);
 	uint32_t results[3] = { 0 };
 	uint32_t addrcp, sizecp;
 	size_t count_results = fdt_find_subnodes_by_prefix(*state, offset, "cpu@",
@@ -83,14 +83,14 @@ static void test_fdt_find_subnodes_by_prefix(void **state)
 
 static void test_fdt_find_node_by_alias(void **state)
 {
-	assert_int_equal(0xf298, fdt_find_node_by_alias(*state, "serial0", NULL, NULL));
-	assert_int_equal(0, fdt_find_node_by_alias(*state, "mmc2", NULL, NULL));
+	assert_int_equal(0xf298, fdt_find_node_by_alias(*state, "serial0", nullptr, nullptr));
+	assert_int_equal(0, fdt_find_node_by_alias(*state, "mmc2", nullptr, nullptr));
 }
 
 static void test_fdt_find_prop_in_node(void **state)
 {
-	uintptr_t cnode_offset = fdt_find_node_by_path(*state, "/clock", NULL, NULL);
-	uintptr_t mnode_offset = fdt_find_node_by_path(*state, "/memory@80000000", NULL, NULL);
+	uintptr_t cnode_offset = fdt_find_node_by_path(*state, "/clock", nullptr, nullptr);
+	uintptr_t mnode_offset = fdt_find_node_by_path(*state, "/memory@80000000", nullptr, nullptr);
 	assert_int_equal(0x18400, cnode_offset);
 
 	struct fdt_property fdt_prop;

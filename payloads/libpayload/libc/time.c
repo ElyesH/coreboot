@@ -126,7 +126,7 @@ static void gettimeofday_init(void)
 /**
  * Return the current time expressed as seconds from 00:00:00 UTC, 1 Jan 1970.
  *
- * @param tp When not NULL, set this to the current time in seconds.
+ * @param tp When not nullptr, set this to the current time in seconds.
  * @return The current time in seconds.
  */
 time_t time(time_t *tp)
@@ -155,7 +155,7 @@ time_t time(time_t *tp)
  */
 int gettimeofday(struct timeval *tv, void *tz)
 {
-	tv->tv_sec = time(NULL);
+	tv->tv_sec = time(nullptr);
 	tv->tv_usec = clock.usecs;
 
 	return 0;

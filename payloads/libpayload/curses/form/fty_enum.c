@@ -59,7 +59,7 @@ enumParams;
 |
 |   Description   :  Allocate structure for enumeration type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error
+|   Return Values :  Pointer to argument structure or nullptr on error
 +--------------------------------------------------------------------------*/
 static void *
 Generic_Enum_Type(void *arg)
@@ -122,7 +122,7 @@ Generic_Enum_Type(void *arg)
 |
 |   Description   :  Allocate structure for enumeration type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error
+|   Return Values :  Pointer to argument structure or nullptr on error
 +--------------------------------------------------------------------------*/
 static void *
 Make_Enum_Type(va_list *ap)
@@ -142,7 +142,7 @@ Make_Enum_Type(va_list *ap)
 |
 |   Description   :  Copy structure for enumeration type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error.
+|   Return Values :  Pointer to argument structure or nullptr on error.
 +--------------------------------------------------------------------------*/
 static void *
 Copy_Enum_Type(const void *argp)
@@ -416,7 +416,7 @@ static FIELDTYPE typeENUM =
   Copy_Enum_Type,
   Free_Enum_Type,
   INIT_FT_FUNC(Check_Enum_Field),
-  INIT_FT_FUNC(NULL),
+  INIT_FT_FUNC(nullptr),
   INIT_FT_FUNC(Next_Enum),
   INIT_FT_FUNC(Previous_Enum),
 #if NCURSES_INTEROP_FUNCS

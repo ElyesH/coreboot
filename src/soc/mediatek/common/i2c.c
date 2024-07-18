@@ -116,8 +116,8 @@ static int mtk_i2c_transfer(uint8_t bus, struct i2c_msg *seg,
 	uint8_t  addr;
 	uint32_t write_len = 0;
 	uint32_t read_len = 0;
-	uint8_t *write_buffer = NULL;
-	uint8_t *read_buffer = NULL;
+	uint8_t *write_buffer = nullptr;
+	uint8_t *read_buffer = nullptr;
 	struct mt_i2c_regs *regs;
 	struct mt_i2c_dma_regs *dma_regs;
 	struct stopwatch sw;

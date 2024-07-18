@@ -83,7 +83,7 @@ static const char *usb_ehci_acpi_name(const struct device *dev)
 	case PCI_DEVFN(0x1d, 0):
 		return "EHC1";
 	}
-	return NULL;
+	return nullptr;
 }
 
 static struct pci_operations lops_pci = {

@@ -73,7 +73,7 @@ void variant_audio_update(void)
 static void remove_usb_device_reset_gpio(const struct device *usb_dev)
 {
 	struct drivers_usb_acpi_config *usb_cfg;
-	/* config_of dies on failure, so a NULL check is not required */
+	/* config_of dies on failure, so a nullptr check is not required */
 	usb_cfg = config_of(usb_dev);
 	usb_cfg->reset_gpio.pin_count = 0;
 }
@@ -99,7 +99,7 @@ void variant_bluetooth_update(void)
 void variant_touchscreen_update(void)
 {
 	DEVTREE_CONST struct device *mmio_dev = DEV_PTR(i2c_2);
-	struct device *child = NULL;
+	struct device *child = nullptr;
 
 	/*
 	 * By default, devicetree/overridetree entries for touchscreen device are configured to
@@ -113,7 +113,7 @@ void variant_touchscreen_update(void)
 	if (variant_uses_v3_6_schematics())
 		return;
 
-	while ((child = dev_bus_each_child(mmio_dev->downstream, child)) != NULL) {
+	while ((child = dev_bus_each_child(mmio_dev->downstream, child)) != nullptr) {
 		struct drivers_i2c_generic_config *cfg;
 
 		if (child->chip_ops == &drivers_i2c_generic_ops) {

@@ -55,7 +55,7 @@ char *readline(const char *prompt)
 #define READLINE_BUFFERSIZE	256
 		readline_buffer = malloc(READLINE_BUFFERSIZE);
 		if (!readline_buffer)
-			return NULL;
+			return nullptr;
 		readline_bufferlen = READLINE_BUFFERSIZE;
 		memset(readline_buffer, 0, readline_bufferlen);
 	}
@@ -167,7 +167,7 @@ int getline(char *buffer, int len)
 {
 	readline_buffer = buffer;
 	readline_bufferlen = len;
-	readline(NULL);
+	readline(nullptr);
 
 	return strlen(buffer);
 }

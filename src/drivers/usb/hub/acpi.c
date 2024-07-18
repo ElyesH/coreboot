@@ -26,7 +26,7 @@ static const char *usb_hub_acpi_name(const struct device *dev)
 		pattern = "SS%02d";
 		break;
 	default:
-		return NULL;
+		return nullptr;
 	}
 
 	snprintf(config->acpi_name, sizeof(config->acpi_name), pattern,
@@ -38,10 +38,10 @@ static const char *usb_hub_acpi_name(const struct device *dev)
 static void usb_hub_add_ports(const struct device *dev)
 {
 	const struct drivers_usb_hub_config *config = config_of(dev);
-	struct device *port = NULL;
+	struct device *port = nullptr;
 	unsigned int child_count = 0;
 
-	while ((port = dev_bus_each_child(dev->downstream, port)) != NULL) {
+	while ((port = dev_bus_each_child(dev->downstream, port)) != nullptr) {
 		if (child_count++ >= config->port_count) {
 			printk(BIOS_WARNING, "%s cannot be added. Port Count limit reached.\n",
 			       dev_name(port));

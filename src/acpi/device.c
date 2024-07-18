@@ -87,10 +87,10 @@ static void acpi_device_fill_len(void *ptr)
 const char *acpi_device_name(const struct device *dev)
 {
 	const struct device *pdev = dev;
-	const char *name = NULL;
+	const char *name = nullptr;
 
 	if (!dev)
-		return NULL;
+		return nullptr;
 
 	/* Check for device specific handler */
 	if (dev->ops && dev->ops->acpi_name) {
@@ -112,14 +112,14 @@ const char *acpi_device_name(const struct device *dev)
 			return name;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /* Locate and return the ACPI _HID (Hardware ID) for this device */
 const char *acpi_device_hid(const struct device *dev)
 {
 	if (!dev)
-		return NULL;
+		return nullptr;
 
 	/* Check for device specific handler */
 	if (dev->ops->acpi_hid)
@@ -130,7 +130,7 @@ const char *acpi_device_hid(const struct device *dev)
 	 * PNP devices are hard to identify.
 	 */
 
-	return NULL;
+	return nullptr;
 }
 
 /*
@@ -186,10 +186,10 @@ const char *acpi_device_path(const struct device *dev)
 	static char buf[DEVICE_PATH_MAX] = {};
 
 	if (!dev)
-		return NULL;
+		return nullptr;
 
 	if (acpi_device_path_fill(dev, buf, sizeof(buf), 0) <= 0)
-		return NULL;
+		return nullptr;
 
 	return buf;
 }
@@ -200,10 +200,10 @@ const char *acpi_device_scope(const struct device *dev)
 	static char buf[DEVICE_PATH_MAX] = {};
 
 	if (!dev || !dev->upstream || !dev->upstream->dev)
-		return NULL;
+		return nullptr;
 
 	if (acpi_device_path_fill(dev->upstream->dev, buf, sizeof(buf), 0) <= 0)
-		return NULL;
+		return nullptr;
 
 	return buf;
 }
@@ -215,16 +215,16 @@ const char *acpi_device_path_join(const struct device *dev, const char *name)
 	ssize_t len;
 
 	if (!dev)
-		return NULL;
+		return nullptr;
 
 	/* Build the path of this device */
 	len = acpi_device_path_fill(dev, buf, sizeof(buf), 0);
 	if (len <= 0)
-		return NULL;
+		return nullptr;
 
 	/* Ensure there is room for the added name, separator, and NUL */
 	if ((len + strlen(name) + 2) > sizeof(buf))
-		return NULL;
+		return nullptr;
 	snprintf(buf + len, sizeof(buf) - len, ".%s", name);
 
 	return buf;
@@ -841,7 +841,7 @@ static void acpi_dp_free(struct acpi_dp *dp)
 static bool acpi_dp_write_properties(struct acpi_dp *prop, const char *uuid)
 {
 	struct acpi_dp *dp;
-	char *prop_count = NULL;
+	char *prop_count = nullptr;
 
 	/* Print base properties */
 	for (dp = prop; dp; dp = dp->next) {
@@ -950,7 +950,7 @@ static struct acpi_dp *acpi_dp_new(struct acpi_dp *dp, enum acpi_dp_type type,
 
 	new = malloc(sizeof(struct acpi_dp));
 	if (!new)
-		return NULL;
+		return nullptr;
 
 	memset(new, 0, sizeof(*new));
 	new->type = type;
@@ -969,7 +969,7 @@ static struct acpi_dp *acpi_dp_new(struct acpi_dp *dp, enum acpi_dp_type type,
 
 struct acpi_dp *acpi_dp_new_table(const char *name)
 {
-	return acpi_dp_new(NULL, ACPI_DP_TYPE_TABLE, name);
+	return acpi_dp_new(nullptr, ACPI_DP_TYPE_TABLE, name);
 }
 
 size_t acpi_dp_add_property_list(struct acpi_dp *dp,
@@ -1018,7 +1018,7 @@ struct acpi_dp *acpi_dp_add_integer(struct acpi_dp *dp, const char *name,
 				    uint64_t value)
 {
 	if (!dp)
-		return NULL;
+		return nullptr;
 
 	struct acpi_dp *new = acpi_dp_new(dp, ACPI_DP_TYPE_INTEGER, name);
 
@@ -1032,7 +1032,7 @@ struct acpi_dp *acpi_dp_add_string(struct acpi_dp *dp, const char *name,
 				   const char *string)
 {
 	if (!dp)
-		return NULL;
+		return nullptr;
 
 	struct acpi_dp *new = acpi_dp_new(dp, ACPI_DP_TYPE_STRING, name);
 
@@ -1046,7 +1046,7 @@ struct acpi_dp *acpi_dp_add_reference(struct acpi_dp *dp, const char *name,
 				      const char *reference)
 {
 	if (!dp)
-		return NULL;
+		return nullptr;
 
 	struct acpi_dp *new = acpi_dp_new(dp, ACPI_DP_TYPE_REFERENCE, name);
 
@@ -1062,7 +1062,7 @@ struct acpi_dp *acpi_dp_add_child(struct acpi_dp *dp, const char *name,
 	struct acpi_dp *new;
 
 	if (!dp || !child || child->type != ACPI_DP_TYPE_TABLE)
-		return NULL;
+		return nullptr;
 
 	new = acpi_dp_new(dp, ACPI_DP_TYPE_CHILD, name);
 	if (new) {
@@ -1078,9 +1078,9 @@ struct acpi_dp *acpi_dp_add_package(struct acpi_dp *dp, struct acpi_dp *package)
 	struct acpi_dp *new;
 
 	if (!dp || !package || package->type != ACPI_DP_TYPE_TABLE)
-		return NULL;
+		return nullptr;
 
-	new = acpi_dp_new(dp, ACPI_DP_TYPE_PACKAGE, NULL);
+	new = acpi_dp_new(dp, ACPI_DP_TYPE_PACKAGE, nullptr);
 	if (new) {
 		new->uuid = package->name;
 		new->child = package;
@@ -1094,7 +1094,7 @@ struct acpi_dp *acpi_dp_add_array(struct acpi_dp *dp, struct acpi_dp *array)
 	struct acpi_dp *new;
 
 	if (!dp || !array || array->type != ACPI_DP_TYPE_TABLE)
-		return NULL;
+		return nullptr;
 
 	new = acpi_dp_new(dp, ACPI_DP_TYPE_ARRAY, array->name);
 	if (new)
@@ -1110,14 +1110,14 @@ struct acpi_dp *acpi_dp_add_integer_array(struct acpi_dp *dp, const char *name,
 	int i;
 
 	if (!dp || len <= 0)
-		return NULL;
+		return nullptr;
 
 	dp_array = acpi_dp_new_table(name);
 	if (!dp_array)
-		return NULL;
+		return nullptr;
 
 	for (i = 0; i < len; i++)
-		if (!acpi_dp_add_integer(dp_array, NULL, array[i]))
+		if (!acpi_dp_add_integer(dp_array, nullptr, array[i]))
 			break;
 
 	acpi_dp_add_array(dp, dp_array);
@@ -1133,11 +1133,11 @@ struct acpi_dp *acpi_dp_add_gpio_array(struct acpi_dp *dp, const char *name,
 	uint32_t i;
 
 	if (!dp || !param_count)
-		return NULL;
+		return nullptr;
 
 	gpio = acpi_dp_new_table(name);
 	if (!gpio)
-		return NULL;
+		return nullptr;
 
 	/*
 	 * Generate ACPI identifiers as follows:
@@ -1152,25 +1152,25 @@ struct acpi_dp *acpi_dp_add_gpio_array(struct acpi_dp *dp, const char *name,
 	 */
 	for (i = 0; i < param_count; i++, params++) {
 		/*
-		 * If refs is NULL, leave a hole in the gpio array. This can be used in
+		 * If refs is nullptr, leave a hole in the gpio array. This can be used in
 		 * conditions where some controllers use both GPIOs and native signals.
 		 */
 		if (!params->ref) {
-			acpi_dp_add_integer(gpio, NULL, 0);
+			acpi_dp_add_integer(gpio, nullptr, 0);
 			continue;
 		}
 
 		/* The device that has _CRS containing GpioIO()/GpioInt() */
-		acpi_dp_add_reference(gpio, NULL, params->ref);
+		acpi_dp_add_reference(gpio, nullptr, params->ref);
 
 		/* Index of the GPIO resource in _CRS starting from zero */
-		acpi_dp_add_integer(gpio, NULL, params->index);
+		acpi_dp_add_integer(gpio, nullptr, params->index);
 
 		/* Pin in the GPIO resource, typically zero */
-		acpi_dp_add_integer(gpio, NULL, params->pin);
+		acpi_dp_add_integer(gpio, nullptr, params->pin);
 
 		/* Set if pin is active low */
-		acpi_dp_add_integer(gpio, NULL, params->active_low);
+		acpi_dp_add_integer(gpio, nullptr, params->active_low);
 	}
 	acpi_dp_add_array(dp, gpio);
 
@@ -1227,8 +1227,8 @@ void acpi_device_write_pci_dev(const struct device *dev)
  * Helper function to add given integer property with an UUID to _DSD in the current scope.
  *
  * dsd   - Pointer to a _DSD object.
- *         Append to existing _DSD object if not NULL.
- *         Create new _DSD object and flush it if NULL.
+ *         Append to existing _DSD object if not nullptr.
+ *         Create new _DSD object and flush it if nullptr.
  * uuid  - Pointer to the UUID string.
  * name  - Pointer to the property name string.
  * value - Value of the integer property.
@@ -1239,12 +1239,12 @@ static void acpi_device_add_integer_property_with_uuid(struct acpi_dp *dsd,
 						uint64_t value)
 {
 	struct acpi_dp *prev_dsd = dsd, *pkg;
-	if (prev_dsd == NULL)
+	if (prev_dsd == nullptr)
 		dsd = acpi_dp_new_table("_DSD");
 	pkg = acpi_dp_new_table(uuid);
 	acpi_dp_add_integer(pkg, name, value);
 	acpi_dp_add_package(dsd, pkg);
-	if (prev_dsd == NULL)
+	if (prev_dsd == nullptr)
 		acpi_dp_write(dsd);
 }
 

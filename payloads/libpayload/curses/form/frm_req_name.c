@@ -113,7 +113,7 @@ static const char *request_names[MAX_FORM_COMMAND - MIN_FORM_COMMAND + 1] =
 |   Description   :  Get the external name of a form request.
 |
 |   Return Values :  Pointer to name      - on success
-|                    NULL                 - on invalid request code
+|                    nullptr                 - on invalid request code
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(const char *)
 form_request_name(int request)

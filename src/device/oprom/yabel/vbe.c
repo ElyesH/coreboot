@@ -713,7 +713,7 @@ static vbe_mode_info_t mode_info;
 const vbe_mode_info_t *vbe_mode_info(void)
 {
 	if (!mode_info_valid || !mode_info.vesa.phys_base_ptr)
-		return NULL;
+		return nullptr;
 	return &mode_info;
 }
 

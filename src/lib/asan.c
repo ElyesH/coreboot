@@ -313,7 +313,7 @@ static void asan_ctors(void)
 	extern long __CTOR_LIST__;
 	typedef void (*func_ptr)(void);
 	func_ptr *ctor = (func_ptr *) &__CTOR_LIST__;
-	if (ctor == NULL)
+	if (ctor == nullptr)
 		return;
 
 	for (; *ctor != (func_ptr) 0; ctor++)

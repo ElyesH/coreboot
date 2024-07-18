@@ -45,15 +45,15 @@ struct cbfile {
 
 static int filecount = 0, selected = 0, start_row = 0;
 static char **filenames;
-static struct cbheader *header = NULL;
+static struct cbheader *header = nullptr;
 
 static struct cbfile *getfile(struct cbfile *f)
 {
 	while (1) {
 		if (f < (struct cbfile *)(0xffffffff - ntohl(header->romsize)))
-			return NULL;
+			return nullptr;
 		if (f->magic == 0)
-			return NULL;
+			return nullptr;
 		if (f->magic == LARCHIVE_MAGIC)
 			return f;
 		f = (struct cbfile *)((u8 *)f + ntohl(header->align));
@@ -80,7 +80,7 @@ static struct cbfile *findfile(const char *filename)
 		if (strcmp(filename, f->filename) == 0)
 			return f;
 	}
-	return NULL;
+	return nullptr;
 }
 
 static int cbfs_module_init(void)
@@ -90,7 +90,7 @@ static int cbfs_module_init(void)
 
 	header = *(void **)HEADER_ADDR;
 	if (header->magic != ntohl(HEADER_MAGIC)) {
-		header = NULL;
+		header = nullptr;
 		return 0;
 	}
 
@@ -98,7 +98,7 @@ static int cbfs_module_init(void)
 		filecount++;
 
 	filenames = malloc(filecount * sizeof(char *));
-	if (filenames == NULL)
+	if (filenames == nullptr)
 		return 0;
 
 	for (f = firstfile(); f; f = nextfile(f))

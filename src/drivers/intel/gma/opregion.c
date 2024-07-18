@@ -44,7 +44,7 @@ void *locate_vbt(size_t *vbt_size)
 err:
 	if (data) {
 		cbfs_unmap(data);
-		data = NULL;
+		data = nullptr;
 	}
 	size = 0;
 
@@ -147,7 +147,7 @@ static enum cb_err locate_vbt_vbios(const u8 *vbios, struct region_device *rdev)
 	}
 
 	pcir = rdev_mmap(&rd, oprom->pcir_offset, sizeof(*pcir));
-	if (pcir == NULL) {
+	if (pcir == nullptr) {
 		rdev_munmap(&rd, (void *)oprom);
 		return CB_ERR;
 	}
@@ -194,7 +194,7 @@ static enum cb_err locate_vbt_cbfs(struct region_device *rdev)
 	size_t vbt_data_size;
 	void *vbt = locate_vbt(&vbt_data_size);
 
-	if (vbt == NULL)
+	if (vbt == nullptr)
 		return CB_ERR;
 
 	if (rdev_chain_mem(rdev, vbt, vbt_data_size))
@@ -209,7 +209,7 @@ static enum cb_err locate_vbt_vbios_cbfs(struct region_device *rdev)
 {
 	const u8 *oprom =
 		(const u8 *)pci_rom_probe(pcidev_on_root(0x2, 0));
-	if (oprom == NULL)
+	if (oprom == nullptr)
 		return CB_ERR;
 
 	printk(BIOS_INFO, "GMA: Found VBIOS in CBFS\n");
@@ -309,7 +309,7 @@ enum cb_err intel_gma_init_igd_opregion(void)
 {
 	igd_opregion_t *opregion;
 	struct region_device rdev;
-	optionrom_vbt_t *vbt = NULL;
+	optionrom_vbt_t *vbt = nullptr;
 	size_t opregion_size = sizeof(igd_opregion_t);
 
 	if (acpi_is_wakeup_s3())

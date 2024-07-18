@@ -141,7 +141,7 @@ static bool ast_launch_m68k(struct drm_device *dev)
 	struct ast_private *ast = dev->dev_private;
 	u32 i, data, len = 0;
 	u32 boot_address;
-	u8 *fw_addr = NULL;
+	u8 *fw_addr = nullptr;
 	u8 jreg;
 
 	data = ast_mindwm(ast, 0x1e6e2100) & 0x01;

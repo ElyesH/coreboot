@@ -239,7 +239,7 @@ const struct pad_config *variant_sleep_gpio_table(u8 slp_typ, size_t *num)
 		return s5_sleep_gpio_table;
 	}
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 /* GPIOs needed to be set in romstage. */

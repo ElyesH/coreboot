@@ -15,7 +15,7 @@
 static const uint8_t *get_spd_data_from_cbfs(struct spd_info *spdi)
 {
 	if (!CONFIG(HAVE_SPD_IN_CBFS))
-		return NULL;
+		return nullptr;
 
 	printk(RAM_DEBUG, "SPD index %u\n", spdi->spd_index);
 
@@ -24,7 +24,7 @@ static const uint8_t *get_spd_data_from_cbfs(struct spd_info *spdi)
 
 	if (!spd_file) {
 		printk(BIOS_ERR, "SPD data not found in CBFS\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (spd_file_len < ((spdi->spd_index + 1) * SPD_SIZE_MAX_DDR3)) {
@@ -34,7 +34,7 @@ static const uint8_t *get_spd_data_from_cbfs(struct spd_info *spdi)
 
 	if (spd_file_len < SPD_SIZE_MAX_DDR3) {
 		printk(BIOS_ERR, "Invalid SPD data in CBFS\n");
-		return NULL;
+		return nullptr;
 	}
 
 	return spd_file + (spdi->spd_index * SPD_SIZE_MAX_DDR3);

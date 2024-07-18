@@ -142,7 +142,7 @@ struct dimm_attr_ddr3_st {
 	u8 dimms_per_channel;
 	/* Manufacturer ID */
 	u16 manufacturer_id;
-	/* ASCII part number - NULL terminated */
+	/* ASCII part number - nullptr terminated */
 	u8 part_number[17];
 	/* Serial number */
 	u8 serial[SPD_DDR3_SERIAL_LEN];

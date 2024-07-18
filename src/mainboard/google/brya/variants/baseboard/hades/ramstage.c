@@ -20,7 +20,7 @@ static struct soc_power_limits_config *get_soc_power_limit_config(void)
 	u8 tdp;
 
 	if (!sa)
-		return NULL;
+		return nullptr;
 
 	sa_pci_id = pci_read_config16(sa, PCI_DEVICE_ID);
 
@@ -33,7 +33,7 @@ static struct soc_power_limits_config *get_soc_power_limit_config(void)
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 void variant_update_power_limits(const struct cpu_power_limits *limits, size_t num_entries)

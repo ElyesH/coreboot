@@ -28,7 +28,7 @@ static enum cb_err postcar_frame_init(struct postcar_frame *pcf)
 	struct var_mtrr_context *ctx;
 
 	ctx = cbmem_add(CBMEM_ID_ROMSTAGE_RAM_STACK, var_mtrr_ctx_size());
-	if (ctx == NULL) {
+	if (ctx == nullptr) {
 		printk(BIOS_ERR, "Couldn't add var_mtrr_ctx setup in cbmem.\n");
 		return CB_ERR;
 	}
@@ -104,7 +104,7 @@ static void load_postcar_cbfs(struct prog *prog, struct postcar_frame *pcf)
 				   "Failed to load after CAR program.\n");
 
 	/* Set the stack pointer within parameters of the program loaded. */
-	if (rsl.params == NULL)
+	if (rsl.params == nullptr)
 		die_with_post_code(POSTCODE_INVALID_ROM,
 				   "No parameters found in after CAR program.\n");
 
@@ -169,7 +169,7 @@ static void run_postcar_phase(struct postcar_frame *pcf)
 		   platforms where the values are the same it's a nop. */
 		finalize_load(prog.arg, (uintptr_t)pcf->mtrr);
 
-		if (prog_entry(&prog) == NULL)
+		if (prog_entry(&prog) == nullptr)
 			postcar_cache_invalid();
 	} else
 		load_postcar_cbfs(&prog, pcf);

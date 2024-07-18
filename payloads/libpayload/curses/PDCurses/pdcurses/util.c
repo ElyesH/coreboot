@@ -34,10 +34,10 @@ RCSID("$Id: util.c,v 1.71 2008/07/13 16:08:18 wmcbrine Exp $")
 
         delay_output() inserts an ms millisecond pause in output.
 
-        getcchar() works in two modes: When wch is not NULL, it reads
+        getcchar() works in two modes: When wch is not nullptr, it reads
         the cchar_t pointed to by wcval and stores the attributes in
         attrs, the color pair in color_pair, and the text in the
-        wide-character string wch. When wch is NULL, getcchar() merely
+        wide-character string wch. When wch is nullptr, getcchar() merely
         returns the number of wide characters in wcval. In either mode,
         the opts argument is unused.
 
@@ -52,11 +52,11 @@ RCSID("$Id: util.c,v 1.71 2008/07/13 16:08:18 wmcbrine Exp $")
         character outside the basic multilingual plane (UCS-2).
 
   Return Value:
-        unctrl() and wunctrl() return NULL on failure. delay_output()
+        unctrl() and wunctrl() return nullptr on failure. delay_output()
         always returns OK.
 
         getcchar() returns the number of wide characters wcval points to
-        when wch is NULL; when it's not, getcchar() returns OK or ERR.
+        when wch is nullptr; when it's not, getcchar() returns OK or ERR.
 
         setcchar() returns OK or ERR.
 

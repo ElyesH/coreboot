@@ -125,5 +125,5 @@ int main(void)
 		cmocka_unit_test(test_ipchksum_add),
 	};
 
-	return cb_run_group_tests(tests, setup_test_group, NULL);
+	return cb_run_group_tests(tests, setup_test_group, nullptr);
 }

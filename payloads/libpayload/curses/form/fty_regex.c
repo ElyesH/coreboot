@@ -102,7 +102,7 @@ RegExp_Arg;
 |
 |   Description   :  Allocate structure for regex type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error
+|   Return Values :  Pointer to argument structure or nullptr on error
 +--------------------------------------------------------------------------*/
 static void *
 Generic_RegularExpression_Type(void *arg MAYBE_UNUSED)
@@ -150,7 +150,7 @@ Generic_RegularExpression_Type(void *arg MAYBE_UNUSED)
 	  int blen = RX_INCREMENT;
 
 	  T((T_CREATE("RegExp_Arg %p"), pArg));
-	  pArg->compiled_expression = NULL;
+	  pArg->compiled_expression = nullptr;
 	  pArg->refCount = typeMalloc(unsigned long, 1);
 
 	  *(pArg->refCount) = 1;
@@ -175,7 +175,7 @@ Generic_RegularExpression_Type(void *arg MAYBE_UNUSED)
 		      else
 			{
 			  free(pArg);
-			  pArg = NULL;
+			  pArg = nullptr;
 			  break;
 			}
 		    }
@@ -191,7 +191,7 @@ Generic_RegularExpression_Type(void *arg MAYBE_UNUSED)
       if (pArg && !pArg->compiled_expression)
 	{
 	  free(pArg);
-	  pArg = NULL;
+	  pArg = nullptr;
 	}
     }
   return (void *)pArg;
@@ -206,7 +206,7 @@ Generic_RegularExpression_Type(void *arg MAYBE_UNUSED)
 |
 |   Description   :  Allocate structure for regex type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error
+|   Return Values :  Pointer to argument structure or nullptr on error
 +--------------------------------------------------------------------------*/
 static void *
 Make_RegularExpression_Type(va_list *ap)
@@ -223,7 +223,7 @@ Make_RegularExpression_Type(va_list *ap)
 |
 |   Description   :  Copy structure for regex type argument.
 |
-|   Return Values :  Pointer to argument structure or NULL on error.
+|   Return Values :  Pointer to argument structure or nullptr on error.
 +--------------------------------------------------------------------------*/
 static void *
 Copy_RegularExpression_Type(const void *argp MAYBE_UNUSED)
@@ -301,7 +301,7 @@ Check_RegularExpression_Field(FIELD *field MAYBE_UNUSED,
   const RegExp_Arg *ap = (const RegExp_Arg *)argp;
 
   if (ap && ap->pRegExp)
-    match = (regexec(ap->pRegExp, field_buffer(field, 0), 0, NULL, 0)
+    match = (regexec(ap->pRegExp, field_buffer(field, 0), 0, nullptr, 0)
 	     ? FALSE
 	     : TRUE);
 #elif HAVE_REGEXP_H_FUNCS | HAVE_REGEXPR_H_FUNCS
@@ -325,9 +325,9 @@ static FIELDTYPE typeREGEXP =
   Copy_RegularExpression_Type,
   Free_RegularExpression_Type,
   INIT_FT_FUNC(Check_RegularExpression_Field),
-  INIT_FT_FUNC(NULL),
-  INIT_FT_FUNC(NULL),
-  INIT_FT_FUNC(NULL),
+  INIT_FT_FUNC(nullptr),
+  INIT_FT_FUNC(nullptr),
+  INIT_FT_FUNC(nullptr),
 #if NCURSES_INTEROP_FUNCS
   Generic_RegularExpression_Type
 #endif

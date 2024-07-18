@@ -108,19 +108,19 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, W83627HF_FDC,  PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
-	{ NULL, W83627HF_PP,   PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
-	{ NULL, W83627HF_SP1,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, W83627HF_SP2,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, W83627HF_KBC,  PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
+	{ nullptr, W83627HF_FDC,  PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
+	{ nullptr, W83627HF_PP,   PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x07f8, },
+	{ nullptr, W83627HF_SP1,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, W83627HF_SP2,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, W83627HF_KBC,  PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_IRQ1,
 		0x07ff, 0x07ff, },
-	{ NULL, W83627HF_CIR, PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, W83627HF_GAME_MIDI_GPIO1, PNP_IO0 | PNP_IO1 | PNP_IRQ0,
+	{ nullptr, W83627HF_CIR, PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, W83627HF_GAME_MIDI_GPIO1, PNP_IO0 | PNP_IO1 | PNP_IRQ0,
 		0x07ff, 0x07fe, },
-	{ NULL, W83627HF_GPIO2, },
-	{ NULL, W83627HF_GPIO3, },
-	{ NULL, W83627HF_ACPI, },
-	{ NULL, W83627HF_HWM,  PNP_IO0 | PNP_IRQ0, 0x0ff8, },
+	{ nullptr, W83627HF_GPIO2, },
+	{ nullptr, W83627HF_GPIO3, },
+	{ nullptr, W83627HF_ACPI, },
+	{ nullptr, W83627HF_HWM,  PNP_IO0 | PNP_IRQ0, 0x0ff8, },
 };
 
 static void enable_dev(struct device *dev)

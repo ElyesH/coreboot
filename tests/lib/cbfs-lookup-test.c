@@ -20,7 +20,7 @@ static uintptr_t unaligned_cbfs_buffer_size = sizeof(aligned_cbfs_buffer) - 3;
 
 static u8 cbfs_mcache[TEST_MCACHE_SIZE] __aligned(CBFS_MCACHE_ALIGNMENT);
 
-/* Add files to CBFS buffer. NULL in files list equals to one CBFS_ALIGNMENT of spacing. */
+/* Add files to CBFS buffer. nullptr in files list equals to one CBFS_ALIGNMENT of spacing. */
 static int create_cbfs(const struct cbfs_test_file *files[], const size_t nfiles, u8 *buffer,
 		       const size_t buffer_size)
 {
@@ -29,7 +29,7 @@ static int create_cbfs(const struct cbfs_test_file *files[], const size_t nfiles
 	memset(buffer, 0, buffer_size);
 
 	for (size_t i = 0; i < nfiles; ++i) {
-		if (files[i] == NULL) {
+		if (files[i] == nullptr) {
 			file_size = CBFS_ALIGNMENT;
 			assert_true(&data_ptr[file_size] < &buffer[buffer_size]);
 		} else {
@@ -150,7 +150,7 @@ static int setup_test_cbfs_aligned(void **state)
 	memset(&s->ex, 0, sizeof(s->ex));
 
 	/* Prestate */
-	if (*state != NULL)
+	if (*state != nullptr)
 		s->ex = *((struct cbfs_test_state_ex *)*state);
 
 	*state = s;
@@ -175,7 +175,7 @@ static int setup_test_cbfs_unaligned(void **state)
 	memset(&s->ex, 0, sizeof(s->ex));
 
 	/* Prestate */
-	if (*state != NULL)
+	if (*state != nullptr)
 		s->ex = *((struct cbfs_test_state_ex *)*state);
 
 	*state = s;
@@ -215,12 +215,12 @@ static void test_cbfs_map(void **state)
 	size_t size_out;
 	struct cbfs_test_state *s = *state;
 	const struct cbfs_test_file *cbfs_files[] = {
-		&test_file_int_1, &test_file_2, NULL, &test_file_int_2,
-		&test_file_1,	  NULL,		NULL, &test_file_int_3,
+		&test_file_int_1, &test_file_2, nullptr, &test_file_int_2,
+		&test_file_1,	  nullptr,		nullptr, &test_file_int_3,
 	};
 	assert_int_equal(
 		0, create_cbfs(cbfs_files, ARRAY_SIZE(cbfs_files), s->cbfs_buf, s->cbfs_size));
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	/* Existing files */
 	size_out = 0;
@@ -258,7 +258,7 @@ static void test_cbfs_map(void **state)
 
 	/* Do not pass output pointer to size. It should work correctly. */
 	expect_lookup_result(CB_SUCCESS);
-	mapping = cbfs_map(TEST_DATA_INT_2_FILENAME, NULL);
+	mapping = cbfs_map(TEST_DATA_INT_2_FILENAME, nullptr);
 	assert_non_null(mapping);
 	assert_memory_equal(mapping, test_data_int_2, TEST_DATA_INT_2_SIZE);
 
@@ -282,13 +282,13 @@ static void test_cbfs_map(void **state)
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
 	mapping = cbfs_map("unknown_fname", &size_out);
-	assert_ptr_equal(NULL, mapping);
+	assert_ptr_equal(nullptr, mapping);
 	assert_int_equal(0, size_out);
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
 	mapping = cbfs_map("", &size_out);
-	assert_ptr_equal(NULL, mapping);
+	assert_ptr_equal(nullptr, mapping);
 	assert_int_equal(0, size_out);
 }
 
@@ -298,12 +298,12 @@ static void test_cbfs_cbmem_alloc(void **state)
 	size_t size_out;
 	struct cbfs_test_state *s = *state;
 	const struct cbfs_test_file *cbfs_files[] = {
-		NULL, &test_file_1,	&test_file_2,	  &test_file_int_1,
-		NULL, &test_file_int_2, &test_file_int_3, NULL,
+		nullptr, &test_file_1,	&test_file_2,	  &test_file_int_1,
+		nullptr, &test_file_int_2, &test_file_int_3, nullptr,
 	};
 	assert_int_equal(
 		0, create_cbfs(cbfs_files, ARRAY_SIZE(cbfs_files), s->cbfs_buf, s->cbfs_size));
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	/* Existing files */
 	expect_lookup_result(CB_SUCCESS);
@@ -323,7 +323,7 @@ static void test_cbfs_cbmem_alloc(void **state)
 	expect_lookup_result(CB_SUCCESS);
 	expect_value(cbmem_add, id, 0x0102);
 	expect_value(cbmem_add, size, TEST_DATA_2_SIZE);
-	mapping = cbfs_cbmem_alloc(TEST_DATA_2_FILENAME, 0x0102, NULL);
+	mapping = cbfs_cbmem_alloc(TEST_DATA_2_FILENAME, 0x0102, nullptr);
 	assert_non_null(mapping);
 	assert_memory_equal(mapping, test_data_2, TEST_DATA_2_SIZE);
 
@@ -391,7 +391,7 @@ static void test_cbfs_image_not_aligned(void **state)
 	};
 	assert_int_equal(0, create_cbfs(cbfs_files, ARRAY_SIZE(cbfs_files), &s->cbfs_buf[5],
 					s->cbfs_size - 5));
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -413,7 +413,7 @@ static void test_cbfs_file_not_aligned(void **state)
 	memcpy(s->cbfs_buf, &test_file_int_2, sizeof(test_file_int_2));
 	memcpy(&s->cbfs_buf[ALIGN_UP(sizeof(test_file_int_2), CBFS_ALIGNMENT) + 5],
 	       &test_file_1, sizeof(test_file_1));
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_SUCCESS);
@@ -439,7 +439,7 @@ static void test_cbfs_garbage_data_before_aligned_file(void **state)
 	/* Garbage data size has to be aligned to CBFS_ALIGNMENT */
 	memcpy(s->cbfs_buf, garbage, garbage_sz);
 	memcpy(&s->cbfs_buf[garbage_sz], &test_file_int_2, sizeof(test_file_int_2));
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_SUCCESS);
@@ -461,7 +461,7 @@ static void test_cbfs_garbage_data_before_unaligned_file(void **state)
 	assert_true(garbage_sz == (CBFS_ALIGNMENT + 3));
 	memcpy(s->cbfs_buf, garbage, garbage_sz);
 	memcpy(&s->cbfs_buf[garbage_sz], &test_file_int_2, sizeof(test_file_int_2));
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -482,7 +482,7 @@ static void test_cbfs_file_bigger_than_rdev(void **state)
 
 	/* Initialization and mcache building will succeed, because it only does access file
 	   headers, and not actual data */
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	/* Lookup should not succeed, because data is too long, so reading it later would cause
@@ -506,7 +506,7 @@ static void test_cbfs_fail_beyond_rdev(void **state)
 	cbd.rdev.region.size = second_file_start + s->ex.file_length;
 
 	/* CBFS initialization should not fail if last file is not valid */
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_SUCCESS);
@@ -537,7 +537,7 @@ static void test_cbfs_unaligned_file_in_the_middle(void **state)
 	memcpy(&s->cbfs_buf[second_file_start], &test_file_int_1, sizeof(test_file_int_1));
 	memcpy(&s->cbfs_buf[third_file_start], &test_file_int_2, sizeof(test_file_int_2));
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_SUCCESS);
@@ -578,7 +578,7 @@ static void test_cbfs_overlapping_files(void **state)
 	f = (struct cbfs_test_file *)&s->cbfs_buf[second_file_start];
 	f->header.len = cpu_to_be32(second_file_size);
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_SUCCESS);
@@ -617,7 +617,7 @@ static void test_cbfs_incorrect_file_in_the_middle(void **state)
 	f = (struct cbfs_test_file *)&s->cbfs_buf[second_file_start];
 	f->header.offset = cpu_to_be32(0);
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_SUCCESS);
@@ -653,7 +653,7 @@ static void test_cbfs_two_files_with_same_name(void **state)
 	memcpy(&s->cbfs_buf[second_file_start], &test_file_1, sizeof(test_file_1));
 	memcpy(&s->cbfs_buf[third_file_start], &test_file_int_1, sizeof(test_file_int_1));
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_SUCCESS);
@@ -683,10 +683,10 @@ static void test_cbfs_filename_not_terminated(void **state)
 	f = (struct cbfs_test_file *)s->cbfs_buf;
 	memcpy(f->filename, fname, strlen(fname));
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
-	/* Filename is too long and does not include NULL-terminator. */
+	/* Filename is too long and does not include nullptr-terminator. */
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
 	mapping = cbfs_map(fname, &size_out);
 	assert_null(mapping);
@@ -700,13 +700,13 @@ static void test_cbfs_filename_terminated_but_too_long(void **state)
 	struct cbfs_test_file *f;
 
 	/* Filename length in header offset field is too short by one to include
-	   NULL-terminator of filename */
+	   nullptr-terminator of filename */
 	memcpy(s->cbfs_buf, &test_file_1, sizeof(test_file_1));
 	f = (struct cbfs_test_file *)s->cbfs_buf;
 	f->header.offset = cpu_to_be32(offsetof(struct cbfs_test_file, filename)
 				       + strlen(TEST_DATA_1_FILENAME));
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -729,7 +729,7 @@ static void test_cbfs_attributes_offset_larger_than_offset(void **state)
 						  + sizeof(struct cbfs_file_attr_compression));
 	f->header.offset = cpu_to_be32(sizeof(struct cbfs_file) + FILENAME_SIZE);
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -752,7 +752,7 @@ static void test_cbfs_attributes_offset_cut_off_at_len(void **state)
 		cpu_to_be32(offsetof(struct cbfs_test_file, attrs_and_data)
 			    + offsetof(struct cbfs_file_attribute, len));
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	/* No attributes will be found, because attributes_offset value is too big to cover
 	   cbfs_file_attribute tag. Compression attribute of ths file will not be found, and
@@ -779,7 +779,7 @@ static void test_cbfs_attributes_offset_cut_off_at_data(void **state)
 	f->header.attributes_offset = cpu_to_be32(sizeof(struct cbfs_file) + FILENAME_SIZE
 						  + offsetof(struct cbfs_file_attribute, data));
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	/* No attributes will be found, because attributes_offset value is too big to cover
 	   cbfs_file_attribute tag and length. Compression attribute of ths file will not be
@@ -804,7 +804,7 @@ static void test_cbfs_attributes_offset_smaller_than_file_struct(void **state)
 	f = (struct cbfs_test_file *)s->cbfs_buf;
 	f->header.attributes_offset = cpu_to_be32(sizeof(struct cbfs_file) / 2);
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -824,7 +824,7 @@ static void test_cbfs_offset_smaller_than_header_size(void **state)
 	f = (struct cbfs_test_file *)s->cbfs_buf;
 	f->header.offset = cpu_to_be32(sizeof(struct cbfs_file) / 2);
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -841,7 +841,7 @@ static void test_cbfs_attributes_offset_is_zero(void **state)
 	assert_true(be32_to_cpu(test_file_int_1.header.attributes_offset) == 0);
 	memcpy(s->cbfs_buf, &test_file_int_1, sizeof(test_file_int_1));
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_SUCCESS);
@@ -862,7 +862,7 @@ static void test_cbfs_offset_is_zero(void **state)
 	f = (struct cbfs_test_file *)s->cbfs_buf;
 	f->header.offset = cpu_to_be32(0);
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -886,7 +886,7 @@ static void test_cbfs_attributes_too_large(void **state)
 	f->header.offset =
 		cpu_to_be32(be32_to_cpu(f->header.offset) + sizeof(union cbfs_mdata));
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -907,7 +907,7 @@ static void test_cbfs_file_length(void **state)
 	f = (struct cbfs_test_file *)s->cbfs_buf;
 	f->header.len = cpu_to_be32(s->ex.file_length);
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -927,7 +927,7 @@ static void test_cbfs_attributes_offset_uint32_max(void **state)
 	f = (struct cbfs_test_file *)s->cbfs_buf;
 	f->header.attributes_offset = cpu_to_be32(UINT32_MAX);
 
-	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, NULL));
+	assert_int_equal(CB_SUCCESS, cbfs_init_boot_device(&cbd, nullptr));
 
 	size_out = 0;
 	expect_lookup_result(CB_CBFS_NOT_FOUND);
@@ -948,7 +948,7 @@ static void test_cbfs_attributes_offset_uint32_max(void **state)
 							    setup_test_cbfs_unaligned,         \
 							    (prestate)))
 
-#define CBFS_LOOKUP_TEST(test_fn) CBFS_LOOKUP_NAME_PRESTATE_TEST(#test_fn, test_fn, NULL)
+#define CBFS_LOOKUP_TEST(test_fn) CBFS_LOOKUP_NAME_PRESTATE_TEST(#test_fn, test_fn, nullptr)
 
 #define CBFS_LOOKUP_TEST_FAIL_BEYOND_RDEV(name, file_len, lookup_res)                          \
 	EMPTY_WRAP(CBFS_LOOKUP_NAME_PRESTATE_TEST(name ", CBFS_TYPE_RAW",                      \
@@ -1061,5 +1061,5 @@ int main(void)
 		CBFS_LOOKUP_TEST(test_cbfs_attributes_offset_uint32_max),
 	};
 
-	return cb_run_group_tests(cbfs_lookup_aligned_and_unaligned_tests, NULL, NULL);
+	return cb_run_group_tests(cbfs_lookup_aligned_and_unaligned_tests, nullptr, nullptr);
 }

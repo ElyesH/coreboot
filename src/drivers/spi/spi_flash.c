@@ -49,8 +49,8 @@ static int do_spi_flash_cmd(const struct spi_slave *spi, const u8 *dout,
 	 */
 	struct spi_op vectors[] = {
 		[0] = { .dout = dout, .bytesout = bytes_out,
-			.din = NULL, .bytesin = 0, },
-		[1] = { .dout = NULL, .bytesout = 0,
+			.din = nullptr, .bytesin = 0, },
+		[1] = { .dout = nullptr, .bytesout = 0,
 			.din = din, .bytesin = bytes_in },
 	};
 	size_t count = ARRAY_SIZE(vectors);
@@ -80,7 +80,7 @@ static int do_dual_output_cmd(const struct spi_slave *spi, const u8 *dout,
 	 * pretty odd.
 	 */
 	struct spi_op vector = { .dout = dout, .bytesout = bytes_out,
-				 .din = NULL, .bytesin = 0 };
+				 .din = nullptr, .bytesin = 0 };
 
 	ret = spi_claim_bus(spi);
 	if (ret)
@@ -89,7 +89,7 @@ static int do_dual_output_cmd(const struct spi_slave *spi, const u8 *dout,
 	ret = spi_xfer_vector(spi, &vector, 1);
 
 	if (!ret)
-		ret = spi->ctrlr->xfer_dual(spi, NULL, 0, din, bytes_in);
+		ret = spi->ctrlr->xfer_dual(spi, nullptr, 0, din, bytes_in);
 
 	spi_release_bus(spi);
 	return ret;
@@ -102,7 +102,7 @@ static int do_dual_io_cmd(const struct spi_slave *spi, const u8 *dout,
 
 	/* Only the very first byte (opcode) is transferred in "single" mode. */
 	struct spi_op vector = { .dout = dout, .bytesout = 1,
-				 .din = NULL, .bytesin = 0 };
+				 .din = nullptr, .bytesin = 0 };
 
 	ret = spi_claim_bus(spi);
 	if (ret)
@@ -111,10 +111,10 @@ static int do_dual_io_cmd(const struct spi_slave *spi, const u8 *dout,
 	ret = spi_xfer_vector(spi, &vector, 1);
 
 	if (!ret)
-		ret = spi->ctrlr->xfer_dual(spi, &dout[1], bytes_out - 1, NULL, 0);
+		ret = spi->ctrlr->xfer_dual(spi, &dout[1], bytes_out - 1, nullptr, 0);
 
 	if (!ret)
-		ret = spi->ctrlr->xfer_dual(spi, NULL, 0, din, bytes_in);
+		ret = spi->ctrlr->xfer_dual(spi, nullptr, 0, din, bytes_in);
 
 	spi_release_bus(spi);
 	return ret;
@@ -143,7 +143,7 @@ int spi_flash_cmd_write(const struct spi_slave *spi, const u8 *cmd,
 	memcpy(buff, cmd, cmd_len);
 	memcpy(buff + cmd_len, data, data_len);
 
-	ret = do_spi_flash_cmd(spi, buff, cmd_len + data_len, NULL, 0);
+	ret = do_spi_flash_cmd(spi, buff, cmd_len + data_len, nullptr, 0);
 	if (ret) {
 		printk(BIOS_WARNING, "SF: Failed to send write command (%zu bytes): %d\n",
 				data_len, ret);
@@ -274,11 +274,11 @@ int spi_flash_cmd_erase(const struct spi_flash *flash, u32 offset, size_t len)
 					cmd[0], cmd[1], cmd[2], cmd[3], offset);
 		}
 
-		ret = spi_flash_cmd(&flash->spi, CMD_WRITE_ENABLE, NULL, 0);
+		ret = spi_flash_cmd(&flash->spi, CMD_WRITE_ENABLE, nullptr, 0);
 		if (ret)
 			goto out;
 
-		ret = spi_flash_cmd_write(&flash->spi, cmd, sizeof(cmd), NULL, 0);
+		ret = spi_flash_cmd_write(&flash->spi, cmd, sizeof(cmd), nullptr, 0);
 		if (ret)
 			goto out;
 
@@ -331,7 +331,7 @@ int spi_flash_cmd_write_page_program(const struct spi_flash *flash, u32 offset,
 					chunk_len);
 		}
 
-		ret = spi_flash_cmd(&flash->spi, flash->wren_cmd, NULL, 0);
+		ret = spi_flash_cmd(&flash->spi, flash->wren_cmd, nullptr, 0);
 		if (ret < 0) {
 			printk(BIOS_WARNING, "SF: Enabling Write failed\n");
 			goto out;
@@ -448,7 +448,7 @@ static const struct spi_flash_part_id *find_part(const struct spi_flash_vendor_i
 			return part;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static int find_match(const struct spi_slave *spi, struct spi_flash *flash,
@@ -467,7 +467,7 @@ static int find_match(const struct spi_slave *spi, struct spi_flash *flash,
 
 		part = find_part(vi, id);
 
-		if (part == NULL)
+		if (part == nullptr)
 			continue;
 
 		return fill_spi_flash(spi, flash, vi, part);
@@ -556,7 +556,7 @@ int spi_flash_probe(unsigned int bus, unsigned int cs, struct spi_flash *flash)
 
 	if (CONFIG(SPI_FLASH_EXIT_4_BYTE_ADDR_MODE) && SPI_FLASH_EXIT_4BYTE_STAGE) {
 		printk(BIOS_DEBUG, "SF: Exiting 4-byte addressing mode\n");
-		spi_flash_cmd(&flash->spi, CMD_EXIT_4BYTE_ADDR_MODE, NULL, 0);
+		spi_flash_cmd(&flash->spi, CMD_EXIT_4BYTE_ADDR_MODE, nullptr, 0);
 	}
 
 	return 0;
@@ -805,7 +805,7 @@ int spi_flash_vector_helper(const struct spi_slave *slave,
 		din = vectors[1].din;
 		bytes_in = vectors[1].bytesin;
 	} else {
-		din = NULL;
+		din = nullptr;
 		bytes_in = 0;
 	}
 

@@ -26,7 +26,7 @@ static void agesa_locate_image(AMD_CONFIG_PARAMS *StdHeader)
 	size_t file_size;
 
 	agesa = cbfs_map((const char *)CONFIG_AGESA_CBFS_NAME, &file_size);
-	if (agesa == NULL)
+	if (agesa == nullptr)
 		return;
 
 	image = LibAmdLocateImage(agesa, agesa + file_size, 4096,
@@ -69,7 +69,7 @@ static AGESA_STATUS amd_create_struct(AMD_INTERFACE_PARAMS *aip,
 	aip->AllocationMethod = 0;
 	aip->NewStructPtr = buf;
 	aip->NewStructSize = len;
-	if (buf != NULL && len != 0)
+	if (buf != nullptr && len != 0)
 		aip->AllocationMethod = ByHost;
 
 	return module_dispatch(AMD_CREATE_STRUCT, &aip->StdHeader);
@@ -219,7 +219,7 @@ int agesa_execute_state(struct sysinfo *cb, AGESA_STRUCT_NAME func)
 		AMD_RESET_PARAMS reset;
 		AMD_S3LATE_PARAMS s3late;
 	} agesa_params;
-	void *buf = NULL;
+	void *buf = nullptr;
 	size_t len = 0;
 
 	AGESA_STATUS status, final;
@@ -242,7 +242,7 @@ int agesa_execute_state(struct sysinfo *cb, AGESA_STRUCT_NAME func)
 
 	/* Must call the function buffer was allocated for.*/
 	AMD_CONFIG_PARAMS *StdHeader = aip.NewStructPtr;
-	ASSERT(StdHeader != NULL && StdHeader->Func == func);
+	ASSERT(StdHeader != nullptr && StdHeader->Func == func);
 
 	if (CONFIG(AGESA_EXTRA_TIMESTAMPS) && task.ts_entry_id)
 		timestamp_add_now(task.ts_entry_id);

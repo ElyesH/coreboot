@@ -52,7 +52,7 @@ static enum cb_err get_cmos_value(unsigned long bit, unsigned long length,
 
 static struct cmos_option_table *get_cmos_layout(void)
 {
-	static struct cmos_option_table *ct = NULL;
+	static struct cmos_option_table *ct = nullptr;
 
 	/*
 	 * In case VBOOT is enabled and this function is called from SMM,
@@ -62,7 +62,7 @@ static struct cmos_option_table *get_cmos_layout(void)
 	 * Support only one CMOS layout in the RO CBFS for now.
 	 */
 	if (!ct)
-		ct = cbfs_ro_map("cmos_layout.bin", NULL);
+		ct = cbfs_ro_map("cmos_layout.bin", nullptr);
 	if (!ct)
 		printk(BIOS_ERR, "RTC: cmos_layout.bin could not be found. "
 				 "Options are disabled\n");
@@ -82,7 +82,7 @@ static struct cmos_entries *find_cmos_entry(struct cmos_option_table *ct, const 
 		if (memcmp(ce->name, name, namelen) == 0)
 			return ce;
 	}
-	return NULL;
+	return nullptr;
 }
 
 static enum cb_err cmos_get_uint_option(unsigned int *dest, const char *name)

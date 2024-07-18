@@ -166,7 +166,7 @@ bool fit_payload_arch(struct prog *payload, struct fit_config_node *config,
 		      struct region *initrd)
 {
 	bool place_anywhere;
-	void *arg = NULL;
+	void *arg = nullptr;
 
 	if (!decompress_kernel_header(config->kernel)) {
 		printk(BIOS_CRIT, "Payload doesn't look like an ARM64"

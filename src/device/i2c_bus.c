@@ -10,7 +10,7 @@
 
 bool i2c_dev_detect(struct device *dev, unsigned int addr)
 {
-	struct i2c_msg seg = { .flags = 0, .slave = addr, .buf = NULL, .len = 0 };
+	struct i2c_msg seg = { .flags = 0, .slave = addr, .buf = nullptr, .len = 0 };
 	if (!dev)
 		return false;
 	return dev->ops->ops_i2c_bus->transfer(dev, &seg, 1) == 0;
@@ -19,7 +19,7 @@ bool i2c_dev_detect(struct device *dev, unsigned int addr)
 struct bus *i2c_link(const struct device *const dev)
 {
 	if (!dev || !dev->upstream)
-		return NULL;
+		return nullptr;
 
 	struct bus *link = dev->upstream;
 	while (link) {
@@ -32,7 +32,7 @@ struct bus *i2c_link(const struct device *const dev)
 		if (parent && parent->upstream && link != parent->upstream)
 			link = parent->upstream;
 		else
-			link = NULL;
+			link = nullptr;
 	}
 
 	if (!link)

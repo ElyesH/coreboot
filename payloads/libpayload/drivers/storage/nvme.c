@@ -94,8 +94,8 @@ static int delete_io_submission_queue(struct nvme_dev *nvme)
 	int res = nvme_cmd(nvme, NVME_ADMIN_QUEUE, &e);
 
 	free(nvme->queue[ios].base);
-	nvme->queue[ios].base = NULL;
-	nvme->queue[ios].bell = NULL;
+	nvme->queue[ios].base = nullptr;
+	nvme->queue[ios].bell = nullptr;
 	nvme->queue[ios].idx  = 0;
 	return res;
 }
@@ -110,8 +110,8 @@ static int delete_io_completion_queue(struct nvme_dev *nvme)
 	int res = nvme_cmd(nvme, NVME_ADMIN_QUEUE, &e);
 	free(nvme->queue[ioc].base);
 
-	nvme->queue[ioc].base  = NULL;
-	nvme->queue[ioc].bell  = NULL;
+	nvme->queue[ioc].base  = nullptr;
+	nvme->queue[ioc].bell  = nullptr;
 	nvme->queue[ioc].idx   = 0;
 	nvme->queue[ioc].round = 0;
 	return res;
@@ -123,13 +123,13 @@ static int delete_admin_queues(struct nvme_dev *nvme)
 		printf("NVMe ERROR: IO queues still active.\n");
 
 	free(nvme->queue[ads].base);
-	nvme->queue[ads].base = NULL;
-	nvme->queue[ads].bell = NULL;
+	nvme->queue[ads].base = nullptr;
+	nvme->queue[ads].bell = nullptr;
 	nvme->queue[ads].idx  = 0;
 
 	free(nvme->queue[adc].base);
-	nvme->queue[adc].base = NULL;
-	nvme->queue[adc].bell = NULL;
+	nvme->queue[adc].base = nullptr;
+	nvme->queue[adc].bell = nullptr;
 	nvme->queue[adc].idx  = 0;
 	nvme->queue[adc].round = 0;
 
@@ -333,7 +333,7 @@ static void nvme_init(pcidev_t dev)
 	nvme->storage_dev.port_type		= PORT_TYPE_NVME;
 	nvme->storage_dev.poll			= nvme_poll;
 	nvme->storage_dev.read_blocks512	= nvme_read_blocks512;
-	nvme->storage_dev.write_blocks512	= NULL;
+	nvme->storage_dev.write_blocks512	= nullptr;
 	nvme->storage_dev.detach_device		= nvme_detach_device;
 	nvme->pci_dev				= dev;
 	nvme->config				= pci_bar0;

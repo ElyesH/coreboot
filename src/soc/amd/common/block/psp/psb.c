@@ -157,4 +157,4 @@ static void enable_secure_boot(void *unused)
 		printk(BIOS_NOTICE, "Enabling PSB failed.\n");
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, enable_secure_boot, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_ENTRY, enable_secure_boot, nullptr);

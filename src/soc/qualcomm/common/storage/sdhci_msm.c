@@ -61,7 +61,7 @@ struct sd_mmc_ctrlr *new_sdhci_msm_host(void *ioaddr)
 	struct sd_mmc_ctrlr *host;
 
 	host = new_mem_sdhci_controller(ioaddr, sdhci_msm_init);
-	if (host == NULL)
+	if (host == nullptr)
 		printk(BIOS_ERR, "Error initializing SDHCI MSM host controller!\n");
 
 	return host;

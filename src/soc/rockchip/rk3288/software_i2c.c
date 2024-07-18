@@ -90,7 +90,7 @@ void software_i2c_attach(unsigned int bus)
 
 void software_i2c_detach(unsigned int bus)
 {
-	software_i2c[bus] = NULL;
+	software_i2c[bus] = nullptr;
 
 	/* Mux pins back to hardware I2C controller. */
 	switch (bus) {

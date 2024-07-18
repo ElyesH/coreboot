@@ -34,7 +34,7 @@ enum cb_err ipmi_init_and_start_bmc_wdt(const int port, uint16_t countdown,
 
 	/* Reset command to start timer */
 	ret = ipmi_message(port, IPMI_NETFN_APPLICATION, 0x0,
-			IPMI_BMC_RESET_WDG_TIMER, NULL, 0,
+			IPMI_BMC_RESET_WDG_TIMER, nullptr, 0,
 			(unsigned char *)&rsp, sizeof(rsp));
 
 	if (ret < sizeof(struct ipmi_rsp) || rsp.completion_code) {
@@ -58,7 +58,7 @@ enum cb_err ipmi_stop_bmc_wdt(const int port)
 
 	/* Get current timer first */
 	ret = ipmi_message(port, IPMI_NETFN_APPLICATION, 0x0,
-			IPMI_BMC_GET_WDG_TIMER, NULL, 0,
+			IPMI_BMC_GET_WDG_TIMER, nullptr, 0,
 			(unsigned char *)&rsp, sizeof(rsp));
 
 	if (ret < sizeof(struct ipmi_rsp) || rsp.resp.completion_code) {
@@ -99,14 +99,14 @@ enum cb_err ipmi_get_system_guid(const int port, uint8_t *uuid)
 	int ret;
 	struct ipmi_get_system_guid_rsp rsp;
 
-	if (uuid == NULL) {
+	if (uuid == nullptr) {
 		printk(BIOS_ERR, "%s failed, null pointer parameter\n",
 			 __func__);
 		return CB_ERR;
 	}
 
 	ret = ipmi_message(port, IPMI_NETFN_APPLICATION, 0x0,
-			IPMI_BMC_GET_SYSTEM_GUID, NULL, 0,
+			IPMI_BMC_GET_SYSTEM_GUID, nullptr, 0,
 			(unsigned char *)&rsp, sizeof(rsp));
 
 	if (ret < sizeof(struct ipmi_rsp) || rsp.resp.completion_code) {
@@ -124,7 +124,7 @@ enum cb_err ipmi_add_sel(const int port, struct sel_event_record *sel)
 	int ret;
 	struct ipmi_add_sel_rsp rsp;
 
-	if (sel == NULL) {
+	if (sel == nullptr) {
 		printk(BIOS_ERR, "%s failed, system event log is not present.\n", __func__);
 		return CB_ERR;
 	}

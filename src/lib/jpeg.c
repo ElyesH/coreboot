@@ -106,14 +106,14 @@ int jpeg_decode(unsigned char *filedata, size_t filesize, unsigned char *pic,
 
 	uint64_t workbuf_len_min_incl = wuffs_jpeg__decoder__workbuf_len(&dec).min_incl;
 	uint8_t *workbuf_array = malloc(workbuf_len_min_incl);
-	if ((workbuf_array == NULL) && workbuf_len_min_incl) {
+	if ((workbuf_array == nullptr) && workbuf_len_min_incl) {
 		return JPEG_DECODE_FAILED;
 	}
 
 	wuffs_base__slice_u8 workbuf =
 		wuffs_base__make_slice_u8(workbuf_array, workbuf_len_min_incl);
 	status = wuffs_jpeg__decoder__decode_frame(&dec, &pixbuf, &src,
-						   WUFFS_BASE__PIXEL_BLEND__SRC, workbuf, NULL);
+						   WUFFS_BASE__PIXEL_BLEND__SRC, workbuf, nullptr);
 
 	free(workbuf_array);
 

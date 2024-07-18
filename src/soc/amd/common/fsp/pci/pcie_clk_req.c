@@ -11,13 +11,13 @@
 void pcie_gpp_dxio_update_clk_req_config(enum gpp_clk_req *gpp_clk_config,
 					 size_t gpp_clk_config_num)
 {
-	const fsp_dxio_descriptor *dxio_descs = NULL;
-	const fsp_ddi_descriptor *ddi_descs = NULL;
+	const fsp_dxio_descriptor *dxio_descs = nullptr;
+	const fsp_ddi_descriptor *ddi_descs = nullptr;
 	size_t dxio_num = 0;
 	size_t ddi_num = 0;
 
 	mainboard_get_dxio_ddi_descriptors(&dxio_descs, &dxio_num, &ddi_descs, &ddi_num);
-	if (dxio_descs == NULL) {
+	if (dxio_descs == nullptr) {
 		printk(BIOS_WARNING,
 		       "No DXIO descriptors found, GPP clk req may not reflect enabled devices\n");
 		return;
@@ -63,7 +63,7 @@ void pcie_gpp_dxio_update_clk_req_config(enum gpp_clk_req *gpp_clk_config,
 
 		const struct device *pci_device = pcidev_path_on_root(
 			PCI_DEVFN(dxio_desc->device_number, dxio_desc->function_number));
-		if (pci_device == NULL) {
+		if (pci_device == nullptr) {
 			gpp_clk_config[gpp_req_index] = GPP_CLK_OFF;
 			printk(BIOS_WARNING,
 			       "Cannot find PCIe device %d.%d, disabling GPP clk req %d, DXIO descriptor %d\n",

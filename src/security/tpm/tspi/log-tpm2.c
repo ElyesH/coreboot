@@ -57,7 +57,7 @@ void *tpm2_log_cbmem_init(void)
 			MAX_TPM_LOG_ENTRIES * sizeof(struct tpm_2_log_entry);
 		tclt = cbmem_add(CBMEM_ID_TPM2_TCG_LOG, tpm_log_len);
 		if (!tclt)
-			return NULL;
+			return nullptr;
 
 		memset(tclt, 0, tpm_log_len);
 		hdr = &tclt->header;

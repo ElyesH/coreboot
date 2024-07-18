@@ -127,13 +127,13 @@ static int find_fmap_directory(struct region_device *fmrd)
 	boot_device_init();
 	boot = boot_device_ro();
 
-	if (boot == NULL)
+	if (boot == nullptr)
 		return -1;
 
 	fmap = rdev_mmap(boot, offset,
 			 CONFIG(CBFS_VERIFICATION) ? FMAP_SIZE : sizeof(struct fmap));
 
-	if (fmap == NULL)
+	if (fmap == nullptr)
 		return -1;
 
 	if (verify_fmap(fmap)) {
@@ -173,7 +173,7 @@ int fmap_locate_area(const char *name, struct region *ar)
 	struct region_device fmrd;
 	size_t offset;
 
-	if (name == NULL || ar == NULL)
+	if (name == nullptr || ar == nullptr)
 		return -1;
 
 	if (find_fmap_directory(&fmrd))
@@ -187,7 +187,7 @@ int fmap_locate_area(const char *name, struct region *ar)
 
 		area = rdev_mmap(&fmrd, offset, sizeof(*area));
 
-		if (area == NULL)
+		if (area == nullptr)
 			return -1;
 
 		if (strcmp((const char *)area->name, name)) {
@@ -218,7 +218,7 @@ int fmap_find_region_name(const struct region * const ar,
 	struct region_device fmrd;
 	size_t offset;
 
-	if (name == NULL || ar == NULL)
+	if (name == nullptr || ar == nullptr)
 		return -1;
 
 	if (find_fmap_directory(&fmrd))
@@ -232,7 +232,7 @@ int fmap_find_region_name(const struct region * const ar,
 
 		area = rdev_mmap(&fmrd, offset, sizeof(*area));
 
-		if (area == NULL)
+		if (area == nullptr)
 			return -1;
 
 		if (region_offset(ar) != le32toh(area->offset) ||

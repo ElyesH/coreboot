@@ -105,7 +105,7 @@ void mtk_spi_set_gpio_pinmux(unsigned int bus, enum spi_pad_mask pad_select)
 {
 	assert(bus < SPI_BUS_NUMBER);
 	assert(pad_select == SPI_PAD0_MASK);
-	const struct pad_func *ptr = NULL;
+	const struct pad_func *ptr = nullptr;
 
 	ptr = pad0_funcs[bus];
 	for (int i = 0; i < 4; i++)

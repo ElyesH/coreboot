@@ -20,15 +20,15 @@ static unsigned long mainboard_write_acpi_tables(const struct device *device,
 	uintptr_t start_addr;
 	uintptr_t end_addr;
 	struct nhlt *nhlt;
-	const char *oem_id = NULL;
-	const char *oem_table_id = NULL;
+	const char *oem_id = nullptr;
+	const char *oem_table_id = nullptr;
 	uint32_t oem_revision = 0;
 
 	start_addr = current;
 
 	nhlt = nhlt_init();
 
-	if (nhlt == NULL)
+	if (nhlt == nullptr)
 		return start_addr;
 
 	variant_nhlt_init(nhlt);

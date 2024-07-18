@@ -97,7 +97,7 @@ static void cmos_walk_options(struct cb_cmos_option_table *opttbl, FIELD **field
 		field_opts_off(fields[2 * i], O_ACTIVE);
 
 		fields[2 * i + 1] = new_field(1, 40, i * 2, maxlength + 2, 0, 0);
-		char *buf = NULL;
+		char *buf = nullptr;
 		int fail = get_option_as_string(use_nvram, opttbl, &buf, (char *)option->name);
 		switch (option->config) {
 		case 'h': {
@@ -136,7 +136,7 @@ static void cmos_walk_options(struct cb_cmos_option_table *opttbl, FIELD **field
 				cnt++;
 				cmos_enum = next_cmos_enum_of_id(cmos_enum, option->config_id);
 			}
-			values[cnt] = NULL;
+			values[cnt] = nullptr;
 			field_opts_off(fields[2 * i + 1], O_EDIT);
 			set_field_type(fields[2 * i + 1], TYPE_ENUM, values, 1, 1);
 			free(values); // copied by set_field_type
@@ -156,7 +156,7 @@ static void cmos_walk_options(struct cb_cmos_option_table *opttbl, FIELD **field
 		option = next_cmos_entry(option);
 	}
 
-	fields[2 * numopts] = NULL;
+	fields[2 * numopts] = nullptr;
 }
 
 int main(void)
@@ -172,7 +172,7 @@ int main(void)
 
 	struct cb_cmos_option_table *opttbl = get_system_option_table();
 
-	if (opttbl == NULL) {
+	if (opttbl == nullptr) {
 		printf("Could not find coreboot option table.\n");
 		halt();
 	}

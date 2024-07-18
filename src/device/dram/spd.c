@@ -43,7 +43,7 @@ const char *spd_manufacturer_name(const uint16_t mod_id)
 	case 0x0b03:
 		return "Nanya";
 	default:
-		return NULL;
+		return nullptr;
 	}
 }
 

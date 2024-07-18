@@ -918,13 +918,13 @@ struct usbdev_ctrl *dwc2_udc_init(device_descriptor_t *dd)
 	int i;
 
 	usb_debug("dwc2_udc_init\n");
-	if (ctrl == NULL)
-		return NULL;
+	if (ctrl == nullptr)
+		return nullptr;
 
 	ctrl->pdata = calloc(1, sizeof(dwc2_pdata_t));
-	if (ctrl->pdata == NULL) {
+	if (ctrl->pdata == nullptr) {
 		free(ctrl);
-		return NULL;
+		return nullptr;
 	}
 	memcpy(&ctrl->device_descriptor, dd, sizeof(*dd));
 	SLIST_INIT(&ctrl->configs);
@@ -953,7 +953,7 @@ struct usbdev_ctrl *dwc2_udc_init(device_descriptor_t *dd)
 	if (!dwc2_reinit_udc(ctrl, (void *)0xff580000, dd)) {
 		free(ctrl->pdata);
 		free(ctrl);
-		return NULL;
+		return nullptr;
 	}
 
 	return ctrl;

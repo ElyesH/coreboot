@@ -334,7 +334,7 @@ int rtc_failure(void)
 	int rtc_fail;
 	struct chipset_power_state *ps = acpi_get_pm_state();
 
-	if (ps != NULL)
+	if (ps != nullptr)
 		gen_pmcon1 = ps->gen_pmcon1;
 	else
 		gen_pmcon1 = read32((u32 *)(PMC_BASE_ADDRESS + GEN_PMCON1));

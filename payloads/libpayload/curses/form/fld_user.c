@@ -60,7 +60,7 @@ set_field_userptr(FIELD *field, void *usrptr)
 |                    store application relevant information.
 |
 |   Return Values :  Value of pointer. If no such pointer has been set,
-|                    NULL is returned
+|                    nullptr is returned
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(void *)
 field_userptr(const FIELD *field)

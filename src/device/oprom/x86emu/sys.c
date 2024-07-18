@@ -365,7 +365,7 @@ void X86EMU_setupIntrFuncs(X86EMU_intrFuncs funcs[])
 	int i;
 
 	for (i = 0; i < 256; i++)
-		_X86EMU_intrTab[i] = NULL;
+		_X86EMU_intrTab[i] = nullptr;
 	if (funcs) {
 		for (i = 0; i < 256; i++)
 			_X86EMU_intrTab[i] = funcs[i];

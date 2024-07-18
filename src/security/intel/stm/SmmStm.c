@@ -86,12 +86,12 @@ STM_RSC_END m_rsc_end_node = {
 	{END_OF_RESOURCES, sizeof(STM_RSC_END)},
 };
 
-uint8_t *m_stm_resources_ptr = NULL;
+uint8_t *m_stm_resources_ptr = nullptr;
 uint32_t m_stm_resource_total_size = 0x0;
 uint32_t m_stm_resource_size_used = 0x0;
 uint32_t m_stm_resource_size_available = 0x0;
 
-uint8_t *stm_resource_heap = NULL;
+uint8_t *stm_resource_heap = nullptr;
 
 uint32_t m_stm_state = 0;
 
@@ -508,7 +508,7 @@ int add_pi_resource(STM_RSC *resource_list, uint32_t num_entries)
  * Delete resources in list to database.
  *
  *  @param resource_list  A pointer to resource list to be deleted
- *			 NULL means delete all resources.
+ *			 nullptr means delete all resources.
  *  @param num_entries    Optional number of entries.
  *			 If 0, list must be terminated by END_OF_RESOURCES.
  *

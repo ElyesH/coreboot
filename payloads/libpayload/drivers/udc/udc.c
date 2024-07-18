@@ -89,7 +89,7 @@ static struct usbdev_configuration *fetch_config(struct usbdev_ctrl *this,
 		if (config->descriptor.bConfigurationValue == id)
 			return config;
 	}
-	return NULL;
+	return nullptr;
 }
 
 static void cease_operation(struct usbdev_ctrl *this)
@@ -145,7 +145,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 		this->set_address(this, dr->wValue & 0x7f);
 
 		/* status phase IN */
-		this->enqueue_packet(this, 0, 1, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 1, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	if ((dr->bmRequestType == 0x00) &&
@@ -156,14 +156,14 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 		if (dr->wValue == 0)
 			cease_operation(this);
 
-		if (config == NULL) {
+		if (config == nullptr) {
 			this->stall(this, 0, 0, 1);
 			this->stall(this, 0, 1, 1);
 			return 1;
 		}
 
 		/* status phase IN */
-		this->enqueue_packet(this, 0, 1, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 1, nullptr, 0, 0, 0);
 
 		this->current_config = config;
 		this->current_config_id = dr->wValue;
@@ -183,7 +183,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 			0, 1);
 
 		/* status phase OUT */
-		this->enqueue_packet(this, 0, 0, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 0, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	// ENDPOINT_HALT
@@ -195,7 +195,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 		this->stall(this, ep & 0xf, ep & 0x80, 0);
 
 		/* status phase IN */
-		this->enqueue_packet(this, 0, 1, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 1, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	// ENDPOINT_HALT
@@ -207,7 +207,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 		this->stall(this, ep & 0xf, ep & 0x80, 1);
 
 		/* status phase IN */
-		this->enqueue_packet(this, 0, 1, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 1, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	// DEVICE_REMOTE_WAKEUP
@@ -217,7 +217,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 		this->remote_wakeup = 0;
 
 		/* status phase IN */
-		this->enqueue_packet(this, 0, 1, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 1, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	// DEVICE_REMOTE_WAKEUP
@@ -227,7 +227,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 		this->remote_wakeup = 1;
 
 		/* status phase IN */
-		this->enqueue_packet(this, 0, 1, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 1, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	if ((dr->bmRequestType == 0x82) && // endpoint
@@ -243,7 +243,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 			min(2, dr->wLength), 0, 1);
 
 		// status phase OUT
-		this->enqueue_packet(this, 0, 0, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 0, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	if ((dr->bmRequestType == 0x80) &&
@@ -260,7 +260,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 			min(2, dr->wLength), 0, 1);
 
 		// status phase OUT
-		this->enqueue_packet(this, 0, 0, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 0, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	if ((dr->bmRequestType == 0x80) &&
@@ -273,7 +273,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 		 */
 		int id = (dr->wValue & 0xff) + 1;
 		struct usbdev_configuration *config = fetch_config(this, id);
-		if (config == NULL) {
+		if (config == nullptr) {
 			this->stall(this, 0, 0, 1);
 			this->stall(this, 0, 1, 1);
 			return 1;
@@ -309,7 +309,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 			zlp(this, 0, size, dr->wLength), 1);
 
 		/* status phase OUT */
-		this->enqueue_packet(this, 0, 0, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 0, nullptr, 0, 0, 0);
 		return 1;
 	} else
 	if ((dr->bmRequestType == 0x80) &&
@@ -333,7 +333,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 				1);
 
 			/* status phase OUT */
-			this->enqueue_packet(this, 0, 0, NULL, 0, 0, 0);
+			this->enqueue_packet(this, 0, 0, nullptr, 0, 0, 0);
 		} else {
 			if (strings_lang_id == 0)
 				return 0;
@@ -364,7 +364,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 				1);
 
 			/* status phase OUT */
-			this->enqueue_packet(this, 0, 0, NULL, 0, 0, 0);
+			this->enqueue_packet(this, 0, 0, nullptr, 0, 0, 0);
 		}
 		return 1;
 	} else
@@ -381,7 +381,7 @@ static int setup_ep0(struct usbdev_ctrl *this, dev_req_t *dr)
 			zlp(this, 0, sizeof(*dd), dr->wLength), 1);
 
 		/* status phase OUT */
-		this->enqueue_packet(this, 0, 0, NULL, 0, 0, 0);
+		this->enqueue_packet(this, 0, 0, nullptr, 0, 0, 0);
 		return 1;
 	}
 	return 0;

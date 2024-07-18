@@ -67,7 +67,7 @@ void tegra_software_i2c_init(unsigned int bus)
 
 void tegra_software_i2c_disable(unsigned int bus)
 {
-	software_i2c[bus] = NULL;
+	software_i2c[bus] = nullptr;
 
 	/* Return pins to I2C controller. */
 	pinmux_set_config(pins[bus].sda >> GPIO_PINMUX_SHIFT,

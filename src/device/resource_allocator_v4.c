@@ -124,7 +124,7 @@ static void update_bridge_resource(const struct device *bridge, struct resource 
 	const unsigned long type_match = bridge_res->flags & type_mask;
 	struct bus *bus = bridge->downstream;
 
-	child_res = NULL;
+	child_res = nullptr;
 
 	/*
 	 * `base` keeps track of where the next allocation for child resources
@@ -255,7 +255,7 @@ static void compute_domain_resources(const struct device *domain)
 	const struct device *child;
 	const int print_depth = 1;
 
-	if (domain->downstream == NULL)
+	if (domain->downstream == nullptr)
 		return;
 
 	for (child = domain->downstream->children; child; child = child->sibling) {
@@ -288,7 +288,7 @@ static void avoid_fixed_resources(struct memranges *ranges, const struct device 
 	const struct device *child;
 	const struct bus *bus;
 
-	for (res = dev->resource_list; res != NULL; res = res->next) {
+	for (res = dev->resource_list; res != nullptr; res = res->next) {
 		if ((res->flags & mask_match) != mask_match)
 			continue;
 		if (!res->size)
@@ -298,10 +298,10 @@ static void avoid_fixed_resources(struct memranges *ranges, const struct device 
 	}
 
 	bus = dev->downstream;
-	if (bus == NULL)
+	if (bus == nullptr)
 		return;
 
-	for (child = bus->children; child != NULL; child = child->sibling)
+	for (child = bus->children; child != nullptr; child = child->sibling)
 		avoid_fixed_resources(ranges, child, mask_match);
 }
 
@@ -323,9 +323,9 @@ static void setup_resource_ranges(const struct device *const domain,
 	const unsigned char alignment = type == IORESOURCE_MEM ? 12 : 0;
 	const unsigned long type_mask = IORESOURCE_TYPE_MASK | IORESOURCE_FIXED;
 
-	memranges_init_empty_with_alignment(ranges, NULL, 0, alignment);
+	memranges_init_empty_with_alignment(ranges, nullptr, 0, alignment);
 
-	for (struct resource *res = domain->resource_list; res != NULL; res = res->next) {
+	for (struct resource *res = domain->resource_list; res != nullptr; res = res->next) {
 		if ((res->flags & type_mask) != type)
 			continue;
 		print_domain_res(domain, res, "");
@@ -355,7 +355,7 @@ static void cleanup_domain_resource_ranges(const struct device *dev, struct memr
 					   unsigned long type)
 {
 	memranges_teardown(ranges);
-	for (struct resource *res = dev->resource_list; res != NULL; res = res->next) {
+	for (struct resource *res = dev->resource_list; res != nullptr; res = res->next) {
 		if (res->flags & IORESOURCE_FIXED)
 			continue;
 		if ((res->flags & IORESOURCE_TYPE_MASK) != type)
@@ -387,7 +387,7 @@ static void allocate_toplevel_resources(const struct device *const domain,
 					const unsigned long type)
 {
 	const unsigned long type_mask = IORESOURCE_TYPE_MASK;
-	struct resource *res = NULL;
+	struct resource *res = nullptr;
 	const struct device *dev;
 	struct memranges ranges;
 	resource_t base;
@@ -442,7 +442,7 @@ static void allocate_bridge_resources(const struct device *bridge)
 	struct resource *res;
 	struct device *child;
 
-	for (res = bridge->resource_list; res != NULL; res = res->next) {
+	for (res = bridge->resource_list; res != nullptr; res = res->next) {
 		if (!res->size)
 			continue;
 
@@ -457,7 +457,7 @@ static void allocate_bridge_resources(const struct device *bridge)
 				     assign_resource_cb, &res->base);
 	}
 
-	for (child = bus->children; child != NULL; child = child->sibling) {
+	for (child = bus->children; child != nullptr; child = child->sibling) {
 		if (!dev_has_children(child))
 			continue;
 
@@ -550,7 +550,7 @@ void allocate_resources(const struct device *root)
 {
 	const struct device *child;
 
-	if ((root == NULL) || (root->downstream == NULL))
+	if ((root == nullptr) || (root->downstream == nullptr))
 		return;
 
 	for (child = root->downstream->children; child; child = child->sibling) {

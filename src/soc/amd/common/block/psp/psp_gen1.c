@@ -174,7 +174,7 @@ int psp_load_named_blob(enum psp_blob_type type, const char *name)
 		return -PSPSTS_UNSUPPORTED;
 	}
 
-	blob = cbfs_map(name, NULL);
+	blob = cbfs_map(name, nullptr);
 	if (!blob) {
 		printk(BIOS_ERR, "BUG: Cannot map blob for PSP loading\n");
 		return -PSPSTS_INVALID_NAME;
@@ -184,7 +184,7 @@ int psp_load_named_blob(enum psp_blob_type type, const char *name)
 
 	/* Blob commands use the buffer registers as data, not pointer to buf */
 	cmd_status = send_psp_command(command, blob);
-	psp_print_cmd_status(cmd_status, NULL);
+	psp_print_cmd_status(cmd_status, nullptr);
 
 	cbfs_unmap(blob);
 	return cmd_status;

@@ -49,11 +49,11 @@ void variant_smi_sleep(u8 slp_typ)
 
 void variant_update_devtree(struct device *dev)
 {
-	struct soc_intel_apollolake_config *cfg = NULL;
+	struct soc_intel_apollolake_config *cfg = nullptr;
 
 	cfg = (struct soc_intel_apollolake_config *)dev->chip_info;
 
-	if (cfg != NULL && (cfg->disable_xhci_lfps_pm != 1)) {
+	if (cfg != nullptr && (cfg->disable_xhci_lfps_pm != 1)) {
 		switch (google_chromeec_get_board_sku()) {
 		case SKU_17_LTE:
 		case SKU_18_LTE_TS:

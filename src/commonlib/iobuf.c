@@ -62,7 +62,7 @@ const void *ibuf_oob_drain(struct ibuf *ib, size_t sz)
 	const void *b;
 
 	if (ibuf_check_size(ib, sz))
-		return NULL;
+		return nullptr;
 
 	b = &ib->b[ib->n_read];
 	ib->n_read += sz;
@@ -74,7 +74,7 @@ int ibuf_read(struct ibuf *ib, void *data, size_t sz)
 {
 	const void *b = ibuf_oob_drain(ib, sz);
 
-	if (b == NULL)
+	if (b == nullptr)
 		return -1;
 
 	memcpy(data, b, sz);
@@ -258,7 +258,7 @@ void *obuf_oob_fill(struct obuf *ob, size_t sz)
 	void *b;
 
 	if (obuf_check_size(ob, sz))
-		return NULL;
+		return nullptr;
 
 	b = &ob->b[ob->n_written];
 	ob->n_written += sz;
@@ -271,7 +271,7 @@ int obuf_write(struct obuf *ob, const void *data, size_t sz)
 	void *b;
 
 	b = obuf_oob_fill(ob, sz);
-	if (b == NULL)
+	if (b == nullptr)
 		return -1;
 
 	memcpy(b, data, sz);

@@ -6,7 +6,7 @@ RCSID("$Id: pdcscrn.c,v 1.55 2008/07/14 04:24:52 wmcbrine Exp $")
 
 /* COLOR_PAIR to attribute encoding table. */
 
-short *xc_atrtab = (short *)NULL;
+short *xc_atrtab = (short *)nullptr;
 
 /* close the physical screen */
 
@@ -19,7 +19,7 @@ void PDC_scr_free(void)
 {
     XCursesExit();
 
-    xc_atrtab = (short *)NULL;
+    xc_atrtab = (short *)nullptr;
 }
 
 /* open the physical screen -- allocate SP, miscellaneous intialization */

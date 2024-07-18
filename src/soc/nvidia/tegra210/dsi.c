@@ -27,14 +27,14 @@ struct tegra_dsi dsi_data[NUM_DSI] = {
 		.regs = (void *)TEGRA_DSIA_BASE,
 		.channel = 0,
 		.slave = &dsi_data[DSI_B],
-		.master = NULL,
+		.master = nullptr,
 		.video_fifo_depth = MAX_DSI_VIDEO_FIFO_DEPTH,
 		.host_fifo_depth = MAX_DSI_HOST_FIFO_DEPTH,
 	},
 	{
 		.regs = (void *)TEGRA_DSIB_BASE,
 		.channel = 0,
-		.slave = NULL,
+		.slave = nullptr,
 		.master = &dsi_data[DSI_A],
 		.video_fifo_depth = MAX_DSI_VIDEO_FIFO_DEPTH,
 		.host_fifo_depth = MAX_DSI_HOST_FIFO_DEPTH,
@@ -961,7 +961,7 @@ void dsi_display_startup(struct device *dev)
 	printk(BIOS_INFO, "%s: entry: disp_ctrl: %p.\n",
 		 __func__, disp_ctrl);
 
-	if (disp_ctrl == NULL) {
+	if (disp_ctrl == nullptr) {
 		printk(BIOS_ERR, "No dc is assigned by dt.\n");
 		return;
 	}

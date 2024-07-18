@@ -65,7 +65,7 @@ usb_hub_interrupt_ep(usbdev_t *const dev)
 				dev->endpoints[i].direction == IN)
 			return &dev->endpoints[i];
 	}
-	return NULL;
+	return nullptr;
 }
 
 static int
@@ -162,21 +162,21 @@ static void usb_hub_set_hub_depth(usbdev_t *const dev)
 		parent = dev->controller->devices[parent->hub];
 		dr.wValue++;
 	}
-	int ret = dev->controller->control(dev, OUT, sizeof(dr), &dr, 0, NULL);
+	int ret = dev->controller->control(dev, OUT, sizeof(dr), &dr, 0, nullptr);
 	if (ret < 0)
 		usb_debug("Failed SET_HUB_DEPTH(%d) on hub %d: %d\n",
 			  dr.wValue, dev->address, ret);
 }
 
 static const generic_hub_ops_t usb_hub_ops = {
-	.hub_status_changed	= NULL,
+	.hub_status_changed	= nullptr,
 	.port_status_changed	= usb_hub_port_status_changed,
 	.port_connected		= usb_hub_port_connected,
 	.port_in_reset		= usb_hub_port_in_reset,
 	.port_enabled		= usb_hub_port_enabled,
 	.port_speed		= usb_hub_port_speed,
 	.enable_port		= usb_hub_enable_port,
-	.disable_port		= NULL,
+	.disable_port		= nullptr,
 	.start_port_reset	= usb_hub_start_port_reset,
 	.reset_port		= generic_hub_resetport,
 };

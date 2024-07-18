@@ -238,7 +238,7 @@ int initTest(WINDOW **win, int argc, char *argv[])
 
     *win = newwin(height, width, (LINES - height) / 2, (COLS - width) / 2);
 
-    if (*win == NULL)
+    if (*win == nullptr)
     {
         endwin();
         return 1;
@@ -344,7 +344,7 @@ void inputTest(WINDOW *win)
     sh = h / 3;
 
     if ((subWin = subwin(win, sh, sw, by + h - sh - 2, bx + w - sw - 2))
-        == NULL)
+        == nullptr)
         return;
 
 #ifdef A_COLOR
@@ -588,7 +588,7 @@ void outputTest(WINDOW *win)
     {
         win1 = newwin(10, 50, 14, 25);
 
-        if (win1 == NULL)
+        if (win1 == nullptr)
         {
             endwin();
             return;
@@ -735,7 +735,7 @@ void resizeTest(WINDOW *dummy)
 
     win1 = newwin(10, 50, 14, 25);
 
-    if (win1 == NULL)
+    if (win1 == nullptr)
     {
         endwin();
         return;
@@ -812,7 +812,7 @@ void clipboardTest(WINDOW *win)
 {
     static const char *text =
         "This string placed in clipboard by PDCurses test program, testcurs.";
-    char *ptr = NULL;
+    char *ptr = nullptr;
     long i, length = 0;
 
     mvaddstr(1, 1,

@@ -26,7 +26,7 @@ static struct panel_serializable_data *get_mipi_cmd_from_cbfs(struct panel_descr
 
 	if (!desc->name) {
 		printk(BIOS_ERR, "Missing panel CBFS file name.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	snprintf(cbfs_name, sizeof(cbfs_name), "panel-%s", desc->name);
@@ -34,7 +34,7 @@ static struct panel_serializable_data *get_mipi_cmd_from_cbfs(struct panel_descr
 		return &buffer.s;
 
 	printk(BIOS_ERR, "Missing %s in CBFS.\n", cbfs_name);
-	return NULL;
+	return nullptr;
 }
 
 __weak int mtk_edp_init(struct edid *edid)
@@ -81,7 +81,7 @@ int mtk_display_init(void)
 			return -1;
 		}
 	} else {
-		struct panel_serializable_data *mipi_data = NULL;
+		struct panel_serializable_data *mipi_data = nullptr;
 
 		if (panel->get_edid) {
 			if (panel->get_edid(&edid) < 0)
@@ -99,7 +99,7 @@ int mtk_display_init(void)
 				      MIPI_DSI_MODE_EOT_PACKET);
 
 		if (mtk_dsi_init(mipi_dsi_flags, MIPI_DSI_FMT_RGB888, 4, &edid,
-				 mipi_data ? mipi_data->init : NULL) < 0) {
+				 mipi_data ? mipi_data->init : nullptr) < 0) {
 			printk(BIOS_ERR, "%s: Failed in DSI init\n", __func__);
 			return -1;
 		}

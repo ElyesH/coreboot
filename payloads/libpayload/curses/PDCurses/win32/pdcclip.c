@@ -56,10 +56,10 @@ int PDC_getclipboard(char **contents, long *length)
 
     PDC_LOG(("PDC_getclipboard() - called\n"));
 
-    if (!OpenClipboard(NULL))
+    if (!OpenClipboard(nullptr))
         return PDC_CLIP_ACCESS_ERROR;
 
-    if ((handle = GetClipboardData(PDC_TEXT)) == NULL)
+    if ((handle = GetClipboardData(PDC_TEXT)) == nullptr)
     {
         CloseClipboard();
         return PDC_CLIP_EMPTY;
@@ -96,7 +96,7 @@ int PDC_setclipboard(const char *contents, long length)
 
     PDC_LOG(("PDC_setclipboard() - called\n"));
 
-    if (!OpenClipboard(NULL))
+    if (!OpenClipboard(nullptr))
         return PDC_CLIP_ACCESS_ERROR;
 
     ptr1 = GlobalAlloc(GMEM_MOVEABLE|GMEM_DDESHARE,

@@ -17,8 +17,8 @@
  * reads or writes through the newly created objects back to the source object.
  *
  * Any function returning an int encodes the return values as < 0 on error
- * and 0 on success. Any function returning a pointer returns NULL on error
- * and non-NULL on success.
+ * and 0 on success. Any function returning a pointer returns nullptr on error
+ * and non-nullptr on success.
  */
 
 struct ibuf {

@@ -61,8 +61,8 @@ PDCurses portable platform definitions list:
 #ifndef TRUE
 # define TRUE 1
 #endif
-#ifndef NULL
-# define NULL (void *)0
+#ifndef nullptr
+# define nullptr (void *)0
 #endif
 #ifndef ERR
 # define ERR (-1)

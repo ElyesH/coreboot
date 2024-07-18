@@ -50,7 +50,7 @@ RCSID("$Id: getyx.c,v 1.29 2008/07/15 17:13:26 wmcbrine Exp $")
 
         getbegy(), getbegx(), getcurx(), getcury(), getmaxy(),
         getmaxx(), getpary(), and getparx() return the appropriate
-        coordinate or size values, or ERR in the case of a NULL window.
+        coordinate or size values, or ERR in the case of a nullptr window.
 
   Portability                                X/Open    BSD    SYS V
         getyx                                   Y       Y       Y

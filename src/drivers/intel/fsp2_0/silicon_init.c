@@ -162,7 +162,7 @@ static void do_silicon_init(struct fsp_header *hdr)
 			 hdr->fsp_multi_phase_si_init_entry_offset);
 
 	/* Implementing multi_phase_si_init() is optional as per FSP 2.2 spec */
-	if (multi_phase_si_init == NULL)
+	if (multi_phase_si_init == nullptr)
 		return;
 
 	post_code(POSTCODE_FSP_MULTI_PHASE_SI_INIT_ENTRY);
@@ -185,7 +185,7 @@ static void do_silicon_init(struct fsp_header *hdr)
 
 		multi_phase_params.multi_phase_action = EXECUTE_PHASE;
 		multi_phase_params.phase_index = i;
-		multi_phase_params.multi_phase_param_ptr = NULL;
+		multi_phase_params.multi_phase_param_ptr = nullptr;
 		status = multi_phase_si_init(&multi_phase_params);
 		if (CONFIG(FSP_MULTIPHASE_SI_INIT_RETURN_BROKEN))
 			status = fsp_get_pch_reset_status();
@@ -266,4 +266,4 @@ static void release_logo(void *arg_unused)
 		bmp_release_logo();
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, release_logo, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_LOAD, BS_ON_EXIT, release_logo, nullptr);

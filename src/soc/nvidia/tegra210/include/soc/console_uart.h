@@ -38,7 +38,7 @@ static inline void *console_uart_clk_rst_reg(void)
 {
 	switch (console_uart_get_id()) {
 	case UART_ID_NONE:
-		return NULL;
+		return nullptr;
 	case UART_ID_A:
 		return CLK_RST_REG(clk_src_uarta);
 	case UART_ID_B:
@@ -51,7 +51,7 @@ static inline void *console_uart_clk_rst_reg(void)
 		return CLK_RST_REG(clk_src_uarte);
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 static inline uint32_t console_uart_clk_src_dev_id(void)

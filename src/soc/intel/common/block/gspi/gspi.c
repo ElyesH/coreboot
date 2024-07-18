@@ -105,7 +105,7 @@ static uintptr_t gspi_get_early_base(void)
 	return EARLY_GSPI_BASE_ADDRESS;
 }
 
-/* Get gspi_config array from devicetree. Returns NULL in case of error. */
+/* Get gspi_config array from devicetree. Returns nullptr in case of error. */
 static const struct gspi_cfg *gspi_get_cfg(void)
 {
 	const struct soc_intel_common_config *common_config;
@@ -149,7 +149,7 @@ void gspi_early_bar_init(void)
 
 	gspi_base_addr = gspi_get_early_base();
 	if (!gspi_base_addr) {
-		printk(BIOS_ERR, "%s: GSPI base address provided is NULL!\n",
+		printk(BIOS_ERR, "%s: GSPI base address provided is nullptr!\n",
 		       __func__);
 		return;
 	}
@@ -158,7 +158,7 @@ void gspi_early_bar_init(void)
 		if (!cfg[gspi_bus].early_init)
 			continue;
 		devfn = gspi_soc_bus_to_devfn(gspi_bus);
-		gspi_set_base_addr(devfn, NULL,
+		gspi_set_base_addr(devfn, nullptr,
 				GSPI_BUS_BASE(gspi_base_addr, gspi_bus));
 	}
 }
@@ -267,7 +267,7 @@ static void gspi_clear_cached_base(void *unused)
 {
 	memset(gspi_base, 0, sizeof(gspi_base));
 }
-BOOT_STATE_INIT_ENTRY(BS_DEV_RESOURCES, BS_ON_EXIT, gspi_clear_cached_base, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_RESOURCES, BS_ON_EXIT, gspi_clear_cached_base, nullptr);
 
 /* Parameters for GSPI controller operation. */
 struct gspi_ctrlr_params {
@@ -690,7 +690,7 @@ static int gspi_ctrlr_xfer(const struct spi_slave *dev,
 	 * equal i.e. if both in and out transfers are to be done in same
 	 * transaction, then they should be equal in length.
 	 * 3. Buffer corresponding to non-zero bytes (bytesin/bytesout) cannot
-	 * be NULL.
+	 * be nullptr.
 	 */
 	if (!bytesin && !bytesout) {
 		printk(BIOS_ERR, "%s: Both in and out bytes cannot be zero!\n",
@@ -702,7 +702,7 @@ static int gspi_ctrlr_xfer(const struct spi_slave *dev,
 		return -1;
 	}
 	if ((bytesin && !din) || (bytesout && !dout)) {
-		printk(BIOS_ERR, "%s: in/out buffer is NULL!\n", __func__);
+		printk(BIOS_ERR, "%s: in/out buffer is nullptr!\n", __func__);
 		return -1;
 	}
 

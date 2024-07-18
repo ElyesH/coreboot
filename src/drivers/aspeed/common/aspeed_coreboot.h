@@ -90,8 +90,8 @@ static inline struct resource* resource_at_bar(struct pci_dev *dev, u8 bar) {
 	int i;
 	for (i = 0; i < bar; i++) {
 		res = res->next;
-		if (res == NULL)
-			return NULL;
+		if (res == nullptr)
+			return nullptr;
 	}
 
 	return res;

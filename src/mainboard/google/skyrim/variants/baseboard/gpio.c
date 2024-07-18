@@ -214,7 +214,7 @@ void baseboard_romstage_gpio_table(const struct soc_amd_gpio **gpio, size_t *siz
 __weak void variant_romstage_override_gpio_table(const struct soc_amd_gpio **gpio, size_t *size)
 {
 	*size = 0;
-	*gpio = NULL;
+	*gpio = nullptr;
 }
 
 void baseboard_gpio_table(const struct soc_amd_gpio **gpio, size_t *size)
@@ -226,7 +226,7 @@ void baseboard_gpio_table(const struct soc_amd_gpio **gpio, size_t *size)
 __weak void variant_override_gpio_table(const struct soc_amd_gpio **gpio, size_t *size)
 {
 	*size = 0;
-	*gpio = NULL;
+	*gpio = nullptr;
 }
 
 __weak void variant_bootblock_gpio_table(const struct soc_amd_gpio **gpio, size_t *size)
@@ -244,7 +244,7 @@ __weak void variant_early_gpio_table(const struct soc_amd_gpio **gpio, size_t *s
 __weak void variant_early_override_gpio_table(const struct soc_amd_gpio **gpio, size_t *size)
 {
 	*size = 0;
-	*gpio = NULL;
+	*gpio = nullptr;
 }
 
 __weak void variant_espi_gpio_table(const struct soc_amd_gpio **gpio, size_t *size)

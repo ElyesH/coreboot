@@ -92,4 +92,4 @@ static void fw_config_handle(void *unused)
 	if (fw_config_probe(FW_CONFIG(AUDIO_CODEC_SOURCE, AUDIO_CODEC_CS42l42)))
 		gpio_configure_pads(codec_cs42l42_pads, ARRAY_SIZE(codec_cs42l42_pads));
 }
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, nullptr);

@@ -173,7 +173,7 @@ static unsigned long gen_crat_cache_entry(struct acpi_crat_header *crat, unsigne
 	struct cpuid_result cache_props0, cache_props1, cache_props2, cache_props3;
 	uint8_t sibling_mask = 0;
 	uint32_t l1_data_cache_ids, l1_inst_cache_ids, l2_cache_ids, l3_cache_ids;
-	struct crat_cache *cache_affinity = NULL;
+	struct crat_cache *cache_affinity = nullptr;
 
 	total_num_threads = get_cpu_count();
 
@@ -349,7 +349,7 @@ static unsigned long gen_crat_tlb_entry(struct acpi_crat_header *crat, unsigned 
 	uint8_t sibling_mask = 0;
 	uint32_t l1_tlb_2M4M_ids, l1_tlb_4K_ids, l2_tlb_2M4M_ids, l2_tlb_4K_ids, l1_tlb_1G_ids,
 		l2_tlb_1G_ids;
-	struct crat_tlb *tlb_affinity = NULL;
+	struct crat_tlb *tlb_affinity = nullptr;
 
 	total_num_threads = get_cpu_count();
 	cache_props0 = cpuid_ext(CPUID_CACHE_PROPS, CACHE_PROPS_0);

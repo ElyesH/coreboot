@@ -23,13 +23,13 @@ static void dnv_ns_uart_read_resources(struct device *dev)
 	if (!CONFIG(LEGACY_UART_MODE))
 		return;
 	struct resource *res = probe_resource(dev, PCI_BASE_ADDRESS_0);
-	if (res == NULL)
+	if (res == nullptr)
 		return;
 	res->size = 0x8;
 	res->flags = IORESOURCE_IO | IORESOURCE_ASSIGNED | IORESOURCE_FIXED;
 	/* Do not configure membar */
 	res = probe_resource(dev, PCI_BASE_ADDRESS_1);
-	if (res != NULL)
+	if (res != nullptr)
 		res->flags = 0;
 	compact_resources(dev);
 }
@@ -56,7 +56,7 @@ static void hide_hsuarts(void)
 	for (i = DENVERTON_UARTS_TO_INI - 1; i >= 0; i--) {
 		struct device *uart_dev;
 		uart_dev = pcidev_on_root(HSUART_DEV, i);
-		if (uart_dev == NULL)
+		if (uart_dev == nullptr)
 			continue;
 		pci_or_config32(uart_dev, PCI_FUNC_RDCFG_HIDE, 1);
 	}

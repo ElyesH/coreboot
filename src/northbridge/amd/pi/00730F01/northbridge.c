@@ -98,11 +98,11 @@ static unsigned long acpi_fill_hest(acpi_hest_t *hest)
 	current = (void *)(hest + 1);
 
 	addr = agesawrapper_getlateinitptr(PICK_WHEA_MCE);
-	if (addr != NULL)
+	if (addr != nullptr)
 		current += acpi_create_hest_error_source(hest, current, 0, (void *)((u32)addr + 2), *(UINT16 *)addr - 2);
 
 	addr = agesawrapper_getlateinitptr(PICK_WHEA_CMC);
-	if (addr != NULL)
+	if (addr != nullptr)
 		current += acpi_create_hest_error_source(hest, current, 1, (void *)((u32)addr + 2), *(UINT16 *)addr - 2);
 
 	return (unsigned long)current;
@@ -270,7 +270,7 @@ static unsigned long acpi_fill_ivrs11(unsigned long current, acpi_ivrs_t *ivrs_a
 
 	/*
 	 * These devices should be already found by previous function.
-	 * Do not perform NULL checks.
+	 * Do not perform nullptr checks.
 	 */
 	struct device *nb_dev = pcidev_on_root(0, 0);
 	struct device *iommu_dev = pcidev_on_root(0, 2);
@@ -313,7 +313,7 @@ static unsigned long acpi_fill_ivrs11(unsigned long current, acpi_ivrs_t *ivrs_a
 	current_backup = current;
 	current = ivhd_dev_range(current, PCI_DEVFN(1, 0), PCI_DEVFN(0x1f, 6), 0);
 	ivhd_11->length += (current - current_backup);
-	add_ivhd_device_entries(NULL, all_devices, 0, -1, NULL, &current, &ivhd_11->length);
+	add_ivhd_device_entries(nullptr, all_devices, 0, -1, nullptr, &current, &ivhd_11->length);
 
 	/* Describe HPET */
 	current_backup = current;
@@ -350,7 +350,7 @@ static unsigned long acpi_fill_ivrs(acpi_ivrs_t *ivrs, unsigned long current)
 	}
 
 	ivrs_agesa = agesawrapper_getlateinitptr(PICK_IVRS);
-	if (ivrs_agesa != NULL) {
+	if (ivrs_agesa != nullptr) {
 		ivrs->iv_info = ivrs_agesa->iv_info;
 		ivrs->ivhd.type = IVHD_BLOCK_TYPE_LEGACY__FIXED;
 		ivrs->ivhd.flags = ivrs_agesa->ivhd.flags;
@@ -368,7 +368,7 @@ static unsigned long acpi_fill_ivrs(acpi_ivrs_t *ivrs, unsigned long current)
 		if (pci_read_config32(iommu_dev, ivrs->ivhd.capability_offset) & EFR_SUPPORT)
 			ivrs->iv_info |= IVINFO_EFR_SUPPORTED;
 	} else {
-		printk(BIOS_WARNING, "%s: AGESA returned NULL IVRS\n", __func__);
+		printk(BIOS_WARNING, "%s: AGESA returned nullptr IVRS\n", __func__);
 
 		return (unsigned long)ivrs;
 	}
@@ -381,7 +381,7 @@ static unsigned long acpi_fill_ivrs(acpi_ivrs_t *ivrs, unsigned long current)
 	current_backup = current;
 	current = ivhd_dev_range(current, PCI_DEVFN(1, 0), PCI_DEVFN(0x1f, 6), 0);
 	ivrs->ivhd.length += (current - current_backup);
-	add_ivhd_device_entries(NULL, all_devices, 0, -1, NULL, &current, &ivrs->ivhd.length);
+	add_ivhd_device_entries(nullptr, all_devices, 0, -1, nullptr, &current, &ivrs->ivhd.length);
 
 	/* Describe HPET */
 	current_backup = current;
@@ -447,40 +447,40 @@ static unsigned long agesa_write_acpi_tables(const struct device *device,
 	current = ALIGN_UP(current, 8);
 	printk(BIOS_DEBUG, "ACPI:    * SRAT at %lx\n", current);
 	srat = (acpi_srat_t *)agesawrapper_getlateinitptr(PICK_SRAT);
-	if (srat != NULL) {
+	if (srat != nullptr) {
 		memcpy((void *)current, srat, srat->header.length);
 		srat = (acpi_srat_t *)current;
 		current += srat->header.length;
 		acpi_add_table(rsdp, srat);
 	} else {
-		printk(BIOS_DEBUG, "  AGESA SRAT table NULL. Skipping.\n");
+		printk(BIOS_DEBUG, "  AGESA SRAT table nullptr. Skipping.\n");
 	}
 
 	/* SLIT */
 	current = ALIGN_UP(current, 8);
 	printk(BIOS_DEBUG, "ACPI:   * SLIT at %lx\n", current);
 	slit = (acpi_slit_t *)agesawrapper_getlateinitptr(PICK_SLIT);
-	if (slit != NULL) {
+	if (slit != nullptr) {
 		memcpy((void *)current, slit, slit->header.length);
 		slit = (acpi_slit_t *)current;
 		current += slit->header.length;
 		acpi_add_table(rsdp, slit);
 	} else {
-		printk(BIOS_DEBUG, "  AGESA SLIT table NULL. Skipping.\n");
+		printk(BIOS_DEBUG, "  AGESA SLIT table nullptr. Skipping.\n");
 	}
 
 	/* ALIB */
 	current = ALIGN_UP(current, 16);
 	printk(BIOS_DEBUG, "ACPI:  * AGESA ALIB SSDT at %lx\n", current);
 	alib = (acpi_header_t *)agesawrapper_getlateinitptr(PICK_ALIB);
-	if (alib != NULL) {
+	if (alib != nullptr) {
 		memcpy((void *)current, alib, alib->length);
 		alib = (acpi_header_t *)current;
 		current += alib->length;
 		acpi_add_table(rsdp, (void *)alib);
 	}
 	else {
-		printk(BIOS_DEBUG, "	AGESA ALIB SSDT table NULL. Skipping.\n");
+		printk(BIOS_DEBUG, "	AGESA ALIB SSDT table nullptr. Skipping.\n");
 	}
 
 	/* this pstate ssdt may cause Blue Screen: Fixed: Keep this comment for a while. */
@@ -488,13 +488,13 @@ static unsigned long agesa_write_acpi_tables(const struct device *device,
 	current   = ALIGN_UP(current, 16);
 	printk(BIOS_DEBUG, "ACPI:    * SSDT at %lx\n", current);
 	ssdt = (acpi_header_t *)agesawrapper_getlateinitptr(PICK_PSTATE);
-	if (ssdt != NULL) {
+	if (ssdt != nullptr) {
 		memcpy((void *)current, ssdt, ssdt->length);
 		ssdt = (acpi_header_t *)current;
 		current += ssdt->length;
 	}
 	else {
-		printk(BIOS_DEBUG, "  AGESA PState table NULL. Skipping.\n");
+		printk(BIOS_DEBUG, "  AGESA PState table nullptr. Skipping.\n");
 	}
 	acpi_add_table(rsdp, ssdt);
 
@@ -547,7 +547,7 @@ static void fam16_finalize(void *chip_info)
 
 	/* disable No Snoop */
 	dev = pcidev_on_root(1, 1);
-	if (dev != NULL) {
+	if (dev != nullptr) {
 		pci_and_config32(dev, 0x60, ~(1 << 11));
 	}
 }
@@ -647,7 +647,7 @@ static const char *domain_acpi_name(const struct device *dev)
 	if (dev->path.type == DEVICE_PATH_DOMAIN)
 		return "PCI0";
 
-	return NULL;
+	return nullptr;
 }
 
 struct device_operations amd_fam16_mod30_pci_domain_ops = {

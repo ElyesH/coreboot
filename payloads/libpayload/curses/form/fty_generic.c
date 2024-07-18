@@ -96,7 +96,7 @@ Generic_This_Type(void *arg)
 |                       E_BAD_ARGUMENT  - invalid arguments
 |                       E_SYSTEM_ERROR  - system error (no memory)
 |
-|   Return Values :  Fieldtype pointer or NULL if error occurred
+|   Return Values :  Fieldtype pointer or nullptr if error occurred
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(FIELDTYPE *)
 _nc_generic_fieldtype(bool (*const field_check) (FORM *, FIELD *, const void *),
@@ -266,7 +266,7 @@ _nc_set_generic_fieldtype(FIELD *field,
 |   Description   :  Get the current position of the form cursor position
 |                    We also return the field window
 |
-|   Return Values :  The fields Window or NULL on error
+|   Return Values :  The fields Window or nullptr on error
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(WINDOW *)
 _nc_form_cursor(const FORM *form, int *pRow, int *pCol)

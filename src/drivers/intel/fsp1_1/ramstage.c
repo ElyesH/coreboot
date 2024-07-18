@@ -16,8 +16,8 @@ static void display_hob_info(FSP_INFO_HEADER *fsp_info_header)
 	void *hob_list_ptr = get_hob_list();
 
 	/* Verify the HOBs */
-	if (hob_list_ptr == NULL) {
-		printk(BIOS_ERR, "HOB pointer is NULL!\n");
+	if (hob_list_ptr == nullptr) {
+		printk(BIOS_ERR, "HOB pointer is nullptr!\n");
 		return;
 	}
 
@@ -52,7 +52,7 @@ static void fsp_run_silicon_init(FSP_INFO_HEADER *fsp_info_header)
 	VPD_DATA_REGION *vpd_ptr;
 
 	/* Display the FSP header */
-	if (fsp_info_header == NULL) {
+	if (fsp_info_header == nullptr) {
 		printk(BIOS_ERR, "FSP_INFO_HEADER not set!\n");
 		return;
 	}
@@ -117,7 +117,7 @@ static void fsp_run_silicon_init(FSP_INFO_HEADER *fsp_info_header)
 
 		void *hob_list_ptr = get_hob_list();
 		vbt_hob = get_guid_hob(&vbt_guid, hob_list_ptr);
-		if (vbt_hob == NULL) {
+		if (vbt_hob == nullptr) {
 			printk(BIOS_ERR, "FSP_ERR: Graphics Data HOB is not present\n");
 		} else {
 			EFI_PEI_GRAPHICS_INFO_HOB *gop;

@@ -69,5 +69,5 @@ const fsp_ddi_descriptor *baseboard_get_ddi_descriptors(size_t *num)
 	/* Different configurations of dalboz have different ddi configurations.
 	 * Therefore, don't provide any baseboard defaults. */
 	*num = 0;
-	return NULL;
+	return nullptr;
 }

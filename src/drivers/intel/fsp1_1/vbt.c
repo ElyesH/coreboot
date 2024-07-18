@@ -11,7 +11,7 @@
 /* Locate VBT and pass it to FSP GOP */
 void load_vbt(SILICON_INIT_UPD *params)
 {
-	const optionrom_vbt_t *vbt_data = NULL;
+	const optionrom_vbt_t *vbt_data = nullptr;
 	size_t vbt_len;
 
 	/* Check boot mode - for S3 resume path VBT loading is not needed */
@@ -20,7 +20,7 @@ void load_vbt(SILICON_INIT_UPD *params)
 	} else if (display_init_required()) {
 		/* Get VBT data */
 		vbt_data = locate_vbt(&vbt_len);
-		if (vbt_data != NULL) {
+		if (vbt_data != nullptr) {
 			if (CONFIG(DISPLAY_VBT)) {
 				/* Display the vbt file contents */
 				printk(BIOS_DEBUG, "VBT Data:\n");

@@ -422,9 +422,9 @@ static int winbond_flash_cmd_status(const struct spi_flash *flash,
 		return 0;
 
 	if (non_volatile) {
-		ret = spi_flash_cmd(&flash->spi, CMD_W25_WREN, NULL, 0);
+		ret = spi_flash_cmd(&flash->spi, CMD_W25_WREN, nullptr, 0);
 	} else {
-		ret = spi_flash_cmd(&flash->spi, CMD_VOLATILE_SREG_WREN, NULL,
+		ret = spi_flash_cmd(&flash->spi, CMD_VOLATILE_SREG_WREN, nullptr,
 				    0);
 	}
 	if (ret)
@@ -436,7 +436,7 @@ static int winbond_flash_cmd_status(const struct spi_flash *flash,
 
 	/* Legacy method of writing status register 1 & 2 */
 	ret = spi_flash_cmd_write(&flash->spi, (u8 *)&cmdbuf, sizeof(cmdbuf),
-				  NULL, 0);
+				  nullptr, 0);
 	if (ret)
 		return ret;
 

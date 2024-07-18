@@ -34,7 +34,7 @@ static void set_spi_speed(void)
 static void early_lpc_init(void)
 {
 	const struct device *dev = pcidev_on_root(0x1f, 0);
-	const struct southbridge_intel_ibexpeak_config *config = NULL;
+	const struct southbridge_intel_ibexpeak_config *config = nullptr;
 
 	/*
 	 * Enable some common LPC IO ranges:

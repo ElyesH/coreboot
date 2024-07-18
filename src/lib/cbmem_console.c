@@ -67,7 +67,7 @@ static void init_console_ptr(void *storage, u32 total_space)
 	struct cbmem_console *cbm_cons_p = storage;
 
 	if (!cbm_cons_p || total_space <= sizeof(struct cbmem_console)) {
-		current_console = NULL;
+		current_console = nullptr;
 		return;
 	}
 
@@ -85,7 +85,7 @@ void cbmemc_init(void)
 		/* Pre-RAM environments use special buffer placed by linker script. */
 		init_console_ptr(_preram_cbmem_console, REGION_SIZE(preram_cbmem_console));
 	} else if (ENV_SMM) {
-		void *cbmemc = NULL;
+		void *cbmemc = nullptr;
 		size_t cbmemc_size = 0;
 
 		smm_get_cbmemc_buffer(&cbmemc, &cbmemc_size);

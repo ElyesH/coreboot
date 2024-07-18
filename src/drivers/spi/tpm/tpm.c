@@ -158,7 +158,7 @@ static enum cb_err start_transaction(int read_write, size_t bytes, unsigned int 
 
 	header_resp.body[3] = 0;
 	if (CONFIG(TPM_GOOGLE))
-		ret = spi_xfer(&spi_slave, header.body, sizeof(header.body), NULL, 0);
+		ret = spi_xfer(&spi_slave, header.body, sizeof(header.body), nullptr, 0);
 	else
 		ret = spi_xfer(&spi_slave, header.body, sizeof(header.body),
 			       header_resp.body, sizeof(header_resp.body));
@@ -182,7 +182,7 @@ static enum cb_err start_transaction(int read_write, size_t bytes, unsigned int 
 			spi_release_bus(&spi_slave);
 			return CB_ERR;
 		}
-		spi_xfer(&spi_slave, NULL, 0, &byte, 1);
+		spi_xfer(&spi_slave, nullptr, 0, &byte, 1);
 	} while (!(byte & 1));
 
 	return CB_SUCCESS;
@@ -251,7 +251,7 @@ static void trace_dump(const char *prefix, uint32_t reg,
  */
 static void write_bytes(const void *buffer, size_t bytes)
 {
-	spi_xfer(&spi_slave, buffer, bytes, NULL, 0);
+	spi_xfer(&spi_slave, buffer, bytes, nullptr, 0);
 }
 
 /*
@@ -260,7 +260,7 @@ static void write_bytes(const void *buffer, size_t bytes)
  */
 static void read_bytes(void *buffer, size_t bytes)
 {
-	spi_xfer(&spi_slave, NULL, 0, buffer, bytes);
+	spi_xfer(&spi_slave, nullptr, 0, buffer, bytes);
 }
 
 /*
@@ -489,7 +489,7 @@ tpm_result_t tpm2_init(struct spi_slave *spi_if)
 		if (tpm_first_access_this_boot()) {
 			/* This is called for the side-effect of printing the firmware version
 			   string */
-			cr50_get_firmware_version(NULL);
+			cr50_get_firmware_version(nullptr);
                         cr50_set_board_cfg();
 		}
 	}

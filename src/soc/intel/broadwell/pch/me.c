@@ -118,13 +118,13 @@ static inline void read_me_csr(struct mei_csr *csr)
 static inline void write_cb(u32 dword)
 {
 	write32(mei_base_address + MEI_H_CB_WW, dword);
-	mei_dump(NULL, dword, MEI_H_CB_WW, "WRITE");
+	mei_dump(nullptr, dword, MEI_H_CB_WW, "WRITE");
 }
 
 static inline u32 read_cb(void)
 {
 	u32 dword = read32(mei_base_address + MEI_ME_CB_RW);
-	mei_dump(NULL, dword, MEI_ME_CB_RW, "READ");
+	mei_dump(nullptr, dword, MEI_ME_CB_RW, "READ");
 	return dword;
 }
 
@@ -528,7 +528,7 @@ static int mkhi_end_of_post(void)
 	u32 eop_ack;
 
 	/* Send request and wait for response */
-	if (mei_sendrecv_mkhi(&mkhi, NULL, 0, &eop_ack, sizeof(eop_ack)) < 0) {
+	if (mei_sendrecv_mkhi(&mkhi, nullptr, 0, &eop_ack, sizeof(eop_ack)) < 0) {
 		printk(BIOS_ERR, "ME: END OF POST message failed\n");
 		return -1;
 	}
@@ -546,7 +546,7 @@ static int mkhi_end_of_post_noack(void)
 	};
 
 	/* Send request, do not wait for response */
-	if (mei_sendrecv_mkhi(&mkhi, NULL, 0, NULL, 0) < 0) {
+	if (mei_sendrecv_mkhi(&mkhi, nullptr, 0, nullptr, 0) < 0) {
 		printk(BIOS_ERR, "ME: END OF POST NOACK message failed\n");
 		return -1;
 	}
@@ -565,7 +565,7 @@ static int mkhi_hmrfpo_lock(void)
 	u32 ack;
 
 	/* Send request and wait for response */
-	if (mei_sendrecv_mkhi(&mkhi, NULL, 0, &ack, sizeof(ack)) < 0) {
+	if (mei_sendrecv_mkhi(&mkhi, nullptr, 0, &ack, sizeof(ack)) < 0) {
 		printk(BIOS_ERR, "ME: HMRFPO LOCK message failed\n");
 		return -1;
 	}
@@ -583,7 +583,7 @@ static int mkhi_hmrfpo_lock_noack(void)
 	};
 
 	/* Send request, do not wait for response */
-	if (mei_sendrecv_mkhi(&mkhi, NULL, 0, NULL, 0) < 0) {
+	if (mei_sendrecv_mkhi(&mkhi, nullptr, 0, nullptr, 0) < 0) {
 		printk(BIOS_ERR, "ME: HMRFPO LOCK NOACK message failed\n");
 		return -1;
 	}
@@ -628,7 +628,7 @@ static int me_icc_set_clock_enables(u32 mask)
 	};
 
 	/* Send request and wait for response */
-	if (mei_sendrecv_icc(&icc, &clk, sizeof(clk), NULL, 0) < 0) {
+	if (mei_sendrecv_icc(&icc, &clk, sizeof(clk), nullptr, 0) < 0) {
 		printk(BIOS_ERR, "ME: ICC SET CLOCK ENABLES message failed\n");
 		return -1;
 	}

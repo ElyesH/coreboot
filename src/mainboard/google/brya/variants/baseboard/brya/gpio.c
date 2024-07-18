@@ -452,7 +452,7 @@ const struct pad_config *__weak variant_gpio_table(size_t *num)
 const struct pad_config *__weak variant_gpio_override_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 const struct pad_config *__weak variant_early_gpio_table(size_t *num)
@@ -471,5 +471,5 @@ DECLARE_WEAK_CROS_GPIOS(cros_gpios);
 const struct pad_config *__weak variant_romstage_gpio_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }

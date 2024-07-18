@@ -14,7 +14,7 @@ RCSID("$Id: pdcscrn.c,v 1.89 2008/07/13 16:08:17 wmcbrine Exp $")
 
 /* COLOR_PAIR to attribute encoding table. */
 
-unsigned char *pdc_atrtab = (unsigned char *)NULL;
+unsigned char *pdc_atrtab = (unsigned char *)nullptr;
 
 int pdc_adapter;         /* screen type */
 int pdc_scrnmode;        /* default screen mode */
@@ -34,7 +34,7 @@ static short curstoreal[16], realtocurs[16] =
 
 static bool sizeable = FALSE;   /* TRUE if adapter is resizeable    */
 
-static unsigned short *saved_screen = NULL;
+static unsigned short *saved_screen = nullptr;
 static int saved_lines = 0;
 static int saved_cols = 0;
 
@@ -480,7 +480,7 @@ void PDC_scr_close(void)
 # endif
 #endif
         free(saved_screen);
-        saved_screen = NULL;
+        saved_screen = nullptr;
     }
 
     reset_shell_mode();
@@ -500,7 +500,7 @@ void PDC_scr_free(void)
     if (pdc_atrtab)
         free(pdc_atrtab);
 
-    pdc_atrtab = (unsigned char *)NULL;
+    pdc_atrtab = (unsigned char *)nullptr;
 }
 
 /* open the physical screen -- allocate SP, miscellaneous intialization,
@@ -584,7 +584,7 @@ int PDC_scr_open(int argc, char **argv)
 #endif
     }
 
-    SP->_preserve = (getenv("PDC_PRESERVE_SCREEN") != NULL);
+    SP->_preserve = (getenv("PDC_PRESERVE_SCREEN") != nullptr);
 
     return OK;
 }

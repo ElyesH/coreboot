@@ -28,8 +28,8 @@ int vboot_executed;
 
 static void after_verstage(void)
 {
-	struct vb2_hash *metadata_hash = NULL;
-	struct vb2_context *ctx = NULL;
+	struct vb2_hash *metadata_hash = nullptr;
+	struct vb2_context *ctx = nullptr;
 
 	vboot_executed = 1;	/* Mark verstage execution complete. */
 
@@ -91,7 +91,7 @@ const struct cbfs_boot_device *vboot_get_cbfs_boot_device(void)
 {
 	/* Don't honor vboot results until the vboot logic has run. */
 	if (!vboot_logic_executed())
-		return NULL;
+		return nullptr;
 
 	static struct cbfs_boot_device cbd;
 	if (region_device_sz(&cbd.rdev))
@@ -99,11 +99,11 @@ const struct cbfs_boot_device *vboot_get_cbfs_boot_device(void)
 
 	struct vb2_context *ctx = vboot_get_context();
 	if (ctx->flags & VB2_CONTEXT_RECOVERY_MODE)
-		return NULL;
+		return nullptr;
 
 	boot_device_init();
 	if (vboot_locate_firmware(ctx, &cbd.rdev))
-		return NULL;
+		return nullptr;
 
 	cbfs_boot_device_find_mcache(&cbd, CBMEM_ID_CBFS_RW_MCACHE);
 

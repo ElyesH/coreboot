@@ -109,5 +109,5 @@ static void back_up_vbnv_cmos(void *unused)
 	/* Save to flash, will only be saved if different. */
 	save_vbnv_flash(vbnv_cmos);
 }
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, back_up_vbnv_cmos, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, back_up_vbnv_cmos, nullptr);
 #endif

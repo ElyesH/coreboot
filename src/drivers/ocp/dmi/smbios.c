@@ -40,7 +40,7 @@ void smbios_ec_revision(uint8_t *ec_major_revision, uint8_t *ec_minor_revision)
 /* Override SMBIOS type 1 data. */
 const char *smbios_system_manufacturer(void)
 {
-	if (fru_strings.prod_info.manufacturer != NULL)
+	if (fru_strings.prod_info.manufacturer != nullptr)
 		return (const char *)fru_strings.prod_info.manufacturer;
 	else
 		return CONFIG_MAINBOARD_SMBIOS_MANUFACTURER;
@@ -48,7 +48,7 @@ const char *smbios_system_manufacturer(void)
 
 const char *smbios_system_product_name(void)
 {
-	if (fru_strings.board_info.product_name != NULL)
+	if (fru_strings.board_info.product_name != nullptr)
 		return (const char *)fru_strings.prod_info.product_name;
 	else
 		return CONFIG_MAINBOARD_SMBIOS_PRODUCT_NAME;
@@ -56,7 +56,7 @@ const char *smbios_system_product_name(void)
 
 const char *smbios_system_serial_number(void)
 {
-	if (fru_strings.prod_info.serial_number != NULL)
+	if (fru_strings.prod_info.serial_number != nullptr)
 		return (const char *)fru_strings.prod_info.serial_number;
 	else
 		return CONFIG_MAINBOARD_SERIAL_NUMBER;
@@ -64,7 +64,7 @@ const char *smbios_system_serial_number(void)
 
 const char *smbios_system_version(void)
 {
-	if (fru_strings.prod_info.product_version != NULL)
+	if (fru_strings.prod_info.product_version != nullptr)
 		return (const char *)fru_strings.prod_info.product_version;
 	else
 		return CONFIG_MAINBOARD_VERSION;
@@ -79,7 +79,7 @@ void smbios_system_set_uuid(u8 *uuid)
 /* Override SMBIOS type 2 data. */
 const char *smbios_mainboard_version(void)
 {
-	if (fru_strings.board_info.part_number != NULL)
+	if (fru_strings.board_info.part_number != nullptr)
 		return (const char *)fru_strings.board_info.part_number;
 	else
 		return CONFIG_MAINBOARD_VERSION;
@@ -87,7 +87,7 @@ const char *smbios_mainboard_version(void)
 
 const char *smbios_mainboard_manufacturer(void)
 {
-	if (fru_strings.board_info.manufacturer != NULL)
+	if (fru_strings.board_info.manufacturer != nullptr)
 		return (const char *)fru_strings.board_info.manufacturer;
 	else
 		return CONFIG_MAINBOARD_SMBIOS_MANUFACTURER;
@@ -95,7 +95,7 @@ const char *smbios_mainboard_manufacturer(void)
 
 const char *smbios_mainboard_product_name(void)
 {
-	if (fru_strings.board_info.product_name != NULL)
+	if (fru_strings.board_info.product_name != nullptr)
 		return (const char *)fru_strings.board_info.product_name;
 	else
 		return CONFIG_MAINBOARD_SMBIOS_PRODUCT_NAME;
@@ -103,7 +103,7 @@ const char *smbios_mainboard_product_name(void)
 
 const char *smbios_mainboard_serial_number(void)
 {
-	if (fru_strings.board_info.serial_number != NULL)
+	if (fru_strings.board_info.serial_number != nullptr)
 		return (const char *)fru_strings.board_info.serial_number;
 	else
 		return CONFIG_MAINBOARD_SERIAL_NUMBER;
@@ -112,7 +112,7 @@ const char *smbios_mainboard_serial_number(void)
 /* Override SMBIOS type 2 and 3 asset_tag data. */
 const char *smbios_mainboard_asset_tag(void)
 {
-	if (fru_strings.prod_info.asset_tag != NULL)
+	if (fru_strings.prod_info.asset_tag != nullptr)
 		return (const char *)fru_strings.prod_info.asset_tag;
 	else
 		return "";
@@ -130,7 +130,7 @@ smbios_enclosure_type smbios_mainboard_enclosure_type(void)
 
 const char *smbios_chassis_version(void)
 {
-	if (fru_strings.chassis_info.chassis_partnumber != NULL)
+	if (fru_strings.chassis_info.chassis_partnumber != nullptr)
 		return fru_strings.chassis_info.chassis_partnumber;
 	else
 		return "";
@@ -138,7 +138,7 @@ const char *smbios_chassis_version(void)
 
 const char *smbios_chassis_serial_number(void)
 {
-	if (fru_strings.chassis_info.serial_number != NULL)
+	if (fru_strings.chassis_info.serial_number != nullptr)
 		return fru_strings.chassis_info.serial_number;
 	else
 		return "";
@@ -150,7 +150,7 @@ const char *smbios_processor_serial_number(void)
 	/* For now type 4 only creates for one CPU, so it can only write the serial number
 	 * of CPU0.
 	 */
-	if (*fru_strings.chassis_info.chassis_custom != NULL)
+	if (*fru_strings.chassis_info.chassis_custom != nullptr)
 		return *fru_strings.chassis_info.chassis_custom;
 	else
 		return "";
@@ -225,26 +225,26 @@ void ocp_oem_smbios_strings(struct device *dev, struct smbios_type11 *t)
 
 	/* Add OEM string 1 to 4 */
 	if (fru_strings.board_info.custom_count > 0 &&
-			*fru_strings.board_info.board_custom != NULL)
+			*fru_strings.board_info.board_custom != nullptr)
 		t->count = smbios_add_oem_string(t->eos, *fru_strings.board_info.board_custom);
 	else
 		t->count = smbios_add_oem_string(t->eos, TBF);
 
 	if (fru_strings.prod_info.custom_count > 0 &&
-			*fru_strings.prod_info.product_custom != NULL)
+			*fru_strings.prod_info.product_custom != nullptr)
 		t->count = smbios_add_oem_string(t->eos, *fru_strings.prod_info.product_custom);
 	else
 		t->count = smbios_add_oem_string(t->eos, TBF);
 
 	if (fru_strings.prod_info.custom_count > 1 &&
-			*(fru_strings.prod_info.product_custom + 1) != NULL)
+			*(fru_strings.prod_info.product_custom + 1) != nullptr)
 		t->count = smbios_add_oem_string(t->eos,
 			*(fru_strings.prod_info.product_custom + 1));
 	else
 		t->count = smbios_add_oem_string(t->eos, TBF);
 
 	if (fru_strings.prod_info.custom_count > 2 &&
-			*(fru_strings.prod_info.product_custom + 2) != NULL) {
+			*(fru_strings.prod_info.product_custom + 2) != nullptr) {
 		t->count = smbios_add_oem_string(t->eos,
 			*(fru_strings.prod_info.product_custom + 2));
 	} else {

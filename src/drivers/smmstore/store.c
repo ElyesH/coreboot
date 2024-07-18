@@ -83,7 +83,7 @@ static int lookup_store(struct region_device *rstore)
 
 	rdev = incoherent_rdev_init(&store_irdev, &region, &read_rdev, &write_rdev);
 
-	if (rdev == NULL)
+	if (rdev == nullptr)
 		return -1;
 
 	return rdev_chain(rstore, rdev, 0, region_device_sz(rdev));
@@ -122,7 +122,7 @@ int smmstore_read_region(void *buf, ssize_t *bufsize)
 {
 	struct region_device store;
 
-	if (bufsize == NULL)
+	if (bufsize == nullptr)
 		return -1;
 
 	if (lookup_store(&store) < 0) {
@@ -355,17 +355,17 @@ static int lookup_block_in_store(struct region_device *store, uint32_t block_id)
 	return 0;
 }
 
-/* Returns NULL on error, pointer from rdev_mmap on success */
+/* Returns nullptr on error, pointer from rdev_mmap on success */
 static void *mmap_com_buf(struct region_device *com_buf, uint32_t offset, uint32_t bufsize)
 {
 	if (smmstore_rdev_chain(com_buf) < 0) {
 		printk(BIOS_ERR, "smm store: lookup of com buffer failed\n");
-		return NULL;
+		return nullptr;
 	}
 
 	if (offset >= region_device_sz(com_buf)) {
 		printk(BIOS_ERR, "smm store: offset out of range\n");
-		return NULL;
+		return nullptr;
 	}
 
 	void *ptr = rdev_mmap(com_buf, offset, bufsize);

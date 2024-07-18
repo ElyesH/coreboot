@@ -50,9 +50,9 @@ struct option {
 	 * whether option takes an argument
 	 */
 	int has_arg;
-	/* if not NULL, set *flag to val when option found */
+	/* if not nullptr, set *flag to val when option found */
 	int *flag;
-	/* if flag not NULL, value to set *flag to; else return value */
+	/* if flag not nullptr, value to set *flag to; else return value */
 	int val;
 };
 

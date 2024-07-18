@@ -58,7 +58,7 @@ static const char *genoa_domain_acpi_name(const struct device *domain)
 	if (domain->path.domain.domain < ARRAY_SIZE(domain_acpi_names))
 		return domain_acpi_names[domain->path.domain.domain];
 
-	return NULL;
+	return nullptr;
 }
 
 struct device_operations genoa_pci_domain_ops = {

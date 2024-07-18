@@ -88,7 +88,7 @@ const struct pad_config *variant_romstage_gpio_table(size_t *num)
 
 	sku_id = google_chromeec_get_board_sku();
 	if (no_touchscreen_sku(sku_id)) {
-		c = NULL;
+		c = nullptr;
 		*num = 0;
 	} else {
 		c = romstage_touch_gpio_table;

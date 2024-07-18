@@ -74,7 +74,7 @@ static void dump_td(u32 addr)
 #if 0 && defined(USB_DEBUG)
 static void dump_qh(ehci_qh_t *cur)
 {
-	qtd_t *tmp_qtd = NULL;
+	qtd_t *tmp_qtd = nullptr;
 	usb_debug("+===================================================+\n");
 	usb_debug("| ############# EHCI QH at [0x%08lx] ########### |\n", virt_to_phys(cur));
 	usb_debug("+---------------------------------------------------+\n");
@@ -104,9 +104,9 @@ static void dump_qh(ehci_qh_t *cur)
 		dump_td(virt_to_phys((void *)&(cur->td)));
 		/* Dump all TD tree for this QH */
 		tmp_qtd = (qtd_t *)phys_to_virt((cur->td.next_qtd & ~0x1FUL));
-		if (tmp_qtd != NULL)
+		if (tmp_qtd != nullptr)
 			usb_debug("|:::::::::::::::::: EHCI QTD CHAIN :::::::::::::::::|\n");
-		while (tmp_qtd != NULL)
+		while (tmp_qtd != nullptr)
 		{
 			dump_td(virt_to_phys(tmp_qtd));
 			tmp_qtd = (qtd_t *)phys_to_virt((tmp_qtd->next_qtd & ~0x1FUL));
@@ -509,7 +509,7 @@ static int ehci_control(usbdev_t *dev, direction_t dir, int drlen, void *setup,
 		(toggle?QTD_TOGGLE_DATA1:QTD_TOGGLE_DATA0) |
 		((dir == OUT)?EHCI_IN:EHCI_OUT) << QTD_PID_SHIFT |
 		(0 << QTD_CERR_SHIFT);
-	fill_td(cur, NULL, 0);
+	fill_td(cur, nullptr, 0);
 	cur->next_qtd = virt_to_phys(0) | QTD_TERMINATE;
 	cur->alt_next_qtd = QTD_TERMINATE;
 
@@ -583,7 +583,7 @@ static void fill_intr_queue_td(
 		((intrq->endp->toggle & 1) << QTD_TOGGLE_SHIFT);
 	fill_td(&intr_qtd->td, data, intrq->reqsize);
 	intr_qtd->data = data;
-	intr_qtd->next = NULL;
+	intr_qtd->next = nullptr;
 
 	intrq->endp->toggle ^= 1;
 }
@@ -601,7 +601,7 @@ static void *ehci_create_intr_queue(
 	if ((reqsize > (4 * 4096 + 1)) || /* the maximum for arbitrary aligned
 					     data in five 4096 byte pages */
 			(reqtiming > 1024))
-		return NULL;
+		return nullptr;
 	if (reqcount < 2) /* we need at least 2:
 			     one for processing, one for the hc to advance to */
 		reqcount = 2;
@@ -610,7 +610,7 @@ static void *ehci_create_intr_queue(
 	if (ep->dev->speed < 2) {
 		/* we need a split transaction */
 		if (closest_usb2_hub(ep->dev, &hubaddr, &hubport))
-			return NULL;
+			return nullptr;
 	}
 
 	intr_queue_t *const intrq = (intr_queue_t *)dma_memalign(64,
@@ -689,7 +689,7 @@ static void *ehci_create_intr_queue(
 		usb_debug("Error: Failed to place ehci interrupt queue head "
 				"into periodic schedule: no space left\n");
 		ehci_destroy_intr_queue(ep, intrq);
-		return NULL;
+		return nullptr;
 	}
 
 	return intrq;
@@ -734,7 +734,7 @@ static u8 *ehci_poll_intr_queue(void *const queue)
 {
 	intr_queue_t *const intrq = (intr_queue_t *)queue;
 
-	u8 *ret = NULL;
+	u8 *ret = nullptr;
 
 	/* process if head qTD is inactive AND QH has been moved forward */
 	if (!(intrq->head->td.token & QTD_ACTIVE)) {
@@ -786,8 +786,8 @@ ehci_init(unsigned long physical_bar)
 	controller->bulk = ehci_bulk;
 	controller->control = ehci_control;
 	controller->set_address = generic_set_address;
-	controller->finish_device_config = NULL;
-	controller->destroy_device = NULL;
+	controller->finish_device_config = nullptr;
+	controller->destroy_device = nullptr;
 	controller->create_intr_queue = ehci_create_intr_queue;
 	controller->destroy_intr_queue = ehci_destroy_intr_queue;
 	controller->poll_intr_queue = ehci_poll_intr_queue;

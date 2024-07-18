@@ -34,7 +34,7 @@ static void cs35l53_fill_ssdt(const struct device *dev)
 	acpigen_write_device(acpi_device_name(dev));
 	acpigen_write_name_string("_HID", CS35L53_ACPI_HID);
 	acpigen_write_name_integer("_UID", config->uid);
-	if (config->desc == NULL)
+	if (config->desc == nullptr)
 		acpigen_write_name_string("_DDN", dev->chip_ops->name);
 	else
 		acpigen_write_name_string("_DDN", config->desc);

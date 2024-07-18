@@ -10,9 +10,9 @@
 /* Beware that there is no XHCI 2 on Phoenix  */
 #define SOC_XHCI_2 DEV_PTR(usb4_xhci_0) /* XHCI 3 */
 #define SOC_XHCI_3 DEV_PTR(usb4_xhci_1) /* XHCI 4 */
-#define SOC_XHCI_4 NULL
-#define SOC_XHCI_5 NULL
-#define SOC_XHCI_6 NULL
-#define SOC_XHCI_7 NULL
+#define SOC_XHCI_4 nullptr
+#define SOC_XHCI_5 nullptr
+#define SOC_XHCI_6 nullptr
+#define SOC_XHCI_7 nullptr
 
 #endif /* AMD_PHOENIX_XHCI_H */

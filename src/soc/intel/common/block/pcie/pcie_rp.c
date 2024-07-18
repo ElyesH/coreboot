@@ -165,7 +165,7 @@ void pcie_rp_update_devicetree(const struct pcie_rp_group *const groups)
 		if (pcie_rp_update_dev(dev, groups, mapping)) {
 			/* Unlink vanished device. */
 			*link = dev->sibling;
-			dev->sibling = NULL;
+			dev->sibling = nullptr;
 			continue;
 		}
 

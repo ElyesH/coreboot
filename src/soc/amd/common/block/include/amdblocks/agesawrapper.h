@@ -17,7 +17,7 @@ enum {
 	PICK_CRAT,
 };
 
-/* Return current dispatcher or NULL on error. */
+/* Return current dispatcher or nullptr on error. */
 MODULE_ENTRY agesa_get_dispatcher(void);
 
 AGESA_STATUS agesa_execute_state(AGESA_STRUCT_NAME func);

@@ -206,8 +206,8 @@ static void mainboard_init(struct device *dev)
 static unsigned long mainboard_write_acpi_tables(
 	const struct device *device, unsigned long current, acpi_rsdp_t *rsdp)
 {
-	const char *oem_id = NULL;
-	const char *oem_table_id = NULL;
+	const char *oem_id = nullptr;
+	const char *oem_table_id = nullptr;
 	uint32_t oem_revision = 0;
 	uintptr_t start_addr;
 	uintptr_t end_addr;

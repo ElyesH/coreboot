@@ -118,7 +118,7 @@ struct resource res_mock[] = {
 	  .flags = IORESOURCE_CACHEABLE | IORESOURCE_MEM | IORESOURCE_ASSIGNED },
 	{ .base = CACHEABLE_START, .size = CACHEABLE_SIZE, .next = &res_mock[2],
 	  .flags = IORESOURCE_CACHEABLE | IORESOURCE_MEM | IORESOURCE_ASSIGNED },
-	{ .base = RESERVED_START, .size = RESERVED_SIZE, .next = NULL,
+	{ .base = RESERVED_START, .size = RESERVED_SIZE, .next = nullptr,
 	  .flags = IORESOURCE_RESERVE | IORESOURCE_MEM | IORESOURCE_ASSIGNED }
 };
 
@@ -126,7 +126,7 @@ struct resource res_mock[] = {
 struct device mem_device_mock = {
 	.enabled = 1,
 	.resource_list = res_mock,
-	.next = NULL
+	.next = nullptr
 };
 
 struct device *all_devices = &mem_device_mock;
@@ -245,11 +245,11 @@ static void test_bootmem_add_range(void **state)
 	init_memory_table_library();
 
 	os_bootmem_walk_cnt = 0;
-	bootmem_walk_os_mem(count_entries_os_bootmem_walk, NULL);
+	bootmem_walk_os_mem(count_entries_os_bootmem_walk, nullptr);
 	assert_int_equal(os_bootmem_walk_cnt, 4);
 
 	bootmem_walk_cnt = 0;
-	bootmem_walk(count_entries_bootmem_walk, NULL);
+	bootmem_walk(count_entries_bootmem_walk, nullptr);
 	assert_int_equal(bootmem_walk_cnt, 5);
 
 	expect_assert_failure(
@@ -259,11 +259,11 @@ static void test_bootmem_add_range(void **state)
 	);
 
 	os_bootmem_walk_cnt = 0;
-	bootmem_walk_os_mem(count_entries_os_bootmem_walk, NULL);
+	bootmem_walk_os_mem(count_entries_os_bootmem_walk, nullptr);
 	assert_int_equal(os_bootmem_walk_cnt, 4);
 
 	bootmem_walk_cnt = 0;
-	bootmem_walk(count_entries_bootmem_walk, NULL);
+	bootmem_walk(count_entries_bootmem_walk, nullptr);
 	assert_int_equal(bootmem_walk_cnt, 6);
 
 	/* Do not expect assert failure as BM_MEM_RAMSTAGE should not be added to os_bootmem */
@@ -272,12 +272,12 @@ static void test_bootmem_add_range(void **state)
 			  BM_MEM_RAMSTAGE);
 
 	os_bootmem_walk_cnt = 0;
-	bootmem_walk_os_mem(count_entries_os_bootmem_walk, NULL);
+	bootmem_walk_os_mem(count_entries_os_bootmem_walk, nullptr);
 	assert_int_equal(os_bootmem_walk_cnt, 4);
 
 	/* Two entries are added because added range is in middle of another */
 	bootmem_walk_cnt = 0;
-	bootmem_walk(count_entries_bootmem_walk, NULL);
+	bootmem_walk(count_entries_bootmem_walk, nullptr);
 	assert_int_equal(bootmem_walk_cnt, 8);
 }
 
@@ -286,11 +286,11 @@ static void test_bootmem_walk(void **state)
 	init_memory_table_library();
 
 	os_bootmem_walk_cnt = 0;
-	bootmem_walk_os_mem(verify_os_bootmem_walk, NULL);
+	bootmem_walk_os_mem(verify_os_bootmem_walk, nullptr);
 	assert_int_equal(os_bootmem_walk_cnt, 4);
 
 	bootmem_walk_cnt = 0;
-	bootmem_walk(verify_bootmem_walk, NULL);
+	bootmem_walk(verify_bootmem_walk, nullptr);
 	assert_int_equal(bootmem_walk_cnt, 5);
 }
 
@@ -382,7 +382,7 @@ static void test_bootmem_allocate_buffer(void **state)
 							0xE0000000, BM_MEM_PAYLOAD));
 	assert_in_range((uintptr_t)buf, CACHEABLE_START + RAMSTAGE_SIZE, RESERVED_START);
 	/* Check if allocated (payload) ranges have their base and size aligned */
-	bootmem_walk(verify_bootmem_allocate_buffer, NULL);
+	bootmem_walk(verify_bootmem_allocate_buffer, nullptr);
 
 	prev = buf;
 	buf = bootmem_allocate_buffer(0xF000000);
@@ -393,7 +393,7 @@ static void test_bootmem_allocate_buffer(void **state)
 	/* Check if newly allocated buffer does not overlap with previously allocated range */
 	assert_not_in_range((uintptr_t)buf, (uintptr_t)prev, (uintptr_t)prev + 0xE0000000);
 	/* Check if allocated (payload) ranges have their base and size aligned */
-	bootmem_walk(verify_bootmem_allocate_buffer, NULL);
+	bootmem_walk(verify_bootmem_allocate_buffer, nullptr);
 
 	/* Run out of memory for new allocations */
 	buf = bootmem_allocate_buffer(0x1000000);
@@ -410,5 +410,5 @@ int main(void)
 		cmocka_unit_test(test_bootmem_region_targets_type)
 	};
 
-	return cb_run_group_tests(tests, NULL, NULL);
+	return cb_run_group_tests(tests, nullptr, nullptr);
 }

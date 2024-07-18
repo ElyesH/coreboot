@@ -41,7 +41,7 @@ static void prepare_mrc_cache(struct pei_data *pei_data)
 	size_t mrc_size;
 
 	/* Preset just in case there is an error */
-	pei_data->mrc_input = NULL;
+	pei_data->mrc_input = nullptr;
 	pei_data->mrc_input_len = 0;
 
 	pei_data->mrc_input =
@@ -137,7 +137,7 @@ static void sdram_initialize(struct pei_data *pei_data)
 	 * in the flash and can therefore only reside in the COREBOOT fmap region. We don't care
 	 * about leaking the mapping.
 	 */
-	entry = cbfs_ro_map("mrc.bin", NULL);
+	entry = cbfs_ro_map("mrc.bin", nullptr);
 	if (entry) {
 		int rv = entry(pei_data);
 

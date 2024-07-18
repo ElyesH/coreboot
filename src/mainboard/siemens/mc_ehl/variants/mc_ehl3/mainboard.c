@@ -48,4 +48,4 @@ static void finalize_boot(void *unused)
 	gpio_output(GPP_F20, 1);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, finalize_boot, NULL);
+BOOT_STATE_INIT_ENTRY(BS_PAYLOAD_BOOT, BS_ON_ENTRY, finalize_boot, nullptr);

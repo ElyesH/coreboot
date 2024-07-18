@@ -66,10 +66,10 @@ const char *soc_acpi_name(const struct device *dev)
 			}
 			break;
 		}
-		return NULL;
+		return nullptr;
 	}
 	if (dev->path.type != DEVICE_PATH_PCI)
-		return NULL;
+		return nullptr;
 
 	switch (dev->path.pci.devfn) {
 	case SA_DEVFN_ROOT:		return "MCHC";
@@ -139,7 +139,7 @@ const char *soc_acpi_name(const struct device *dev)
 	case PCH_DEVFN_CSE:		return "HEC1";
 	}
 
-	return NULL;
+	return nullptr;
 }
 #endif
 

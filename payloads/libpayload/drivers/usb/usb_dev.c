@@ -46,8 +46,8 @@ usb_nop_poll(usbdev_t *dev)
 void
 usb_nop_init(usbdev_t *dev)
 {
-	dev->descriptor = NULL;
-	dev->configuration = NULL;
+	dev->descriptor = nullptr;
+	dev->configuration = nullptr;
 	dev->destroy = usb_nop_destroy;
 	dev->poll = usb_nop_poll;
 }

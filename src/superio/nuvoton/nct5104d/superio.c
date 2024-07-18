@@ -212,18 +212,18 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, NCT5104D_FDC,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, NCT5104D_SP1,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, NCT5104D_SP2,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, NCT5104D_SP3,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, NCT5104D_SP4,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
-	{ NULL, NCT5104D_GPIO_WDT},
-	{ NULL, NCT5104D_GPIO0},
-	{ NULL, NCT5104D_GPIO1},
-	{ NULL, NCT5104D_GPIO6},
-	{ NULL, NCT5104D_GPIO_PP_OD},
-	{ NULL, NCT5104D_GPIO_IO, PNP_IO0, 0x07f8, },
-	{ NULL, NCT5104D_PORT80},
+	{ nullptr, NCT5104D_FDC,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, NCT5104D_SP1,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, NCT5104D_SP2,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, NCT5104D_SP3,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, NCT5104D_SP4,  PNP_IO0 | PNP_IRQ0, 0x07f8, },
+	{ nullptr, NCT5104D_GPIO_WDT},
+	{ nullptr, NCT5104D_GPIO0},
+	{ nullptr, NCT5104D_GPIO1},
+	{ nullptr, NCT5104D_GPIO6},
+	{ nullptr, NCT5104D_GPIO_PP_OD},
+	{ nullptr, NCT5104D_GPIO_IO, PNP_IO0, 0x07f8, },
+	{ nullptr, NCT5104D_PORT80},
 };
 
 static void enable_dev(struct device *dev)

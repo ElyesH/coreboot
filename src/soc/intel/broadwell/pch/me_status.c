@@ -255,22 +255,22 @@ void intel_me_status(void)
 
 	case ME_HFS2_PHASE_BUP:		/* Bringup Phase */
 		if (ARRAY_TO_ELEMENT(me_progress_bup_values,
-					hfs2->current_state, NULL))
+					hfs2->current_state, nullptr))
 			printk(BIOS_DEBUG, "%s",
 			       ARRAY_TO_ELEMENT(me_progress_bup_values,
 						hfs2->current_state,
-						NULL));
+						nullptr));
 		else
 			printk(BIOS_DEBUG, "0x%02x", hfs2->current_state);
 		break;
 
 	case ME_HFS2_PHASE_POLICY:	/* Policy Module Phase */
 		if (ARRAY_TO_ELEMENT(me_progress_policy_values,
-					hfs2->current_state, NULL))
+					hfs2->current_state, nullptr))
 			printk(BIOS_DEBUG, "%s",
 			       ARRAY_TO_ELEMENT(me_progress_policy_values,
 						hfs2->current_state,
-						NULL));
+						nullptr));
 		else
 			printk(BIOS_DEBUG, "0x%02x", hfs2->current_state);
 		break;

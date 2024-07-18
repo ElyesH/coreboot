@@ -33,7 +33,7 @@ long atol(const char *str);
  * @param s The string.
  * @param c The character.
  * @return A pointer to the last occurrence of the character in the
- * string, or NULL if the character was not encountered within the string.
+ * string, or nullptr if the character was not encountered within the string.
  */
 char *strrchr(const char *s, int c);
 

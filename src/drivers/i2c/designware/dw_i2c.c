@@ -240,7 +240,7 @@ static const struct i2c_descriptor *get_bus_descriptor(enum i2c_speed speed)
 		if (speed == speed_descriptors[i].speed)
 			return &speed_descriptors[i];
 
-	return NULL;
+	return nullptr;
 }
 
 static const struct soc_clock *get_soc_descriptor(int ic_clk)
@@ -251,7 +251,7 @@ static const struct soc_clock *get_soc_descriptor(int ic_clk)
 		if (ic_clk == soc_clocks[i].clk_speed_mhz)
 			return &soc_clocks[i];
 
-	return NULL;
+	return nullptr;
 }
 
 static int counts_from_time(const struct freq *f, int ns)
@@ -554,12 +554,12 @@ static enum cb_err dw_i2c_gen_config_rise_fall_time(struct dw_i2c_regs *regs,
 	bus = get_bus_descriptor(speed);
 	soc = get_soc_descriptor(ic_clk);
 
-	if (bus == NULL) {
+	if (bus == nullptr) {
 		printk(BIOS_ERR, "dw_i2c: invalid bus speed %d\n", speed);
 		return CB_ERR;
 	}
 
-	if (soc == NULL) {
+	if (soc == nullptr) {
 		printk(BIOS_ERR, "dw_i2c: invalid SoC clock speed %d MHz\n",
 			ic_clk);
 		return CB_ERR;

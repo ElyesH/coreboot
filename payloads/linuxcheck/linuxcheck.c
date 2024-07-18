@@ -24,10 +24,10 @@ int main(void)
 	int ret, i;
 
 	buts("Greetings from linuxcheck, via hard-coded calls to serial functions.\n");
-	if (console_out == NULL)
-		buts("Bad news: console_out is NULL\n");
-	if (lib_sysinfo.serial == NULL)
-		buts("Bad news: lib_sysinfo.serial is NULL. Very little will work well.\n");
+	if (console_out == nullptr)
+		buts("Bad news: console_out is nullptr\n");
+	if (lib_sysinfo.serial == nullptr)
+		buts("Bad news: lib_sysinfo.serial is nullptr. Very little will work well.\n");
 	ret = lib_get_sysinfo();
 	if (ret) {
 		buts("lib_get_sysinfo() is non-zero");

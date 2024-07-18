@@ -93,7 +93,7 @@ void intel_txt_log_bios_acm_error(void)
  */
 void txt_dump_acm_info(const struct acm_header_v0 *acm_header)
 {
-	const struct acm_info_table *info = NULL;
+	const struct acm_info_table *info = nullptr;
 	if (!acm_header)
 		return;
 
@@ -190,7 +190,7 @@ void txt_dump_chipset_info(void)
 
 void txt_dump_regions(void)
 {
-	struct txt_biosdataregion *bdr = NULL;
+	struct txt_biosdataregion *bdr = nullptr;
 
 	uintptr_t tseg_base;
 	size_t tseg_size;

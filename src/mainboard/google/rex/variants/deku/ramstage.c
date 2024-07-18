@@ -36,7 +36,7 @@ void variant_devtree_update(void)
 	struct soc_intel_meteorlake_config *config = config_of_soc();
 
 	soc_config = variant_get_soc_power_limit_config();
-	if (soc_config == NULL)
+	if (soc_config == nullptr)
 		return;
 
 	if (config->psys_pl2_watts) {

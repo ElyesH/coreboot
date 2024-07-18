@@ -43,7 +43,7 @@ static ssize_t ata_read_unaligned(ata_dev_t *const dev,
 	size_t blk_residue;
 
 	u8 *const sec_buf = malloc(dev->sector_size);
-	if (sec_buf == NULL)
+	if (sec_buf == nullptr)
 		return -1;
 
 	const size_t shift = dev->sector_size_shift - 9;
@@ -107,7 +107,7 @@ static ssize_t ata_read512(storage_dev_t *_dev,
 {
 	ata_dev_t *const dev = (ata_dev_t *)_dev;
 
-	if (dev->read_sectors == NULL) {
+	if (dev->read_sectors == nullptr) {
 		printf("ata: No read support implemented.\n");
 		return -1;
 	}

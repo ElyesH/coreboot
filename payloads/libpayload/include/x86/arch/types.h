@@ -52,8 +52,8 @@ typedef signed long long s64;
 typedef long time_t;
 typedef long suseconds_t;
 
-#ifndef NULL
-#define NULL ((void *)0)
+#ifndef nullptr
+#define nullptr ((void *)0)
 #endif
 
 #endif

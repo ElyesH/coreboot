@@ -34,7 +34,7 @@ void variant_devtree_update(void)
 	u32 watts;
 
 	soc_config = variant_get_soc_power_limit_config();
-	if (soc_config == NULL)
+	if (soc_config == nullptr)
 		return;
 
 	/*

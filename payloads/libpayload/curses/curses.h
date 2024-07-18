@@ -953,8 +953,8 @@ extern NCURSES_EXPORT(int) getpary (const WINDOW *);			/* generated */
 #define wstandout(win)      	(wattrset(win,A_STANDOUT))
 #define wstandend(win)      	(wattrset(win,A_NORMAL))
 
-#define wattron(win,at)		wattr_on(win, NCURSES_CAST(attr_t, at), NULL)
-#define wattroff(win,at)	wattr_off(win, NCURSES_CAST(attr_t, at), NULL)
+#define wattron(win,at)		wattr_on(win, NCURSES_CAST(attr_t, at), nullptr)
+#define wattroff(win,at)	wattr_off(win, NCURSES_CAST(attr_t, at), nullptr)
 
 #if defined(_XOPEN_SOURCE_EXTENDED) && 0
 #define wattrset(win,at)	((win)->_color = PAIR_NUMBER(at), \

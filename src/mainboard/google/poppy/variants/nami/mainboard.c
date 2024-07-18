@@ -170,7 +170,7 @@ const char *smbios_mainboard_manufacturer(void)
 		oem_entry++;
 	}
 
-	if (manuf == NULL)
+	if (manuf == nullptr)
 		manuf = CONFIG_MAINBOARD_SMBIOS_MANUFACTURER;
 
 	return manuf;

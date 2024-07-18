@@ -90,7 +90,7 @@ static const struct spi_flash_part_id flash_table_pp256[] = {
 static int
 sst_enable_writing(const struct spi_flash *flash)
 {
-	int ret = spi_flash_cmd(&flash->spi, CMD_SST_WREN, NULL, 0);
+	int ret = spi_flash_cmd(&flash->spi, CMD_SST_WREN, nullptr, 0);
 	if (ret)
 		printk(BIOS_WARNING, "SF: Enabling Write failed\n");
 	return ret;
@@ -99,7 +99,7 @@ sst_enable_writing(const struct spi_flash *flash)
 static int
 sst_enable_writing_status(const struct spi_flash *flash)
 {
-	int ret = spi_flash_cmd(&flash->spi, CMD_SST_EWSR, NULL, 0);
+	int ret = spi_flash_cmd(&flash->spi, CMD_SST_EWSR, nullptr, 0);
 	if (ret)
 		printk(BIOS_WARNING, "SF: Enabling Write Status failed\n");
 	return ret;
@@ -108,7 +108,7 @@ sst_enable_writing_status(const struct spi_flash *flash)
 static int
 sst_disable_writing(const struct spi_flash *flash)
 {
-	int ret = spi_flash_cmd(&flash->spi, CMD_SST_WRDI, NULL, 0);
+	int ret = spi_flash_cmd(&flash->spi, CMD_SST_WRDI, nullptr, 0);
 	if (ret)
 		printk(BIOS_WARNING, "SF: Disabling Write failed\n");
 	return ret;

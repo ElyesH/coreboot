@@ -29,7 +29,7 @@
 #include <libpayload-config.h>
 #include <libpayload.h>
 
-void (*reset_handler)(void) = NULL;
+void (*reset_handler)(void) = nullptr;
 
 int add_reset_handler(void (*new_handler)(void))
 {

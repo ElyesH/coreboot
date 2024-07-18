@@ -30,7 +30,7 @@ static pei_wrapper_entry_t load_reference_code(void)
 
 	if (rmodule_stage_load(&refcode)) {
 		printk(BIOS_DEBUG, "Error loading reference code.\n");
-		return NULL;
+		return nullptr;
 	}
 
 	/* Cache loaded reference code. */
@@ -53,7 +53,7 @@ void broadwell_run_reference_code(void)
 	pei_data.saved_data = (void *)&dummy;
 
 	entry = load_reference_code();
-	if (entry == NULL) {
+	if (entry == nullptr) {
 		printk(BIOS_ERR, "Reference code not found\n");
 		return;
 	}

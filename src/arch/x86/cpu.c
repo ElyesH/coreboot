@@ -201,13 +201,13 @@ struct cpu_driver *find_cpu_driver(struct device *cpu)
 				return driver;
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 static void set_cpu_ops(struct device *cpu)
 {
 	struct cpu_driver *driver = find_cpu_driver(cpu);
-	cpu->ops = driver ? driver->ops : NULL;
+	cpu->ops = driver ? driver->ops : nullptr;
 }
 
 void cpu_initialize(void)

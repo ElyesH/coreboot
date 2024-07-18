@@ -18,7 +18,7 @@ void mainboard_suspend_resume(void)
 
 static void mainboard_init(struct device *dev)
 {
-	struct device *ethernet_dev = NULL;
+	struct device *ethernet_dev = nullptr;
 
 	/* Initialize the Embedded Controller */
 	stout_ec_init();
@@ -31,7 +31,7 @@ static void mainboard_init(struct device *dev)
 	ethernet_dev = dev_find_device(STOUT_NIC_VENDOR_ID,
 				       STOUT_NIC_DEVICE_ID, dev);
 
-	if (ethernet_dev != NULL)
+	if (ethernet_dev != nullptr)
 		pci_write_config8(ethernet_dev, 0x81, 0x01);
 }
 

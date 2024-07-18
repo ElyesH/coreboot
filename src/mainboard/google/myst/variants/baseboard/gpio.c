@@ -272,5 +272,5 @@ __weak void variant_tpm_gpio_table(const struct soc_amd_gpio **gpio, size_t *siz
 __weak void variant_override_gpio_table(const struct soc_amd_gpio **gpio, size_t *size)
 {
 	*size = 0;
-	*gpio = NULL;
+	*gpio = nullptr;
 }

@@ -19,4 +19,4 @@ static void fw_config_handle(void *unused)
 		write32(pad_conf_offset, pad_conf);
 	}
 }
-BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_ENABLE, BS_ON_ENTRY, fw_config_handle, nullptr);

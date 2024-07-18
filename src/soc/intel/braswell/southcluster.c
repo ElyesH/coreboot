@@ -99,7 +99,7 @@ static void write_pci_config_irqs(void)
 	uint8_t device_num = 0;
 	const struct soc_irq_route *ir = &global_soc_irq_route;
 
-	if (ir == NULL) {
+	if (ir == nullptr) {
 		printk(BIOS_WARNING, "Can't write PCI IRQ assignments "
 			"because 'global_braswell_irq_route' structure does not exist\n");
 		return;
@@ -122,9 +122,9 @@ static void write_pci_config_irqs(void)
 		 * Step 1: Get the INT_PIN and device structure to look for
 		 * in the pirq_data table defined in the mainboard directory.
 		 */
-		targ_dev = NULL;
+		targ_dev = nullptr;
 		new_int_pin = get_pci_irq_pins(irq_dev, &targ_dev);
-		if (targ_dev == NULL || new_int_pin < 1)
+		if (targ_dev == nullptr || new_int_pin < 1)
 			continue;
 
 		/* Get the original INT_PIN for record keeping */
@@ -568,4 +568,4 @@ static void finalize_chipset(void *unused)
 	}
 }
 
-BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, finalize_chipset, NULL);
+BOOT_STATE_INIT_ENTRY(BS_POST_DEVICE, BS_ON_EXIT, finalize_chipset, nullptr);

@@ -56,12 +56,12 @@ char *strchr(const char *s, int c)
 			return (char *)s;
 	} while (*s++);
 
-	return NULL;
+	return nullptr;
 }
 
 char *strrchr(const char *s, int c)
 {
-	char *p = NULL;
+	char *p = nullptr;
 
 	do {
 		if (*s == c)
@@ -162,7 +162,7 @@ char *strstr(const char *haystack, const char *needle)
 		if (!strncmp(haystack, needle, needle_len))
 			return (char *)haystack;
 	}
-	return NULL;
+	return nullptr;
 }
 
 char *strtok_r(char *str, const char *delim, char **ptr)
@@ -170,11 +170,11 @@ char *strtok_r(char *str, const char *delim, char **ptr)
 	char *start;
 	char *end;
 
-	if (str == NULL)
+	if (str == nullptr)
 		str = *ptr;
 	start = str + strspn(str, delim);
 	if (start[0] == '\0')
-		return NULL;
+		return nullptr;
 
 	end = start + strcspn(start, delim);
 	*ptr = end;

@@ -86,7 +86,7 @@ set_current_item(MENU * menu, ITEM * item)
 |
 |   Description   :  Return the menus current item
 |
-|   Return Values :  Item pointer or NULL if failure
+|   Return Values :  Item pointer or nullptr if failure
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(ITEM *)
 current_item(const MENU * menu)

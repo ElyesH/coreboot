@@ -110,7 +110,7 @@ static void lpe_stash_firmware_info(struct device *dev)
 	struct resource *mmio;
 
 	res = probe_resource(dev, FIRMWARE_PCI_REG_BASE);
-	if (res == NULL) {
+	if (res == nullptr) {
 		printk(BIOS_DEBUG, "LPE Firmware memory not found.\n");
 		return;
 	}
@@ -163,7 +163,7 @@ static void lpe_set_resources(struct device *dev)
 	struct resource *res;
 
 	res = probe_resource(dev, PCI_BASE_ADDRESS_2);
-	if (res != NULL)
+	if (res != nullptr)
 		res->flags |= IORESOURCE_STORED;
 
 	pci_dev_set_resources(dev);

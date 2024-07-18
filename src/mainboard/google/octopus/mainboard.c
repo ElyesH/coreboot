@@ -63,14 +63,14 @@ static void gpio_modification_by_ssfc(struct pad_config *table, size_t num)
 			NONE, DEEP, EDGE_BOTH, INVERT, HIZCRx1, DISPUPD);
 	enum ssfc_audio_codec codec = ssfc_get_audio_codec();
 
-	if (table == NULL || num == 0)
+	if (table == nullptr || num == 0)
 		return;
 
 	/*
 	 * Currently we only have the case of RT5682 as the second source. And
 	 * in case of Ampton which used RT5682 as the default source, it didn't
 	 * provide override_table right now so it will be returned earlier since
-	 * table above is NULL.
+	 * table above is nullptr.
 	 */
 	if ((codec != SSFC_AUDIO_CODEC_RT5682) &&
 		(codec != SSFC_AUDIO_CODEC_RT5682_VS))
@@ -123,7 +123,7 @@ static unsigned long mainboard_write_acpi_tables(
 
 	nhlt = nhlt_init();
 
-	if (nhlt == NULL)
+	if (nhlt == nullptr)
 		return start_addr;
 
 	variant_nhlt_init(nhlt);
@@ -177,13 +177,13 @@ static void wifi_device_update(void)
  */
 static void audio_codec_device_update(void)
 {
-	struct device *audio_dev = NULL;
+	struct device *audio_dev = nullptr;
 	struct bus *audio_i2c_bus =
 		pcidev_path_on_root(PCH_DEVFN_I2C5)->downstream;
 	enum ssfc_audio_codec codec = ssfc_get_audio_codec();
 
 	while ((audio_dev = dev_bus_each_child(audio_i2c_bus, audio_dev))) {
-		if (audio_dev->chip_info == NULL)
+		if (audio_dev->chip_info == nullptr)
 			continue;
 
 		if ((audio_dev->chip_ops == &drivers_i2c_da7219_ops) &&
@@ -196,20 +196,20 @@ static void audio_codec_device_update(void)
 			struct drivers_i2c_generic_config *cfg =
 				audio_dev->chip_info;
 
-			if ((cfg != NULL && !strcmp(cfg->hid, "10EC5682")) &&
+			if ((cfg != nullptr && !strcmp(cfg->hid, "10EC5682")) &&
 				(codec == SSFC_AUDIO_CODEC_RT5682)) {
 				printk(BIOS_INFO, "enable RT5682 VD.\n");
 				continue;
 			}
 
-			if ((cfg != NULL && !strcmp(cfg->hid, "10EC5682")) &&
+			if ((cfg != nullptr && !strcmp(cfg->hid, "10EC5682")) &&
 				(codec == SSFC_AUDIO_CODEC_RT5682_VS)) {
 				cfg->hid = "RTL5682";
 				printk(BIOS_INFO, "enable RT5682 VS.\n");
 				continue;
 			}
 
-			if ((cfg != NULL && !strcmp(cfg->hid, "RTL5682")) &&
+			if ((cfg != nullptr && !strcmp(cfg->hid, "RTL5682")) &&
 				(codec == SSFC_AUDIO_CODEC_RT5682_VS)) {
 				printk(BIOS_INFO, "enable RT5682 VS.\n");
 				continue;
@@ -248,4 +248,4 @@ static void disable_unused_devices(void *unused)
 	usb_xhci_disable_unused(variant_ext_usb_status);
 }
 
-BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, disable_unused_devices, NULL);
+BOOT_STATE_INIT_ENTRY(BS_DEV_INIT, BS_ON_EXIT, disable_unused_devices, nullptr);

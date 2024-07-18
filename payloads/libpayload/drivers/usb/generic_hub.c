@@ -257,7 +257,7 @@ generic_hub_init(usbdev_t *const dev, const int num_ports,
 	if (!hub->ports) {
 		usb_debug("generic_hub: ERROR: Out of memory\n");
 		free(dev->data);
-		dev->data = NULL;
+		dev->data = nullptr;
 		return -1;
 	}
 	for (port = 1; port <= num_ports; ++port)

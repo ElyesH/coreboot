@@ -70,7 +70,7 @@ static inline int vboot_can_enable_udc(void) { return 1; }
 static inline void vboot_run_logic(void) {}
 static inline const struct cbfs_boot_device *vboot_get_cbfs_boot_device(void)
 {
-	return NULL;
+	return nullptr;
 }
 #endif
 

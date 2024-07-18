@@ -25,7 +25,7 @@ static void max98390_fill_ssdt(const struct device *dev)
 		.speed = I2C_SPEED_FAST,
 		.resource = scope,
 	};
-	struct acpi_dp *dp = NULL;
+	struct acpi_dp *dp = nullptr;
 	uint64_t r0_value, temp_value;
 	char dsm_name[80] = {};
 

@@ -380,14 +380,14 @@ const struct pad_config * __weak
 	variant_sku_gpio_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 const struct pad_config * __weak
 	variant_romstage_sku_gpio_table(size_t *num)
 {
 	*num = 0;
-	return NULL;
+	return nullptr;
 }
 
 static const struct cros_gpio cros_gpios[] = {

@@ -15,7 +15,7 @@ unsigned long southbridge_write_acpi_tables(const struct device *device,
 
 	if (CONFIG(AMD_SOC_CONSOLE_UART))
 		current = acpi_16550_mmio32_write_dbg2_uart(rsdp, current,
-			uart_platform_base(get_uart_for_console()), NULL);
+			uart_platform_base(get_uart_for_console()), nullptr);
 
 	return current;
 }

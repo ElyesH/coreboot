@@ -15,7 +15,7 @@ asmlinkage void chipset_teardown_car_main(void)
 	 * Init CBMEM before loading fsp, to have buffer available */
 	cbmem_initialize();
 
-	void *fsp = cbfs_map("fsp.bin", NULL);
+	void *fsp = cbfs_map("fsp.bin", nullptr);
 	if (!fsp) {
 		die("Unable to locate fsp.bin\n");
 	} else {
@@ -32,7 +32,7 @@ asmlinkage void chipset_teardown_car_main(void)
 	temp_ram_exit = (FSP_TEMP_RAM_EXIT)(fih->TempRamExitEntryOffset +
 						fih->ImageBase);
 	printk(BIOS_DEBUG, "Calling TempRamExit: %p\n", temp_ram_exit);
-	status = temp_ram_exit(NULL);
+	status = temp_ram_exit(nullptr);
 
 	if (status != FSP_SUCCESS) {
 		printk(BIOS_CRIT, "TempRamExit returned 0x%08x\n", status);

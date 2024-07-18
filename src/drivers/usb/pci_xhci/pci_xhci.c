@@ -75,7 +75,7 @@ static const struct device *get_xhci_dev(const struct device *dev)
 {
 	while (dev && dev->ops != &xhci_pci_ops) {
 		if (is_root_device(dev))
-			return NULL;
+			return nullptr;
 
 		dev = dev->upstream->dev;
 	}
@@ -107,7 +107,7 @@ static const char *xhci_acpi_name(const struct device *dev)
 		default:
 			printk(BIOS_INFO, "%s: Unknown USB Version: %#x\n", __func__,
 			       dev->path.usb.port_type);
-			return NULL;
+			return nullptr;
 		}
 
 		xhci_dev = get_xhci_dev(dev);
@@ -127,7 +127,7 @@ static const char *xhci_acpi_name(const struct device *dev)
 			/* dev_path uses a static buffer :( */
 			printk(BIOS_WARNING, "%s\n", dev_path(xhci_dev));
 
-			return NULL;
+			return nullptr;
 		}
 
 		name = malloc(ACPI_NAME_BUFFER_SIZE);
@@ -141,7 +141,7 @@ static const char *xhci_acpi_name(const struct device *dev)
 
 	printk(BIOS_ERR, "%s: Unknown device %s\n", __func__, dev_path(dev));
 
-	return NULL;
+	return nullptr;
 }
 
 static void xhci_generate_port_acpi(void *context, const struct xhci_supported_protocol *data)

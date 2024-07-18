@@ -83,7 +83,7 @@ static void i2c_sx9310_fill_ssdt(const struct device *dev)
 		for (int i = 0;
 				i < config->combined_sensors_count &&
 				i < MAX_COMBINED_SENSORS_ENTRIES; ++i) {
-			acpi_dp_add_integer(combined_sensors, NULL,
+			acpi_dp_add_integer(combined_sensors, nullptr,
 					    config->combined_sensors[i]);
 		}
 		acpi_dp_add_array(dsd, combined_sensors);

@@ -12,7 +12,7 @@ int ipmi_get_device_id(const struct device *dev, struct ipmi_devid_rsp *rsp)
 	int ret;
 
 	ret = ipmi_message(dev->path.pnp.port, IPMI_NETFN_APPLICATION, 0,
-			   IPMI_BMC_GET_DEVICE_ID, NULL, 0, (u8 *)rsp,
+			   IPMI_BMC_GET_DEVICE_ID, nullptr, 0, (u8 *)rsp,
 			   sizeof(*rsp));
 	if (ret < sizeof(struct ipmi_rsp) || rsp->resp.completion_code) {
 		printk(BIOS_ERR, "IPMI: %s command failed (ret=%d resp=0x%x)\n",
@@ -32,7 +32,7 @@ static int ipmi_get_bmc_self_test_result(const struct device *dev,
 	int ret;
 
 	ret = ipmi_message(dev->path.pnp.port, IPMI_NETFN_APPLICATION, 0,
-			   IPMI_BMC_GET_SELFTEST_RESULTS, NULL, 0, (u8 *)rsp,
+			   IPMI_BMC_GET_SELFTEST_RESULTS, nullptr, 0, (u8 *)rsp,
 			   sizeof(*rsp));
 
 	if (ret < sizeof(struct ipmi_rsp) || rsp->resp.completion_code) {

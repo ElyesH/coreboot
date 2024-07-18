@@ -345,7 +345,7 @@ msm_boot_uart_dm_read(unsigned int *data, int *count)
 
 	base = uart_board_param.uart_dm_base;
 
-	if (data == NULL)
+	if (data == nullptr)
 		return MSM_BOOT_UART_DM_E_INVAL;
 
 	status_reg = read32(MSM_BOOT_UART_DM_MISR(base));

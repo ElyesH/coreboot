@@ -114,7 +114,7 @@ static void soundwire_alc1308_fill_ssdt(const struct device *dev)
 	acpigen_write_STA(acpi_device_status(dev));
 
 	dsd = acpi_dp_new_table("_DSD");
-	soundwire_gen_codec(dsd, &alc1308_codec, NULL);
+	soundwire_gen_codec(dsd, &alc1308_codec, nullptr);
 	acpi_dp_write(dsd);
 
 	acpigen_pop_len(); /* Device */

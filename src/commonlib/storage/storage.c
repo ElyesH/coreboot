@@ -154,7 +154,7 @@ int storage_startup(struct storage_media *media)
 	cmd.resp_type = CARD_RSP_R1;
 	cmd.cmdarg = media->rca << 16;
 	cmd.flags = 0;
-	err = ctrlr->send_cmd(ctrlr, &cmd, NULL);
+	err = ctrlr->send_cmd(ctrlr, &cmd, nullptr);
 	if (err)
 		return err;
 
@@ -232,7 +232,7 @@ static int storage_read(struct storage_media *media, void *dest, uint32_t start,
 		cmd.cmdarg = 0;
 		cmd.resp_type = CARD_RSP_R1b;
 		cmd.flags = CMD_FLAG_IGNORE_INHIBIT;
-		if (ctrlr->send_cmd(ctrlr, &cmd, NULL)) {
+		if (ctrlr->send_cmd(ctrlr, &cmd, nullptr)) {
 			sd_mmc_error("Failed to send stop cmd\n");
 			return 0;
 		}
@@ -328,7 +328,7 @@ const char *storage_partition_name(struct storage_media *media,
 	const char *name;
 
 	/* Get the partition name */
-	name = NULL;
+	name = nullptr;
 	if (CONFIG(COMMONLIB_STORAGE_SD) && IS_SD(media))
 		name = sd_partition_name(media, partition_number);
 	else if (CONFIG(COMMONLIB_STORAGE_MMC))

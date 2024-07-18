@@ -484,7 +484,7 @@ int PDC_mouse_set(void)
     if (mbe && !mouse_handle)
     {
         memset(&old_mouse_status, 0, sizeof(MOUSE_STATUS));
-        MouOpen(NULL, &mouse_handle);
+        MouOpen(nullptr, &mouse_handle);
         if (mouse_handle)
             MouDrawPtr(mouse_handle);
     }

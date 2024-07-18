@@ -39,7 +39,7 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, 0, 0, 0, }
+	{ nullptr, 0, 0, 0, }
 };
 
 static void enable_dev(struct device *dev)

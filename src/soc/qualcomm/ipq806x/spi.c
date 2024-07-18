@@ -502,7 +502,7 @@ static struct ipq_spi_slave *to_ipq_spi(const struct spi_slave *slave)
 			return ds;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /*
@@ -741,7 +741,7 @@ out:
 
 static int spi_ctrlr_setup(const struct spi_slave *slave)
 {
-	struct ipq_spi_slave *ds = NULL;
+	struct ipq_spi_slave *ds = nullptr;
 	int i;
 	int bus = slave->bus;
 	int cs = slave->cs;

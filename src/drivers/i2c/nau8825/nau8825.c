@@ -26,7 +26,7 @@ static void nau8825_fill_ssdt(const struct device *dev)
 		.speed = config->bus_speed ? : I2C_SPEED_FAST,
 		.resource = scope,
 	};
-	struct acpi_dp *dp = NULL;
+	struct acpi_dp *dp = nullptr;
 
 	if (!scope)
 		return;

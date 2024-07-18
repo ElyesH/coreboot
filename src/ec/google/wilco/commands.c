@@ -125,14 +125,14 @@ int wilco_ec_get_lid_state(void)
 int wilco_ec_get_board_id(uint8_t *id)
 {
 	return wilco_ec_mailbox(WILCO_EC_MSG_RAW, KB_BOARD_ID,
-				NULL, 0, id, sizeof(*id));
+				nullptr, 0, id, sizeof(*id));
 }
 
 void wilco_ec_slp_en(void)
 {
 	/* EC does not respond to this command */
 	if (wilco_ec_mailbox(WILCO_EC_MSG_NO_RESPONSE,
-			     KB_SLP_EN, NULL, 0, NULL, 0) < 0)
+			     KB_SLP_EN, nullptr, 0, nullptr, 0) < 0)
 		printk(BIOS_ERR, "%s: command failed\n", __func__);
 }
 
@@ -140,7 +140,7 @@ void wilco_ec_power_off(enum ec_power_off_reason reason)
 {
 	/* EC does not respond to this command */
 	if (wilco_ec_mailbox(WILCO_EC_MSG_NO_RESPONSE,
-			     KB_POWER_OFF, &reason, 1, NULL, 0) < 0)
+			     KB_POWER_OFF, &reason, 1, nullptr, 0) < 0)
 		printk(BIOS_ERR, "%s: command failed\n", __func__);
 }
 
@@ -150,7 +150,7 @@ int wilco_ec_radio_control(enum ec_radio radio, uint8_t state)
 
 	return wilco_ec_mailbox(WILCO_EC_MSG_DEFAULT, KB_RADIO_CONTROL,
 				radio_control, ARRAY_SIZE(radio_control),
-				NULL, 0);
+				nullptr, 0);
 }
 
 int wilco_ec_change_wake(uint8_t source, enum ec_wake_change change)
@@ -159,7 +159,7 @@ int wilco_ec_change_wake(uint8_t source, enum ec_wake_change change)
 
 	return wilco_ec_mailbox(WILCO_EC_MSG_DEFAULT, KB_ACPI_WAKEUP_CHANGE,
 				wake_source, ARRAY_SIZE(wake_source),
-				NULL, 0);
+				nullptr, 0);
 }
 
 int wilco_ec_signed_fw(void)
@@ -209,7 +209,7 @@ void die_notify(void)
 	       wilco_ec_saved_post_code, err_code);
 
 	wilco_ec_mailbox(WILCO_EC_MSG_DEFAULT, KB_ERR_CODE,
-			 &err_code, 1, NULL, 0);
+			 &err_code, 1, nullptr, 0);
 }
 
 /*
@@ -235,5 +235,5 @@ int wilco_ec_set_cpuid(uint32_t cpuid, uint8_t cpu_cores, uint8_t gpu_cores)
 	cpu_id[5] = gpu_cores;
 
 	return wilco_ec_mailbox(WILCO_EC_MSG_DEFAULT, KB_CPU_ID, cpu_id,
-				ARRAY_SIZE(cpu_id), NULL, 0);
+				ARRAY_SIZE(cpu_id), nullptr, 0);
 }

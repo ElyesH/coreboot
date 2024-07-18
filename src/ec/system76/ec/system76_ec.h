@@ -8,8 +8,8 @@
 
 /*
  * Send a command to the EC.  request_data/request_size are the request payload,
- * request_data can be NULL if request_size is 0.  reply_data/reply_size are
- * the reply payload, reply_data can be NULL if reply_size is 0.
+ * request_data can be nullptr if request_size is 0.  reply_data/reply_size are
+ * the reply payload, reply_data can be nullptr if reply_size is 0.
  */
 bool system76_ec_cmd(uint8_t cmd, const uint8_t *request_data,
 	uint8_t request_size, uint8_t *reply_data, uint8_t reply_size);

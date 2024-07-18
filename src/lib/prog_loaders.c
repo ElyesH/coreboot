@@ -62,7 +62,7 @@ static void run_ramstage_from_resume(struct prog *ramstage)
 	ramstage->cbfs_type = CBFS_TYPE_STAGE;
 	prog_set_arg(ramstage, (void *)cbmem_top());
 
-	if (prog_entry(ramstage) != NULL) {
+	if (prog_entry(ramstage) != nullptr) {
 		printk(BIOS_DEBUG, "Jumping to image.\n");
 		prog_run(ramstage);
 	}
@@ -158,7 +158,7 @@ void payload_load(void)
 		goto out;
 
 	payload->cbfs_type = CBFS_TYPE_QUERY;
-	mapping = cbfs_type_map(prog_name(payload), NULL, &payload->cbfs_type);
+	mapping = cbfs_type_map(prog_name(payload), nullptr, &payload->cbfs_type);
 
 	if (!mapping)
 		goto out;
@@ -181,7 +181,7 @@ void payload_load(void)
 
 	cbfs_unmap(mapping);
 out:
-	if (prog_entry(payload) == NULL)
+	if (prog_entry(payload) == nullptr)
 		die_with_post_code(POSTCODE_INVALID_ROM, "Payload not loaded.\n");
 }
 

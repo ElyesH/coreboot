@@ -46,7 +46,7 @@ MODULE_ID("$Id: fld_ftlink.c,v 1.14 2010/01/23 21:14:35 tom Exp $")
 |                       E_BAD_ARGUMENT  - invalid arguments
 |                       E_SYSTEM_ERROR  - system error (no memory)
 |
-|   Return Values :  Fieldtype pointer or NULL if error occurred.
+|   Return Values :  Fieldtype pointer or nullptr if error occurred.
 +--------------------------------------------------------------------------*/
 NCURSES_EXPORT(FIELDTYPE *)
 link_fieldtype(FIELDTYPE *type1, FIELDTYPE *type2)

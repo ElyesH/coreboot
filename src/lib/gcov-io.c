@@ -217,7 +217,7 @@ gcov_write_block(unsigned int size)
 }
 
 /* Allocate space to write BYTES bytes to the gcov file. Return a
-   pointer to those bytes, or NULL on failure.  */
+   pointer to those bytes, or nullptr on failure.  */
 
 static gcov_unsigned_t *
 gcov_write_words(unsigned int words)
@@ -372,7 +372,7 @@ gcov_write_summary(gcov_unsigned_t tag, const struct gcov_summary *summary)
 #endif /*!IN_GCOV */
 
 /* Return a pointer to read BYTES bytes from the gcov file. Returns
-   NULL on failure (read past EOF).  */
+   nullptr on failure (read past EOF).  */
 
 static const gcov_unsigned_t *
 gcov_read_words(unsigned int words)
@@ -453,7 +453,7 @@ gcov_read_counter(void)
 }
 
 /* Read string from coverage file. Returns a pointer to a static
-   buffer, or NULL on empty string. You must copy the string before
+   buffer, or nullptr on empty string. You must copy the string before
    calling another gcov function.  */
 
 #if !IN_LIBGCOV

@@ -89,7 +89,7 @@ static inline void set_color_trans(struct color_transformation *trans,
 int set_color_map(const struct rgb_color *background,
 		  const struct rgb_color *foreground)
 {
-	if (background == NULL || foreground == NULL)
+	if (background == nullptr || foreground == nullptr)
 		return CBGFX_ERROR_INVALID_PARAMETER;
 
 	set_color_trans(&color_map.red, background->red, foreground->red);
@@ -115,7 +115,7 @@ static struct blend_value blend;
 
 int set_blend(const struct rgb_color *rgb, uint8_t alpha)
 {
-	if (rgb == NULL)
+	if (rgb == nullptr)
 		return CBGFX_ERROR_INVALID_PARAMETER;
 
 	blend.alpha = alpha;
@@ -1293,5 +1293,5 @@ int flush_graphics_buffer(void)
 void disable_graphics_buffer(void)
 {
 	free(gfx_buffer);
-	gfx_buffer = NULL;
+	gfx_buffer = nullptr;
 }

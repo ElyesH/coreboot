@@ -346,7 +346,7 @@ static void msdc_set_clock(struct msdc_ctrlr *host, u32 clock)
 
 	clrsetbits_le32(host->base + MSDC_CFG, (0x3 << mode_shift) | (div_mask << 8),
 			(mode << mode_shift) | (div << 8));
-	if (msdc_wait_done(host->base + MSDC_CFG, MSDC_CFG_CKSTB, NULL) != MSDC_SUCCESS)
+	if (msdc_wait_done(host->base + MSDC_CFG, MSDC_CFG_CKSTB, nullptr) != MSDC_SUCCESS)
 		msdc_error("Failed while wait clock stable!\n");
 
 	ctrlr->bus_hz = sclk;

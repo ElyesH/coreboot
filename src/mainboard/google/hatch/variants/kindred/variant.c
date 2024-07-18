@@ -19,14 +19,14 @@ void variant_devtree_update(void)
 	/* SKU ID 1/3/23/24 doesn't have a eMMC device, hence disable it. */
 	sku_id = google_chromeec_get_board_sku();
 	if (sku_id == 1 || sku_id == 3 || sku_id == 23 || sku_id == 24) {
-		if (emmc_host == NULL)
+		if (emmc_host == nullptr)
 			return;
 		emmc_host->enabled = 0;
 		cfg->ScsEmmcHs400Enabled = 0;
 	}
 	/* SKU ID 2/4/21/22 doesn't have a SSD device, hence disable it. */
 	if (sku_id == 2 || sku_id == 4 || sku_id == 21 || sku_id == 22) {
-		if (ssd_host == NULL)
+		if (ssd_host == nullptr)
 			return;
 		ssd_host->enabled = 0;
 		cfg->SataSalpSupport = 0;

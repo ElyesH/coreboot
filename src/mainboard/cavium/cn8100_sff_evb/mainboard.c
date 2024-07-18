@@ -75,7 +75,7 @@ static void mainboard_init(struct device *dev)
 
 	/* Init CPUs */
 	for (i = 1; i < CONFIG_MAX_CPUS; i++)
-		start_cpu(i, NULL);
+		start_cpu(i, nullptr);
 }
 
 static void mainboard_enable(struct device *dev)

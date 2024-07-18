@@ -286,15 +286,15 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, SCH5545_LDN_EMI, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1, 0x0ff0 },
-	{ NULL, SCH5545_LDN_KBC, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1 | PNP_MSC0 | PNP_MSC1, 0x0fff },
-	{ NULL, SCH5545_LDN_UART1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8 },
-	{ NULL, SCH5545_LDN_UART2, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8 },
-	{ NULL, SCH5545_LDN_RR, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1 | PNP_MSC0, 0x0fc0 },
-	{ NULL, SCH5545_LDN_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0 | PNP_MSC0 | PNP_MSC1 |
+	{ nullptr, SCH5545_LDN_EMI, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1, 0x0ff0 },
+	{ nullptr, SCH5545_LDN_KBC, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1 | PNP_MSC0 | PNP_MSC1, 0x0fff },
+	{ nullptr, SCH5545_LDN_UART1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8 },
+	{ nullptr, SCH5545_LDN_UART2, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8 },
+	{ nullptr, SCH5545_LDN_RR, PNP_IO0 | PNP_IRQ0 | PNP_IRQ1 | PNP_MSC0, 0x0fc0 },
+	{ nullptr, SCH5545_LDN_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0 | PNP_MSC0 | PNP_MSC1 |
 				 PNP_MSC2 | PNP_MSC3 | PNP_MSC4 | PNP_MSC5, 0x0ff8, },
-	{ NULL, SCH5545_LDN_LPC, PNP_IO0, 0x0ffe },
-	{ NULL, SCH5545_LDN_PP, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0 | PNP_MSC0 | PNP_MSC1, 0x0ff8 },
+	{ nullptr, SCH5545_LDN_LPC, PNP_IO0, 0x0ffe },
+	{ nullptr, SCH5545_LDN_PP, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0 | PNP_MSC0 | PNP_MSC1, 0x0ff8 },
 };
 
 static void enable_dev(struct device *dev)

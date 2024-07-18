@@ -379,7 +379,7 @@ void pnp_enable_devices(struct device *base_dev, struct device_operations *ops,
 			continue;
 
 		/* use LDN-specific ops override from corresponding pnp_info
-		   entry if not NULL */
+		   entry if not nullptr */
 		if (info[i].ops)
 			dev->ops = info[i].ops;
 		/* else use device ops  */

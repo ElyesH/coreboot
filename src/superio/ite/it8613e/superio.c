@@ -43,18 +43,18 @@ static struct device_operations ops = {
 
 static struct pnp_info pnp_dev_info[] = {
 	/* Serial Port 1 */
-	{ NULL, IT8613E_SP1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
+	{ nullptr, IT8613E_SP1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
 	/* Environmental Controller */
-	{ NULL, IT8613E_EC, PNP_IO0 | PNP_IO1 | PNP_IRQ0, 0x0ff8, 0x0ff8, },
+	{ nullptr, IT8613E_EC, PNP_IO0 | PNP_IO1 | PNP_IRQ0, 0x0ff8, 0x0ff8, },
 	/* KBC Keyboard */
-	{ NULL, IT8613E_KBCK, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0,
+	{ nullptr, IT8613E_KBCK, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_MSC0,
 		0x0fff, 0x0fff, },
 	/* KBC Mouse */
-	{ NULL, IT8613E_KBCM, PNP_IRQ0 | PNP_MSC0, },
+	{ nullptr, IT8613E_KBCM, PNP_IRQ0 | PNP_MSC0, },
 	/* GPIO */
-	{ NULL, IT8613E_GPIO, PNP_IO0 | PNP_IO1 | PNP_IRQ0, 0x0ffc, 0x0ff8, },
+	{ nullptr, IT8613E_GPIO, PNP_IO0 | PNP_IO1 | PNP_IRQ0, 0x0ffc, 0x0ff8, },
 	/* Consumer Infrared */
-	{ NULL, IT8613E_CIR, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
+	{ nullptr, IT8613E_CIR, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
 };
 
 static void enable_dev(struct device *dev)

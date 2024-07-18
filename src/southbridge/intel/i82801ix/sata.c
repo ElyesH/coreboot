@@ -145,7 +145,7 @@ static void sata_init(struct device *const dev)
 
 	printk(BIOS_DEBUG, "i82801ix_sata: initializing...\n");
 
-	if (config == NULL) {
+	if (config == nullptr) {
 		printk(BIOS_ERR, "i82801ix_sata: error: "
 				 "device not in devicetree.cb!\n");
 		return;

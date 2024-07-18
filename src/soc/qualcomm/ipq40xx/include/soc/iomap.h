@@ -108,7 +108,7 @@ static inline void *blsp_qup_base(blsp_qup_id_t id)
 	case BLSP_QUP_ID_2: return BLSP1_QUP2_BASE;
 	case BLSP_QUP_ID_3: return BLSP1_QUP3_BASE;
 	}
-	return NULL;
+	return nullptr;
 }
 
 #define BLSP_MINI_CORE_SHIFT		8

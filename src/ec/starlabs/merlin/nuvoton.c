@@ -271,24 +271,24 @@ static struct device_operations ops = {
 
 static struct pnp_info pnp_dev_info[] = {
 	/* System Wake-Up Control (SWUC) */
-	{ NULL,	NUVOTON_MSWC,	PNP_IO0 | PNP_IRQ0,		0xfff0,		},
+	{ nullptr,	NUVOTON_MSWC,	PNP_IO0 | PNP_IRQ0,		0xfff0,		},
 	/* KBC / Mouse Interface */
-	{ NULL, NUVOTON_KBCM,	PNP_IRQ0,					},
+	{ nullptr, NUVOTON_KBCM,	PNP_IRQ0,					},
 	/* KBC / Keyboard Interface */
-	{ NULL, NUVOTON_KBCK,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, NUVOTON_KBCK,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 	/* Shared Memory / Flash Interface (SMFI) */
-	{ NULL, NUVOTON_SHM,	PNP_IO0 | PNP_IRQ0,		0xfff0,		},
+	{ nullptr, NUVOTON_SHM,	PNP_IO0 | PNP_IRQ0,		0xfff0,		},
 	/* Power Management I/F Channel 1 (PMC1) */
-	{ NULL, NUVOTON_PM1,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, NUVOTON_PM1,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 	/* Power Management I/F Channel 2 (PMC2) */
-	{ NULL, NUVOTON_PM2,	PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IRQ0,	0x07fc,
+	{ nullptr, NUVOTON_PM2,	PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IRQ0,	0x07fc,
 				0x07fc, 0xfff0,					},
 	/* Power Management I/F Channel 3 (PMC3) */
-	{ NULL, NUVOTON_PM3,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, NUVOTON_PM3,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 	/* Extended Shared Memory (ESHM) */
-	{ NULL, NUVOTON_ESHM							},
+	{ nullptr, NUVOTON_ESHM							},
 	/* Power Management I/F Channel 4 (PMC4) */
-	{ NULL, NUVOTON_PM4,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
+	{ nullptr, NUVOTON_PM4,	PNP_IO0 | PNP_IO1 | PNP_IRQ0,	0x07ff,	0x07ff,	},
 };
 
 static void enable_dev(struct device *dev)

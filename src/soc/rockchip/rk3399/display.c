@@ -37,7 +37,7 @@ void rk_display_init(struct device *dev)
 	struct edid edid;
 	struct soc_rockchip_rk3399_config *conf = dev->chip_info;
 	enum vop_modes detected_mode = VOP_MODE_UNKNOWN;
-	const struct mipi_panel_data *panel_data = NULL;
+	const struct mipi_panel_data *panel_data = nullptr;
 	int retry_count_init = 0;
 	int retry_count_edp_prepare = 0;
 
