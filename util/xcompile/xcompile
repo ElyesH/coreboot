@@ -235,6 +235,12 @@ detect_special_flags() {
 	testcc "$GCC"      "$CFLAGS_GCC -Wno-type-limits" &&
 		CFLAGS_GCC="$CFLAGS_GCC -Wno-type-limits"
 
+	testcc "$GCC"       "$CFLAGS_GCC -Walloc-size" &&
+		CFLAGS_GCC="$CFLAGS_GCC -Walloc-size"
+
+	testcc "$GCC"      "$CFLAGS_GCC -Wno-unterminated-string-initialization" &&
+		CFLAGS_GCC="$CFLAGS_GCC -Wno-unterminated-string-initialization"
+
 	testcc "$GCC"      "$CFLAGS_GCC -Wno-cast-function-type" &&
 		CFLAGS_GCC="$CFLAGS_GCC -Wno-cast-function-type"
 

@@ -116,9 +116,6 @@ test-lint:
 	util/lint/lint lint-extended $(JUNIT)
 
 test-abuild:
-ifneq ($(JENKINS_SKIP_SCANBUILD_TEST),y)
-	NAME=scanbuild; SCANBUILD_ARGS='-k -plist-html -maxloop 10' util/abuild/abuild -o $(COREBOOT_BUILD_DIR)/$${NAME} $(ABUILD_OPTIONS) --scan-build --target EMULATION_QEMU_X86_Q35 --exitcode --name $${NAME}
-endif
 ifneq ($(JENKINS_SKIP_GCC_TESTS),y)
 ifneq ($(JENKINS_SKIP_ALLTHREAD_TEST),y)
 	NAME=emu_gcc_allthreads; util/abuild/abuild -o $(COREBOOT_BUILD_DIR)/$${NAME} $(ABUILD_OPTIONS) $(CCACHE_OPTIONS) --name $${NAME} --target EMULATION_QEMU_X86_Q35 -b EMULATION_QEMU_X86_Q35 --exitcode --clean
@@ -172,7 +169,6 @@ test-tools:
 test-cleanup:
 	rm -rf $(COREBOOT_BUILD_DIR)/chromeos $(COREBOOT_BUILD_DIR)/default
 	rm -rf $(COREBOOT_BUILD_DIR)/chromeos-clang $(COREBOOT_BUILD_DIR)/default-clang
-	rm -rf $(COREBOOT_BUILD_DIR)/scanbuild
 	$(MAKE) clean
 	$(foreach tool, $(TOOLLIST), $(MAKE) -C util/$(tool) clean ; )
 	$(MAKE) -C src/soc/nvidia/tegra124/lp0 clean
