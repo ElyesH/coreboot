@@ -11,10 +11,15 @@ ARG DOCKER_COMMIT
 ARG SDK_VERSION
 ARG CROSSGCC_PARAM
 
+RUN echo "deb http://deb.debian.org/debian unstable main" >> /etc/apt/sources.list
+
 RUN \
 	useradd -p locked -m coreboot && \
 	apt-get -qq update && \
 	apt-get -y install --no-install-recommends \
+		g++-14 \
+		gcc-14 \
+		gnat-14 \
 		bash-completion \
 		bc \
 		bison \
@@ -30,12 +35,9 @@ RUN \
 		diffutils \
 		exuberant-ctags \
 		flex \
-		g++ \
 		gawk \
-		gcc \
 		gettext \
 		git \
-		gnat \
 		golang \
 		graphicsmagick-imagemagick-compat \
 		graphviz \
@@ -90,8 +92,14 @@ RUN \
 		xfonts-unifont \
 		xz-utils \
 		zlib1g-dev \
-	&& apt-get clean
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/*
 
+RUN \
+	update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100 && \
+	update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100 && \
+	update-alternatives --install /usr/bin/gnat gnat /usr/bin/gnat-14 100
+RUN gnat --version || echo "GNAT is missing!"
 RUN \
 	cd /tmp && \
 	git clone https://review.coreboot.org/coreboot && \
