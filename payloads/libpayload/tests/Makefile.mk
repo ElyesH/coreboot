@@ -48,7 +48,7 @@ TEST_CFLAGS += -Wwrite-strings -Wno-address-of-packed-member -Wimplicit-fallthro
 TEST_CFLAGS += -Wstrict-aliasing -Wshadow -Werror
 TEST_CFLAGS += -Wno-unknown-warning-option -Wno-source-mgr -Wno-main-return-type
 
-TEST_CFLAGS += -std=gnu11 -ffunction-sections -fdata-sections -fno-builtin
+TEST_CFLAGS += -std=gnu23 -ffunction-sections -fdata-sections -fno-builtin
 
 ifneq ($(filter-out 0,$(DEBUG)),)
 TEST_CFLAGS += -Og -ggdb3
