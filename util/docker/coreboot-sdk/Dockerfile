@@ -11,9 +11,16 @@ ARG DOCKER_COMMIT
 ARG SDK_VERSION
 ARG CROSSGCC_PARAM
 
-RUN \
-	useradd -p locked -m coreboot && \
-	apt-get -qq update && \
+# Create user first
+RUN useradd -p locked -m coreboot
+
+# Add Debian Unstable repository and install GCC 14 toolchain to match coreboot's toolchain version
+# We use pinning to keep the base system on Stable while installing only specific packages from Unstable
+RUN echo "deb http://deb.debian.org/debian sid main" > /etc/apt/sources.list.d/sid.list && \
+	echo -e "Package: *\nPin: release a=bookworm\nPin-Priority: 500\n\nPackage: *\nPin: release a=unstable\nPin-Priority: 100\n" > /etc/apt/preferences.d/pinning
+
+# Install all packages in a single RUN to optimize layers
+RUN apt-get update && \
 	apt-get -y install --no-install-recommends \
 		bash-completion \
 		bc \
@@ -30,12 +37,9 @@ RUN \
 		diffutils \
 		exuberant-ctags \
 		flex \
-		g++ \
 		gawk \
-		gcc \
 		gettext \
 		git \
-		gnat \
 		golang \
 		graphicsmagick-imagemagick-compat \
 		graphviz \
@@ -90,8 +94,20 @@ RUN \
 		xfonts-unifont \
 		xz-utils \
 		zlib1g-dev \
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/*
+	&& \
+	apt-get -t sid install -y --no-install-recommends \
+		gcc-14 \
+		g++-14 \
+		gnat-14 \
+		&& \
+	update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100 && \
+	update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100 && \
+	update-alternatives --install /usr/bin/gnat gnat /usr/bin/gnat-14 100 && \
+	update-alternatives --install /usr/bin/gnatmake gnatmake /usr/bin/gnatmake-14 100 && \
+	update-alternatives --install /usr/bin/gnatbind gnatbind /usr/bin/gnatbind-14 100 && \
+	update-alternatives --install /usr/bin/gnatlink gnatlink /usr/bin/gnatlink-14 100 && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
 
 RUN \
 	cd /tmp && \
