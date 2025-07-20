@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: docker://docker:dind  # Correction ici
+      image: docker://docker:dind
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
