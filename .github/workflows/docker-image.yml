@@ -1,0 +1,11 @@
+name: Build and Test Coreboot SDK
+
+on: 
+  workflow_dispatch:  # Uniquement manuel pour test
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test step
+      run: echo "Workflow is working!"
