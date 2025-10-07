@@ -4,7 +4,6 @@
 #define NORTHBRIDGE_INTEL_SANDYBRIDGE_CHIP_H
 
 #include <drivers/intel/gma/i915.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 /*
@@ -19,7 +18,7 @@ struct northbridge_intel_sandybridge_config {
 	u8 gpu_dp_c_hotplug; /* Digital Port C Hotplug Config */
 	u8 gpu_dp_d_hotplug; /* Digital Port D Hotplug Config */
 
-	enum {
+	enum : uint8_t {
 		PANEL_PORT_LVDS = 0,
 		PANEL_PORT_DP_A = 1, /* Also known as eDP */
 		PANEL_PORT_DP_C = 2,
@@ -60,7 +59,7 @@ struct northbridge_intel_sandybridge_config {
 	 * 1 1N
 	 * 2 2N
 	 */
-	enum {
+	enum : uint8_t {
 		DDR_NMODE_AUTO = 0,
 		DDR_NMODE_1N,
 		DDR_NMODE_2N,
@@ -74,7 +73,7 @@ struct northbridge_intel_sandybridge_config {
 	 *   1 Normal rate
 	 *   2 Always enable double rate
 	 */
-	enum {
+	enum : uint8_t {
 		DDR_REFRESH_RATE_TEMP_THRES = 0,
 		DDR_REFRESH_REATE_NORMAL,
 		DDR_REFRESH_RATE_DOUBLE,

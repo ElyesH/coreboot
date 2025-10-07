@@ -6,7 +6,6 @@
 #include <commonlib/bsd/bcd.h>
 #include <console/console.h>
 #include <rtc.h>
-#include <stdbool.h>
 
 #define RTCTAG			"[RTC]"
 #define rtc_info(fmt, arg ...)	printk(BIOS_INFO, RTCTAG "%s,%d: " fmt, \

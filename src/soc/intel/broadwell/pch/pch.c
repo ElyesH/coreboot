@@ -10,7 +10,6 @@
 #include <soc/serialio.h>
 #include <soc/spi.h>
 #include <southbridge/intel/lynxpoint/iobp.h>
-#include <stdbool.h>
 
 u8 pch_revision(void)
 {

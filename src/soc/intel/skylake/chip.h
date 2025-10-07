@@ -13,7 +13,6 @@
 #include <intelblocks/lpc_lib.h>
 #include <intelblocks/power_limit.h>
 #include <intelblocks/xhci.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <soc/gpe.h>
 #include <soc/irq.h>
@@ -102,7 +101,7 @@ struct soc_intel_skylake_config {
 	 * 2 = FixedHigh
 	 * 3 = Enabled
 	*/
-	enum {
+	enum : uint8_t {
 		SaGv_Disabled,
 		SaGv_FixedLow,
 		SaGv_FixedHigh,
@@ -122,7 +121,7 @@ struct soc_intel_skylake_config {
 	u8 LanClkReqNumber;
 
 	/* SATA related */
-	enum {
+	enum : uint8_t {
 		SATA_AHCI    = 0,
 		SATA_RAID    = 1,
 	} SataMode;
@@ -137,7 +136,7 @@ struct soc_intel_skylake_config {
 	bool DspEnable;
 
 	/* HDA Virtual Channel Type Select */
-	enum {
+	enum : uint8_t {
 		Vc0,
 		Vc1,
 	} PchHdaVcType;
@@ -164,7 +163,7 @@ struct soc_intel_skylake_config {
 	 */
 
 	/* PEG Max Link Width */
-	enum {
+	enum : uint8_t {
 		Peg0_x16,
 		Peg0_x1,
 		Peg0_x2,
@@ -172,14 +171,14 @@ struct soc_intel_skylake_config {
 		Peg0_x8,
 	} Peg0MaxLinkWidth;
 
-	enum {
+	enum : uint8_t {
 		Peg1_x8,
 		Peg1_x1,
 		Peg1_x2,
 		Peg1_x4,
 	} Peg1MaxLinkWidth;
 
-	enum {
+	enum : uint8_t {
 		Peg2_x4,
 		Peg2_x1,
 		Peg2_x2,
@@ -280,7 +279,7 @@ struct soc_intel_skylake_config {
 	u8 ScsEmmcHs400RxStrobeDll1;
 	u8 ScsEmmcHs400TxDataDll;
 
-	enum {
+	enum : uint8_t {
 		Display_iGFX,
 		Display_PEG,
 		Display_PCH_PCIe,
@@ -329,14 +328,14 @@ struct soc_intel_skylake_config {
 	 */
 	u8 PmConfigDeepSxPol;
 
-	enum {
+	enum : uint8_t {
 		SLP_S3_MIN_ASSERT_60US = 0,
 		SLP_S3_MIN_ASSERT_1MS  = 1,
 		SLP_S3_MIN_ASSERT_50MS = 2,
 		SLP_S3_MIN_ASSERT_2S   = 3,
 	} PmConfigSlpS3MinAssert;
 
-	enum {
+	enum : uint8_t {
 		SLP_S4_MIN_ASSERT_PCH = 0,
 		SLP_S4_MIN_ASSERT_1S  = 1,
 		SLP_S4_MIN_ASSERT_2S  = 2,
@@ -346,14 +345,14 @@ struct soc_intel_skylake_config {
 
 	/* When deep Sx enabled: Must be greater than or equal to
 	                         all other minimum assertion widths. */
-	enum {
+	enum : uint8_t {
 		SLP_SUS_MIN_ASSERT_0MS   = 0,
 		SLP_SUS_MIN_ASSERT_500MS = 1,
 		SLP_SUS_MIN_ASSERT_1S    = 2,
 		SLP_SUS_MIN_ASSERT_4S    = 3,
 	} PmConfigSlpSusMinAssert;
 
-	enum {
+	enum : uint8_t {
 		SLP_A_MIN_ASSERT_0MS  = 0,
 		SLP_A_MIN_ASSERT_4S   = 1,
 		SLP_A_MIN_ASSERT_98MS = 2,
@@ -378,7 +377,7 @@ struct soc_intel_skylake_config {
 	 */
 	bool PchPmSlpS0VmEnable;
 
-	enum {
+	enum : uint8_t {
 		RESET_POWER_CYCLE_DEFAULT = 0,
 		RESET_POWER_CYCLE_1S      = 1,
 		RESET_POWER_CYCLE_2S      = 2,
@@ -388,7 +387,7 @@ struct soc_intel_skylake_config {
 
 	enum serirq_mode serirq_mode;
 
-	enum {
+	enum : uint8_t {
 		SERIAL_IRQ_FRAME_PULSE_4CLK = 0,
 		SERIAL_IRQ_FRAME_PULSE_6CLK = 1,
 		SERIAL_IRQ_FRAME_PULSE_8CLK = 2,

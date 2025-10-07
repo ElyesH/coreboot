@@ -396,7 +396,7 @@ struct soc_intel_alderlake_config {
 	 * When enabled memory will be training at two different frequencies.
 	 * 0:Disabled, 1:FixedPoint0, 2:FixedPoint1, 3:FixedPoint2,
 	 * 4:FixedPoint3, 5:Enabled */
-	enum {
+	enum : uint8_t {
 		SaGv_Disabled,
 		SaGv_FixedPoint0,
 		SaGv_FixedPoint1,
@@ -449,7 +449,7 @@ struct soc_intel_alderlake_config {
 	bool pch_hda_sdi_enable[MAX_HD_AUDIO_SDI_LINKS];
 
 	/* iDisp-Link T-Mode 0: 2T, 2: 4T, 3: 8T, 4: 16T */
-	enum {
+	enum : uint8_t {
 		HDA_TMODE_2T = 0,
 		HDA_TMODE_4T = 2,
 		HDA_TMODE_8T = 3,
@@ -457,7 +457,7 @@ struct soc_intel_alderlake_config {
 	} pch_hda_idisp_link_tmode;
 
 	/* iDisp-Link Freq 4: 96MHz, 3: 48MHz. */
-	enum {
+	enum : uint8_t {
 		HDA_LINKFREQ_48MHZ = 3,
 		HDA_LINKFREQ_96MHZ = 4,
 	} pch_hda_idisp_link_frequency;
@@ -469,7 +469,7 @@ struct soc_intel_alderlake_config {
 	uint8_t pcie_clk_config_flag[CONFIG_MAX_PCIE_CLOCK_SRC];
 
 	/* Gfx related */
-	enum {
+	enum : uint8_t {
 		IGD_SM_0MB = 0x00,
 		IGD_SM_32MB = 0x01,
 		IGD_SM_64MB = 0x02,
@@ -492,7 +492,7 @@ struct soc_intel_alderlake_config {
 		IGD_SM_60MB = 0xFE,
 	} igd_dvmt50_pre_alloc;
 
-	enum {
+	enum : uint8_t {
 		IGD_AP_SZ_128MB = 0x00,
 		IGD_AP_SZ_256MB = 0x01,
 		IGD_AP_SZ_512MB = 0x02,
@@ -637,7 +637,7 @@ struct soc_intel_alderlake_config {
 	bool cpu_replacement_check;
 
 	/* ISA Serial Base selection. */
-	enum {
+	enum : uint8_t {
 		ISA_SERIAL_BASE_ADDR_3F8,
 		ISA_SERIAL_BASE_ADDR_2F8,
 	} isa_serial_uart_base;
@@ -669,7 +669,7 @@ struct soc_intel_alderlake_config {
 
 	uint16_t max_dram_speed_mts;
 
-	enum {
+	enum : uint8_t {
 		SLP_S3_ASSERTION_DEFAULT,
 		SLP_S3_ASSERTION_60_US,
 		SLP_S3_ASSERTION_1_MS,
@@ -677,7 +677,7 @@ struct soc_intel_alderlake_config {
 		SLP_S3_ASSERTION_2_S,
 	} pch_slp_s3_min_assertion_width;
 
-	enum {
+	enum : uint8_t {
 		SLP_S4_ASSERTION_DEFAULT,
 		SLP_S4_ASSERTION_1S,
 		SLP_S4_ASSERTION_2S,
@@ -685,7 +685,7 @@ struct soc_intel_alderlake_config {
 		SLP_S4_ASSERTION_4S,
 	} pch_slp_s4_min_assertion_width;
 
-	enum {
+	enum : uint8_t {
 		SLP_SUS_ASSERTION_DEFAULT,
 		SLP_SUS_ASSERTION_0_MS,
 		SLP_SUS_ASSERTION_500_MS,
@@ -693,7 +693,7 @@ struct soc_intel_alderlake_config {
 		SLP_SUS_ASSERTION_4_S,
 	} pch_slp_sus_min_assertion_width;
 
-	enum {
+	enum : uint8_t {
 		SLP_A_ASSERTION_DEFAULT,
 		SLP_A_ASSERTION_0_MS,
 		SLP_A_ASSERTION_4_S,
@@ -710,7 +710,7 @@ struct soc_intel_alderlake_config {
 	 *  - PM_CFG.SLP_A_MIN_ASST_WDTH (PchPmSlpAMinAssert)
 	 *  - PM_CFG.SLP_LAN_MIN_ASST_WDTH
 	 */
-	enum {
+	enum : uint8_t {
 		POWER_CYCLE_DURATION_DEFAULT,
 		POWER_CYCLE_DURATION_1S,
 		POWER_CYCLE_DURATION_2S,
@@ -822,7 +822,7 @@ struct soc_intel_alderlake_config {
 	 * Defaults to 27000 (27A), the value has to align with HW design.
 	 * Recommended value: 25000 (PD_TIER_PREMIUM) or 27000 (PD_TIER_VOLUME)
 	 */
-	enum {
+	enum : uint16_t {
 		PD_TIER_PREMIUM = 25000,
 		PD_TIER_VOLUME  = 27000
 	} vccin_aux_imon_iccmax;

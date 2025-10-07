@@ -32,11 +32,11 @@
 #include <pci/pci.h>
 #include <stdint.h>
 
-typedef enum { host_to_device = 0, device_to_host = 1 } dev_req_dir;
-typedef enum { standard_type = 0, class_type = 1, vendor_type =
+typedef enum : uint8_t { host_to_device = 0, device_to_host = 1 } dev_req_dir;
+typedef enum : uint8_t { standard_type = 0, class_type = 1, vendor_type =
 		2, reserved_type = 3
 } dev_req_type;
-typedef enum { dev_recp = 0, iface_recp = 1, endp_recp = 2, other_recp = 3
+typedef enum : uint8_t { dev_recp = 0, iface_recp = 1, endp_recp = 2, other_recp = 3
 } dev_req_recp;
 
 enum {
@@ -47,7 +47,7 @@ enum {
 	DT_ENDP = 5,
 };
 
-typedef enum {
+typedef enum : uint8_t {
 	GET_STATUS = 0,
 	CLEAR_FEATURE = 1,
 	SET_FEATURE = 3,
@@ -61,7 +61,7 @@ typedef enum {
 	SYNCH_FRAME = 12
 } bRequest_Codes;
 
-typedef enum {
+typedef enum : uint8_t {
 	ENDPOINT_HALT = 0,
 	DEVICE_REMOTE_WAKEUP = 1,
 	TEST_MODE = 2
@@ -188,8 +188,8 @@ typedef struct usbdev_hc hci_t;
 struct usbdev;
 typedef struct usbdev usbdev_t;
 
-typedef enum { SETUP, IN, OUT } direction_t;
-typedef enum { CONTROL = 0, ISOCHRONOUS = 1, BULK = 2, INTERRUPT = 3
+typedef enum : uint8_t { SETUP, IN, OUT } direction_t;
+typedef enum : uint8_t { CONTROL = 0, ISOCHRONOUS = 1, BULK = 2, INTERRUPT = 3
 } endpoint_type;
 
 typedef struct {
@@ -203,7 +203,7 @@ typedef struct {
 			 of microframes (i.e. t = 125us * 2^interval) */
 } endpoint_t;
 
-typedef enum {
+typedef enum : int8_t {
 	UNKNOWN_SPEED = -1,
 	FULL_SPEED = 0,
 	LOW_SPEED = 1,
@@ -229,7 +229,7 @@ struct usbdev {
 	void (*poll) (usbdev_t *dev);
 };
 
-typedef enum { OHCI = 0, UHCI = 1, EHCI = 2, XHCI = 3, DWC2 = 4} hc_type;
+typedef enum : uint8_t { OHCI = 0, UHCI = 1, EHCI = 2, XHCI = 3, DWC2 = 4} hc_type;
 
 struct usbdev_hc {
 	hci_t *next;

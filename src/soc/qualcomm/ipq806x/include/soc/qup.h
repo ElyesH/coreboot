@@ -87,7 +87,7 @@
 #define QUP_I2C_PACKET_NACK		(1 << 3)
 #define QUP_I2C_BUS_ERROR		(1 << 2)
 
-typedef enum {
+typedef enum : uint8_t {
 	QUP_SUCCESS = 0,
 	QUP_ERR_BAD_PARAM,
 	QUP_ERR_STATE_SET,
@@ -104,13 +104,13 @@ typedef enum {
 	QUP_ERR_UNDEFINED,
 } qup_return_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	QUP_MINICORE_SPI = 1,
 	QUP_MINICORE_I2C_MASTER,
 	QUP_MINICORE_I2C_SLAVE
 } qup_protocol_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	QUP_MODE_FIFO = 0,
 	QUP_MODE_BLOCK,
 	QUP_MODE_DATAMOVER,

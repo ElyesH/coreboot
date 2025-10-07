@@ -281,8 +281,12 @@
 //#include <console/console.h>
 //#include <commonlib/loglevel.h>
 
-#ifndef NULL
-  #define NULL              ((void *)0)
+#undef NULL
+#if __STDC_VERSION__ >= 202300L
+#define NULL nullptr
+#else
+#define nullptr ((void *)0)
+#define NULL ((void *)0)
 #endif
 
 #else

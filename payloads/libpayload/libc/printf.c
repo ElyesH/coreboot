@@ -74,7 +74,7 @@ struct printf_spec {
 #define PRINT_BUFFER_SIZE		(64 + 1 + 2 + 13)
 
 /** Enumeration of possible arguments types. */
-typedef enum {
+typedef enum : uint8_t {
 	PrintfQualifierByte = 0,
 	PrintfQualifierShort,
 	PrintfQualifierInt,

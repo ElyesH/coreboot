@@ -11,7 +11,7 @@
 #include <soc/dramc_soc_common.h>
 #include <stdint.h>
 
-typedef enum {
+typedef enum : uint8_t {
 	CHANNEL_A = 0,
 	CHANNEL_B,
 	CHANNEL_C,
@@ -19,13 +19,13 @@ typedef enum {
 	CHANNEL_MAX,
 } DRAM_CHANNEL_T;
 
-typedef enum {
+typedef enum : uint8_t {
 	RANK_0 = 0,
 	RANK_1,
 	RANK_MAX,
 } DRAM_RANK_T;
 
-typedef enum {
+typedef enum : uint8_t {
 	SRAM_SHU0 = 0,
 	SRAM_SHU1,
 	SRAM_SHU2,
@@ -37,7 +37,7 @@ typedef enum {
 	DRAM_DFS_SRAM_MAX,
 } DRAM_DFS_SRAM_SHU_T;
 
-typedef enum {
+typedef enum : uint8_t {
 	DRVP = 0,
 	DRVN,
 	ODTP,

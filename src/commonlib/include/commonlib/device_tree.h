@@ -4,7 +4,6 @@
 #ifndef __COMMONLIB_DEVICE_TREE_H__
 #define __COMMONLIB_DEVICE_TREE_H__
 
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <commonlib/list.h>

@@ -184,7 +184,7 @@ static void local_udelay(int i)
 /*-----------------------------------------------------------------------------
 Handle (undocumented) control bits MCHTST and PCI_DEV(0,6,0)
 -----------------------------------------------------------------------------*/
-typedef enum {
+typedef enum : uint8_t {
 	MCHTST_CMD_0,
 	D060_ENABLE,
 	D060_DISABLE,
@@ -192,12 +192,12 @@ typedef enum {
 	RCOMP_BAR_DISABLE,
 } mchtst_cc;
 
-typedef enum {
+typedef enum : uint8_t {
 	D060_CMD_0,
 	D060_CMD_1,
 } d060_cc;
 
-typedef enum {
+typedef enum : uint8_t {
 	RCOMP_HOLD,
 	RCOMP_RELEASE,
 	RCOMP_SMR_00,

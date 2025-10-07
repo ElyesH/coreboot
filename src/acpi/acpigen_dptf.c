@@ -2,7 +2,6 @@
 
 #include <acpi/acpigen.h>
 #include <acpi/acpigen_dptf.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 

@@ -60,7 +60,7 @@ enum {
 
 #define MSC_INST(dev) ((usbmsc_inst_t*)(dev)->data)
 
-typedef enum { cbw_direction_data_in = 0x80, cbw_direction_data_out = 0
+typedef enum : uint8_t { cbw_direction_data_in = 0x80, cbw_direction_data_out = 0
 } cbw_direction;
 
 int readwrite_blocks_512 (usbdev_t *dev, int start, int n, cbw_direction dir, u8 *buf);

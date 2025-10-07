@@ -73,7 +73,7 @@
  *   BS_PAYLOAD_BOOT - Boot to payload
  */
 
-typedef enum {
+typedef enum : uint8_t {
 	BS_PRE_DEVICE,
 	BS_DEV_INIT_CHIPS,
 	BS_DEV_ENUMERATE,
@@ -90,7 +90,7 @@ typedef enum {
 
 /* The boot_state_sequence_t describes when a callback is to be made. It is
  * called either before a state is entered or when a state is exited. */
-typedef enum {
+typedef enum : uint8_t {
 	BS_ON_ENTRY,
 	BS_ON_EXIT
 } boot_state_sequence_t;

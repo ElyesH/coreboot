@@ -1,4 +1,4 @@
-/* Public Domain Curses */
+u/* Public Domain Curses */
 
 /* $Id: curses.h,v 1.295 2008/07/15 17:13:25 wmcbrine Exp $ */
 
@@ -41,7 +41,6 @@ PDCurses portable platform definitions list:
 /*----------------------------------------------------------------------*/
 
 #include <stdarg.h>
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>             /* Required by X/Open usage below */
 
@@ -55,15 +54,8 @@ PDCurses portable platform definitions list:
  *
  */
 
-#ifndef FALSE
-# define FALSE 0
-#endif
-#ifndef TRUE
-# define TRUE 1
-#endif
-#ifndef NULL
-# define NULL (void *)0
-#endif
+#undef NULL
+# define NULL nullptr
 #ifndef ERR
 # define ERR (-1)
 #endif

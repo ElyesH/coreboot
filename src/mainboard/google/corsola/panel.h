@@ -6,7 +6,6 @@
 #include <soc/display.h>
 #include <soc/i2c.h>
 #include <soc/tps65132s.h>
-#include <stdbool.h>
 
 #define BRIDGE_I2C		I2C0
 #define PMIC_AW37503_SLAVE	0x3E

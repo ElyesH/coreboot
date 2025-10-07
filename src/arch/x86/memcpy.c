@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 
 #include <string.h>
-#include <stdbool.h>
 #include <asan.h>
 
 void *memcpy(void *dest, const void *src, size_t n)

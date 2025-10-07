@@ -5,7 +5,7 @@
 
 #include "common.h"
 
-typedef enum { NVRAMTOOL_OP_SHOW_VERSION = 0,
+typedef enum : uint8_t { NVRAMTOOL_OP_SHOW_VERSION = 0,
 	NVRAMTOOL_OP_SHOW_USAGE,
 	NVRAMTOOL_OP_LBTABLE_SHOW_INFO,
 	NVRAMTOOL_OP_LBTABLE_DUMP,
@@ -30,7 +30,7 @@ typedef struct {
 	char *param;
 } nvramtool_op_info_t;
 
-typedef enum { NVRAMTOOL_MOD_SHOW_VALUE_ONLY = 0,
+typedef enum : uint8_t { NVRAMTOOL_MOD_SHOW_VALUE_ONLY = 0,
 	NVRAMTOOL_MOD_USE_CMOS_LAYOUT_FILE,
 	NVRAMTOOL_MOD_USE_CBFS_FILE,
 	NVRAMTOOL_MOD_USE_CMOS_FILE,

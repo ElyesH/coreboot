@@ -6,7 +6,6 @@
 #include <gpio.h>
 #include <soc/display.h>
 #include <soc/i2c.h>
-#include <stdbool.h>
 
 #define PMIC_AW37503_SLAVE	0x3E
 #define PMIC_I2C_BUS		I2C6

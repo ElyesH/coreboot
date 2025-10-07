@@ -3,7 +3,6 @@
 #include <console/console.h>
 #include <device/i2c_simple.h>
 #include <soc/mt6360.h>
-#include <stdbool.h>
 
 static struct mt6360_i2c_data i2c_data[] = {
 	[MT6360_INDEX_LDO] = {

@@ -58,7 +58,7 @@ disclaimer.
 #define O_BINARY 0
 #endif
 
-typedef enum {
+typedef enum : uint8_t {
 	IMG_SATA,
 	IMG_UART,
 	IMG_FLASH,
@@ -83,13 +83,13 @@ typedef struct {
 
 } IMG_MAP;
 
-typedef enum {
+typedef enum : uint8_t {
 	IMG_FILE_INDX = 1,
 	HDR_FILE_INDX = 2
 
 } FILE_IDX;
 
-typedef enum {
+typedef enum : uint8_t {
 	HDR_IMG_ONE_FILE = 1,  /* Create one file with header and image */
 	HDR_IMG_TWO_FILES = 2, /* Create separate header and image files */
 	HDR_ONLY = 3,	  /* Create only header */

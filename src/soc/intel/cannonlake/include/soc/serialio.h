@@ -4,7 +4,7 @@
 #define _SERIALIO_H_
 
 #if CONFIG(SOC_INTEL_COMETLAKE)
-typedef enum {
+typedef enum : uint8_t {
 	PchSerialIoNotInitialized,
 	PchSerialIoDisabled,
 	PchSerialIoPci,
@@ -14,7 +14,7 @@ typedef enum {
 	PchSerialIoMax,
 } PCH_SERIAL_IO_MODE;
 #else
-typedef enum {
+typedef enum : uint8_t {
 	PchSerialIoNotInitialized,
 	PchSerialIoDisabled,
 	PchSerialIoPci,
@@ -24,7 +24,7 @@ typedef enum {
 } PCH_SERIAL_IO_MODE;
 #endif
 
-typedef enum {
+typedef enum : uint8_t {
 	PchSerialIoIndexI2C0,
 	PchSerialIoIndexI2C1,
 	PchSerialIoIndexI2C2,

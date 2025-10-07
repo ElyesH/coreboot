@@ -3,7 +3,6 @@
 #ifndef SOC_INTEL_COMMON_BLOCK_GRAPHICS_EARLY_H
 #define SOC_INTEL_COMMON_BLOCK_GRAPHICS_EARLY_H
 
-#include <stdbool.h>
 
 /*
  * SoC override

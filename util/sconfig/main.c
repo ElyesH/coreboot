@@ -22,7 +22,7 @@ extern int linenum;
  */
 static struct chip chip_header;
 
-typedef enum {
+typedef enum : uint8_t {
 	UNSLASH,
 	SPLIT_1ST,
 	TO_LOWER,

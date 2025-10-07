@@ -140,7 +140,7 @@ struct intel_thc_hidspi_info {
 	 *    0b10 - Quad SPI Mode
 	 *    0b11 - Reserved
 	 */
-	enum {
+	enum : uint16_t {
 		HIDSPI_WRITE_MODE_SINGLE = 0x0,
 		HIDSPI_WRITE_MODE_MULTI_SINGLE_SPI = 0x2000,
 		HIDSPI_WRITE_MODE_MULTI_DUAL_SPI = 0x6000,
@@ -195,7 +195,7 @@ struct drivers_intel_touch_config {
 	 *     0x1: THC HID SPI (for MTL or later)
 	 *     0x2: THC HID I2C (for PTL or later)
 	 */
-	enum {
+	enum : uint8_t {
 		THC_IPTS_MODE,
 		THC_HID_SPI_MODE,
 		THC_HID_I2C_MODE,

@@ -368,7 +368,7 @@ struct gpio_bank {
 	const u8 has_wake_en:1;
 };
 
-typedef enum {
+typedef enum : uint8_t {
 	P_NONE  = 0,		/* Pull None */
 	P_20K_L = 1,		/* Pull Down  20K */
 	P_5K_L  = 2,		/* Pull Down  5K */
@@ -378,7 +378,7 @@ typedef enum {
 	P_1K_H  = 12		/* Pull Up  1K */
 } pull_type_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	M0 = 0,
 	M1,
 	M2,
@@ -395,7 +395,7 @@ typedef enum {
 	M13,
 } mode_list_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	L0 = 0,
 	L1 = 1,
 	L2 = 2,
@@ -414,7 +414,7 @@ typedef enum {
 	L15 = 15,
 } int_select_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	INT_DIS = 0,
 	trig_edge_low = PAD_TRIG_EDGE_LOW,
 	trig_edge_high = PAD_TRIG_EDGE_HIGH,
@@ -423,19 +423,19 @@ typedef enum {
 	trig_level_low = PAD_TRIG_EDGE_LEVEL | (4 << 4),
 } int_type_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	glitch_disable = 0,
 	en_edge_detect,
 	en_rx_data,
 	en_edge_rx_data,
 } glitch_cfg;
 
-typedef enum {
+typedef enum : uint8_t {
 	maskable = 0,
 	non_maskable,
 } mask_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	GPE = 0,
 	SMI,
 	SCI,
@@ -450,7 +450,7 @@ typedef enum {
  * [2] RX Data
  * [3] TX Data
  */
-typedef enum {
+typedef enum : uint8_t {
 	no_inversion	  = 0,
 	inv_rx_enable	 = 0x1,
 	inv_tx_enable	 = 0x2,

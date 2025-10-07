@@ -288,7 +288,7 @@ FORCE_INLINE int LZ4HC_InsertAndGetWiderMatch (
 }
 
 
-typedef enum { noLimit = 0, limitedOutput = 1 } limitedOutput_directive;
+typedef enum : uint8_t { noLimit = 0, limitedOutput = 1 } limitedOutput_directive;
 
 #define LZ4HC_DEBUG 0
 #if LZ4HC_DEBUG

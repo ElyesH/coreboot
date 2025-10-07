@@ -161,7 +161,7 @@ struct soc_intel_elkhartlake_config {
 	 * When enabled memory will be trained at different frequencies.
 	 * 0:Disabled, 1:FixedPoint0(low), 2:FixedPoint1(mid), 3:FixedPoint2
 	 * (high), 4:Enabled */
-	enum {
+	enum : uint8_t {
 		SaGv_Disabled,
 		SaGv_FixedPoint0,
 		SaGv_FixedPoint1,
@@ -308,7 +308,7 @@ struct soc_intel_elkhartlake_config {
 	uint8_t TraceHubMode;
 
 	/* Debug interface selection */
-	enum {
+	enum : uint8_t {
 		DEBUG_INTERFACE_RAM = (1 << 0),
 		DEBUG_INTERFACE_UART_8250IO = (1 << 1),
 		DEBUG_INTERFACE_USB3 = (1 << 3),

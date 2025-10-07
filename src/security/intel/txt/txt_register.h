@@ -179,11 +179,11 @@ union dpr_register {
 	uint32_t raw;
 };
 
-typedef enum {
+typedef enum : uint8_t {
 	CHIPSET_ACM = 2,
 } acm_module_type;
 
-typedef enum {
+typedef enum : uint8_t {
 	BIOS = 0,
 	SINIT = 1,
 } acm_module_sub_type;

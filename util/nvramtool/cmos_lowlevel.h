@@ -13,7 +13,7 @@ typedef struct {
 	void (*set_iopl)(int level);
 } cmos_access_t;
 
-typedef enum { HAL_CMOS, HAL_MEMORY } hal_t;
+typedef enum : uint8_t { HAL_CMOS, HAL_MEMORY } hal_t;
 void select_hal(hal_t hal, void *data);
 
 #define CMOS_AREA_OUT_OF_RANGE (CMOS_RESULT_START + 0)

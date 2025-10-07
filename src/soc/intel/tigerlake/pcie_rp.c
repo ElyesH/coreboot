@@ -4,7 +4,6 @@
 #include <device/pci_def.h>
 #include <intelblocks/pcie_rp.h>
 #include <soc/pci_devs.h>
-#include <stdbool.h>
 
 #define CPU_CPIE_VW_IDX_BASE		24
 

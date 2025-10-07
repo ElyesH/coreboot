@@ -5,7 +5,6 @@
 #include <commonlib/device_tree.h>
 #include <ctype.h>
 #include <endian.h>
-#include <stdbool.h>
 #include <stdint.h>
 #ifdef __COREBOOT__
 #include <console/console.h>

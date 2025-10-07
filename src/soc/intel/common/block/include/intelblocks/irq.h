@@ -27,7 +27,7 @@ struct slot_irq_constraints {
 	struct {
 		enum pci_pin fixed_int_pin;
 		enum pirq fixed_pirq;
-		enum {
+		enum : uint8_t {
 			IRQ_NONE = 0,	/* Empty function */
 			IRQ_PIRQ = 1,	/* PIRQ routing, i.e. IRQs 16 - 23 */
 			IRQ_DIRECT = 2,	/* No PIRQ routing, i.e., IRQs > 23 */

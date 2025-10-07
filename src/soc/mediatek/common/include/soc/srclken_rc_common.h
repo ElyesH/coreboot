@@ -3,7 +3,6 @@
 #ifndef SOC_MEDIATEK_COMMON_SRCLKEN_RC_H
 #define SOC_MEDIATEK_COMMON_SRCLKEN_RC_H
 
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 

@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 
-#include <stdbool.h>
 
 #ifndef SOUTHBRIDGE_INTEL_COMMON_PCIEHP_H
 #define SOUTHBRIDGE_INTEL_COMMON_PCIEHP_H

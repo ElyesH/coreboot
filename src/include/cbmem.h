@@ -6,7 +6,6 @@
 #include <commonlib/bsd/cbmem_id.h> /* IWYU pragma: export */
 #include <stddef.h>
 #include <stdint.h>
-#include <stdbool.h>
 #include <boot/coreboot_tables.h>
 
 #define CBMEM_FSP_HOB_PTR	0x614

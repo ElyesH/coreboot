@@ -17,7 +17,7 @@ struct northbridge_intel_ironlake_config {
 	u8 gpu_dp_c_hotplug; /* Digital Port C Hotplug Config */
 	u8 gpu_dp_d_hotplug; /* Digital Port D Hotplug Config */
 
-	enum {
+	enum : uint8_t {
 		PANEL_PORT_LVDS = 0,
 		PANEL_PORT_DP_A = 1, /* Also known as eDP */
 		PANEL_PORT_DP_C = 2,

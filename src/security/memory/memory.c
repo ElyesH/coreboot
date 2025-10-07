@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 
 #include <security/intel/txt/txt.h>
-#include <stdbool.h>
 
 #include "memory.h"
 

@@ -38,14 +38,14 @@ typedef u32 lba_t;
 typedef u64 lba_t;
 #endif
 
-typedef enum {
+typedef enum : uint8_t {
 	PORT_TYPE_IDE	= (1 << 0),
 	PORT_TYPE_SATA	= (1 << 1),
 	PORT_TYPE_USB	= (1 << 2),
 	PORT_TYPE_NVME	= (1 << 3),
 } storage_port_t;
 
-typedef enum {
+typedef enum : int8_t {
 	POLL_MEDIUM_ERROR	= -3,
 	POLL_NO_DEVICE		= -2,
 	POLL_ERROR		= -1,

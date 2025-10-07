@@ -158,7 +158,7 @@ int smbios_write_type8(unsigned long *current, int *handle,
 #define MEMORY_OPERATING_MODE_CAP_BYTE_ACCESS_PERSISTENT	(1 << 4)
 #define MEMORY_OPERATING_MODE_CAP_BLOCK_ACCESS_PERSISTENT	(1 << 5)
 
-typedef enum {
+typedef enum : uint8_t {
 	MEMORY_BUS_WIDTH_8 = 0,
 	MEMORY_BUS_WIDTH_16 = 1,
 	MEMORY_BUS_WIDTH_32 = 2,
@@ -170,7 +170,7 @@ typedef enum {
 	MEMORY_BUS_WIDTH_MAX = 7,
 } smbios_memory_bus_width;
 
-typedef enum {
+typedef enum : uint8_t {
 	MEMORY_FORMFACTOR_OTHER = 0x01,
 	MEMORY_FORMFACTOR_UNKNOWN = 0x02,
 	MEMORY_FORMFACTOR_SIMM = 0x03,
@@ -192,7 +192,7 @@ typedef enum {
 	MEMORY_FORMFACTOR_CSODIMM = 0x13,
 } smbios_memory_form_factor;
 
-typedef enum {
+typedef enum : uint8_t {
 	MEMORY_TYPE_OTHER = 0x01,
 	MEMORY_TYPE_UNKNOWN = 0x02,
 	MEMORY_TYPE_DRAM = 0x03,
@@ -229,7 +229,7 @@ typedef enum {
 	MEMORY_TYPE_MRDIMM = 0x25,
 } smbios_memory_type;
 
-typedef enum {
+typedef enum : uint8_t {
 	MEMORY_ARRAY_LOCATION_OTHER = 0x01,
 	MEMORY_ARRAY_LOCATION_UNKNOWN = 0x02,
 	MEMORY_ARRAY_LOCATION_SYSTEM_BOARD = 0x03,
@@ -247,7 +247,7 @@ typedef enum {
 	MEMORY_ARRAY_LOCATION_CXL_FLEXBUS_1_0_ADD_ON = 0xa4,
 } smbios_memory_array_location;
 
-typedef enum {
+typedef enum : uint8_t {
 	MEMORY_ARRAY_USE_OTHER = 0x01,
 	MEMORY_ARRAY_USE_UNKNOWN = 0x02,
 	MEMORY_ARRAY_USE_SYSTEM = 0x03,
@@ -257,7 +257,7 @@ typedef enum {
 	MEMORY_ARRAY_USE_CACHE = 0x07,
 } smbios_memory_array_use;
 
-typedef enum {
+typedef enum : uint8_t {
 	MEMORY_ARRAY_ECC_OTHER = 0x01,
 	MEMORY_ARRAY_ECC_UNKNOWN = 0x02,
 	MEMORY_ARRAY_ECC_NONE = 0x03,
@@ -268,7 +268,7 @@ typedef enum {
 } smbios_memory_array_ecc;
 
 #define SMBIOS_STATE_SAFE 3
-typedef enum {
+typedef enum : uint8_t {
 	SMBIOS_BIOS_INFORMATION = 0,
 	SMBIOS_SYSTEM_INFORMATION = 1,
 	SMBIOS_BOARD_INFORMATION = 2,
@@ -346,7 +346,7 @@ struct smbios_type0 {
 	u8 eos[2];
 } __packed;
 
-typedef enum {
+typedef enum : uint8_t {
 	SMBIOS_WAKEUP_TYPE_RESERVED = 0x00,
 	SMBIOS_WAKEUP_TYPE_OTHER = 0x01,
 	SMBIOS_WAKEUP_TYPE_UNKNOWN = 0x02,
@@ -377,7 +377,7 @@ struct smbios_type1 {
 #define SMBIOS_FEATURE_FLAGS_REPLACEABLE		(1 << 3)
 #define SMBIOS_FEATURE_FLAGS_HOT_SWAPPABLE		(1 << 4)
 
-typedef enum {
+typedef enum : uint8_t {
 	SMBIOS_BOARD_TYPE_UNKNOWN = 0x01,
 	SMBIOS_BOARD_TYPE_OTHER = 0x02,
 	SMBIOS_BOARD_TYPE_SERVER_BLADE = 0x03,
@@ -407,7 +407,7 @@ struct smbios_type2 {
 	u8 eos[2];
 } __packed;
 
-typedef enum {
+typedef enum : uint8_t {
 	SMBIOS_ENCLOSURE_OTHER = 0x01,
 	SMBIOS_ENCLOSURE_UNKNOWN = 0x02,
 	SMBIOS_ENCLOSURE_DESKTOP = 0x03,
@@ -699,7 +699,7 @@ struct smbios_type7 {
 } __packed;
 
 /* enum for connector types */
-typedef enum {
+typedef enum : uint8_t {
 	CONN_NONE = 0x00,
 	CONN_CENTRONICS = 0x01,
 	CONN_MINI_CENTRONICS = 0x02,
@@ -745,7 +745,7 @@ typedef enum {
 } type8_connector_types;
 
 /* enum for port types */
-typedef enum {
+typedef enum : uint8_t {
 	TYPE_NONE_PORT = 0x00,
 	TYPE_PARALLEL_PORT_XT_AT_COMPATIBLE = 0x01,
 	TYPE_PARALLEL_PORT_PS_2 = 0x02,
@@ -1126,7 +1126,7 @@ enum smbios_bmc_interface_type {
 	SMBIOS_BMC_INTERFACE_SMBUS,
 };
 
-typedef enum {
+typedef enum : uint8_t {
 	PowerSupplyTypeOther = 1,
 	PowerSupplyTypeUnknown = 2,
 	PowerSupplyTypeLinear = 3,
@@ -1137,7 +1137,7 @@ typedef enum {
 	PowerSupplyTypeRegulator = 8
 } power_supply_type;
 
-typedef enum {
+typedef enum : uint8_t {
 	PowerSupplyStatusOther = 1,
 	PowerSupplyStatusUnknown = 2,
 	PowerSupplyStatusOk = 3,
@@ -1145,7 +1145,7 @@ typedef enum {
 	PowerSupplyStatusCritical = 5
 } power_supply_status;
 
-typedef enum {
+typedef enum : uint8_t {
 	PowerSupplyInputVoltageRangeSwitchingOther = 1,
 	PowerSupplyInputVoltageRangeSwitchingUnknown = 2,
 	PowerSupplyInputVoltageRangeSwitchingManual = 3,
@@ -1189,7 +1189,7 @@ int smbios_write_type39(unsigned long *current, int *handle,
 			const char *rev_lvl, u16 max_pow_cap,
 			const struct power_supply_ch *ps_ch);
 
-typedef enum {
+typedef enum : uint8_t {
 	SMBIOS_DEVICE_TYPE_OTHER = 0x01,
 	SMBIOS_DEVICE_TYPE_UNKNOWN,
 	SMBIOS_DEVICE_TYPE_VIDEO,

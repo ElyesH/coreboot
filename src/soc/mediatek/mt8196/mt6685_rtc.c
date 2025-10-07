@@ -10,7 +10,6 @@
 #include <rtc.h>
 #include <soc/mt6685.h>
 #include <soc/rtc.h>
-#include <stdbool.h>
 #include <timer.h>
 
 static u8 rtc_read_byte(u16 addr)

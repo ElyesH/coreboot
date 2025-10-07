@@ -17,7 +17,6 @@
 #include <stdint.h>
 #include <spd.h>
 #include <device/dram/common.h>
-#include <stdbool.h>
 
 /** Maximum SPD size supported */
 #define SPD_SIZE_MAX_DDR2	128

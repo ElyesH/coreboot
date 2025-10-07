@@ -209,7 +209,7 @@ struct soc_intel_tigerlake_config {
 	 * When enabled memory will be training at two different frequencies.
 	 * 0:Disabled, 1:FixedPoint0, 2:FixedPoint1, 3:FixedPoint2,
 	 * 4:FixedPoint3, 5:Enabled */
-	enum {
+	enum : uint8_t {
 		SaGv_Disabled,
 		SaGv_FixedPoint0,
 		SaGv_FixedPoint1,
@@ -357,7 +357,7 @@ struct soc_intel_tigerlake_config {
 	uint8_t TraceHubMode;
 
 	/* Debug interface selection */
-	enum {
+	enum : uint8_t {
 		DEBUG_INTERFACE_RAM = (1 << 0),
 		DEBUG_INTERFACE_UART_8250IO = (1 << 1),
 		DEBUG_INTERFACE_USB3 = (1 << 3),

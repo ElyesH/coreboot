@@ -4,7 +4,6 @@
 #define _CPU_INTEL_HASWELL_H
 
 #include <cpu/cpu.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 /* CPU types without stepping */

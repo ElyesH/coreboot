@@ -3,7 +3,6 @@
 #ifndef CPU_INTEL_SPEEDSTEP_H
 #define CPU_INTEL_SPEEDSTEP_H
 
-#include <stdbool.h>
 #include <stdint.h>
 
 /* MWAIT coordination I/O base address. This must match

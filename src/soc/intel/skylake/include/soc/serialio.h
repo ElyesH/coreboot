@@ -3,7 +3,7 @@
 #ifndef _SERIALIO_H_
 #define _SERIALIO_H_
 
-typedef enum {
+typedef enum : uint8_t {
 	PchSerialIoDisabled,
 	PchSerialIoAcpi,
 	PchSerialIoPci,
@@ -12,7 +12,7 @@ typedef enum {
 	PchSerialIoSkipInit
 } PCH_SERIAL_IO_MODE;
 
-typedef enum {
+typedef enum : uint8_t {
 	PchSerialIoIndexI2C0,
 	PchSerialIoIndexI2C1,
 	PchSerialIoIndexI2C2,

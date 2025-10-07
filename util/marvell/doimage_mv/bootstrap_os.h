@@ -105,9 +105,8 @@ disclaimer.
 #define MV_FALSE 0
 #define MV_TRUE (!(MV_FALSE))
 
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
+#undef NULL
+#define NULL nullptr
 
 #ifndef MV_ASMLANGUAGE
 /* typedefs */

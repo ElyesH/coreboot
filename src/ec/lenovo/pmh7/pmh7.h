@@ -3,7 +3,6 @@
 #ifndef EC_LENOVO_PMH7_H
 #define EC_LENOVO_PMH7_H
 
-#include <stdbool.h>
 
 #define EC_LENOVO_PMH7_INDEX 0x77
 

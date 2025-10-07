@@ -53,7 +53,7 @@ extern int attr_input_field;
 extern int attr_function_text;
 extern int attr_function_highlight;
 
-typedef enum {
+typedef enum : uint8_t {
 	F_HELP = 1,
 	F_SYMBOL = 2,
 	F_INSTS = 3,

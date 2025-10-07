@@ -5,13 +5,13 @@
 
 #include <stdint.h>
 
-typedef enum {
+typedef enum : uint8_t {
 	FSB_CLOCK_1067MHz = 0,
 	FSB_CLOCK_800MHz  = 1,
 	FSB_CLOCK_667MHz  = 2,
 } fsb_clock_t;
 
-typedef enum { /* Steppings below B1 were pre-production,
+typedef enum : uint8_t { /* Steppings below B1 were pre-production,
 		  conversion stepping A1 is a newer GL40 with support for 800 MT/s on FSB/DDR.
 		  We'll support B1, B2, B3, and conversion stepping A1. */
 	STEPPING_A0 = 0,
@@ -25,7 +25,7 @@ typedef enum { /* Steppings below B1 were pre-production,
 	STEPPING_CONVERSION_A1 = 9,
 } stepping_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	GMCH_GM45 = 0,
 	GMCH_GM47,
 	GMCH_GM49,
@@ -38,7 +38,7 @@ typedef enum {
 	GMCH_UNKNOWN
 } gmch_gfx_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	MEM_CLOCK_533MHz = 0,
 	MEM_CLOCK_400MHz = 1,
 	MEM_CLOCK_333MHz = 2,
@@ -47,26 +47,26 @@ typedef enum {
 	MEM_CLOCK_667MT  = 2,
 } mem_clock_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	DDR1 = 1,
 	DDR2 = 2,
 	DDR3 = 3,
 } ddr_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	CHANNEL_MODE_SINGLE,
 	CHANNEL_MODE_DUAL_ASYNC,
 	CHANNEL_MODE_DUAL_INTERLEAVED,
 } channel_mode_t;
 
-typedef enum { /* as in DDR3 spd */
+typedef enum : uint8_t { /* as in DDR3 spd */
 	CHIP_WIDTH_x4	= 0,
 	CHIP_WIDTH_x8	= 1,
 	CHIP_WIDTH_x16	= 2,
 	CHIP_WIDTH_x32	= 3,
 } chip_width_t;
 
-typedef enum { /* as in DDR3 spd */
+typedef enum : uint8_t { /* as in DDR3 spd */
 	CHIP_CAP_256M	= 0,
 	CHIP_CAP_512M	= 1,
 	CHIP_CAP_1G	= 2,
@@ -76,7 +76,7 @@ typedef enum { /* as in DDR3 spd */
 	CHIP_CAP_16G	= 6,
 } chip_capacity_t;
 
-typedef enum { /* as in DDR2 spd */
+typedef enum : uint8_t { /* as in DDR2 spd */
 	REFRESH_15_625	= 0,
 	REFRESH_3_9	= 1,
 	REFRESH_7_8	= 2,

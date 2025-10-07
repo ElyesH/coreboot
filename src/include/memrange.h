@@ -3,7 +3,6 @@
 #define MEMRANGE_H_
 
 #include <device/resource.h>
-#include <stdbool.h>
 #include <stddef.h>
 
 /* A memranges structure consists of a list of range_entry(s). The structure

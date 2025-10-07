@@ -5,7 +5,6 @@
 
 #include <device/device.h>
 #include <static.h>  /* Provides fw_config definitions from devicetree.cb */
-#include <stdbool.h>
 #include <stdint.h>
 
 #define UNDEFINED_FW_CONFIG	~((uint64_t)0)

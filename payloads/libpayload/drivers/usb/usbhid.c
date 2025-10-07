@@ -32,7 +32,7 @@
 #include <usb/usb.h>
 
 enum { hid_subclass_none = 0, hid_subclass_boot = 1 };
-typedef enum { hid_proto_boot = 0, hid_proto_report = 1 } hid_proto;
+typedef enum : uint8_t { hid_proto_boot = 0, hid_proto_report = 1 } hid_proto;
 enum { hid_boot_proto_none = 0, hid_boot_proto_keyboard =
 		1, hid_boot_proto_mouse = 2
 };

@@ -496,7 +496,7 @@ static void clean_items(void)
 	items_num = 0;
 }
 
-typedef enum {MATCH_TINKER_PATTERN_UP, MATCH_TINKER_PATTERN_DOWN,
+typedef enum : uint8_t {MATCH_TINKER_PATTERN_UP, MATCH_TINKER_PATTERN_DOWN,
 	FIND_NEXT_MATCH_DOWN, FIND_NEXT_MATCH_UP} match_f;
 
 /* return the index of the matched item, or -1 if no such item exists */

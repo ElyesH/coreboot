@@ -346,7 +346,7 @@ static void write_tpch_methods(const struct dptf_platform_info *platform_info)
 	write_create_tpch(platform_info);
 
 	const struct {
-		enum { READ, WRITE } type;
+		enum : uint8_t { READ, WRITE } type;
 		const char *method_name;
 		unsigned int subcommand;
 	} tpch_methods[] = {

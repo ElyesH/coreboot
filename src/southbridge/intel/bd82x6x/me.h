@@ -247,7 +247,7 @@ struct me_global_reset {
 	u8 reset_type;
 } __packed;
 
-typedef enum {
+typedef enum : uint8_t {
 	ME_NORMAL_BIOS_PATH,
 	ME_S3WAKE_BIOS_PATH,
 	ME_ERROR_BIOS_PATH,

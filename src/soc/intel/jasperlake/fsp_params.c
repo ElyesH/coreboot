@@ -24,7 +24,7 @@
  * 1 - Send in PEI (Applicable for FSP in API mode)
  * 2 - Send in DXE (Not applicable for FSP in API mode)
  */
-enum {
+enum : uint8_t {
 	EOP_DISABLE = 0,
 	EOP_PEI = 1,
 	EOP_DXE = 2,

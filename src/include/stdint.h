@@ -16,25 +16,28 @@ typedef unsigned int       uint32_t;
 typedef signed long long   int64_t;
 typedef unsigned long long uint64_t;
 
+typedef _BitInt(8)  int8_b;
+typedef _BitInt(16) int16_b;
+typedef _BitInt(32) int32_b;
+typedef unsigned _BitInt(8)  uint8_b;
+typedef unsigned _BitInt(16) uint16_b;
+typedef unsigned _BitInt(32) uint32_b;
+
 /* Types for 'void *' pointers */
 typedef signed long        intptr_t;
 typedef unsigned long      uintptr_t;
 
 /* Ensure that the widths are all correct */
-_Static_assert(sizeof(int8_t) == 1, "Size of int8_t is incorrect");
-_Static_assert(sizeof(uint8_t) == 1, "Size of uint8_t is incorrect");
-
-_Static_assert(sizeof(int16_t) == 2, "Size of int16_t is incorrect");
-_Static_assert(sizeof(uint16_t) == 2, "Size of uint16_t is incorrect");
-
-_Static_assert(sizeof(int32_t) == 4, "Size of int32_t is incorrect");
-_Static_assert(sizeof(uint32_t) == 4, "Size of uint32_t is incorrect");
-
-_Static_assert(sizeof(int64_t) == 8, "Size of int64_t is incorrect");
-_Static_assert(sizeof(uint64_t) == 8, "Size of uint64_t is incorrect");
-
-_Static_assert(sizeof(intptr_t) == sizeof(void *), "Size of intptr_t is incorrect");
-_Static_assert(sizeof(uintptr_t) == sizeof(void *), "Size of uintptr_t is incorrect");
+static_assert(sizeof(int8_t) == 1);
+static_assert(sizeof(uint8_t) == 1);
+static_assert(sizeof(int16_t) == 2);
+static_assert(sizeof(uint16_t) == 2);
+static_assert(sizeof(int32_t) == 4);
+static_assert(sizeof(uint32_t) == 4);
+static_assert(sizeof(int64_t) == 8);
+static_assert(sizeof(uint64_t) == 8);
+static_assert(sizeof(intptr_t) == sizeof(void *));
+static_assert(sizeof(uintptr_t) == sizeof(void *));
 
 /* Maximum width integer types */
 typedef int64_t  intmax_t;

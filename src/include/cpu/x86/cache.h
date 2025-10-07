@@ -14,7 +14,6 @@
 #if !defined(__ASSEMBLER__)
 
 #include <arch/cpuid.h>
-#include <stdbool.h>
 #include <stddef.h>
 
 static inline void wbinvd(void)

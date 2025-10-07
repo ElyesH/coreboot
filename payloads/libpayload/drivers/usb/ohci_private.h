@@ -34,7 +34,7 @@
 #define MASK(startbit, lenbit) (((1<<(lenbit))-1)<<(startbit))
 
 	// FIXME: fake
-	typedef enum { CMD} reg;
+	typedef enum : uint8_t { CMD} reg;
 
 	enum HcRhDescriptorAReg {
 		NumberDownstreamPorts = 1 << 0,
@@ -262,6 +262,6 @@
 		void *dma_buffer;
 	} ohci_t;
 
-	typedef enum { OHCI_SETUP = 0, OHCI_OUT = 1, OHCI_IN = 2, OHCI_FROM_TD = 3 } ohci_pid_t;
+	typedef enum : uint8_t { OHCI_SETUP = 0, OHCI_OUT = 1, OHCI_IN = 2, OHCI_FROM_TD = 3 } ohci_pid_t;
 
 #endif

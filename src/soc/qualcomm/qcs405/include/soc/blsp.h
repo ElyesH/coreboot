@@ -3,21 +3,21 @@
 #ifndef __BLSP_H_
 #define __BLSP_H_
 
-typedef enum {
+typedef enum : uint8_t {
 	BLSP_QUP_ID_0,
 	BLSP_QUP_ID_1,
 	BLSP_QUP_ID_2,
 	BLSP_QUP_ID_3,
 } blsp_qup_id_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	BLSP_SUCCESS = 0,
 	BLSP_ID_ERROR,
 	BLSP_ERROR,
 	BLSP_UNSUPPORTED
 } blsp_return_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	BLSP_PROTO_I2C_UIM = 1,
 	BLSP_PROTO_I2C_ONLY,
 	BLSP_PROTO_SPI_ONLY,

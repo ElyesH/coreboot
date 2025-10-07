@@ -4,7 +4,6 @@
 #define AMD_BLOCK_PSP_H
 
 #include <stdint.h>
-#include <stdbool.h>
 
 #define SMM_TRIGGER_IO		0
 #define SMM_TRIGGER_MEM		1

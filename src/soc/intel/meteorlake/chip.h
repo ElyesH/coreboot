@@ -17,7 +17,6 @@
 #include <soc/pmc.h>
 #include <soc/serialio.h>
 #include <soc/usb.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 /* Define config parameters for In-Band ECC (IBECC). */
@@ -197,7 +196,7 @@ struct soc_intel_meteorlake_config {
 	 * When enabled memory will be training at two different frequencies.
 	 * 0:Disabled, 1:Enabled
 	 */
-	enum {
+	enum : uint8_t {
 		SAGV_DISABLED,
 		SAGV_ENABLED,
 	} sagv;
@@ -206,7 +205,7 @@ struct soc_intel_meteorlake_config {
 	 * at the enabled frequencies. Possible work points are:
 	 * 0x3:Points0_1, 0x7:Points0_1_2, 0xF:AllPoints0_1_2_3
 	 */
-	enum {
+	enum : uint8_t {
 		SAGV_POINTS_0_1 = 0x03,
 		SAGV_POINTS_0_1_2 = 0x07,
 		SAGV_POINTS_0_1_2_3 = 0x0f,
@@ -257,7 +256,7 @@ struct soc_intel_meteorlake_config {
 	bool pch_hda_sdi_enable[MAX_HD_AUDIO_SDI_LINKS];
 
 	/* iDisp-Link T-Mode 0: 2T, 2: 4T, 3: 8T, 4: 16T */
-	enum {
+	enum : uint8_t {
 		HDA_TMODE_2T = 0,
 		HDA_TMODE_4T = 2,
 		HDA_TMODE_8T = 3,
@@ -265,7 +264,7 @@ struct soc_intel_meteorlake_config {
 	} pch_hda_idisp_link_tmode;
 
 	/* iDisp-Link Freq 4: 96MHz, 3: 48MHz. */
-	enum {
+	enum : uint8_t {
 		HDA_LINKFREQ_48MHZ = 3,
 		HDA_LINKFREQ_96MHZ = 4,
 	} pch_hda_idisp_link_frequency;
@@ -276,7 +275,7 @@ struct soc_intel_meteorlake_config {
 	uint8_t pcie_clk_config_flag[CONFIG_MAX_PCIE_CLOCK_SRC];
 
 	/* Gfx related */
-	enum {
+	enum : uint8_t {
 		IGD_SM_0MB = 0x00,
 		IGD_SM_32MB = 0x01,
 		IGD_SM_64MB = 0x02,
@@ -459,7 +458,7 @@ struct soc_intel_meteorlake_config {
 	 */
 	bool cpu_replacement_check;
 
-	enum {
+	enum : uint8_t {
 		SLP_S3_ASSERTION_DEFAULT,
 		SLP_S3_ASSERTION_60_US,
 		SLP_S3_ASSERTION_1_MS,
@@ -467,7 +466,7 @@ struct soc_intel_meteorlake_config {
 		SLP_S3_ASSERTION_2_S,
 	} pch_slp_s3_min_assertion_width;
 
-	enum {
+	enum : uint8_t {
 		SLP_S4_ASSERTION_DEFAULT,
 		SLP_S4_ASSERTION_1S,
 		SLP_S4_ASSERTION_2S,
@@ -475,7 +474,7 @@ struct soc_intel_meteorlake_config {
 		SLP_S4_ASSERTION_4S,
 	} pch_slp_s4_min_assertion_width;
 
-	enum {
+	enum : uint8_t {
 		SLP_SUS_ASSERTION_DEFAULT,
 		SLP_SUS_ASSERTION_0_MS,
 		SLP_SUS_ASSERTION_500_MS,
@@ -483,7 +482,7 @@ struct soc_intel_meteorlake_config {
 		SLP_SUS_ASSERTION_4_S,
 	} pch_slp_sus_min_assertion_width;
 
-	enum {
+	enum : uint8_t {
 		SLP_A_ASSERTION_DEFAULT,
 		SLP_A_ASSERTION_0_MS,
 		SLP_A_ASSERTION_4_S,
@@ -500,7 +499,7 @@ struct soc_intel_meteorlake_config {
 	 *  - PM_CFG.SLP_A_MIN_ASST_WDTH (PchPmSlpAMinAssert)
 	 *  - PM_CFG.SLP_LAN_MIN_ASST_WDTH
 	 */
-	enum {
+	enum : uint8_t {
 		POWER_CYCLE_DURATION_DEFAULT,
 		POWER_CYCLE_DURATION_1S,
 		POWER_CYCLE_DURATION_2S,
@@ -509,7 +508,7 @@ struct soc_intel_meteorlake_config {
 	} pch_reset_power_cycle_duration;
 
 	/* ISA Serial Base selection. */
-	enum {
+	enum : uint8_t {
 		ISA_SERIAL_BASE_ADDR_3F8,
 		ISA_SERIAL_BASE_ADDR_2F8,
 	} isa_serial_uart_base;

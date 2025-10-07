@@ -126,7 +126,7 @@ struct soc_amd_picasso_config {
 	/* PROCHOT_L de-assertion Ramp Time */
 	uint32_t prochot_l_deassertion_ramp_time_ms;
 
-	enum {
+	enum : uint8_t {
 		DOWNCORE_AUTO = 0,
 		DOWNCORE_1 = 1, /* Run with 1 physical core */
 		DOWNCORE_2 = 3, /* Run with 2 physical cores */
@@ -182,7 +182,7 @@ struct soc_amd_picasso_config {
 		 * If the eMMC MMIO device is disabled in the devicetree,
 		 * fsps_update_emmc_config will set timing to SD_EMMC_DISABLE.
 		*/
-		enum {
+		enum : uint8_t {
 			SD_EMMC_DISABLE,
 			SD_EMMC_SD_LOW_SPEED,
 			SD_EMMC_SD_HIGH_SPEED,
@@ -262,7 +262,7 @@ struct soc_amd_picasso_config {
 	enum gpp_clk_req gpp_clk_config[GPP_CLK_OUTPUT_COUNT];
 
 	/* performance policy for the PCIe links: power consumption vs. link speed */
-	enum {
+	enum : uint8_t {
 		DXIO_PSPP_DISABLED = 0,
 		DXIO_PSPP_PERFORMANCE,
 		DXIO_PSPP_BALANCED,

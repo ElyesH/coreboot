@@ -24,7 +24,7 @@ struct soc_amd_glinda_config {
 	/* Enable S0iX support */
 	bool s0ix_enable;
 
-	enum {
+	enum : uint8_t {
 		DOWNCORE_AUTO = 0,
 		DOWNCORE_1 = 1, /* Run with 1 physical core */
 		DOWNCORE_2 = 3, /* Run with 2 physical cores */
@@ -96,7 +96,7 @@ struct soc_amd_glinda_config {
 	enum gpp_clk_req gpp_clk_config[GPP_CLK_OUTPUT_AVAILABLE];
 
 	/* performance policy for the PCIe links: power consumption vs. link speed */
-	enum {
+	enum : uint8_t {
 		DXIO_PSPP_DISABLED = 0,
 		DXIO_PSPP_PERFORMANCE,
 		DXIO_PSPP_BALANCED,

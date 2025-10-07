@@ -8,7 +8,7 @@
 #include <string.h>
 
 /* Silicon revisions */
-typedef enum {
+typedef enum : uint8_t {
 	SILICON_REV_DENVERTON_A0 = 0x00,
 	SILICON_REV_DENVERTON_A1 = 0x01,
 	SILICON_REV_DENVERTON_B0 = 0x02,

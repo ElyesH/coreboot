@@ -24,12 +24,12 @@
 
 struct soc_amd_stoneyridge_config {
 	u8 spd_addr_lookup[MAX_NODES][MAX_DRAM_CH][MAX_DIMMS_PER_CH];
-	enum {
+	enum : uint8_t {
 		DRAM_CONTENTS_KEEP,
 		DRAM_CONTENTS_CLEAR
 	} dram_clear_on_reset;
 
-	enum {
+	enum : uint8_t {
 		/* Do not enable UMA in the system. */
 		UMAMODE_NONE,
 		/* Enable UMA with a specific size. */

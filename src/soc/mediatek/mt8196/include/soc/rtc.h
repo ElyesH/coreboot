@@ -11,7 +11,6 @@
 #include <soc/mt6685_rtc.h>
 #include <soc/rtc_common.h>
 #include <soc/rtc_reg_common.h>
-#include <stdbool.h>
 #include <timer.h>
 #include <types.h>
 
