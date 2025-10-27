@@ -616,7 +616,7 @@ typedef union {
 	};
 } hcsplit_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	EPDIR_OUT = 0,
 	EPDIR_IN,
 } ep_dir_t;

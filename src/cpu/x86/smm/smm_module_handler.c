@@ -17,7 +17,7 @@
 
 static int do_driver_init = 1;
 
-typedef enum { SMI_LOCKED, SMI_UNLOCKED } smi_semaphore;
+typedef enum : uint8_t { SMI_LOCKED, SMI_UNLOCKED } smi_semaphore;
 
 /* SMI multiprocessing semaphore */
 static volatile

@@ -548,7 +548,7 @@ static int LZ4F_localSaveDict(LZ4F_cctx_t* cctxPtr)
     return LZ4_saveDictHC ((LZ4_streamHC_t*)(cctxPtr->lz4CtxPtr), (char*)(cctxPtr->tmpBuff), 64 KB);
 }
 
-typedef enum { notDone, fromTmpBuffer, fromSrcBuffer } LZ4F_lastBlockStatus;
+typedef enum : uint8_t { notDone, fromTmpBuffer, fromSrcBuffer } LZ4F_lastBlockStatus;
 
 /* LZ4F_compressUpdate()
 * LZ4F_compressUpdate() can be called repetitively to compress as much data as necessary.
@@ -788,7 +788,7 @@ LZ4F_errorCode_t LZ4F_freeDecompressionContext(LZ4F_decompressionContext_t LZ4F_
 /* ********************* Decompression ******************************** */
 /* ******************************************************************** */
 
-typedef enum { dstage_getHeader=0, dstage_storeHeader,
+typedef enum : uint8_t { dstage_getHeader=0, dstage_storeHeader,
     dstage_getCBlockSize, dstage_storeCBlockSize,
     dstage_copyDirect,
     dstage_getCBlock, dstage_storeCBlock,

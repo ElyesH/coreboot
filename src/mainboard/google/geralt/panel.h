@@ -5,7 +5,6 @@
 
 #include <soc/display.h>
 #include <soc/tps65132s.h>
-#include <stdbool.h>
 
 void configure_mipi_pwm_backlight(bool enable);
 void fill_lp_backlight_gpios(struct lb_gpios *gpios);

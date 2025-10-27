@@ -5,7 +5,6 @@
 #include <drivers/tpm/cr50.h>
 #include <ec/google/chromeec/ec.h>
 #include <gpio.h>
-#include <stdbool.h>
 
 #include "gpio.h"
 

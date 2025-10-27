@@ -19,7 +19,7 @@ struct i915_gpu_panel_config {
 	unsigned int backlight_on_delay_ms;
 	unsigned int backlight_off_delay_ms;
 	unsigned int backlight_pwm_hz;
-	enum {
+	enum : uint8_t {
 		GPU_BACKLIGHT_POLARITY_HIGH = 0,
 		GPU_BACKLIGHT_POLARITY_LOW,
 	} backlight_polarity;

@@ -301,7 +301,7 @@ struct ldat
 };
 #endif	/* USE_TERMLIB */
 
-typedef enum {
+typedef enum : int8_t {
 	M_XTERM	= -1		/* use xterm's mouse tracking? */
 	,M_NONE = 0		/* no mouse device */
 #if USE_GPM_SUPPORT

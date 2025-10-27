@@ -140,7 +140,7 @@ typedef struct {
 
 #define SMM_PSD_OFFSET 0xfb00
 
-typedef enum {
+typedef enum : uint8_t {
 	TxtSmmPageViolation = 1,
 	TxtSmmMsrViolation,
 	TxtSmmRegisterViolation,
@@ -443,7 +443,7 @@ typedef struct {
 	uint64_t write_mask;
 } STM_REGISTER_VIOLATION_DESC;
 
-typedef enum {
+typedef enum : uint8_t {
 	stm_register_cr0,
 	stm_register_cr2,
 	stm_register_cr3,
@@ -504,7 +504,7 @@ typedef struct {
 #define STOP_LOG 4
 #define CLEAR_LOG 5
 #define DELETE_LOG 6
-typedef enum {
+typedef enum : uint32_t {
 	evt_log_started,
 	evt_log_stopped,
 	evt_log_invalid_parameter_detected,

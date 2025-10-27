@@ -10,7 +10,6 @@
 #include <commonlib/helpers.h>
 #include <console/console.h>
 #include <ctype.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include <edid.h>

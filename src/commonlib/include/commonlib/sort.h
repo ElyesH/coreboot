@@ -7,7 +7,7 @@
 typedef enum {
 	NUM_ASCENDING,
 	NUM_DESCENDING
-} sort_order_t;
+}sort_order_t;
 
 void bubblesort(int *v, size_t num_entries, sort_order_t order);
 

@@ -41,7 +41,7 @@ enum cke_type {
 	CKE_DYNAMIC
 };
 
-typedef enum {
+typedef enum : uint8_t {
 	CBT_LOW_FREQ = 0,
 	CBT_HIGH_FREQ,
 } cbt_freq;

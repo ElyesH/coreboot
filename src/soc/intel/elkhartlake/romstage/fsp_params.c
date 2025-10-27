@@ -14,7 +14,7 @@
 #include <static.h>
 
 /* ISA Serial Base selection. */
-enum {
+enum : uint8_t {
 	ISA_SERIAL_BASE_ADDR_3F8,
 	ISA_SERIAL_BASE_ADDR_2F8,
 } isa_serial_uart_base;

@@ -15,7 +15,7 @@
 #define GSBI_HCLK_CTL_S                 4
 #define GSBI_HCLK_CTL_CLK_ENA           0x1
 
-typedef enum {
+typedef enum : uint8_t {
 	GSBI_ID_1 = 1,
 	GSBI_ID_2,
 	GSBI_ID_3,
@@ -25,14 +25,14 @@ typedef enum {
 	GSBI_ID_7,
 } gsbi_id_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	GSBI_SUCCESS = 0,
 	GSBI_ID_ERROR,
 	GSBI_ERROR,
 	GSBI_UNSUPPORTED
 } gsbi_return_t;
 
-typedef enum {
+typedef enum : uint8_t {
 	GSBI_PROTO_I2C_UIM = 1,
 	GSBI_PROTO_I2C_ONLY,
 	GSBI_PROTO_SPI_ONLY,

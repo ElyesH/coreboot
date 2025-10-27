@@ -11,7 +11,7 @@
 	(DEFAULT_PCR_BASE | ((uint8_t)(Pid) << 16) | (uint16_t)(Offset))
 
 /* PID for PCR and SBI */
-typedef enum {
+typedef enum : uint8_t {
 	PID_SMB = 0xCF,
 	PID_ITSS = 0xD0,
 	PID_GPIOCOM0 = 0xC2,

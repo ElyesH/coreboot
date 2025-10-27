@@ -5,7 +5,6 @@
 
 #include <sys/types.h>
 #include <stddef.h>
-#include <stdbool.h>
 #include <commonlib/bsd/cb_err.h>
 #include <commonlib/bsd/helpers.h>
 #include <commonlib/mem_pool.h>

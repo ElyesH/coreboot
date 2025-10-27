@@ -6,7 +6,6 @@
 #include <soc/pmic_wrap_common.h>
 #include <soc/rtc_common.h>
 #include <soc/rtc_reg_common.h>
-#include <stdbool.h>
 
 /* RTC registers */
 enum {

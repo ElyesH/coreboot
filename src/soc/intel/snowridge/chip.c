@@ -13,7 +13,6 @@
 #include <ramstage.h>
 #include <soc/acpi.h>
 #include <soc/pci_devs.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 #include "chip.h"

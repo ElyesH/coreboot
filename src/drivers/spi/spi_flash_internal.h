@@ -140,11 +140,11 @@ extern const struct spi_flash_ops_descriptor spi_flash_pp_0xd8_sector_desc;
 
 struct sfdp_rpmc_info {
 	bool flash_hardening;
-	enum {
+	enum : uint8_t {
 		SFDP_RPMC_COUNTER_BITS_32		= 0,
 		SFDP_RPMC_COUNTER_BITS_RESERVED		= 1,
 	} monotonic_counter_size;
-	enum {
+	enum : uint8_t {
 		SFDP_RPMC_POLL_OP2_EXTENDED_STATUS	= 0,
 		SFDP_RPMC_POLL_READ_STATUS		= 1,
 	} busy_polling_method;

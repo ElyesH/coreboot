@@ -7,7 +7,7 @@
 #include <types.h>
 
 struct acp_config {
-	enum {
+	enum : uint8_t {
 #if CONFIG(SOC_AMD_COMMON_BLOCK_ACP_GEN2)
 		ACP_PINS_HDA_3SDI = 1,		/* HDA 3xSDI */
 		ACP_PINS_HDA_1SDI_1SW = 2,	/* HDA 1xSDI,    SW w/Data0 */

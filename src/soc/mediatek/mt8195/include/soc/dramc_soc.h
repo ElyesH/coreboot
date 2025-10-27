@@ -5,7 +5,7 @@
 
 #include <soc/dramc_soc_common.h>
 
-typedef enum {
+typedef enum : uint8_t {
 	CHANNEL_A = 0,
 	CHANNEL_B,
 	CHANNEL_C,
@@ -13,14 +13,14 @@ typedef enum {
 	CHANNEL_MAX,
 } DRAM_CHANNEL_T;
 
-typedef enum {
+typedef enum : uint8_t {
 	RANK_0 = 0,
 	RANK_1,
 	RANK_MAX,
 } DRAM_RANK_T;
 
 /* DRAM SHUFFLE register type */
-typedef enum {
+typedef enum : uint8_t {
 	DRAM_DFS_SHUFFLE_1 = 0,
 	DRAM_DFS_SHUFFLE_2,
 	DRAM_DFS_SHUFFLE_3,

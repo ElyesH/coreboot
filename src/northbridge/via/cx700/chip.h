@@ -7,7 +7,7 @@
 
 struct dram_cfg {
 	uint8_t spd_addr[DIMM_SOCKETS];
-	enum {
+	enum : uint8_t {
 		MCLKO0,
 		MCLKO1,
 		MCLKO2,

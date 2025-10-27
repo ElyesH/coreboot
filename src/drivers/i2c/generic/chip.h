@@ -95,7 +95,7 @@ struct drivers_i2c_generic_config {
 	 *
 	 * The _CDM method should return 0xabcd0X, where X is the position.
 	 */
-	enum {
+	enum : uint8_t {
 		CDM_NOT_PRESENT = 0,
 		CDM_ROT_90,
 		CDM_ROT_180,

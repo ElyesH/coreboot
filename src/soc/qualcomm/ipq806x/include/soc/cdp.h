@@ -7,7 +7,7 @@
 
 unsigned int smem_get_board_machtype(void);
 
-typedef enum {
+typedef enum : uint8_t {
         PHY_INTERFACE_MODE_MII,
         PHY_INTERFACE_MODE_GMII,
         PHY_INTERFACE_MODE_SGMII,
@@ -40,7 +40,7 @@ typedef struct {
 
 /* SPI Mode */
 
-typedef enum {
+typedef enum : uint8_t {
 	NOR_SPI_MODE_0,
 	NOR_SPI_MODE_1,
 	NOR_SPI_MODE_2,
@@ -49,7 +49,7 @@ typedef enum {
 
 /* SPI GSBI Bus number */
 
-typedef enum {
+typedef enum : uint8_t {
 	GSBI_BUS_5 = 0,
 	GSBI_BUS_6,
 	GSBI_BUS_7,
@@ -57,7 +57,7 @@ typedef enum {
 
 /* SPI Chip selects */
 
-typedef enum {
+typedef enum : uint8_t {
 	SPI_CS_0 ,
 	SPI_CS_1,
 	SPI_CS_2,
@@ -66,7 +66,7 @@ typedef enum {
 
 /* Flash Types */
 
-typedef enum {
+typedef enum : uint8_t {
 	ONLY_NAND,
 	ONLY_NOR,
 	NAND_NOR,

@@ -87,7 +87,7 @@ struct lm96000_temp_zone {
 	/* This is tied to the zone in the implementation I tested
 	   with. (Datasheet clearly states the opposite, that this
 	   is tied to each PWM output so YMMV.) */
-	enum {
+	enum : uint8_t {
 		/* turn fan off below `low_temp - hysteresis` */
 		LM96000_LOW_TEMP_OFF = 0,
 		/* keep PWM at minimum duty cycle */

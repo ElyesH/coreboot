@@ -36,7 +36,7 @@
 #include <arch/io.h>
 
 // TODO: these are probably specific to POWER9
-typedef enum {
+typedef enum : uint8_t {
 	PIB_CHIPLET_ID  = 0x00,     ///< PIB chiplet
 	PERV_CHIPLET_ID = 0x01,     ///< TP chiplet
 	N0_CHIPLET_ID   = 0x02,     ///< Nest0 (North) chiplet

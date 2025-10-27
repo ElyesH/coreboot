@@ -507,7 +507,7 @@ endif
 CFLAGS_common += -pipe
 CFLAGS_common += -g
 CFLAGS_common += -nostdinc
-CFLAGS_common += -std=gnu11
+CFLAGS_common += -std=gnu23
 CFLAGS_common += -nostdlib
 CFLAGS_common += -Wall
 CFLAGS_common += -Wundef
@@ -537,7 +537,6 @@ CFLAGS_common += -Wold-style-declaration
 CFLAGS_common += -Wcast-function-type
 # Don't add these GCC specific flags when running clang-tidy
 ifeq ($(CLANG_TIDY),)
-CFLAGS_common += -Wno-packed-not-aligned
 CFLAGS_common += -fconserve-stack
 CFLAGS_common += -Wnull-dereference
 CFLAGS_common += -Wlogical-op

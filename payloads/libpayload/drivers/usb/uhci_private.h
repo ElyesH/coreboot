@@ -29,7 +29,7 @@
 #ifndef __UHCI_PRIVATE_H
 #define __UHCI_PRIVATE_H
 
-typedef enum { UHCI_SETUP = 0x2d, UHCI_IN = 0x69, UHCI_OUT = 0xe1 } uhci_pid_t;
+typedef enum : uint8_t { UHCI_SETUP = 0x2d, UHCI_IN = 0x69, UHCI_OUT = 0xe1 } uhci_pid_t;
 
 typedef u32 flistp_t;
 #define FLISTP_TERMINATE 1
@@ -75,7 +75,7 @@ typedef struct {
      } __packed
      qh_t;
 
-     typedef enum { USBCMD = 0, USBSTS = 2, USBINTR = 4, FRNUM =
+     typedef enum : uint8_t { USBCMD = 0, USBSTS = 2, USBINTR = 4, FRNUM =
 		     6, FLBASEADD = 8, SOFMOD = 0xc, PORTSC1 = 0x10, PORTSC2 =
 		     0x12
      } usbreg;

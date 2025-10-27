@@ -5,7 +5,6 @@
 
 #include <device/device.h>
 #include <device/pci_type.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 enum sa_server_reg {

@@ -3,7 +3,6 @@
 #ifndef SOUTHBRIDGE_INTEL_I82801IX_CHIP_H
 #define SOUTHBRIDGE_INTEL_I82801IX_CHIP_H
 
-#include <stdbool.h>
 #include <stdint.h>
 
 enum {

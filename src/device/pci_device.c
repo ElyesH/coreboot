@@ -1473,7 +1473,7 @@ void pci_scan_bus(struct bus *bus, unsigned int min_devfn,
 	post_code(POSTCODE_EXIT_PCI_SCAN_BUS);
 }
 
-typedef enum {
+typedef enum : uint8_t {
 	PCI_ROUTE_CLOSE,
 	PCI_ROUTE_SCAN,
 	PCI_ROUTE_FINAL,

@@ -3,7 +3,6 @@
 #ifndef __BOOTMODE_H__
 #define __BOOTMODE_H__
 
-#include <stdbool.h>
 
 /* functions implemented per mainboard: */
 int get_write_protect_state(void);

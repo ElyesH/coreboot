@@ -39,7 +39,7 @@ typedef struct {
 #define DWC2_INST(controller) ((dwc_ctrl_t *)((controller)->instance))
 #define DWC2_REG(controller) ((dwc2_reg_t *)((controller)->reg_base))
 
-typedef enum {
+typedef enum : uint8_t {
 	HCSTAT_DONE = 0,
 	HCSTAT_XFERERR,
 	HCSTAT_BABBLE,

@@ -15,25 +15,10 @@
 #define __aligned(x) __attribute__((__aligned__(x)))
 #endif
 
-/*
- * Because there may be variables/parameters whose name contains "__unused" in
- * header files of libc, namely musl, names consistent with the ones in the
- * Linux kernel may be a better choice.
- */
-
-/*
- * This is used to mark identifiers unused in all conditions, e.g. a parameter
- * completely unused in all code branch, only present to fit an API.
- */
 #ifndef __always_unused
 #define __always_unused __attribute__((__unused__))
 #endif
 
-/*
- * This is used to mark identifiers unused in some conditions, e.g. a parameter
- * only unused in some code branches, a global variable only accessed with code
- * being conditionally preprocessed, etc.
- */
 #ifndef __maybe_unused
 #define __maybe_unused __attribute__((__unused__))
 #endif
@@ -55,7 +40,7 @@
 #endif
 
 #ifndef __always_inline
-#define __always_inline inline __attribute__((__always_inline__))
+#define __always_inline __attribute__((__always_inline__)) inline
 #endif
 
 #ifndef __fallthrough
@@ -63,10 +48,18 @@
 #endif
 
 #ifndef __printf
-#define __printf(a, b) __attribute__((format(printf, a, b)))
+#define __printf(a, b) __attribute__((__format__(__printf__, a, b)))
 #endif
 
-// This checks the support for the nonstring attribute on multidimensional character arrays.
+#ifndef __deprecated
+#define __deprecated(msg) __attribute__((__deprecated__ msg))
+#endif
+
+#ifndef __deprecated_no_msg
+#define __deprecated_no_msg __attribute__((__deprecated__))
+#endif
+
+/* This checks the support for the nonstring attribute on multidimensional character arrays. */
 #if (defined(__GNUC__) && __GNUC__ >= 15) || (defined(__clang__) && __clang_major__ >= 21)
 #define __nonstring __attribute__((__nonstring__))
 #else

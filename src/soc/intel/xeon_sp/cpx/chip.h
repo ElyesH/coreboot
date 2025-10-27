@@ -24,7 +24,7 @@ struct pch_pcie_port {
 /**
  PCIe Link Speed Selection
  **/
-typedef enum {
+typedef enum : uint8_t {
 	PcieAuto = 0,
 	PcieGen1,
 	PcieGen2,

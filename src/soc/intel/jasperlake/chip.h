@@ -20,7 +20,6 @@
 #include <soc/serialio.h>
 #include <soc/usb.h>
 #include <stdint.h>
-#include <stdbool.h>
 
 #define MAX_HD_AUDIO_DMIC_LINKS 2
 #define MAX_HD_AUDIO_SNDW_LINKS 4
@@ -130,7 +129,7 @@ struct soc_intel_jasperlake_config {
 	 * When enabled memory will be training at different frequencies.
 	 * 0:Disabled, 1:FixedPoint0(low), 2:FixedPoint1(mid), 3:FixedPoint2
 	 * (high), 4:Enabled */
-	enum {
+	enum : uint8_t {
 		SaGv_Disabled,
 		SaGv_FixedPoint0,
 		SaGv_FixedPoint1,
@@ -243,7 +242,7 @@ struct soc_intel_jasperlake_config {
 	uint8_t TraceHubMode;
 
 	/* Debug interface selection */
-	enum {
+	enum : uint8_t {
 		DEBUG_INTERFACE_RAM = (1 << 0),
 		DEBUG_INTERFACE_UART_8250IO = (1 << 1),
 		DEBUG_INTERFACE_USB3 = (1 << 3),
@@ -423,7 +422,7 @@ struct soc_intel_jasperlake_config {
 	 * based on Acoustic Noise Mitigation feature enabled.
 	 * 0: Fast/2 ; 1: Fast/4; 2: Fast/8; 3: Fast/16
 	 */
-	enum {
+	enum : uint8_t {
 		SlewRateFastBy2 = 0,
 		SlewRateFastBy4,
 		SlewRateFastBy8,
@@ -479,7 +478,7 @@ struct soc_intel_jasperlake_config {
 	 * For the cases GOP is run, GOP will be in charge of the related register
 	 * settings.
 	 */
-	enum {
+	enum : uint8_t {
 		CD_CLOCK_172_8_MHZ = 1,
 		CD_CLOCK_180_MHZ   = 2,
 		CD_CLOCK_192_MHZ   = 3,

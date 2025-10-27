@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 
-typedef enum {
+typedef enum : uint8_t {
 	IGNORE_SENSOR = 0,
 	EXTERNAL_SENSOR1,
 	EXTERNAL_SENSOR2,
@@ -13,13 +13,13 @@ typedef enum {
 	EXTERNAL_SENSOR4
 } external_sensor;
 
-typedef enum {
+typedef enum : uint8_t {
 	TEMP_SENSOR_THERMISTOR = 0,
 	TEMP_SENSOR_BJT,
 	TEMP_SENSOR_DEFAULT
 } temp_sensor_type;
 
-typedef enum {
+typedef enum : uint8_t {
 	FAN_TYPE_PWM_PUSH_PULL = 0,
 	FAN_TYPE_DAC_POWER,
 	FAN_TYPE_PWM_OPEN_DRAIN,
@@ -27,7 +27,7 @@ typedef enum {
 } fan_type;
 #define FAN_TYPE_PWM_CHECK			1 /* bit 0 must be 0 for PWM */
 
-typedef enum {
+typedef enum : uint8_t {
 	FAN_MODE_AUTO_RPM = 0,
 	FAN_MODE_AUTO_PWM_DAC,
 	FAN_MODE_MANUAL_RPM,
@@ -35,14 +35,14 @@ typedef enum {
 	FAN_MODE_DEFAULT
 } fan_mode;
 
-typedef enum {
+typedef enum : uint8_t {
 	FAN_PWM_FREQ_23500 = 0,
 	FAN_PWM_FREQ_11750,
 	FAN_PWM_FREQ_5875,
 	FAN_PWM_FREQ_220
 } fan_pwm_freq;
 
-typedef enum {
+typedef enum : uint8_t {
 	FAN_TEMP_PECI = 0,
 	FAN_TEMP_EXTERNAL_1,
 	FAN_TEMP_EXTERNAL_2,
@@ -50,7 +50,7 @@ typedef enum {
 	FAN_TEMP_MXM,
 } fan_temp_source;
 
-typedef enum {
+typedef enum : uint8_t {
 	FAN_UP_RATE_2HZ = 0,
 	FAN_UP_RATE_5HZ,
 	FAN_UP_RATE_10HZ,
@@ -59,7 +59,7 @@ typedef enum {
 	FAN_UP_RATE_JUMP = 8
 } fan_rate_up;
 
-typedef enum {
+typedef enum : uint8_t {
 	FAN_DOWN_RATE_2HZ = 0,
 	FAN_DOWN_RATE_5HZ,
 	FAN_DOWN_RATE_10HZ,
@@ -69,7 +69,7 @@ typedef enum {
 	FAN_DOWN_RATE_JUMP = 8
 } fan_rate_down;
 
-typedef enum {
+typedef enum : uint8_t {
 	FAN_FOLLOW_STEP = 0,
 	FAN_FOLLOW_INTERPOLATION
 } fan_follow;

@@ -64,7 +64,7 @@ struct ast_private {
 
 	int next_cursor;
 	bool support_wide_screen;
-	enum {
+	enum : uint8_t {
 		ast_use_p2a,
 		ast_use_dt,
 		ast_use_defaults

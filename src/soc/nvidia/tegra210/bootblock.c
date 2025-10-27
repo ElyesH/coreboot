@@ -52,7 +52,7 @@ void __weak bootblock_mainboard_early_init(void)
  *   OP_AND : [reg] &= val;
  *   OP_UDELAY : udelay(val);
  */
-typedef enum {
+typedef enum : uint8_t {
 	OP_SET,
 	OP_OR,
 	OP_AND,

@@ -44,7 +44,7 @@ static const struct ddr4_speed_attr ddr4_speeds[] = {
 	[DDR4_3200] = {.min_clock_mhz = 1467, .max_clock_mhz = 1600, .reported_mts = 3200}
 };
 
-typedef enum {
+typedef enum : uint8_t {
 	BLOCK_0, /* Base Configuration and DRAM Parameters */
 	BLOCK_1,
 	BLOCK_1_L, /* Standard Module Parameters */

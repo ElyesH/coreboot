@@ -219,7 +219,7 @@ static U64 XXH_swap64 (U64 x)
 /***************************************
 *  Architecture Macros
 ***************************************/
-typedef enum { XXH_bigEndian=0, XXH_littleEndian=1 } XXH_endianness;
+typedef enum : uint8_t { XXH_bigEndian=0, XXH_littleEndian=1 } XXH_endianness;
 
 /* XXH_CPU_LITTLE_ENDIAN can be defined externally, for example one the compiler command line */
 #ifndef XXH_CPU_LITTLE_ENDIAN
@@ -231,7 +231,7 @@ typedef enum { XXH_bigEndian=0, XXH_littleEndian=1 } XXH_endianness;
 /*****************************
 *  Memory reads
 *****************************/
-typedef enum { XXH_aligned, XXH_unaligned } XXH_alignment;
+typedef enum : uint8_t { XXH_aligned, XXH_unaligned } XXH_alignment;
 
 FORCE_INLINE U32 XXH_readLE32_align(const void* ptr, XXH_endianness endian, XXH_alignment align)
 {

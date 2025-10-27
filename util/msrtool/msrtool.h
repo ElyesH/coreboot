@@ -18,14 +18,14 @@
 
 #define HEXCHARS "0123456789abcdefABCDEF"
 
-typedef enum {
+typedef enum : uint8_t {
 	MSRTYPE_RDONLY,
 	MSRTYPE_RDWR,
 	MSRTYPE_WRONLY,
 	MSRTYPE_EOT
 } MsrTypes;
 
-typedef enum {
+typedef enum : uint8_t {
 	PRESENT_RSVD,
 	PRESENT_DEC,
 	PRESENT_BIN,
@@ -80,7 +80,7 @@ struct msrdef {
 
 #define MAX_CORES 8
 
-typedef enum {
+typedef enum : uint32_t {
 	VENDOR_INTEL = 0x756e6547,
 	VENDOR_AMD = 0x68747541,
 	VENDOR_CENTAUR = 0x746e6543,

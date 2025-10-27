@@ -10,7 +10,7 @@
  * 2. Declared as dram_cbt_mode[RANK_MAX] internally to
  *    store each rank's CBT mode type
  */
-typedef enum {
+typedef enum : uint8_t {
 	CBT_NORMAL_MODE = 0,
 	CBT_BYTE_MODE1,
 } DRAM_CBT_MODE_T;

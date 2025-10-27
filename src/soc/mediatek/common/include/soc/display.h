@@ -5,7 +5,6 @@
 
 #include <commonlib/coreboot_tables.h>
 #include <mipi/panel.h>
-#include <stdbool.h>
 
 enum disp_path_sel {
 	DISP_PATH_NONE = 0,

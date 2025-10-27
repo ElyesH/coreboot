@@ -135,12 +135,12 @@ struct GPIO_CONFIG {
 	uint32_t RsvdBits : 27; ///< Reserved bits for future extension
 } __packed;
 
-typedef enum { GpioHardwareDefault = 0x0 } GPIO_HARDWARE_DEFAULT;
+typedef enum : uint8_t { GpioHardwareDefault = 0x0 } GPIO_HARDWARE_DEFAULT;
 
 ///
 /// GPIO Pad Mode
 ///
-typedef enum {
+typedef enum : uint8_t {
 	GpioPadModeGpio = 0x1,
 	GpioPadModeNative1 = 0x3,
 	GpioPadModeNative2 = 0x5,
@@ -151,7 +151,7 @@ typedef enum {
 ///
 /// Host Software Pad Ownership modes
 ///
-typedef enum {
+typedef enum : uint8_t {
 	GpioHostOwnDefault = 0x0, ///< Leave ownership value unmodified
 	GpioHostOwnAcpi = 0x1,    ///< Set HOST ownership to ACPI
 	GpioHostOwnGpio = 0x3     ///< Set HOST ownership to GPIO
@@ -160,7 +160,7 @@ typedef enum {
 ///
 /// GPIO Direction
 ///
-typedef enum {
+typedef enum : uint8_t {
 	GpioDirDefault = 0x0, ///< Leave pad direction setting unmodified
 	GpioDirInOut =
 		(0x1 | (0x1 << 3)), ///< Set pad for both output and input
@@ -175,7 +175,7 @@ typedef enum {
 ///
 /// GPIO Output State
 ///
-typedef enum {
+typedef enum : uint8_t {
 	GpioOutDefault = 0x0, ///< Leave output value unmodified
 	GpioOutLow = 0x1,     ///< Set output to low
 	GpioOutHigh = 0x3     ///< Set output to high
@@ -194,7 +194,7 @@ typedef enum {
 /// Not all GPIO are capable of generating an SMI or NMI interrupt
 ///
 
-typedef enum {
+typedef enum : uint8_t {
 	GpioIntDefault = 0x0, ///< Leave value of interrupt routing unmodified
 	GpioIntDis = 0x1, ///< Disable IOxAPIC/SCI/SMI/NMI interrupt generation
 	GpioIntNmi = 0x3, ///< Enable NMI interrupt only
@@ -213,7 +213,7 @@ typedef enum {
 /// GPIO_RESET_CONFIG allows to set GPIO Reset (used to reset the specified
 /// Pad Register fields).
 ///
-typedef enum {
+typedef enum : uint8_t {
 	GpioResetDefault = 0x0, ///< Leave value of pad reset unmodified
 	GpioResetPwrGood = 0x1, ///< Powergood reset
 	GpioResetDeep = 0x3,    ///< Deep GPIO Reset
@@ -227,7 +227,7 @@ typedef enum {
 /// Field from GpioTermDefault to GpioTermNative can be OR'ed with
 /// GpioTolerance1v8.
 ///
-typedef enum {
+typedef enum : uint8_t {
 	GpioTermDefault = 0x0,  ///< Leave termination setting unmodified
 	GpioTermNone = 0x1,     ///< none
 	GpioTermWpd5K = 0x5,    ///< 5kOhm weak pull-down
@@ -247,7 +247,7 @@ typedef enum {
 /// Set GPIO configuration lock and output state lock
 /// GpioLockPadConfig and GpioLockOutputState can be OR'ed
 ///
-typedef enum {
+typedef enum : uint8_t {
 	GpioLockDefault = 0x0,    ///< Leave lock setting unmodified
 	GpioPadConfigLock = 0x3,  ///< Lock Pad Configuration
 	GpioOutputStateLock = 0x5 ///< Lock GPIO pad output value
@@ -263,7 +263,7 @@ typedef enum {
 ///     The override takes place at the internal pad state directly from buffer
 ///     and before the RXINV.
 ///
-typedef enum {
+typedef enum : uint8_t {
 	GpioRxRaw1Default = 0x0, ///< Use default input override value
 	GpioRxRaw1Dis = 0x1,     ///< Don't override input
 	GpioRxRaw1En = 0x3       ///< Override input to '1'
@@ -272,7 +272,7 @@ typedef enum {
 //
 // Possible values of Pad Ownership
 //
-typedef enum {
+typedef enum : uint8_t {
 	GpioPadOwnHost = 0x0,
 	GpioPadOwnCsme = 0x1,
 	GpioPadOwnIsh = 0x2,

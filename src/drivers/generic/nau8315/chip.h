@@ -7,7 +7,7 @@
 
 struct drivers_generic_nau8315_config {
 	/* ACPI _HID */
-	enum {
+	enum : uint8_t {
 		NAU8315,
 		NAU8318,
 		MAX_HID,

@@ -11,7 +11,6 @@
 #include <intelblocks/lpc_lib.h>
 #include <intelblocks/power_limit.h>
 #include <intelblocks/xhci.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <soc/pch.h>
 #include <soc/pci_devs.h>
@@ -80,7 +79,7 @@ struct soc_intel_cannonlake_config {
 	/* Enable DPTF support */
 	bool dptf_enable;
 
-	enum {
+	enum : uint8_t {
 		MAX_PC_DEFAULT	= 0,
 		MAX_PC0_1	= 1,
 		MAX_PC2		= 2,
@@ -115,7 +114,7 @@ struct soc_intel_cannonlake_config {
 	 * For WHL/CFL/CML options are as following
 	 * When enabled, memory will be training at two different frequencies.
 	 * 0:Disabled, 1:FixedLow, 2:FixedHigh, 3:Enabled*/
-	enum {
+	enum : uint8_t {
 		SaGv_Disabled,
 		SaGv_FixedLow,
 		SaGv_FixedHigh,
@@ -136,13 +135,13 @@ struct soc_intel_cannonlake_config {
 	bool PchUsb2PhySusPgDisable;
 
 	/* SATA related */
-	enum {
+	enum : uint8_t {
 		SATA_AHCI,
 		SATA_RAID,
 	} SataMode;
 
 	/* SATA devslp pad reset configuration */
-	enum {
+	enum : uint8_t {
 		SataDevSlpResumeReset = 1,
 		SataDevSlpHostDeepReset = 3,
 		SataDevSlpPlatformReset = 5,

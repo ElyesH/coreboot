@@ -6,7 +6,6 @@
 #include <commonlib/helpers.h>
 #include <device/device.h>
 #include <device/soundwire.h>
-#include <stdbool.h>
 
 #include "soundwire.h"
 #include "chip.h"

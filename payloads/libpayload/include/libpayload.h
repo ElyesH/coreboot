@@ -336,7 +336,7 @@ int set_option_from_string(const struct nvram_accessor *nvram, struct cb_cmos_op
  * @defgroup console Console functions
  * @{
  */
-typedef enum {
+typedef enum : uint8_t {
 	CONSOLE_INPUT_TYPE_UNKNOWN = 0,
 	CONSOLE_INPUT_TYPE_USB,
 	CONSOLE_INPUT_TYPE_EC,
@@ -381,7 +381,7 @@ int console_remove_output_driver(void *function);
  * @defgroup mouse_cursor Mouse cursor functions
  * @{
  */
-typedef enum {
+typedef enum : uint8_t {
 	CURSOR_INPUT_TYPE_UNKNOWN = 0,
 	CURSOR_INPUT_TYPE_USB,
 	CURSOR_INPUT_TYPE_PS2,

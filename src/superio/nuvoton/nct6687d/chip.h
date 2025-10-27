@@ -3,7 +3,6 @@
 #ifndef SUPERIO_NUVOTON_NCT6687D_CHIP_H
 #define SUPERIO_NUVOTON_NCT6687D_CHIP_H
 
-#include <stdbool.h>
 
 #define MAX_TEMP_SPEED_LEVELS 7
 #define MAX_TEMP_SRC 4
