@@ -3,7 +3,6 @@
 #ifndef _STATE_MACHINE_H_
 #define _STATE_MACHINE_H_
 
-#include <stdbool.h>
 #include <stdint.h>
 #include <AGESA.h>
 #include <AMD.h>

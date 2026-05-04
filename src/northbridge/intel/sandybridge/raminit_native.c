@@ -10,7 +10,6 @@
 #include <device/pci_ops.h>
 #include <northbridge/intel/sandybridge/chip.h>
 #include <static.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 #include "sandybridge.h"
