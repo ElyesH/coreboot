@@ -3,7 +3,6 @@
 #ifndef _BROADWELL_PCH_H_
 #define _BROADWELL_PCH_H_
 
-#include <stdbool.h>
 
 /* Haswell ULT Pch (LynxPoint-LP) */
 #define PCH_LPT_LP_SAMPLE	0x9c41

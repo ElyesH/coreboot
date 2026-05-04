@@ -4,7 +4,6 @@
 #define INTEL_COMMON_GPIO_H
 
 #include <stdint.h>
-#include <stdbool.h>
 #include <soc/gpio.h>
 
 #define GPIO_MODE_NATIVE	0

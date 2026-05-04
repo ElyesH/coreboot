@@ -13,7 +13,6 @@
 #include <soc/rcba.h>
 #include <southbridge/intel/wildcatpoint/chip.h>
 #include <southbridge/intel/lynxpoint/iobp.h>
-#include <stdbool.h>
 
 static void adsp_init(struct device *dev)
 {
