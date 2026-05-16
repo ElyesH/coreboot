@@ -3,7 +3,6 @@
 #ifndef LIBREM_EC_H
 #define LIBREM_EC_H
 
-#include <stdbool.h>
 
 /*
  * Check whether librem-ec has working jack detect.  This was fixed in librem-ec

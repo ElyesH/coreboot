@@ -3,7 +3,6 @@
 #ifndef SYSTEM76_EC_H
 #define SYSTEM76_EC_H
 
-#include <stdbool.h>
 #include <stdint.h>
 
 /*
