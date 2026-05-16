@@ -7,7 +7,6 @@
 #include <device/soundwire.h>
 #include <mipi/ids.h>
 #include <stdio.h>
-#include <stdbool.h>
 #include <stddef.h>
 
 #include "chip.h"

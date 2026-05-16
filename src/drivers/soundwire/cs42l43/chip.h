@@ -6,7 +6,6 @@
 #include <acpi/acpi.h>
 #include <acpi/acpi_device.h>
 #include <mipi/ids.h>
-#include <stdbool.h>
 
 enum cs42l43_detect_us {
 	DET_20_US = 20,

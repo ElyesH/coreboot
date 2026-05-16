@@ -3,7 +3,6 @@
 #ifndef __DRIVERS_GENERIC_BAYHUB_LV2_CHIP_H__
 #define __DRIVERS_GENERIC_BAYHUB_LV2_CHIP_H__
 
-#include <stdbool.h>
 
 /* Bayhub LV2 PCIe to SD bridge */
 struct drivers_generic_bayhub_lv2_config {
