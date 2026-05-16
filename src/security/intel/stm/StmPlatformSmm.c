@@ -10,7 +10,6 @@
 
 #include <cbfs.h>
 #include <console/console.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 /*
