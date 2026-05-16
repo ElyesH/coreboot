@@ -4,7 +4,6 @@
 
 #include <string.h>
 #include <stdint.h>
-#include <stdbool.h>
 #include <asan.h>
 
 typedef uint32_t op_t;

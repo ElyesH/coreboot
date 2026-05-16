@@ -4,7 +4,6 @@
  */
 
 #include <string.h>
-#include <stdbool.h>
 #include <asan.h>
 
 void *memmove(void *dest, const void *src, size_t n)
