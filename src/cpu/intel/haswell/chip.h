@@ -3,7 +3,6 @@
 #ifndef __CPU_INTEL_HASWELL_CHIP_H__
 #define __CPU_INTEL_HASWELL_CHIP_H__
 
-#include <stdbool.h>
 #include <stdint.h>
 
 struct cpu_vr_config {
