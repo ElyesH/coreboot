@@ -7,7 +7,6 @@
 #include <device/pci_ops.h>
 #include <intelblocks/imc.h>
 #include <soc/pci_devs.h>
-#include <stdbool.h>
 #include <timer.h>
 
 #include "imclib.h"

@@ -5,7 +5,6 @@
 #include <device/pci_ids.h>
 #include <intelblocks/xdci.h>
 #include <security/vboot/vboot_common.h>
-#include <stdbool.h>
 
 __weak void soc_xdci_init(struct device *dev) { /* no-op */ }
 

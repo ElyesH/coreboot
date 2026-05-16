@@ -17,7 +17,6 @@
 #include <soc/pci_devs.h>
 #include <soc/pmc.h>
 #include <soc/serialio.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 /* Define config parameters for In-Band ECC (IBECC). */

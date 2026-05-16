@@ -3,7 +3,6 @@
 #ifndef SOC_INTEL_COMMON_OC_WDT_H
 #define SOC_INTEL_COMMON_OC_WDT_H
 
-#include <stdbool.h>
 
 /* Starts and reloads the OC watchdog if enabled in Kconfig */
 void setup_oc_wdt(void);
