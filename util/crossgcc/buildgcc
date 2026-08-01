@@ -932,6 +932,7 @@ build_LLVM() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DLLVM_TARGETS_TO_BUILD="AArch64;ARM;PowerPC;RISCV;X86" \
 		-DLLVM_ENABLE_RUNTIMES="compiler-rt" \
+		-DLLVM_RUNTIME_TARGETS="AArch64;ARM;PowerPC;RISCV;X86" \
 		../${LLVM_DIR}/llvm || touch .failed
 	# shellcheck disable=SC2086
 	$MAKE $JOBS || touch .failed
