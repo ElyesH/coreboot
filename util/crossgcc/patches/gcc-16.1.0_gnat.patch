@@ -16,13 +16,12 @@ diff --git a/gcc/ada/gcc-interface/Make-lang.in b/gcc/ada/gcc-interface/Make-lan
 index 9507f2f09203..cf7ec4cc1662 100644
 --- a/gcc/ada/gcc-interface/Make-lang.in
 +++ b/gcc/ada/gcc-interface/Make-lang.in
-@@ -56,19 +56,21 @@
+@@ -56,17 +56,18 @@
  # need to be built by a recent/matching native so we might as well leave the
  # checks fully active.
  
 -STAGE1=False
 +HOST_RT=False
- GNATBIND_FLAGS=
  GNATLIB=
  
 +ADAFLAGS=$(COMMON_ADAFLAGS) -gnatwns
@@ -31,8 +30,6 @@ index 9507f2f09203..cf7ec4cc1662 100644
  
    ifeq ($(if $(wildcard ../stage_current),$(shell cat ../stage_current),stage1),stage1)
      STAGE1=True
-     GNATBIND_FLAGS=-t
-+    HOST_RT=True
    endif
  else
 -  ADAFLAGS=$(COMMON_ADAFLAGS)
@@ -41,7 +38,7 @@ index 9507f2f09203..cf7ec4cc1662 100644
  endif
  
  ADA_CFLAGS =
-@@ -88,7 +90,7 @@
+@@ -86,7 +87,7 @@
    STAGE1_LIBS=/usr/lib/libcl.a
  endif
  
@@ -50,7 +47,7 @@ index 9507f2f09203..cf7ec4cc1662 100644
    ADA_INCLUDES=$(COMMON_ADA_INCLUDES)
    adalib=$(dir $(shell $(CC) -print-libgcc-file-name))adalib
    GNATLIB=$(adalib)/$(if $(wildcard $(adalib)/libgnat.a),libgnat.a,libgnat.so) $(STAGE1_LIBS)
-@@ -506,6 +508,7 @@
+@@ -516,6 +517,7 @@
   ada/rtinit.o     \
   ada/seh_init.o
  
@@ -58,7 +55,7 @@ index 9507f2f09203..cf7ec4cc1662 100644
  GNAT_ADA_OBJS+= \
   ada/gcc-interface/system.o \
   ada/libgnat/a-assert.o	\
-@@ -586,6 +589,7 @@
+@@ -587,6 +589,7 @@
   ada/libgnat/s-wchstw.o	\
   ada/libgnat/s-widuns.o
  endif
@@ -66,17 +63,17 @@ index 9507f2f09203..cf7ec4cc1662 100644
  
  # Object files for gnat executables
  GNAT1_ADA_OBJS = $(GNAT_ADA_OBJS) ada/back_end.o ada/gnat1drv.o
-@@ -692,6 +696,9 @@
+@@ -692,6 +695,9 @@
   ada/rtfinal.o    \
   ada/rtinit.o     \
   ada/seh_init.o   \
-+ 
++
 +ifeq ($(HOST_RT),False)
 +GNATBIND_OBJS +=  \
   ada/gcc-interface/system.o \
   ada/libgnat/a-assert.o   \
   ada/libgnat/a-elchha.o   \
-@@ -746,6 +753,9 @@
+@@ -745,6 +751,9 @@
   ada/libgnat/s-wchjis.o   \
   ada/libgnat/s-wchstw.o   \
   ada/libgnat/s-widuns.o   \
