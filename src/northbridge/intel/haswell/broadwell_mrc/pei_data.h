@@ -7,7 +7,11 @@
 
 #define PEI_VERSION 22
 
+#ifdef __x86_64__
+#define ABI_X86
+#else
 #define ABI_X86 __attribute__((regparm(0)))
+#endif
 
 typedef void ABI_X86(*tx_byte_func)(unsigned char byte);
 

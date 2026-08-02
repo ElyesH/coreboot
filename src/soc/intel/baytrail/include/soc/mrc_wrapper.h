@@ -7,7 +7,11 @@
 #define NUM_CHANNELS 2
 
 /* Provide generic x86 calling conventions. */
+#ifdef __x86_64__
+#define ABI_X86
+#else
 #define ABI_X86 __attribute((regparm(0)))
+#endif
 
 enum {
 	DRAM_INFO_SPD_SMBUS, /* Use the typical SPD smbus access. */

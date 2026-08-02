@@ -6,7 +6,11 @@
 #define EFI_WRAPPER_VER 2
 
 /* Provide generic x86 calling conventions. */
+#ifdef __x86_64__
+#define ABI_X86
+#else
 #define ABI_X86 __attribute((regparm(0)))
+#endif
 
 /* Errors returned by the EFI wrapper. */
 enum efi_wrapper_error {

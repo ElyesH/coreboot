@@ -63,8 +63,11 @@ static void prepare_mrc_cache(struct pei_data *pei_data)
  */
 static void sdram_initialize(struct pei_data *pei_data)
 {
+#ifdef __x86_64__
+	int (*entry)(struct pei_data *pei_data);
+#else
 	int (*entry)(struct pei_data *pei_data) __attribute__((regparm(1)));
-
+#endif
 	printk(BIOS_DEBUG, "Starting UEFI PEI System Agent\n");
 
 	/*

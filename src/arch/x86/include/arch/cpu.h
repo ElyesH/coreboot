@@ -223,7 +223,11 @@ static __always_inline void cpu_relax(void)
 	__asm__ __volatile__("rep;nop" : : : "memory");
 }
 
+#ifdef __x86_64__
+#define asmlinkage
+#else
 #define asmlinkage __attribute__((regparm(0)))
+#endif
 
 /*
  * The car_stage_entry() is the symbol jumped to for each stage
